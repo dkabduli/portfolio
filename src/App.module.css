@@ -221,6 +221,23 @@
   min-width: 0;
 }
 
+.heroGrid > *,
+.aboutIntro > *,
+.projectCard,
+.projectBody,
+.projectMedia,
+.skillsPanel,
+.timelineCard,
+.detailCard,
+.detailContent,
+.detailSidebar,
+.detailSection,
+.detailSidebarCard,
+.detailImageCard,
+.contactInfo {
+  min-width: 0;
+}
+
 .heroKicker,
 .sectionLabel,
 .timelinePeriod,
@@ -513,6 +530,9 @@
 }
 
 .statCard {
+  display: grid;
+  align-content: start;
+  gap: 8px;
   padding: 24px;
 }
 
@@ -529,7 +549,6 @@
 }
 
 .statLabel {
-  margin-top: 8px;
   color: var(--slate);
   font-size: 0.75rem;
 }
@@ -1218,6 +1237,77 @@
   }
 }
 
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+
+  .heroGrid {
+    gap: 24px;
+  }
+
+  .heroActions {
+    gap: 14px;
+  }
+
+  .primaryButton,
+  .secondaryLink,
+  .resumeLink,
+  .projectLinks a {
+    max-width: 100%;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .statCard,
+  .statCard + .statCard {
+    padding: 18px;
+  }
+
+  .statCard + .statCard {
+    border-left: 1px solid var(--line);
+  }
+
+  .statCard:nth-child(odd):not(:first-child) {
+    border-left: 0;
+  }
+
+  .statCard:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+
+  .projectMetaRow {
+    gap: 10px;
+  }
+
+  .projectTags {
+    gap: 8px;
+  }
+
+  .projectTag {
+    font-size: 0.64rem;
+  }
+
+  .projectLinks {
+    flex-wrap: wrap;
+  }
+
+  .contactLinks {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    margin-left: 10px;
+    padding-left: 26px;
+  }
+
+  .timelineDot {
+    left: -30px;
+  }
+}
+
 @media (max-width: 640px) {
   .container,
   .sectionContent,
@@ -1282,10 +1372,6 @@
   .aboutText {
     font-size: 0.94rem;
     line-height: 1.68;
-  }
-
-  .contactLinks {
-    grid-template-columns: 1fr;
   }
 
   .contactInfo {
@@ -1383,20 +1469,6 @@
     top: 39%;
     left: 67%;
     width: 32%;
-  }
-
-  .statsGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .statCard,
-  .statCard + .statCard {
-    border-left: 0;
-    padding-left: 0;
-  }
-
-  .statCard + .statCard {
-    border-top: 1px solid var(--line);
   }
 
   .timeline {
@@ -1527,11 +1599,22 @@
   }
 
   .statsGrid {
-    margin-top: 28px;
+    grid-template-columns: 1fr;
+    align-items: start;
   }
 
-  .statCard {
-    padding: 18px;
+  .statCard,
+  .statCard + .statCard {
+    border-left: 0;
+    padding: 16px 18px;
+  }
+
+  .statCard + .statCard {
+    border-top: 1px solid var(--line);
+  }
+
+  .statsGrid {
+    margin-top: 28px;
   }
 
   .skillsPanel,
