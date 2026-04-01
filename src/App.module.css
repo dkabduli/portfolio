@@ -1195,7 +1195,7 @@
   }
 
   .heroStage {
-    margin-left: max(-20px, calc(50% - 360px));
+    margin-left: auto;
     margin-right: auto;
   }
 
@@ -1225,11 +1225,6 @@
 
   .nodeRight {
     width: 35%;
-  }
-
-  .statCard:nth-child(3) {
-    border-left: 0;
-    padding-left: 0;
   }
 
   .statCard:nth-child(n + 3) {
@@ -1263,7 +1258,7 @@
 
   .statCard,
   .statCard + .statCard {
-    padding: 18px;
+    padding: 24px 22px 20px;
   }
 
   .statCard + .statCard {
@@ -1272,6 +1267,14 @@
 
   .statCard:nth-child(odd):not(:first-child) {
     border-left: 0;
+  }
+
+  .statValue {
+    margin-top: 6px;
+  }
+
+  .statLabel {
+    margin-top: 6px;
   }
 
   .statCard:nth-child(n + 3) {
