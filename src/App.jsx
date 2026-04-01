@@ -36,10 +36,10 @@ const EXPERIENCE = [
       'Worked on internal infrastructure automation and audit initiatives at Shared Services Canada, with hands-on ownership across GitLab account analysis, secrets-management research, and Lighthouse audit improvements.',
     skills: ['GitLab API', 'Python Scripting', 'HashiCorp Vault', 'Linux', 'Lighthouse', 'Metadata Auditing', 'Workflow Analysis'],
     timelineBullets: [
-      'Built a GitLab inactivity audit workflow using the GitLab API and impersonation-token research.',
-      'Created reporting that flagged accounts inactive for more than 90 days.',
-      'Researched HashiCorp Vault as a possible secrets-management solution for the team.',
-      'Expanded Lighthouse auditing beyond IP/DNS checks to include richer device metadata.',
+      'Developed a GitLab user-audit workflow using the GitLab API and impersonation-token research to improve visibility into inactive mailbox-based accounts.',
+      'Produced reporting that identified accounts inactive for more than 90 days, supporting access review and deactivation decisions.',
+      'Evaluated HashiCorp Vault as a potential secrets-management solution to strengthen how the team handled sensitive credentials and values.',
+      'Enhanced Lighthouse auditing by extending validation beyond IP and DNS checks to include richer device metadata such as serial numbers and model details.',
     ],
     detailBullets: [
       'Spent a large part of the beginning of the internship on a GitLab user audit project, where I worked directly with the GitLab API and figured out how to handle impersonation tokens so mailbox-based accounts could still be reviewed even when they appeared inactive because nobody was signing in regularly.',
@@ -60,10 +60,10 @@ const EXPERIENCE = [
       'Supported hands-on network operations work through switch upgrades, shipping and staging tasks, and detailed topology creation for multi-floor environments.',
     skills: ['Cisco Switches', 'Juniper Switches', 'Linux', 'USB Mounting', 'Firmware Upgrades', 'Visio', 'Topology Design'],
     timelineBullets: [
-      'Upgraded Cisco and Juniper switches as part of operational refresh work.',
-      'Used USB-based workflows on Juniper devices during upgrade preparation.',
-      'Packaged and shipped prepared hardware for deployment.',
-      'Built multi-floor Visio topologies with IP addressing and network links.',
+      'Performed Cisco and Juniper switch upgrades as part of operational refresh and deployment preparation activities.',
+      'Applied USB-based upgrade workflows on Juniper devices to support software staging and readiness for deployment.',
+      'Prepared, packaged, and shipped upgraded hardware for rollout across operational environments.',
+      'Created multi-floor Visio network topologies with IP addressing, device placement, and link mapping to improve documentation accuracy.',
     ],
     detailBullets: [
       'Worked on upgrading both Cisco and Juniper switches as part of operational refresh and deployment work, giving me direct exposure to the physical and technical process of preparing network hardware for production use.',
