@@ -1,6 +1,7 @@
 .pageShell {
   min-height: 100vh;
   background: radial-gradient(circle at top, rgba(238, 243, 255, 0.42), transparent 38%), var(--bg);
+  overflow-x: clip;
 }
 
 .container {
@@ -217,6 +218,7 @@
 
 .heroCopy {
   max-width: 700px;
+  min-width: 0;
 }
 
 .heroKicker,
@@ -480,6 +482,7 @@
   display: grid;
   gap: 16px;
   max-width: 58ch;
+  min-width: 0;
 }
 
 .aboutLead {
@@ -597,6 +600,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 16px;
   margin-top: 10px;
 }
@@ -819,6 +823,7 @@
   display: flex;
   align-items: start;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
@@ -1227,7 +1232,7 @@
   .mobileNavLink {
     color: #fff;
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
   .mobileNavSubLink {
@@ -1287,11 +1292,24 @@
   }
 
   .heroTitle {
-    font-size: clamp(3.5rem, 18vw, 5rem);
+    font-size: clamp(3rem, 15vw, 4.25rem);
+  }
+
+  .heroMeta {
+    font-size: 0.92rem;
+  }
+
+  .heroLocation {
+    font-size: 0.88rem;
+  }
+
+  .heroBody {
+    font-size: 1rem;
+    line-height: 1.75;
   }
 
   .heroArt {
-    max-width: 460px;
+    max-width: 380px;
     margin: 0 auto;
   }
 
@@ -1304,7 +1322,7 @@
   }
 
   .heroNodeCard {
-    width: 36%;
+    width: 34%;
   }
 
   .aboutIntro {
@@ -1328,7 +1346,7 @@
   .nodeRight {
     top: 38%;
     left: 78%;
-    width: 36%;
+    width: 34%;
   }
 
   .statsGrid {
@@ -1363,6 +1381,20 @@
     padding: 20px;
   }
 
+  .projectTitle,
+  .timelineTitle {
+    font-size: 1.7rem;
+  }
+
+  .projectDescription,
+  .timelineBullets li,
+  .contactIntro,
+  .detailText,
+  .detailSidebarText,
+  .detailBullets li {
+    font-size: 0.98rem;
+  }
+
   .detailNav {
     min-height: 64px;
     align-items: flex-start;
@@ -1378,6 +1410,88 @@
   .cursorDot,
   .cursorRing {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container,
+  .sectionContent,
+  .sectionLabel {
+    width: min(100% - 22px, 1200px);
+  }
+
+  .nav {
+    min-height: 64px;
+  }
+
+  .mobileNav {
+    inset: 64px 11px auto;
+    padding: 18px;
+  }
+
+  .hero {
+    padding: 92px 0 56px;
+  }
+
+  .heroGrid {
+    gap: 22px;
+  }
+
+  .heroArt {
+    max-width: 320px;
+  }
+
+  .heroNodeCard {
+    width: 35%;
+    padding: 5px;
+  }
+
+  .heroNodeCard::before {
+    inset: 5px;
+  }
+
+  .aboutIntro {
+    grid-template-columns: 118px minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .statsGrid {
+    margin-top: 28px;
+  }
+
+  .statCard {
+    padding: 18px;
+  }
+
+  .skillsPanel,
+  .timelineCard,
+  .detailSection,
+  .detailSidebarCard,
+  .detailImageCard,
+  .detailCard,
+  .contactInfo {
+    padding: 16px;
+  }
+
+  .projectBody,
+  .projectMedia {
+    padding: 16px;
+  }
+
+  .contactLink {
+    gap: 10px;
+    padding: 11px;
+  }
+
+  .contactIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .contactIconSvg {
+    width: 14px;
+    height: 14px;
   }
 }
 
