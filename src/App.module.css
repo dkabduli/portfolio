@@ -1291,6 +1291,11 @@
     gap: 28px;
   }
 
+  .heroArt {
+    order: -1;
+    width: 100%;
+  }
+
   .heroTitle {
     font-size: clamp(3rem, 15vw, 4.25rem);
   }
@@ -1313,6 +1318,10 @@
     margin: 0 auto;
   }
 
+  .heroStage {
+    width: min(100%, 340px);
+  }
+
   .detailCard {
     padding: 24px;
   }
@@ -1323,6 +1332,10 @@
 
   .heroNodeCard {
     width: 34%;
+  }
+
+  .heroWatermark {
+    font-size: min(10rem, 38vw);
   }
 
   .aboutIntro {
@@ -1345,7 +1358,7 @@
 
   .nodeRight {
     top: 38%;
-    left: 78%;
+    left: 73%;
     width: 34%;
   }
 
@@ -1441,6 +1454,10 @@
     max-width: 320px;
   }
 
+  .heroStage {
+    width: min(100%, 300px);
+  }
+
   .heroNodeCard {
     width: 35%;
     padding: 5px;
@@ -1448,6 +1465,14 @@
 
   .heroNodeCard::before {
     inset: 5px;
+  }
+
+  .heroWatermark {
+    font-size: min(8rem, 42vw);
+  }
+
+  .nodeRight {
+    left: 71%;
   }
 
   .aboutIntro {
