@@ -476,6 +476,12 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
+  useEffect(() => {
+    if (!activeExperienceDetail) return
+    if (window.innerWidth > 768) return
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [activeExperienceDetail])
+
   if (activeExperienceDetail) {
     return (
       <LazyMotion features={domAnimation}>
