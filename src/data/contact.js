@@ -1,0 +1,42 @@
+export const contactMethods = [
+  {
+    id: 'email',
+    label: 'Email',
+    value: 'abdulrehman6@cmail.carleton.ca',
+    href: 'mailto:abdulrehman6@cmail.carleton.ca',
+    external: false,
+    icon: '✉️',
+  },
+  {
+    id: 'linkedin',
+    label: 'LinkedIn',
+    value: 'abdulrehmanbaseem',
+    href: 'https://linkedin.com/in/abdulrehmanbaseem',
+    external: true,
+    icon: '💼',
+  },
+  {
+    id: 'github',
+    label: 'GitHub',
+    value: 'dkabduli',
+    href: 'https://github.com/dkabduli',
+    external: true,
+    icon: '🐙',
+  },
+  {
+    id: 'discord',
+    label: 'Discord',
+    value: 'ykabduli',
+    href: null,
+    external: false,
+    icon: '💬',
+  },
+  {
+    id: 'lol',
+    label: 'League of Legends',
+    value: 'dkabduli',
+    href: null,
+    external: false,
+    icon: '🎮',
+  },
+];
