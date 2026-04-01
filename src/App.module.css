@@ -1338,6 +1338,10 @@
     font-size: min(10rem, 38vw);
   }
 
+  .topology {
+    opacity: 0.92;
+  }
+
   .aboutIntro {
     margin-bottom: 32px;
   }
@@ -1347,19 +1351,19 @@
   }
 
   .nodeTopLeft {
-    top: 17%;
-    left: 19%;
+    top: 20%;
+    left: 28%;
   }
 
   .nodeBottomLeft {
-    top: 77%;
-    left: 20%;
+    top: 72%;
+    left: 28%;
   }
 
   .nodeRight {
-    top: 38%;
-    left: 73%;
-    width: 34%;
+    top: 39%;
+    left: 67%;
+    width: 32%;
   }
 
   .statsGrid {
@@ -1471,8 +1475,20 @@
     font-size: min(8rem, 42vw);
   }
 
+  .nodeTopLeft {
+    top: 21%;
+    left: 30%;
+  }
+
+  .nodeBottomLeft {
+    top: 72%;
+    left: 30%;
+  }
+
   .nodeRight {
-    left: 71%;
+    top: 40%;
+    left: 64%;
+    width: 31%;
   }
 
   .aboutIntro {
