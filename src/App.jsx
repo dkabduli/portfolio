@@ -186,6 +186,12 @@ const EXPERIENCE_LINKS = EXPERIENCE.map((job) => ({
   shortLabel: job.title,
 }))
 
+const PROJECT_LINKS = PROJECTS.filter((project) => project.slug).map((project) => ({
+  href: `#/${PROJECT_ROUTE_PREFIX}${project.slug}`,
+  label: `${project.name} More info`,
+  shortLabel: project.name,
+}))
+
 function getDetailRoute() {
   if (typeof window === 'undefined') return null
   const { hash } = window.location
@@ -222,6 +228,12 @@ function useActiveSection(ids) {
   }, [ids])
 
   return activeSection
+}
+
+function getNavDropdownLinks(itemId) {
+  if (itemId === 'experience') return EXPERIENCE_LINKS
+  if (itemId === 'projects') return PROJECT_LINKS
+  return []
 }
 
 function Cursor() {
@@ -727,7 +739,7 @@ export default function App() {
 
               <nav className={styles.desktopNav} aria-label="Primary">
                 {NAV_ITEMS.map((item) => (
-                  item.id === 'experience' ? (
+                  item.id === 'experience' || item.id === 'projects' ? (
                     <div key={item.id} className={styles.navDropdown}>
                       <a
                         href={`#${item.id}`}
@@ -742,7 +754,7 @@ export default function App() {
                         </span>
                       </a>
                       <div className={styles.navDropdownMenu}>
-                        {EXPERIENCE_LINKS.map((link) => (
+                        {getNavDropdownLinks(item.id).map((link) => (
                           <a key={link.href} href={link.href} className={styles.navDropdownLink}>
                             {link.shortLabel}
                           </a>
@@ -780,13 +792,13 @@ export default function App() {
             animate={{ opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? 'auto' : 'none' }}
           >
             {NAV_ITEMS.map((item) => (
-              item.id === 'experience' ? (
+              item.id === 'experience' || item.id === 'projects' ? (
                 <div key={item.id} className={styles.mobileNavGroup}>
                   <a href={`#${item.id}`} className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
                     {item.label}
                   </a>
                   <div className={styles.mobileNavSubmenu}>
-                    {EXPERIENCE_LINKS.map((link) => (
+                    {getNavDropdownLinks(item.id).map((link) => (
                       <a key={link.href} href={link.href} className={styles.mobileNavSubLink} onClick={() => setMenuOpen(false)}>
                         {link.shortLabel}
                       </a>
