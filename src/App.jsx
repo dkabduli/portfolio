@@ -6,6 +6,7 @@ import styles from './App.module.css'
 const BASE = import.meta.env.BASE_URL || '/'
 const RESUME_URL = `${BASE}resume/Resume.pdf`
 const EXPERIENCE_ROUTE_PREFIX = 'experience/'
+const PROJECT_ROUTE_PREFIX = 'projects/'
 
 const NAV_ITEMS = [
   { id: 'about', label: 'About' },
@@ -83,6 +84,7 @@ const SKILLS = {
 const PROJECTS = [
   {
     name: 'BlackBoxNet',
+    slug: 'blackboxnet',
     year: '2026',
     description: 'Built a network state replay platform for outage analysis with a FastAPI backend, PostgreSQL storage, Git-based config versioning, and a React dashboard that visualizes topology impact, event correlation, and root-cause diffs.',
     tags: ['React', 'FastAPI', 'PostgreSQL', 'Git', 'Docker'],
@@ -92,6 +94,78 @@ const PROJECTS = [
     imagePosition: 'center top',
     github: null,
     external: null,
+    detailMeta: ['Product concept + full-stack build', 'Simulation-driven MVP', 'NetDevOps / observability'],
+    summary:
+      'BlackBoxNet is a network-state replay platform built to make outage analysis more explainable. The idea was to treat an incident like a flight recorder for infrastructure: capture configuration history, metrics, and event timing, then reconstruct what changed before service failed so an operator can move from symptoms to root cause quickly.',
+    objective:
+      'The product is trying to solve a common problem in network operations: teams can see that something is broken, but it is often slow and messy to prove which change caused it, how that change propagated downstream, and what the next remediation step should be. BlackBoxNet turns that investigation into a guided workflow instead of a pile of disconnected logs and device outputs.',
+    humanSummary: [
+      {
+        label: 'What it does',
+        value: 'Turns raw network state, config history, and health events into a guided outage investigation flow.',
+      },
+      {
+        label: 'Core idea',
+        value: 'Treat the network like a black box recorder so operators can replay what changed before an outage.',
+      },
+      {
+        label: 'Why it matters',
+        value: 'Makes the root cause easier to explain to engineers, interviewers, and non-specialists without losing technical depth.',
+      },
+      {
+        label: 'Next action',
+        value: 'Surface the most suspicious config change fast, then connect it to evidence and a clear remediation recommendation.',
+      },
+    ],
+    pillars: [
+      'Record configuration snapshots, metrics, and events into a Git-backed timeline so the system always has historical context.',
+      'Correlate symptoms like latency spikes, packet loss, interface degradation, and outages against the exact config changes that happened before them.',
+      'Explain incidents in plain language first, then let a deeper layer reveal the raw config diff, rule identifiers, and supporting evidence.',
+      'Keep the demo deterministic enough for interviews and portfolio walkthroughs while still feeling like a believable NOC / NetDevOps product.',
+    ],
+    incidentFlow: [
+      {
+        title: '1. Summary before detail',
+        text: 'The incident page is designed to answer what broke, where it broke, and who was affected within a few seconds, before the viewer has to parse any raw telemetry.',
+      },
+      {
+        title: '2. Root cause with evidence',
+        text: 'BlackBoxNet highlights the most suspicious config change, ties it to the affected device and subnet, and shows why that change matters in human-readable language.',
+      },
+      {
+        title: '3. Timeline to action',
+        text: 'The investigation then walks through the event chain in chronological order and ends with an explicit recommendation such as rolling back or reordering an ACL entry.',
+      },
+    ],
+    deepDive: [
+      'Phase 1 replays a deterministic ACL regression across three devices so the product can prove its UX, correlation logic, and diff experience in a controlled environment.',
+      'Phase 1.5 extends the concept by allowing one device to provide a live running-config over SSH while keeping the rest of the timeline simulated, which helps bridge the gap between a pure demo and a real operational workflow.',
+      'The incident explanation flow became the strongest part of the project because it turns backend signals such as config diffs, suspicion flags, and topology context into a narrative that feels understandable instead of noisy.',
+    ],
+    screenshots: [
+      {
+        src: `${BASE}images/blackboxnet-incident.png`,
+        alt: 'BlackBoxNet incident summary and correlation analysis screen',
+        eyebrow: 'Incident investigation',
+        title: 'Guided summary and recommendation',
+        caption:
+          'This view condenses the outage into a recruiter-friendly story: impacted subnet, root device, correlation analysis, supporting flags, and a recommendation banner that clearly points toward the next operator action.',
+      },
+      {
+        src: `${BASE}images/blackboxnet-outage.png`,
+        alt: 'BlackBoxNet root cause mismatch and investigation timeline screen',
+        eyebrow: 'Evidence layer',
+        title: 'Root cause + event timeline',
+        caption:
+          'The deeper evidence layer connects the suspicious ACL change to the degradation sequence, showing which event is treated as the primary suspect and giving the operator a direct path into the config diff.',
+      },
+    ],
+    sidebarFacts: [
+      'React + TypeScript frontend with a FastAPI backend and PostgreSQL persistence.',
+      'Git-backed config history for replayable snapshots and diff generation.',
+      'Rules-based correlation engine chosen intentionally for explainability.',
+      'Compact topology preview to keep the affected path and root device visible during an incident.',
+    ],
   },
   {
     name: 'IPv6 EIGRP Network',
@@ -435,6 +509,144 @@ function ExperienceDetailPage({ job }) {
   )
 }
 
+function ProjectDetailPage({ project }) {
+  return (
+    <div className={styles.detailPage}>
+      <header className={styles.detailHeader}>
+        <div className={styles.container}>
+          <div className={styles.detailNav}>
+            <a href={`${BASE}#projects`} className={styles.detailBackLink}>
+              ← Back to portfolio
+            </a>
+            <a href={RESUME_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
+              Resume
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main className={styles.detailMain}>
+        <div className={styles.container}>
+          <article className={styles.detailCard}>
+            <p className={styles.detailLabel}>Project More Info</p>
+            <h1 className={styles.detailTitle}>{project.name}</h1>
+            <div className={styles.detailMeta}>
+              {project.detailMeta.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+
+            <div className={styles.projectSummaryGrid}>
+              {project.humanSummary.map((item) => (
+                <section key={item.label} className={styles.projectSummaryCard}>
+                  <p className={styles.projectSummaryLabel}>{item.label}</p>
+                  <p className={styles.projectSummaryValue}>{item.value}</p>
+                </section>
+              ))}
+            </div>
+
+            <div className={styles.detailGrid}>
+              <div className={styles.detailContent}>
+                <section className={styles.detailSection}>
+                  <h2 className={styles.detailSectionTitle}>Overview</h2>
+                  <p className={styles.detailText}>{project.summary}</p>
+                  <p className={styles.detailText}>{project.objective}</p>
+                </section>
+
+                <section className={styles.detailSection}>
+                  <h2 className={styles.detailSectionTitle}>What BlackBoxNet Is Trying To Accomplish</h2>
+                  <ul className={styles.detailBullets}>
+                    {project.pillars.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+
+                <section className={styles.detailSection}>
+                  <h2 className={styles.detailSectionTitle}>Incident Explanation Experience</h2>
+                  <div className={styles.projectFlowGrid}>
+                    {project.incidentFlow.map((step) => (
+                      <article key={step.title} className={styles.projectFlowCard}>
+                        <p className={styles.projectFlowTitle}>{step.title}</p>
+                        <p className={styles.projectFlowText}>{step.text}</p>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+
+                <section className={styles.detailSection}>
+                  <h2 className={styles.detailSectionTitle}>Why The Demo Works</h2>
+                  <ul className={styles.detailBullets}>
+                    {project.deepDive.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+
+                <section className={styles.detailSection}>
+                  <div className={styles.projectScreenshotHeader}>
+                    <div>
+                      <h2 className={styles.detailSectionTitle}>Featured Screens</h2>
+                      <p className={styles.detailText}>
+                        These screens show the part of the product I focused on most: turning outage evidence into a clean, guided investigation flow.
+                      </p>
+                    </div>
+                  </div>
+                  <div className={styles.projectScreenshotGrid}>
+                    {project.screenshots.map((shot) => (
+                      <figure key={shot.title} className={styles.projectScreenshotCard}>
+                        <img src={shot.src} alt={shot.alt} className={styles.projectScreenshotImage} />
+                        <figcaption className={styles.projectScreenshotCaption}>
+                          <p className={styles.projectScreenshotEyebrow}>{shot.eyebrow}</p>
+                          <h3 className={styles.projectScreenshotTitle}>{shot.title}</h3>
+                          <p className={styles.projectScreenshotText}>{shot.caption}</p>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                </section>
+              </div>
+
+              <aside className={styles.detailSidebar}>
+                <div className={styles.detailImageCard}>
+                  <img src={project.image} alt={`${project.name} dashboard preview`} className={`${styles.detailImage} ${styles.detailImageContain}`} />
+                </div>
+
+                <div className={styles.detailSidebarCard}>
+                  <p className={styles.projectSidebarLabel}>Stack</p>
+                  <div className={styles.detailSkills}>
+                    {project.tags.map((skill) => (
+                      <span key={skill} className={styles.detailSkillTag}>
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={styles.detailSidebarCard}>
+                  <p className={styles.projectSidebarLabel}>Why it feels human</p>
+                  <p className={styles.detailSidebarText}>
+                    Instead of stopping at “an outage happened,” the product is built to explain the chain of reasoning behind that conclusion. That is what makes the demo feel more like a real operational tool and less like a backend debug screen.
+                  </p>
+                </div>
+
+                <div className={styles.detailSidebarCard}>
+                  <p className={styles.projectSidebarLabel}>Key product traits</p>
+                  <ul className={styles.detailBullets}>
+                    {project.sidebarFacts.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </article>
+        </div>
+      </main>
+    </div>
+  )
+}
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -452,6 +664,9 @@ export default function App() {
   const contactLinks = contactMethods.filter((item) => ['email', 'linkedin', 'github', 'lol'].includes(item.id))
   const activeExperienceDetail = detailRoute
     ? EXPERIENCE.find((job) => `${EXPERIENCE_ROUTE_PREFIX}${job.slug}` === detailRoute)
+    : null
+  const activeProjectDetail = detailRoute
+    ? PROJECTS.find((project) => project.slug && `${PROJECT_ROUTE_PREFIX}${project.slug}` === detailRoute)
     : null
 
   useEffect(() => {
@@ -477,15 +692,22 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (!activeExperienceDetail) return
-    if (window.innerWidth > 768) return
+    if (!activeExperienceDetail && !activeProjectDetail) return
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-  }, [activeExperienceDetail])
+  }, [activeExperienceDetail, activeProjectDetail])
 
   if (activeExperienceDetail) {
     return (
       <LazyMotion features={domAnimation}>
         <ExperienceDetailPage job={activeExperienceDetail} />
+      </LazyMotion>
+    )
+  }
+
+  if (activeProjectDetail) {
+    return (
+      <LazyMotion features={domAnimation}>
+        <ProjectDetailPage project={activeProjectDetail} />
       </LazyMotion>
     )
   }
@@ -770,7 +992,7 @@ export default function App() {
                     </div>
                     <h2 className={styles.projectTitle}>{project.name}</h2>
                     <p className={styles.projectDescription}>{project.description}</p>
-                    {project.github || project.external ? (
+                    {project.github || project.external || project.slug ? (
                       <div className={styles.projectLinks}>
                         {project.github ? (
                           <a href={project.github} target="_blank" rel="noreferrer">
@@ -780,6 +1002,11 @@ export default function App() {
                         {project.external ? (
                           <a href={project.external} target="_blank" rel="noreferrer">
                             Live link
+                          </a>
+                        ) : null}
+                        {project.slug ? (
+                          <a href={`#/${PROJECT_ROUTE_PREFIX}${project.slug}`}>
+                            More info
                           </a>
                         ) : null}
                       </div>
