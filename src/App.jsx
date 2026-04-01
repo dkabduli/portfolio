@@ -92,10 +92,10 @@ const EXPERIENCE = [
 ]
 
 const SKILLS = {
-  Languages: ['C', 'C++', 'Python', 'Java', 'Cisco IOS', 'Juniper JunOS'],
-  Networking: ['TCP/IP', 'BGP', 'OSPFv2/v3', 'EIGRP', 'MPLS', 'STP'],
-  'Automation / DevOps': ['Ansible', 'GitLab CI/CD', 'API Integration', 'AAP'],
-  Tools: ['Linux', 'Git', 'Wireshark', 'Vault', 'Zabbix', 'MySQL'],
+  Languages: ['C', 'C++', 'Python', 'Java'],
+  Networking: ['Routing & Switching', 'IPv4 / IPv6', 'BGP', 'OSPFv2 / OSPFv3', 'EIGRP', 'MPLS', 'Spanning Tree'],
+  'Automation / DevOps': ['Infrastructure Automation', 'CI / CD Workflows', 'API Scripting', 'Configuration Management', 'Secrets Management'],
+  Systems: ['Linux Administration', 'Version Control', 'Network Monitoring', 'Packet Analysis', 'Database Querying', 'Topology Documentation'],
 }
 
 const PROJECTS = [
