@@ -1,0 +1,33 @@
+hostname D1
+no ip domain lookup
+banner motd ^C D1, Implement EIGRP for IPv6 ^C
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line vty 0 4
+ privilege level 15
+ exec-timeout 0 0
+ password cisco123
+ login
+exit
+vlan 2
+ name HOST-VLAN
+exit
+interface g1/0/3
+ switchport mode access
+ no shut
+exit
+interface g1/0/11
+ switchport mode trunk
+ no shutdown
+exit
+interface vlan 1
+ no shut
+exit
+interface g1/0/23
+ switchport mode access
+ switchport access vlan 2
+ spanning-tree portfast
+ no shutdown
+exit
+end

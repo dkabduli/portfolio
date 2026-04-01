@@ -1,0 +1,68 @@
+hostname R3
+no ip domain lookup
+ipv6 unicast-routing
+banner motd ^C R3, Implement EIGRP for IPv6 ^C
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line vty 0 4
+ privilege level 15
+ exec-timeout 0 0
+ password cisco123
+ login
+exit
+interface g0/0/0
+ ipv6 address fe80::3:1 link-local
+ ipv6 address 2001:db8:cafe:2::1/64
+ no shutdown
+exit
+interface g0/0/1
+ ipv6 address fe80::3:2 link-local
+ ipv6 address 2001:db8:acad:3::1/64
+ no shutdown
+exit
+interface loopback 1
+ ipv6 address fe80::3:3 link-local
+ ipv6 address 2001:db8:abcd:8::1/64
+ no shutdown
+exit
+interface loopback 2
+ ipv6 address fe80::3:4 link-local
+ ipv6 address 2001:db8:abcd:9::1/64
+ no shutdown
+exit
+interface loopback 3
+ ipv6 address fe80::3:5 link-local
+ ipv6 address 2001:db8:abcd:10::1/64
+ no shutdown
+exit
+interface loopback 4
+ ipv6 address fe80::3:6 link-local
+ ipv6 address 2001:db8:abcd:11::1/64
+ no shutdown
+exit
+interface loopback 5
+ ipv6 address fe80::3:7 link-local
+ ipv6 address 2001:db8:abcd:12::1/64
+ no shutdown
+exit
+key chain EIGRPv6-AUTHEN-KEY
+ key 1
+  key-string $3cre7!!
+exit
+router eigrp EIGRP_IPV6
+ address-family ipv6 unicast autonomous-system 43
+  eigrp router-id 3.3.3.3
+  af-interface default
+   passive-interface
+  af-interface g0/0/0
+   no passive-interface
+   authentication mode md5
+   authentication key-chain EIGRPv6-AUTHEN-KEY
+   summary-address 2001:db8:abcd::/56
+  af-interface g0/0/1
+   no passive-interface
+   authentication mode hmac-sha-256 $3cre7!!
+   summary-address 2001:db8:abcd::/56
+ exit-address-family
+end

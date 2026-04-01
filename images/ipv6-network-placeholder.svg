@@ -1,0 +1,30 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#F8F8F6"/>
+  <rect x="96" y="96" width="1408" height="708" rx="32" fill="#FFFFFF" stroke="#E2E6ED" stroke-width="4"/>
+  <g stroke="#8A9BB5" stroke-width="4">
+    <path d="M350 280L600 184L880 282L1148 176L1280 356L1114 560L812 628L508 584L314 428Z"/>
+    <path d="M600 184L508 584"/>
+    <path d="M880 282L812 628"/>
+    <path d="M350 280L812 628"/>
+    <path d="M1148 176L508 584"/>
+  </g>
+  <g fill="#1A2744">
+    <circle cx="350" cy="280" r="28"/>
+    <circle cx="600" cy="184" r="28"/>
+    <circle cx="880" cy="282" r="28"/>
+    <circle cx="1148" cy="176" r="28"/>
+    <circle cx="1280" cy="356" r="28"/>
+    <circle cx="1114" cy="560" r="28"/>
+    <circle cx="812" cy="628" r="28"/>
+    <circle cx="508" cy="584" r="28"/>
+    <circle cx="314" cy="428" r="28"/>
+  </g>
+  <g fill="#2563EB">
+    <circle cx="600" cy="184" r="14"/>
+    <circle cx="1114" cy="560" r="14"/>
+    <circle cx="812" cy="628" r="14"/>
+  </g>
+  <rect x="226" y="682" width="1148" height="54" rx="27" fill="#F6F8FC" stroke="#E2E6ED" stroke-width="3"/>
+  <text x="180" y="138" fill="#1A2744" font-family="Inter, sans-serif" font-size="42" font-weight="600">IPV6 EIGRP NETWORK</text>
+  <text x="274" y="718" fill="#3D4F6B" font-family="JetBrains Mono, monospace" font-size="30">2001:0db8:85a3::8a2e:0370:7334    /    ROUTING / SUBNETTING / TOPOLOGY</text>
+</svg>

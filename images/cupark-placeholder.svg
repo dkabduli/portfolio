@@ -1,0 +1,25 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#F8F8F6"/>
+  <rect x="96" y="96" width="1408" height="708" rx="32" fill="#FFFFFF" stroke="#E2E6ED" stroke-width="4"/>
+  <rect x="182" y="180" width="1240" height="420" rx="30" fill="#F9FBFF" stroke="#E2E6ED" stroke-width="3"/>
+  <rect x="236" y="240" width="310" height="300" rx="22" fill="#EEF3FF"/>
+  <path d="M290 472V310C290 273.549 319.549 244 356 244H426C462.451 244 492 273.549 492 310V472" stroke="#2563EB" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="392" cy="378" r="26" fill="#2563EB"/>
+  <rect x="614" y="252" width="732" height="44" rx="22" fill="#EAF0FB"/>
+  <rect x="614" y="334" width="660" height="44" rx="22" fill="#EAF0FB"/>
+  <rect x="614" y="416" width="512" height="44" rx="22" fill="#EAF0FB"/>
+  <g stroke="#8A9BB5" stroke-width="6">
+    <path d="M290 670H1310"/>
+    <path d="M290 670V736"/>
+    <path d="M484 670V736"/>
+    <path d="M678 670V736"/>
+    <path d="M872 670V736"/>
+    <path d="M1066 670V736"/>
+    <path d="M1260 670V736"/>
+  </g>
+  <circle cx="484" cy="650" r="22" fill="#2563EB"/>
+  <circle cx="872" cy="650" r="22" fill="#1A2744"/>
+  <circle cx="1260" cy="650" r="22" fill="#2563EB"/>
+  <text x="180" y="138" fill="#1A2744" font-family="Inter, sans-serif" font-size="42" font-weight="600">CUPARK</text>
+  <text x="1116" y="822" fill="#8A9BB5" font-family="DM Mono, monospace" font-size="28" letter-spacing="4">REACT / ARDUINO / REAL-TIME DASHBOARD</text>
+</svg>

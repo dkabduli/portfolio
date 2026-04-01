@@ -1,0 +1,70 @@
+hostname R2
+no ip domain lookup
+ipv6 unicast-routing
+banner motd ^C R2, Implement EIGRP for IPv6 ^C
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line vty 0 4
+ privilege level 15
+ exec-timeout 0 0
+ password cisco123
+ login
+exit
+interface g0/0/0
+ ipv6 address fe80::2:1 link-local
+ ipv6 address 2001:db8:cafe:1::2/64
+ no shutdown
+exit
+interface g0/0/1
+ ipv6 address fe80::2:2 link-local
+ ipv6 address 2001:db8:cafe:2::2/64
+ no shutdown
+exit
+interface loopback 0
+ description Internet host
+ ipv6 address fe80::2:3 link-local
+ ipv6 address 2001:db8:ff:999::153/64
+ no shutdown
+exit
+interface loopback 1
+ ipv6 address fe80::2:4 link-local
+ ipv6 address 2001:db8:cede::1/64
+ no shutdown
+exit
+interface loopback 2
+ ipv6 address fe80::2:5 link-local
+ ipv6 address 2001:db8:cede:1::1/64
+ no shutdown
+exit
+key chain EIGRPv6-AUTHEN-KEY
+ key 1
+  key-string $3cre7!!
+exit
+ipv6 router eigrp 43
+ eigrp router-id 2.2.2.2
+ no shutdown
+ passive-interface default
+ no passive-interface g0/0/0
+ no passive-interface g0/0/1
+exit
+interface g0/0/0
+ ipv6 eigrp 43
+ ipv6 authentication mode eigrp 43 md5
+ ipv6 authentication key-chain eigrp 43 EIGRPv6-AUTHEN-KEY
+exit
+interface g0/0/1
+ ipv6 eigrp 43
+ ipv6 authentication mode eigrp 43 md5
+ ipv6 authentication key-chain eigrp 43 EIGRPv6-AUTHEN-KEY
+exit
+interface loopback 0
+ ipv6 eigrp 43
+exit
+interface loopback 1
+ ipv6 eigrp 43
+exit
+interface loopback 2
+ ipv6 eigrp 43
+exit
+end
