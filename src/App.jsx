@@ -5,6 +5,8 @@ import styles from './App.module.css'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const RESUME_URL = `${BASE}resume/Resume.pdf`
+const LINKEDIN_URL = contactMethods.find((item) => item.id === 'linkedin')?.href || 'https://linkedin.com'
+const EMAIL_URL = contactMethods.find((item) => item.id === 'email')?.href || 'mailto:'
 const EXPERIENCE_ROUTE_PREFIX = 'experience/'
 const PROJECT_ROUTE_PREFIX = 'projects/'
 
@@ -23,6 +25,19 @@ const QUICK_STATS = [
   { value: '20+', label: 'TOOLS USED' },
 ]
 
+const KEY_STRENGTHS = ['Routing', 'Automation', 'Operational Support']
+
+const COURSEWORK = [
+  'Advanced Network Routing',
+  'Network Security',
+  'Wireless Networks',
+  'DevOps',
+  'Networking Tech & Automation',
+  'Intermediate Networking',
+  'Routing and Switching',
+  'Database Concepts & SQL',
+]
+
 const EXPERIENCE = [
   {
     slug: 'netdevops-intern',
@@ -34,6 +49,7 @@ const EXPERIENCE = [
     imageContain: true,
     summary:
       'Worked on internal infrastructure automation and audit initiatives at Shared Services Canada, with hands-on ownership across GitLab account analysis, secrets-management research, and Lighthouse audit improvements.',
+    outcome: 'Improved audit visibility and infrastructure documentation quality for internal operational workflows.',
     skills: ['GitLab API', 'Python Scripting', 'HashiCorp Vault', 'Linux', 'Lighthouse', 'Metadata Auditing', 'Workflow Analysis'],
     timelineBullets: [
       'Developed a GitLab user-audit workflow using the GitLab API and impersonation-token research to improve visibility into inactive mailbox-based accounts.',
@@ -58,6 +74,7 @@ const EXPERIENCE = [
     imageAlt: 'Abdul Rehman Baseem upgrading switches in a network environment',
     summary:
       'Supported hands-on network operations work through switch upgrades, shipping and staging tasks, and detailed topology creation for multi-floor environments.',
+    outcome: 'Helped prepare production hardware and clearer network documentation for deployment and support teams.',
     skills: ['Cisco Switches', 'Juniper Switches', 'Linux', 'USB Mounting', 'Firmware Upgrades', 'Visio', 'Topology Design'],
     timelineBullets: [
       'Performed Cisco and Juniper switch upgrades as part of operational refresh and deployment preparation activities.',
@@ -86,7 +103,7 @@ const PROJECTS = [
     name: 'BlackBoxNet',
     slug: 'blackboxnet',
     year: '2026',
-    description: 'Built a network state replay platform for outage analysis with a FastAPI backend, PostgreSQL storage, Git-based config versioning, and a React dashboard that visualizes topology impact, event correlation, and root-cause diffs.',
+    description: 'Built a network state replay platform that helps operators move from outage symptoms to root cause faster through Git-backed config history, event correlation, topology context, and guided diff analysis.',
     tags: ['React', 'FastAPI', 'PostgreSQL', 'Git', 'Docker'],
     featured: true,
     image: `${BASE}images/blackboxnet-dashboard.png`,
@@ -95,6 +112,18 @@ const PROJECTS = [
     github: null,
     external: null,
     detailMeta: ['Product concept + full-stack build', 'Simulation-driven MVP', 'NetDevOps / observability'],
+    outcome: 'Turned outage analysis into a clearer operator workflow by connecting evidence, topology, and root-cause explanation in one interface.',
+    overviewTitle: 'Overview',
+    pillarsTitle: 'What BlackBoxNet Is Trying To Accomplish',
+    flowTitle: 'Incident Explanation Experience',
+    deepDiveTitle: 'Why The Demo Works',
+    learningTitle: 'What I Learned',
+    screenshotsIntro:
+      'These screens show the part of the product I focused on most: turning outage evidence into a clean, guided investigation flow.',
+    sidebarNarrativeTitle: 'Why it feels human',
+    sidebarTraitsTitle: 'Key product traits',
+    sidebarNarrative:
+      'Instead of stopping at "an outage happened," the product is built to explain the chain of reasoning behind that conclusion. That is what makes the demo feel more like a real operational tool and less like a backend debug screen.',
     summary:
       'BlackBoxNet is a network-state replay platform built to make outage analysis more explainable. The idea was to treat an incident like a flight recorder for infrastructure: capture configuration history, metrics, and event timing, then reconstruct what changed before service failed so an operator can move from symptoms to root cause quickly.',
     objective:
@@ -142,6 +171,11 @@ const PROJECTS = [
       'Phase 1.5 extends the concept by allowing one device to provide a live running-config over SSH while keeping the rest of the timeline simulated, which helps bridge the gap between a pure demo and a real operational workflow.',
       'The incident explanation flow became the strongest part of the project because it turns backend signals such as config diffs, suspicion flags, and topology context into a narrative that feels understandable instead of noisy.',
     ],
+    learningNotes: [
+      'I got better at translating low-level technical signals into product decisions that make the investigation feel clear instead of overwhelming.',
+      'The project reinforced how valuable explainability is in infrastructure tools, especially when the audience includes operators, recruiters, and non-specialist reviewers.',
+      'It also sharpened my thinking around full-stack system design, where backend evidence only becomes valuable once the frontend makes the story understandable.',
+    ],
     screenshots: [
       {
         src: `${BASE}images/blackboxnet-incident.png`,
@@ -169,14 +203,104 @@ const PROJECTS = [
   },
   {
     name: 'IPv6 EIGRP Network',
+    slug: 'ipv6-eigrp-network',
     year: '2024',
-    description: 'Designed and validated IPv6 topologies in Cisco Packet Tracer, implemented EIGRP for IPv6 with link-local and global unicast addressing, and troubleshot adjacency and routing issues to improve convergence and end-to-end connectivity.',
+    description: 'Built and tuned a multi-router IPv6 EIGRP lab with named and classic configurations, passive-interface controls, route summarization, authentication, and route filtering to strengthen end-to-end routing validation.',
     tags: ['Cisco', 'EIGRP', 'Visio'],
     image: `${BASE}images/ipv6-network.png`,
     fallback: `${BASE}images/ipv6-network-placeholder.svg`,
     imagePosition: 'center center',
     github: null,
     external: null,
+    detailMeta: ['Advanced routing lab', 'IPv6 control-plane tuning', 'Cisco Packet Tracer'],
+    outcome: 'Strengthened practical IPv6 routing skills by moving beyond adjacency setup into tuning, security, summarization, and verification.',
+    overviewTitle: 'Overview',
+    pillarsTitle: 'What The Lab Covered',
+    flowTitle: 'Key Routing Tasks',
+    deepDiveTitle: 'What I Validated',
+    learningTitle: 'What I Learned',
+    screenshotsIntro:
+      'This project focused on configuring, tuning, and verifying EIGRP for IPv6 across a multi-router topology rather than building a frontend product.',
+    sidebarNarrativeTitle: 'Why it matters',
+    sidebarTraitsTitle: 'Key technical areas',
+    summary:
+      'This lab focused on implementing and tuning EIGRP for IPv6 across a routed topology with multiple interfaces, loopbacks, and VLAN segments. I used it to build stronger hands-on understanding of how IPv6 EIGRP adjacencies form, how route exchange behaves across classic and named configurations, and how control-plane choices affect convergence and visibility.',
+    objective:
+      'The work went beyond basic adjacency setup. I configured IPv6 unicast routing, router IDs, interface-level EIGRP participation, passive-interface controls, default-route propagation, route summarization, authentication, load-balancing behavior, and route filtering so the lab reflected a more realistic routing-engineering exercise.',
+    humanSummary: [
+      {
+        label: 'What it does',
+        value: 'Implements and tunes EIGRP for IPv6 across a multi-router topology with routed links, VLAN interfaces, and loopbacks.',
+      },
+      {
+        label: 'Core focus',
+        value: 'Move from basic adjacency formation to stronger control over propagation, summarization, authentication, and verification.',
+      },
+      {
+        label: 'Why it matters',
+        value: 'Shows practical routing depth beyond simple Packet Tracer connectivity by validating how protocol behavior changes with tuning decisions.',
+      },
+      {
+        label: 'Outcome',
+        value: 'Built confidence with IPv6 routing operations, verification commands, and optimization techniques used in larger network environments.',
+      },
+    ],
+    pillars: [
+      'Configured IPv6 addressing, link-local interfaces, router IDs, and EIGRP participation across routers, loopbacks, and router-on-a-stick VLAN segments.',
+      'Worked with both classic and named EIGRP for IPv6 configurations to understand how adjacency formation and interface activation differ across models.',
+      'Applied passive-interface tuning, default-route propagation, summary routes, authentication, and route filtering to improve routing control and reduce unnecessary protocol exposure.',
+      'Verified outcomes using commands such as `show ipv6 eigrp neighbors`, `show ipv6 eigrp interfaces`, `show ipv6 route eigrp`, and topology-table inspection.',
+    ],
+    incidentFlow: [
+      {
+        title: '1. Establish adjacency',
+        text: 'Configured IPv6 unicast routing, router IDs, and interface-level EIGRP activation so neighbors could form correctly across the routed topology.',
+      },
+      {
+        title: '2. Tune route behavior',
+        text: 'Adjusted passive interfaces, propagated a default route, and summarized loopback networks to control what was advertised and how efficiently routes were carried.',
+      },
+      {
+        title: '3. Secure and verify',
+        text: 'Implemented MD5 and HMAC-SHA-256 authentication, then validated neighbor state, interface participation, and learned routes with verification commands.',
+      },
+    ],
+    deepDive: [
+      'Configured passive-interface behavior both per interface and through default-passive methods, which helped reinforce the operational trade-off between reachability and routing-protocol exposure.',
+      'Tested two default-route propagation approaches: redistributing a static default route and injecting a summary default route, then compared how they appeared as external versus internal EIGRP routes.',
+      'Summarized multiple loopback networks into a single route advertisement to reduce routing-table noise and better understand how summarization affects the rest of the topology.',
+      'Implemented interface-based authentication with both MD5 key chains and HMAC-SHA-256, then verified that adjacencies only returned once both ends of a link were configured correctly.',
+    ],
+    learningNotes: [
+      'This lab helped me understand that routing work is not just about making neighbors come up, but about controlling how routes are advertised, summarized, and protected.',
+      'I became more confident reading verification outputs and comparing how EIGRP behavior changes when passive interfaces, summaries, default routes, and authentication are introduced.',
+      'It also gave me stronger hands-on comfort with protocol tuning choices that affect scalability, visibility, and operational security.',
+    ],
+    screenshots: [
+      {
+        src: `${BASE}images/ipv6-network.png`,
+        alt: 'IPv6 EIGRP network topology in Cisco Packet Tracer',
+        eyebrow: 'Routing topology',
+        title: 'Multi-router IPv6 EIGRP lab',
+        caption:
+          'The topology includes routed links, VLAN subinterfaces, loopbacks, and downstream segments so protocol behavior can be validated across more than a simple point-to-point setup.',
+      },
+    ],
+    sidebarNarrative:
+      'This project is valuable because it shows routing depth, not just configuration familiarity. It demonstrates that I can move from getting EIGRP for IPv6 working to tuning, securing, summarizing, and verifying it in a more disciplined way.',
+    sidebarFacts: [
+      'Classic and named EIGRP for IPv6 configuration models.',
+      'Passive interfaces, summarization, default-route propagation, and filtering.',
+      'MD5 and HMAC-SHA-256 authentication at the interface level.',
+      'Hands-on verification of neighbors, interfaces, topology, and learned routes.',
+    ],
+    configLinks: [
+      { label: 'Router R1 configuration', href: `${BASE}configs/eigrp/r1.txt` },
+      { label: 'Router R2 configuration', href: `${BASE}configs/eigrp/r2.txt` },
+      { label: 'Router R3 configuration', href: `${BASE}configs/eigrp/r3.txt` },
+      { label: 'Switch D1 configuration', href: `${BASE}configs/eigrp/d1.txt` },
+      { label: 'Switch D2 configuration', href: `${BASE}configs/eigrp/d2.txt` },
+    ],
   },
 ]
 
@@ -453,9 +577,17 @@ function ExperienceDetailPage({ job }) {
             <a href={`${BASE}#experience`} className={styles.detailBackLink}>
               ← Back to portfolio
             </a>
-            <a href={RESUME_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
-              Resume
-            </a>
+            <div className={styles.detailActions}>
+              <a href={RESUME_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
+                Resume
+              </a>
+              <a href={LINKEDIN_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a href={EMAIL_URL} className={styles.detailResumeLink}>
+                Contact
+              </a>
+            </div>
           </div>
         </div>
       </header>
@@ -530,9 +662,17 @@ function ProjectDetailPage({ project }) {
             <a href={`${BASE}#projects`} className={styles.detailBackLink}>
               ← Back to portfolio
             </a>
-            <a href={RESUME_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
-              Resume
-            </a>
+            <div className={styles.detailActions}>
+              <a href={RESUME_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
+                Resume
+              </a>
+              <a href={LINKEDIN_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a href={EMAIL_URL} className={styles.detailResumeLink}>
+                Contact
+              </a>
+            </div>
           </div>
         </div>
       </header>
@@ -560,13 +700,13 @@ function ProjectDetailPage({ project }) {
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
                 <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>Overview</h2>
+                  <h2 className={styles.detailSectionTitle}>{project.overviewTitle || 'Overview'}</h2>
                   <p className={styles.detailText}>{project.summary}</p>
                   <p className={styles.detailText}>{project.objective}</p>
                 </section>
 
                 <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>What BlackBoxNet Is Trying To Accomplish</h2>
+                  <h2 className={styles.detailSectionTitle}>{project.pillarsTitle || 'Project Scope'}</h2>
                   <ul className={styles.detailBullets}>
                     {project.pillars.map((item) => (
                       <li key={item}>{item}</li>
@@ -575,7 +715,7 @@ function ProjectDetailPage({ project }) {
                 </section>
 
                 <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>Incident Explanation Experience</h2>
+                  <h2 className={styles.detailSectionTitle}>{project.flowTitle || 'Process'}</h2>
                   <div className={styles.projectFlowGrid}>
                     {project.incidentFlow.map((step) => (
                       <article key={step.title} className={styles.projectFlowCard}>
@@ -587,7 +727,7 @@ function ProjectDetailPage({ project }) {
                 </section>
 
                 <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>Why The Demo Works</h2>
+                  <h2 className={styles.detailSectionTitle}>{project.deepDiveTitle || 'Details'}</h2>
                   <ul className={styles.detailBullets}>
                     {project.deepDive.map((item) => (
                       <li key={item}>{item}</li>
@@ -595,13 +735,22 @@ function ProjectDetailPage({ project }) {
                   </ul>
                 </section>
 
+                {project.learningNotes?.length ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>{project.learningTitle || 'What I Learned'}</h2>
+                    <ul className={styles.detailBullets}>
+                      {project.learningNotes.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </section>
+                ) : null}
+
                 <section className={styles.detailSection}>
                   <div className={styles.projectScreenshotHeader}>
                     <div>
                       <h2 className={styles.detailSectionTitle}>Featured Screens</h2>
-                      <p className={styles.detailText}>
-                        These screens show the part of the product I focused on most: turning outage evidence into a clean, guided investigation flow.
-                      </p>
+                      <p className={styles.detailText}>{project.screenshotsIntro || 'Selected screenshots and supporting context.'}</p>
                     </div>
                   </div>
                   <div className={styles.projectScreenshotGrid}>
@@ -636,20 +785,31 @@ function ProjectDetailPage({ project }) {
                 </div>
 
                 <div className={styles.detailSidebarCard}>
-                  <p className={styles.projectSidebarLabel}>Why it feels human</p>
-                  <p className={styles.detailSidebarText}>
-                    Instead of stopping at “an outage happened,” the product is built to explain the chain of reasoning behind that conclusion. That is what makes the demo feel more like a real operational tool and less like a backend debug screen.
-                  </p>
+                  <p className={styles.projectSidebarLabel}>{project.sidebarNarrativeTitle || 'Why it matters'}</p>
+                  <p className={styles.detailSidebarText}>{project.sidebarNarrative || 'This project combines technical depth with a clearer explanation of why the work matters.'}</p>
                 </div>
 
                 <div className={styles.detailSidebarCard}>
-                  <p className={styles.projectSidebarLabel}>Key product traits</p>
+                  <p className={styles.projectSidebarLabel}>{project.sidebarTraitsTitle || 'Key traits'}</p>
                   <ul className={styles.detailBullets}>
                     {project.sidebarFacts.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
+
+                {project.configLinks?.length ? (
+                  <div className={styles.detailSidebarCard}>
+                    <p className={styles.projectSidebarLabel}>Configurations</p>
+                    <div className={styles.projectConfigLinks}>
+                      {project.configLinks.map((item) => (
+                        <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className={styles.projectConfigLink}>
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
               </aside>
             </div>
           </article>
@@ -844,6 +1004,14 @@ export default function App() {
                     NetDevOps Intern
                   </motion.p>
                   <motion.p
+                    className={styles.heroTargetRoles}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.2 }}
+                  >
+                    Seeking internships and new grad roles in network engineering, NetDevOps, and infrastructure automation.
+                  </motion.p>
+                  <motion.p
                     className={styles.heroLocation}
                     initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -860,6 +1028,18 @@ export default function App() {
                     3rd-year IT student building experience across infrastructure tooling, automation workflows, and operational network environments.
                   </motion.p>
                   <motion.div
+                    className={styles.heroStrengths}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.4 }}
+                  >
+                    {KEY_STRENGTHS.map((item) => (
+                      <span key={item} className={styles.heroStrengthTag}>
+                        {item}
+                      </span>
+                    ))}
+                  </motion.div>
+                  <motion.div
                     className={styles.heroActions}
                     initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -867,6 +1047,12 @@ export default function App() {
                   >
                     <a href={RESUME_URL} className={styles.primaryButton} target="_blank" rel="noreferrer">
                       Download Resume
+                    </a>
+                    <a href={LINKEDIN_URL} className={styles.secondaryLink} target="_blank" rel="noreferrer">
+                      LinkedIn
+                    </a>
+                    <a href={EMAIL_URL} className={styles.secondaryLink}>
+                      Contact
                     </a>
                     <a href="#projects" className={styles.secondaryLink}>
                       View Projects →
@@ -936,6 +1122,7 @@ export default function App() {
                       <p className={styles.timelineCompany}>{job.company}</p>
                       <PlaceholderLogo />
                     </div>
+                    <p className={styles.timelineOutcome}>{job.outcome}</p>
                     <div className={styles.timelineRule} />
                     <ul className={styles.timelineBullets}>
                       {job.timelineBullets.map((bullet) => (
@@ -972,6 +1159,22 @@ export default function App() {
                 ))}
               </div>
             </div>
+
+            <div className={styles.courseworkPanel}>
+              <div className={styles.courseworkHeader}>
+                <p className={styles.aboutKicker}>Selected Coursework</p>
+                <p className={styles.courseworkText}>
+                  Relevant coursework completed across routing, automation, security, wireless networking, systems, and infrastructure foundations.
+                </p>
+              </div>
+              <div className={styles.courseworkGrid}>
+                {COURSEWORK.map((course) => (
+                  <span key={course} className={styles.courseworkTag}>
+                    {course}
+                  </span>
+                ))}
+              </div>
+            </div>
           </Section>
 
           <Section id="projects" label="// 03 — PROJECTS">
@@ -1003,6 +1206,7 @@ export default function App() {
                       <span className={styles.projectYear}>{project.year}</span>
                     </div>
                     <h2 className={styles.projectTitle}>{project.name}</h2>
+                    <p className={styles.projectOutcome}>{project.outcome}</p>
                     <p className={styles.projectDescription}>{project.description}</p>
                     {project.github || project.external || project.slug ? (
                       <div className={styles.projectLinks}>
