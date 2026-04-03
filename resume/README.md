@@ -1,9 +1,7 @@
 # Resume PDF
 
-Place your resume PDF here.
+Place the canonical resume PDF here as **`Resume.pdf`**.
 
-**Required file:** `Abdul_Rehman_Resume.pdf`
+Full path: `public/resume/Resume.pdf`
 
-Full path: `public/resume/Abdul_Rehman_Resume.pdf`
-
-The "View Resume" buttons throughout the site link to this file.
+Download and “View resume” links use `/portfolio/resume/Resume.pdf` (see `RESUME_URL` in `src/App.jsx`).
