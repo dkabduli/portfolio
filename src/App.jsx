@@ -109,7 +109,7 @@ const EXPERIENCE = [
 ]
 
 const SKILLS = {
-  Languages: ['Python', 'Java', 'C', 'C++', 'MATLAB', 'TypeScript', 'LC-3', 'Arduino (C/C++)'],
+  Languages: ['Python', 'Java', 'C', 'C++', 'TypeScript', 'LC-3', 'Arduino (C/C++)'],
   Networking: [
     'Routing & switching design',
     'Cisco IOS & Juniper Junos CLI',
@@ -133,6 +133,7 @@ const SKILLS = {
     'Git workflows',
     'Zabbix / NNMI monitoring',
     'Wireshark & packet analysis',
+    'MATLAB',
     'PostgreSQL & MySQL',
     'Visio topology documentation',
   ],
