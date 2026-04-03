@@ -22,7 +22,7 @@ const QUICK_STATS = [
   { value: '2+', label: 'YRS EXPERIENCE' },
   { value: '50+', label: 'SWITCHES UPGRADED' },
   { value: '200+', label: 'ACCOUNTS AUDITED' },
-  { value: '20+', label: 'TOOLS USED' },
+  { value: '20+', label: 'PRACTICE AREAS' },
 ]
 
 const KEY_STRENGTHS = ['Routing', 'Automation', 'Operational Support']
@@ -48,9 +48,16 @@ const EXPERIENCE = [
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
     summary:
-      'Worked on internal infrastructure automation and audit initiatives at Shared Services Canada, with hands-on ownership across GitLab account analysis, secrets-management research, and Lighthouse audit improvements.',
+      'Worked on internal infrastructure automation and audit initiatives at Shared Services Canada, with hands-on ownership across identity and access analysis (including in GitLab), secrets-management research, and widening inventory audits with richer device metadata.',
     outcome: 'Improved audit visibility and infrastructure documentation quality for internal operational workflows.',
-    skills: ['GitLab API', 'Python Scripting', 'HashiCorp Vault', 'Linux', 'Lighthouse', 'Metadata Auditing', 'Workflow Analysis'],
+    capabilities: [
+      'API-driven automation',
+      'Python scripting & reporting',
+      'Secrets management evaluation',
+      'Linux administration',
+      'Audit & inventory validation',
+      'Identity & access analysis',
+    ],
     timelineBullets: [
       'Developed a GitLab user-audit workflow using the GitLab API and impersonation-token research to improve visibility into inactive mailbox-based accounts.',
       'Produced reporting that identified accounts inactive for more than 90 days, supporting access review and deactivation decisions.',
@@ -75,7 +82,14 @@ const EXPERIENCE = [
     summary:
       'Supported hands-on network operations work through switch upgrades, shipping and staging tasks, and detailed topology creation for multi-floor environments.',
     outcome: 'Helped prepare production hardware and clearer network documentation for deployment and support teams.',
-    skills: ['Cisco Switches', 'Juniper Switches', 'Linux', 'USB Mounting', 'Firmware Upgrades', 'Visio', 'Topology Design'],
+    capabilities: [
+      'Hands-on enterprise switching',
+      'Firmware & image lifecycle',
+      'Linux in network operations',
+      'Field staging & hardware logistics',
+      'Network diagramming & documentation',
+      'Multi-site topology design',
+    ],
     timelineBullets: [
       'Performed Cisco and Juniper switch upgrades as part of operational refresh and deployment preparation activities.',
       'Applied USB-based upgrade workflows on Juniper devices to support software staging and readiness for deployment.',
@@ -93,9 +107,31 @@ const EXPERIENCE = [
 
 const SKILLS = {
   Languages: ['C', 'C++', 'Python', 'Java'],
-  Networking: ['Routing & Switching', 'IPv4 / IPv6', 'BGP', 'OSPFv2 / OSPFv3', 'EIGRP', 'MPLS', 'Spanning Tree'],
-  'Automation / DevOps': ['Infrastructure Automation', 'CI / CD Workflows', 'API Scripting', 'Configuration Management', 'Secrets Management'],
-  Systems: ['Linux Administration', 'Version Control', 'Network Monitoring', 'Packet Analysis', 'Database Querying', 'Topology Documentation'],
+  Networking: [
+    'Routing & switching design',
+    'IPv4 / IPv6 operations',
+    'BGP route policy',
+    'OSPFv2 / OSPFv3',
+    'EIGRP tuning & verification',
+    'MPLS fundamentals',
+    'Spanning tree operations',
+  ],
+  'Automation & NetDevOps': [
+    'Infrastructure automation',
+    'Network-oriented automation',
+    'CI/CD practices',
+    'API-driven development',
+    'Configuration management',
+    'Secrets management',
+  ],
+  Systems: [
+    'Linux administration',
+    'Git workflows',
+    'Network monitoring & triage',
+    'Packet analysis',
+    'Database querying',
+    'Topology documentation',
+  ],
 }
 
 const PROJECTS = [
@@ -206,7 +242,7 @@ const PROJECTS = [
     slug: 'ipv6-eigrp-network',
     year: '2024',
     description: 'Built and tuned a multi-router IPv6 EIGRP lab with named and classic configurations, passive-interface controls, route summarization, authentication, and route filtering to strengthen end-to-end routing validation.',
-    tags: ['Cisco', 'EIGRP', 'Visio'],
+    tags: ['IPv6 EIGRP', 'Routing tuning & security', 'Topology documentation'],
     image: `${BASE}images/ipv6-network.png`,
     fallback: `${BASE}images/ipv6-network-placeholder.svg`,
     imagePosition: 'center center',
@@ -545,11 +581,11 @@ function ExperienceDetailPage({ job }) {
                 </section>
 
                 <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>Skills Used</h2>
+                  <h2 className={styles.detailSectionTitle}>Core capabilities</h2>
                   <div className={styles.detailSkills}>
-                    {job.skills.map((skill) => (
-                      <span key={skill} className={styles.detailSkillTag}>
-                        {skill}
+                    {job.capabilities.map((item) => (
+                      <span key={item} className={styles.detailSkillTag}>
+                        {item}
                       </span>
                     ))}
                   </div>
@@ -711,9 +747,9 @@ function ProjectDetailPage({ project }) {
                 <div className={styles.detailSidebarCard}>
                   <p className={styles.projectSidebarLabel}>Stack</p>
                   <div className={styles.detailSkills}>
-                    {project.tags.map((skill) => (
-                      <span key={skill} className={styles.detailSkillTag}>
-                        {skill}
+                    {project.tags.map((tag) => (
+                      <span key={tag} className={styles.detailSkillTag}>
+                        {tag}
                       </span>
                     ))}
                   </div>
@@ -951,8 +987,8 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    3rd-year IT (Network Technology) at Carleton. NetDevOps and LAN operations at Shared Services Canada—GitLab
-                    audits, automation research, Lighthouse tooling, and 50+ production switch upgrades. Open to Fall 2026 internships
+                    3rd-year IT (Network Technology) at Carleton. NetDevOps and LAN operations at Shared Services Canada—access
+                    audits and reporting, automation research, infrastructure audit tooling, and 50+ production switch upgrades. Open to Fall 2026 internships
                     and new grad roles in networking, NetDevOps, and infrastructure automation.
                   </motion.p>
                   <motion.div
