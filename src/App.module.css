@@ -253,7 +253,7 @@
 }
 
 .heroGrid > *,
-.aboutIntro > *,
+.aboutStatsRow > *,
 .projectCard,
 .projectBody,
 .projectMedia,
@@ -306,23 +306,15 @@
   text-transform: uppercase;
 }
 
-.heroTargetRoles {
-  max-width: 50ch;
-  margin-top: 14px;
-  color: var(--navy);
-  font-size: 0.92rem;
-  line-height: 1.65;
-}
-
 .heroLocation {
-  margin-top: 10px;
+  margin-top: 14px;
   color: var(--mist);
   font-size: 0.95rem;
 }
 
 .heroBody {
-  max-width: 52ch;
-  margin-top: 24px;
+  max-width: 58ch;
+  margin-top: 18px;
   color: var(--slate);
   font-size: 1.08rem;
   line-height: 1.85;
@@ -497,22 +489,23 @@
   width: min(720px, 100%);
 }
 
-.aboutIntro {
+.aboutStatsRow {
   display: grid;
-  grid-template-columns: minmax(220px, 0.42fr) minmax(0, 0.58fr);
-  gap: 32px;
-  align-items: start;
-  margin-bottom: 42px;
+  grid-template-columns: minmax(200px, 280px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: stretch;
   padding: 24px;
   border: 1px solid rgba(207, 215, 227, 0.92);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.74);
 }
 
-.aboutHeader {
-  display: grid;
-  gap: 10px;
-  justify-items: start;
+.aboutStatsRow .aboutPortraitFrame {
+  align-self: center;
+}
+
+.aboutStatsRow .statsGrid {
+  margin-top: 0;
 }
 
 .aboutKicker {
@@ -521,15 +514,6 @@
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-}
-
-.aboutHeading {
-  max-width: 11ch;
-  color: var(--navy);
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  line-height: 0.98;
-  font-weight: 500;
 }
 
 .aboutPortraitFrame {
@@ -548,26 +532,6 @@
   object-fit: cover;
   object-position: center 20%;
   border-radius: 8px;
-}
-
-.aboutCopy {
-  display: grid;
-  gap: 16px;
-  max-width: 58ch;
-  min-width: 0;
-}
-
-.aboutLead {
-  color: var(--navy);
-  font-size: 1.24rem;
-  line-height: 1.8;
-  font-weight: 500;
-}
-
-.aboutText {
-  color: var(--slate);
-  font-size: 1.08rem;
-  line-height: 1.95;
 }
 
 .statsGrid {
@@ -785,7 +749,8 @@
 .skillsGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
+  gap: 20px;
+  align-items: stretch;
 }
 
 .skillsPanel {
@@ -844,8 +809,19 @@
 }
 
 .skillColumn {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 18px;
+  min-height: 100%;
+  padding: 18px 16px;
+  border: 1px solid rgba(207, 215, 227, 0.85);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.skillColumn .skillTags {
+  flex: 1;
+  align-content: flex-start;
 }
 
 .skillHeading {
@@ -1394,48 +1370,6 @@
   line-height: 1.78;
 }
 
-.cursorDot,
-.cursorRing {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 140;
-  pointer-events: none;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-.cursorDot {
-  width: 8px;
-  height: 8px;
-  margin: -4px 0 0 -4px;
-  border-radius: 999px;
-  background: var(--navy);
-}
-
-.cursorRing {
-  width: 24px;
-  height: 24px;
-  margin: -12px 0 0 -12px;
-  border: 1px solid rgba(26, 39, 68, 0.45);
-  border-radius: 999px;
-  transition: width 120ms ease, height 120ms ease, margin 120ms ease, opacity 120ms ease;
-}
-
-.cursorVisible {
-  opacity: 1;
-}
-
-.cursorHidden {
-  opacity: 0;
-}
-
-.cursorRingHover {
-  width: 36px;
-  height: 36px;
-  margin: -18px 0 0 -18px;
-}
-
 @media (max-width: 1024px) {
   .heroGrid,
   .skillsGrid,
@@ -1455,20 +1389,9 @@
     margin-right: auto;
   }
 
-  .aboutIntro {
-    grid-template-columns: minmax(180px, 0.4fr) minmax(0, 0.6fr);
+  .aboutStatsRow {
+    grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
     gap: 24px;
-    align-items: center;
-  }
-
-  .aboutLead {
-    font-size: 1.14rem;
-    line-height: 1.72;
-  }
-
-  .aboutText {
-    font-size: 1rem;
-    line-height: 1.82;
   }
 
   .statsGrid {
@@ -1608,29 +1531,15 @@
     font-size: 0.95rem;
   }
 
-  .aboutIntro {
-    grid-template-columns: minmax(128px, 148px) minmax(0, 1fr);
+  .aboutStatsRow {
+    grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
     gap: 16px;
-    align-items: center;
-  }
-
-  .aboutHeader {
-    gap: 8px;
+    padding: 18px;
   }
 
   .aboutPortraitFrame {
     width: 100%;
     padding: 8px;
-  }
-
-  .aboutLead {
-    font-size: 1rem;
-    line-height: 1.65;
-  }
-
-  .aboutText {
-    font-size: 0.94rem;
-    line-height: 1.68;
   }
 
   .contactInfo {
@@ -1706,14 +1615,6 @@
     opacity: 0.92;
   }
 
-  .aboutIntro {
-    margin-bottom: 32px;
-  }
-
-  .aboutHeading {
-    max-width: none;
-  }
-
   .nodeTopLeft {
     top: 20%;
     left: 28%;
@@ -1784,10 +1685,6 @@
     position: static;
   }
 
-  .cursorDot,
-  .cursorRing {
-    display: none;
-  }
 }
 
 @media (max-width: 480px) {
@@ -1851,39 +1748,29 @@
     width: 31%;
   }
 
-  .aboutIntro {
-    grid-template-columns: 118px minmax(0, 1fr);
-    gap: 12px;
+  .aboutStatsRow {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 20px;
     padding: 16px;
   }
 
-  .aboutLead {
-    font-size: 0.94rem;
-    line-height: 1.58;
-  }
-
-  .aboutText {
-    font-size: 0.88rem;
-    line-height: 1.58;
+  .aboutStatsRow .aboutPortraitFrame {
+    max-width: 220px;
   }
 
   .statsGrid {
-    grid-template-columns: 1fr;
-    align-items: start;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .statCard,
   .statCard + .statCard {
-    border-left: 0;
     padding: 16px 18px;
   }
 
-  .statCard + .statCard {
-    border-top: 1px solid var(--line);
-  }
-
-  .statsGrid {
-    margin-top: 28px;
+  .aboutStatsRow .statsGrid {
+    width: 100%;
+    margin-top: 0;
   }
 
   .skillsPanel,
@@ -1930,7 +1817,6 @@
   .projectLinks a,
   .contactLink,
   .projectImage,
-  .cursorRing,
   .contactForm {
     transition-duration: 100ms;
   }

@@ -327,28 +327,28 @@ function useActiveSection(ids) {
   const [activeSection, setActiveSection] = useState(ids[0] ?? 'about')
 
   useEffect(() => {
-    const sections = ids
-      .map((id) => document.getElementById(id))
-      .filter(Boolean)
+    /** Last section whose top has passed this line wins — stable for tall #about + #experience. */
+    const ACTIVATION_RATIO = 0.26
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-
-        if (visible[0]) {
-          setActiveSection(visible[0].target.id)
-        }
-      },
-      {
-        rootMargin: '-18% 0px -55% 0px',
-        threshold: [0.2, 0.35, 0.6],
+    const update = () => {
+      const y = window.innerHeight * ACTIVATION_RATIO
+      let current = ids[0] ?? 'about'
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (!el) continue
+        const { top } = el.getBoundingClientRect()
+        if (top <= y) current = id
       }
-    )
+      setActiveSection((prev) => (prev === current ? prev : current))
+    }
 
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
   }, [ids])
 
   return activeSection
@@ -358,71 +358,6 @@ function getNavDropdownLinks(itemId) {
   if (itemId === 'experience') return EXPERIENCE_LINKS
   if (itemId === 'projects') return PROJECT_LINKS
   return []
-}
-
-function Cursor() {
-  const shouldReduceMotion = useReducedMotion()
-  const [visible, setVisible] = useState(false)
-  const [hovering, setHovering] = useState(false)
-  const [point, setPoint] = useState({ x: 0, y: 0 })
-  const [ring, setRing] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    if (shouldReduceMotion || window.matchMedia('(pointer: coarse)').matches) return undefined
-
-    let frameId = 0
-
-    const onMove = (event) => {
-      const next = { x: event.clientX, y: event.clientY }
-      setPoint(next)
-      setVisible(true)
-    }
-
-    const onLeave = () => setVisible(false)
-
-    const updateHover = (target) => {
-      setHovering(Boolean(target?.closest('a, button, input, textarea, label')))
-    }
-
-    const onOver = (event) => updateHover(event.target)
-
-    const loop = () => {
-      setRing((prev) => ({
-        x: prev.x + (point.x - prev.x) * 0.2,
-        y: prev.y + (point.y - prev.y) * 0.2,
-      }))
-      frameId = window.requestAnimationFrame(loop)
-    }
-
-    frameId = window.requestAnimationFrame(loop)
-    window.addEventListener('mousemove', onMove)
-    document.addEventListener('mouseover', onOver)
-    document.addEventListener('mouseout', onOver)
-    document.addEventListener('mouseleave', onLeave)
-
-    return () => {
-      window.cancelAnimationFrame(frameId)
-      window.removeEventListener('mousemove', onMove)
-      document.removeEventListener('mouseover', onOver)
-      document.removeEventListener('mouseout', onOver)
-      document.removeEventListener('mouseleave', onLeave)
-    }
-  }, [hovering, point.x, point.y, shouldReduceMotion])
-
-  if (shouldReduceMotion) return null
-
-  return (
-    <>
-      <span
-        className={`${styles.cursorDot} ${visible ? styles.cursorVisible : ''} ${hovering ? styles.cursorHidden : ''}`}
-        style={{ transform: `translate(${point.x}px, ${point.y}px)` }}
-      />
-      <span
-        className={`${styles.cursorRing} ${visible ? styles.cursorVisible : ''} ${hovering ? styles.cursorRingHover : ''}`}
-        style={{ transform: `translate(${ring.x}px, ${ring.y}px)` }}
-      />
-    </>
-  )
 }
 
 function Section({ id, label, children, className = '', contentClassName = '' }) {
@@ -887,7 +822,6 @@ export default function App() {
   return (
     <LazyMotion features={domAnimation}>
       <div className={styles.pageShell}>
-        <Cursor />
         <motion.div className={styles.progressBar} style={{ scaleX: progress }} />
 
         <header className={`${styles.navWrap} ${scrolled ? styles.navWrapScrolled : ''}`}>
@@ -1004,18 +938,10 @@ export default function App() {
                     NetDevOps Intern
                   </motion.p>
                   <motion.p
-                    className={styles.heroTargetRoles}
-                    initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.2 }}
-                  >
-                    Seeking internships and new grad roles in network engineering, NetDevOps, and infrastructure automation.
-                  </motion.p>
-                  <motion.p
                     className={styles.heroLocation}
                     initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.25 }}
+                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.2 }}
                   >
                     Carleton University · Ottawa, ON
                   </motion.p>
@@ -1023,15 +949,17 @@ export default function App() {
                     className={styles.heroBody}
                     initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.35 }}
+                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    3rd-year IT student building experience across infrastructure tooling, automation workflows, and operational network environments.
+                    3rd-year IT (Network Technology) at Carleton. NetDevOps and LAN operations at Shared Services Canada—GitLab
+                    audits, automation research, Lighthouse tooling, and 50+ production switch upgrades. Open to Fall 2026 internships
+                    and new grad roles in networking, NetDevOps, and infrastructure automation.
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}
                     initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.4 }}
+                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.38 }}
                   >
                     {KEY_STRENGTHS.map((item) => (
                       <span key={item} className={styles.heroStrengthTag}>
@@ -1043,7 +971,7 @@ export default function App() {
                     className={styles.heroActions}
                     initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.45 }}
+                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.44 }}
                   >
                     <a href={RESUME_URL} className={styles.primaryButton} target="_blank" rel="noreferrer">
                       Download Resume
@@ -1072,34 +1000,22 @@ export default function App() {
           </section>
 
           <Section id="about" label="// 00 — SUMMARY">
-            <div className={styles.aboutIntro}>
-              <div className={styles.aboutHeader}>
-                <p className={styles.aboutKicker}>Professional Summary</p>
-                <div className={styles.aboutPortraitFrame}>
-                  <img
-                    src={`${BASE}images/about-face.png`}
-                    alt="Portrait of Abdul Rehman Baseem"
-                    className={styles.aboutPortrait}
-                  />
-                </div>
+            <div className={styles.aboutStatsRow}>
+              <div className={styles.aboutPortraitFrame}>
+                <img
+                  src={`${BASE}images/about-face.png`}
+                  alt="Portrait of Abdul Rehman Baseem"
+                  className={styles.aboutPortrait}
+                />
               </div>
-
-              <div className={styles.aboutCopy}>
-                <p className={styles.aboutLead}>
-                  I am an Information Technology (Network Technology) student at Carleton University with hands-on experience across NetDevOps, network support, and systems-focused technical work.
-                </p>
-                <p className={styles.aboutText}>
-                  My work has included automation research, audit tooling, topology documentation, and day-to-day infrastructure support using tools such as Ansible, GitLab, Linux, and network monitoring platforms. I bring a hands-on, adaptable approach to technical problem solving and am especially interested in roles that sit at the intersection of networking, automation, and modern infrastructure.
-                </p>
+              <div className={styles.statsGrid}>
+                {QUICK_STATS.map((stat) => (
+                  <div key={stat.label} className={styles.statCard}>
+                    <strong className={styles.statValue}>{stat.value}</strong>
+                    <span className={styles.statLabel}>{stat.label}</span>
+                  </div>
+                ))}
               </div>
-            </div>
-            <div className={styles.statsGrid}>
-              {QUICK_STATS.map((stat) => (
-                <div key={stat.label} className={styles.statCard}>
-                  <strong className={styles.statValue}>{stat.value}</strong>
-                  <span className={styles.statLabel}>{stat.label}</span>
-                </div>
-              ))}
             </div>
           </Section>
 
@@ -1164,7 +1080,7 @@ export default function App() {
               <div className={styles.courseworkHeader}>
                 <p className={styles.aboutKicker}>Selected Coursework</p>
                 <p className={styles.courseworkText}>
-                  Relevant coursework completed across routing, automation, security, wireless networking, systems, and infrastructure foundations.
+                  Routing, security, wireless, automation, and systems foundations.
                 </p>
               </div>
               <div className={styles.courseworkGrid}>
@@ -1236,7 +1152,7 @@ export default function App() {
           <Section id="contact" label="// 04 — CONTACT">
             <div className={styles.contactInfo}>
               <p className={styles.contactIntro}>
-                Open to Fall 2026 internships and new grad roles across networking, DevOps, and infrastructure engineering. Reach out directly through the links below.
+                Best reach is email or LinkedIn—links below.
               </p>
               <div className={styles.contactLinks}>
                 {contactLinks.map((item) => (
