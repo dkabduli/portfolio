@@ -493,7 +493,7 @@
   display: grid;
   grid-template-columns: minmax(200px, 280px) minmax(0, 1fr);
   gap: 28px;
-  align-items: stretch;
+  align-items: center;
   padding: 24px;
   border: 1px solid rgba(207, 215, 227, 0.92);
   border-radius: 18px;
@@ -506,6 +506,8 @@
 
 .aboutStatsRow .statsGrid {
   margin-top: 0;
+  align-self: center;
+  height: fit-content;
 }
 
 .aboutKicker {
@@ -550,9 +552,10 @@
 
 .statCard {
   display: grid;
-  align-content: start;
-  gap: 8px;
-  padding: 24px;
+  align-content: center;
+  gap: 6px;
+  padding: 22px 20px;
+  min-height: 0;
 }
 
 .statCard + .statCard {
@@ -562,14 +565,17 @@
 .statValue {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 3.25rem);
+  font-size: clamp(2.35rem, 4.5vw, 3rem);
   font-weight: 500;
+  line-height: 1.05;
   color: var(--navy);
 }
 
 .statLabel {
+  display: block;
   color: var(--slate);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  line-height: 1.35;
 }
 
 .timeline {
@@ -1446,14 +1452,6 @@
 
   .statCard:nth-child(odd):not(:first-child) {
     border-left: 0;
-  }
-
-  .statValue {
-    margin-top: 6px;
-  }
-
-  .statLabel {
-    margin-top: 6px;
   }
 
   .statCard:nth-child(n + 3) {

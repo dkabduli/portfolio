@@ -106,7 +106,7 @@ const EXPERIENCE = [
 ]
 
 const SKILLS = {
-  Languages: ['C', 'C++', 'Python', 'Java'],
+  Languages: ['C', 'C++', 'Python', 'Java', 'LC-3', 'Arduino (C/C++)'],
   Networking: [
     'Routing & switching design',
     'IPv4 / IPv6 operations',
