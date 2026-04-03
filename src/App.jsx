@@ -21,8 +21,8 @@ const NAV_ITEMS = [
 const QUICK_STATS = [
   { value: '2+', label: 'YRS EXPERIENCE' },
   { value: '50+', label: 'SWITCHES UPGRADED' },
-  { value: '200+', label: 'ACCOUNTS AUDITED' },
-  { value: '20+', label: 'PRACTICE AREAS' },
+  { value: '132', label: 'INACTIVE USERS FOUND' },
+  { value: '500+', label: 'INVENTORY RECORDS' },
 ]
 
 const KEY_STRENGTHS = ['Routing', 'Automation', 'Operational Support']
@@ -48,28 +48,30 @@ const EXPERIENCE = [
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
     summary:
-      'Worked on internal infrastructure automation and audit initiatives at Shared Services Canada, with hands-on ownership across identity and access analysis (including in GitLab), secrets-management research, and widening inventory audits with richer device metadata.',
-    outcome: 'Improved audit visibility and infrastructure documentation quality for internal operational workflows.',
+      'NetDevOps work at Shared Services Canada spanning GitLab identity auditing, Ansible-based device health automation, CI/CD monitoring integration, and Lighthouse-driven inventory validation across large record sets.',
+    outcome:
+      'Delivered measurable outcomes: 132 inactive GitLab users flagged for deactivation, 75+ devices under automated health polling, Zabbix wired into CI/CD across three tiers, and 500+ inventory records validated through an expanded Lighthouse pipeline.',
     capabilities: [
-      'API-driven automation',
+      'Ansible automation & playbooks',
+      'API-driven GitLab workflows',
+      'CI/CD and monitoring integration (Zabbix)',
       'Python scripting & reporting',
-      'Secrets management evaluation',
+      'Lighthouse / inventory validation',
       'Linux administration',
-      'Audit & inventory validation',
-      'Identity & access analysis',
     ],
     timelineBullets: [
-      'Developed a GitLab user-audit workflow using the GitLab API and impersonation-token research to improve visibility into inactive mailbox-based accounts.',
-      'Produced reporting that identified accounts inactive for more than 90 days, supporting access review and deactivation decisions.',
-      'Evaluated HashiCorp Vault as a potential secrets-management solution to strengthen how the team handled sensitive credentials and values.',
-      'Enhanced Lighthouse auditing by extending validation beyond IP and DNS checks to include richer device metadata such as serial numbers and model details.',
+      'Led a GitLab account audit via the API, identifying 132 inactive users and supporting a deactivation strategy aligned with licensing and platform constraints.',
+      'Developed and maintained Ansible playbooks that polled 75+ network devices for health metrics with automated alerting for incident detection.',
+      'Integrated Zabbix real-time monitoring into CI/CD pipelines across three environment tiers, removing manual health checks from the release path.',
+      'Reworked the Lighthouse audit pipeline to validate six attributes per device (for example IP, DNS, name, model, serial, ownership), improving inventory accuracy across 500+ records.',
     ],
     detailBullets: [
-      'Spent a large part of the beginning of the internship on a GitLab user audit project, where I worked directly with the GitLab API and figured out how to handle impersonation tokens so mailbox-based accounts could still be reviewed even when they appeared inactive because nobody was signing in regularly.',
-      'Built a full script that reported on every user account, tracked how long each account had been inactive, and flagged accounts that had gone beyond 90 days without activity, giving the team a clearer way to review stale access and make deactivation decisions.',
-      'Completed a research project on secrets management where I evaluated HashiCorp Vault as a possible solution for the team, focusing on how a dedicated secrets manager could improve the way credentials and sensitive values were stored, organized, and accessed across internal workflows.',
-      'Reworked the Lighthouse audit beyond the original IP and DNS validation checks by expanding it to pull additional device details such as serial numbers, model information, and other metadata that made the audit output more useful for infrastructure tracking and verification.',
-      'Helped move the audit process toward richer validation and more reliable inventory awareness, so the team could use the results for more than simple name matching and instead get a fuller picture of what devices were actually present and how accurately they were documented.',
+      'Owned the GitLab user audit end to end: API-driven reporting, inactive-user identification (132 accounts), and recommendations that fed licensing and deactivation decisions while respecting platform constraints.',
+      'Built and maintained Ansible automation that continuously polled 75+ devices for health signals and escalated anomalies, tightening the loop between infrastructure state and operator response.',
+      'Partnered on monitoring strategy by integrating Zabbix into CI/CD across three tiers so deployments were gated on automated health evidence instead of manual checks.',
+      'Assessed Ansible Forms and similar self-service patterns for cross-team workflows, producing a scoped roadmap senior engineers accepted for rollout.',
+      'Audited and refactored 20+ Ansible playbooks and automated 15 monitoring jobs, cutting redundant steps and stabilizing recurring network checks.',
+      'Expanded the Lighthouse audit pipeline to six validated attributes per asset, reducing discrepancies across 500+ inventory rows and giving teams a trustworthy device baseline.',
     ],
   },
   {
@@ -80,8 +82,9 @@ const EXPERIENCE = [
     image: `${BASE}images/ssc-switch-upgrade.png`,
     imageAlt: 'Abdul Rehman Baseem upgrading switches in a network environment',
     summary:
-      'Supported hands-on network operations work through switch upgrades, shipping and staging tasks, and detailed topology creation for multi-floor environments.',
-    outcome: 'Helped prepare production hardware and clearer network documentation for deployment and support teams.',
+      'Hands-on LAN operations: Juniper-focused firmware upgrades at scale, Visio topology design for NCR sites, and consolidated documentation so field and ops teams could respond faster.',
+    outcome:
+      'Delivered 50+ switch upgrades aligned to security baselines, formal Visio references for 10+ sites, and centralized documentation that reduced ops lookup time materially.',
     capabilities: [
       'Hands-on enterprise switching',
       'Firmware & image lifecycle',
@@ -91,24 +94,25 @@ const EXPERIENCE = [
       'Multi-site topology design',
     ],
     timelineBullets: [
-      'Performed Cisco and Juniper switch upgrades as part of operational refresh and deployment preparation activities.',
-      'Applied USB-based upgrade workflows on Juniper devices to support software staging and readiness for deployment.',
-      'Prepared, packaged, and shipped upgraded hardware for rollout across operational environments.',
-      'Created multi-floor Visio network topologies with IP addressing, device placement, and link mapping to improve documentation accuracy.',
+      'Upgraded firmware on 50+ Juniper EX-4300 switches using Linux-based scripting, closing known gaps and aligning devices to current security baselines.',
+      'Authored Visio topology diagrams for 10+ National Capital Region sites covering subnets and physical layout—adopted as the primary reference for field technicians during incidents.',
+      'Consolidated fragmented site documentation (configs, topologies, switch inventory) for 10+ sites into one reference system, cutting how long ops spent hunting for answers.',
+      'Prepared, packaged, and shipped refreshed hardware for rollout, pairing documentation accuracy with dependable logistics.',
     ],
     detailBullets: [
-      'Worked on upgrading both Cisco and Juniper switches as part of operational refresh and deployment work, giving me direct exposure to the physical and technical process of preparing network hardware for production use.',
-      'Learned how to mount USB storage on Juniper switches and use that workflow during upgrade tasks, which was a practical part of getting devices ready with the correct software and ensuring they could be processed properly before deployment.',
-      'Handled packaging and shipping work tied to upgraded hardware, which meant being involved not just in the software side of the refresh process but also in the operational steps required to move prepared devices out to their destination sites.',
-      'Created detailed Visio topologies for multi-floor environments that included IP addressing, device placement, and interconnections, helping produce clearer network documentation that could support planning, implementation, and team understanding of site layouts.',
+      'Executed large-scale Juniper EX-4300 firmware upgrades with Linux-assisted workflows, validating images and ensuring every device met the expected security posture before handoff.',
+      'Partnered with teams across NCR sites to capture accurate Visio diagrams that engineers relied on during outages because they mirrored both logical and physical reality.',
+      'Centralized previously scattered site records so incident responders and planners referenced a single source of truth instead of conflicting spreadsheets or ad hoc notes.',
+      'Continued to support USB staging, packaging, and shipping workflows so hardware arrived on site ready for install without rework.',
     ],
   },
 ]
 
 const SKILLS = {
-  Languages: ['C', 'C++', 'Python', 'Java', 'LC-3', 'Arduino (C/C++)'],
+  Languages: ['Python', 'Java', 'C', 'C++', 'MATLAB', 'TypeScript', 'LC-3', 'Arduino (C/C++)'],
   Networking: [
     'Routing & switching design',
+    'Cisco IOS & Juniper Junos CLI',
     'IPv4 / IPv6 operations',
     'BGP route policy',
     'OSPFv2 / OSPFv3',
@@ -117,20 +121,20 @@ const SKILLS = {
     'Spanning tree operations',
   ],
   'Automation & NetDevOps': [
+    'Ansible Automation Platform',
     'Infrastructure automation',
-    'Network-oriented automation',
     'CI/CD practices',
     'API-driven development',
-    'Configuration management',
+    'Docker & GitLab workflows',
     'Secrets management',
   ],
   Systems: [
     'Linux administration',
     'Git workflows',
-    'Network monitoring & triage',
-    'Packet analysis',
-    'Database querying',
-    'Topology documentation',
+    'Zabbix / NNMI monitoring',
+    'Wireshark & packet analysis',
+    'PostgreSQL & MySQL',
+    'Visio topology documentation',
   ],
 }
 
@@ -987,9 +991,9 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    3rd-year IT (Network Technology) at Carleton. NetDevOps and LAN operations at Shared Services Canada—access
-                    audits and reporting, automation research, infrastructure audit tooling, and 50+ production switch upgrades. Open to Fall 2026 internships
-                    and new grad roles in networking, NetDevOps, and infrastructure automation.
+                    3rd-year IT (Network Technology) at Carleton. Shared Services Canada: GitLab audit surfacing 132 inactive users, Ansible health polling
+                    across 75+ devices, Lighthouse validation for 500+ inventory records, and 50+ Juniper switch upgrades. Open to Fall 2026 internships and
+                    new grad roles in networking, NetDevOps, and infrastructure automation.
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}

@@ -70,10 +70,10 @@ Replace the existing file. The image is used as the Hero section background.
 Place your resume at:
 
 ```
-public/resume/Abdul_Rehman_Resume.pdf
+public/resume/Resume.pdf
 ```
 
-The "View Resume" buttons link to this file.
+The "View Resume" / download buttons link to this file (`RESUME_URL` in `src/App.jsx`).
 
 ### Favicon
 
