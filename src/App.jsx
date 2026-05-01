@@ -47,11 +47,11 @@ const EXPERIENCE = [
     image: `${BASE}images/aap-logo.png`,
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
-    summary: 'Incoming....',
-    outcome: 'Incoming....',
-    capabilities: ['Incoming....'],
-    timelineBullets: ['Incoming....'],
-    detailBullets: ['Incoming....'],
+    summary: '',
+    outcome: '',
+    capabilities: [],
+    timelineBullets: [],
+    detailBullets: [],
   },
   {
     slug: 'netdevops-intern',
@@ -359,7 +359,11 @@ const PROJECTS = [
   },
 ]
 
-const EXPERIENCE_LINKS = EXPERIENCE.map((job) => ({
+function hasExperienceDetails(job) {
+  return Boolean(job.summary?.trim() || job.outcome?.trim() || job.capabilities.length || job.timelineBullets.length || job.detailBullets.length)
+}
+
+const EXPERIENCE_LINKS = EXPERIENCE.filter(hasExperienceDetails).map((job) => ({
   href: `#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`,
   label: `${job.title} More info`,
   shortLabel: job.title,
@@ -559,6 +563,10 @@ function ContactMethodIcon({ id }) {
 }
 
 function ExperienceDetailPage({ job }) {
+  const hasSummary = Boolean(job.summary?.trim())
+  const hasCapabilities = Boolean(job.capabilities.length)
+  const hasContributions = Boolean(job.detailBullets.length)
+
   return (
     <div className={styles.detailPage}>
       <header className={styles.detailHeader}>
@@ -594,30 +602,36 @@ function ExperienceDetailPage({ job }) {
 
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
-                <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>Summary</h2>
-                  <p className={styles.detailText}>{job.summary}</p>
-                </section>
+                {hasSummary ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>Summary</h2>
+                    <p className={styles.detailText}>{job.summary}</p>
+                  </section>
+                ) : null}
 
-                <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>Core capabilities</h2>
-                  <div className={styles.detailSkills}>
-                    {job.capabilities.map((item) => (
-                      <span key={item} className={styles.detailSkillTag}>
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </section>
+                {hasCapabilities ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>Core capabilities</h2>
+                    <div className={styles.detailSkills}>
+                      {job.capabilities.map((item) => (
+                        <span key={item} className={styles.detailSkillTag}>
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
 
-                <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>Key Contributions</h2>
-                  <ul className={styles.detailBullets}>
-                    {job.detailBullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </ul>
-                </section>
+                {hasContributions ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>Key Contributions</h2>
+                    <ul className={styles.detailBullets}>
+                      {job.detailBullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  </section>
+                ) : null}
               </div>
 
               <aside className={styles.detailSidebar}>
@@ -1091,16 +1105,20 @@ export default function App() {
                       <p className={styles.timelineCompany}>{job.company}</p>
                       <PlaceholderLogo />
                     </div>
-                    <p className={styles.timelineOutcome}>{job.outcome}</p>
-                    <div className={styles.timelineRule} />
-                    <ul className={styles.timelineBullets}>
-                      {job.timelineBullets.map((bullet) => (
-                        <li key={bullet}>{bullet}</li>
-                      ))}
-                    </ul>
-                    <a href={`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`} className={styles.caseStudyLink}>
-                      More info →
-                    </a>
+                    {job.outcome?.trim() ? <p className={styles.timelineOutcome}>{job.outcome}</p> : null}
+                    {job.timelineBullets.length ? <div className={styles.timelineRule} /> : null}
+                    {job.timelineBullets.length ? (
+                      <ul className={styles.timelineBullets}>
+                        {job.timelineBullets.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    {hasExperienceDetails(job) ? (
+                      <a href={`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`} className={styles.caseStudyLink}>
+                        More info →
+                      </a>
+                    ) : null}
                   </div>
                 </motion.article>
               ))}
