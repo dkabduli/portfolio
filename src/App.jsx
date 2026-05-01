@@ -40,8 +40,22 @@ const COURSEWORK = [
 
 const EXPERIENCE = [
   {
+    slug: 'infrastructure-automation-intern',
+    period: 'MAY 2026 — PRESENT',
+    title: 'Infrastructure Automation Intern',
+    company: 'Shared Services Canada',
+    image: `${BASE}images/aap-logo.png`,
+    imageAlt: 'Ansible Automation Platform logo',
+    imageContain: true,
+    summary: 'Incoming....',
+    outcome: 'Incoming....',
+    capabilities: ['Incoming....'],
+    timelineBullets: ['Incoming....'],
+    detailBullets: ['Incoming....'],
+  },
+  {
     slug: 'netdevops-intern',
-    period: 'APR 2025 — PRESENT',
+    period: 'APR 2025 — APR 2026',
     title: 'NetDevOps Intern',
     company: 'Shared Services Canada',
     image: `${BASE}images/aap-logo.png`,
