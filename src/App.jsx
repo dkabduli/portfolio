@@ -1020,7 +1020,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    3rd-year IT (Network Technology) at Carleton, building experience across infrastructure tooling, automation workflows, and operational network environments. Open to Fall 2026 internships and new grad roles in networking, NetDevOps, and infrastructure automation.
+                    4th-year BIT (Network Technology) student at Carleton University (expected graduation: April 2027).
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}
