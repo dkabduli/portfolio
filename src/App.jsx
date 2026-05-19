@@ -40,18 +40,35 @@ const COURSEWORK = [
 
 const EXPERIENCE = [
   {
-    slug: 'infrastructure-automation-intern',
+    slug: 'infrastructure-dev-intern',
     period: 'MAY 2026 — PRESENT',
-    title: 'Infrastructure Automation Intern',
+    title: 'Infrastructure Dev Intern',
     company: 'Shared Services Canada',
     image: `${BASE}images/aap-logo.png`,
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
-    summary: '',
-    outcome: '',
-    capabilities: [],
-    timelineBullets: [],
-    detailBullets: [],
+    summary:
+      'Infrastructure development at Shared Services Canada focused on Ansible-driven SSL/TLS certificate automation for Azure-compatible environments, multi-hop deployment workflows across jump hosts and GitLab, and n8n platform migration from development to pre-production.',
+    outcome:
+      'Cut manual certificate setup from 20–30 minutes to under 2 minutes per request, established a validated multi-hop Ansible path for SWLINUX certificate distribution, and reduced n8n environment deployment time from several hours to 20–30 minutes.',
+    capabilities: [
+      'Ansible roles & playbooks',
+      'OpenSSL / TLS certificate workflows',
+      'Multi-hop SSH & proxy routing',
+      'Azure & GitLab integration',
+      'n8n automation platform',
+      'Reverse proxy & HTTPS troubleshooting',
+    ],
+    timelineBullets: [
+      'Automated Azure-compatible SSL/TLS certificate request generation using Ansible and OpenSSL, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for SSC NAI environments, reducing manual certificate setup time from 20–30 minutes to under 2 minutes per request.',
+      'Engineered and validated a multi-hop SSH/Ansible deployment workflow across devHost, jump hosts, and Azure GitLab infrastructure (git02), enabling centralized certificate automation and secure repository distribution for SWLINUX operations while standardizing inventory, SSH proxy routing, and environment configuration for future production deployments.',
+      'Migrated an internal n8n automation platform from an Azure development VM to a pre-production environment, resolving SSL, reverse-proxy, and network routing issues to restore secure external HTTPS access, reducing deployment time from several hours to 20–30 minutes through a repeatable process.',
+    ],
+    detailBullets: [
+      'Automated Azure-compatible SSL/TLS certificate request generation using Ansible and OpenSSL, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for SSC NAI environments, reducing manual certificate setup time from 20–30 minutes to under 2 minutes per request.',
+      'Engineered and validated a multi-hop SSH/Ansible deployment workflow across devHost, jump hosts, and Azure GitLab infrastructure (git02), enabling centralized certificate automation and secure repository distribution for SWLINUX operations while standardizing inventory, SSH proxy routing, and environment configuration for future production deployments.',
+      'Migrated an internal n8n automation platform from an Azure development VM to a pre-production environment, resolving SSL, reverse-proxy, and network routing issues to restore secure external HTTPS access, reducing deployment time from several hours to 20–30 minutes through a repeatable process.',
+    ],
   },
   {
     slug: 'netdevops-intern',
