@@ -125,7 +125,8 @@ const PROJECTS = [
     name: 'BlackBoxNet',
     slug: 'blackboxnet',
     year: '2026',
-    description: 'Network state replay with 12 vendor labs and a public live demo.',
+    description:
+      'A Git-backed network state replay platform with twelve scripted outage labs across Cisco, Juniper, and Nokia. Operators step through T1→T5, view live topology, correlate root cause, and compare configs—available as a public demo on Render.',
     tags: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'Git'],
     featured: true,
     image: `${BASE}images/blackboxnet-dashboard.png`,
@@ -221,7 +222,8 @@ const PROJECTS = [
     name: 'IPv6 EIGRP Network',
     slug: 'ipv6-eigrp-network',
     year: '2024',
-    description: 'IPv6 EIGRP lab in Packet Tracer—tuning, security, and verification beyond basic adjacency.',
+    description:
+      'A Cisco Packet Tracer lab building and tuning EIGRP for IPv6 on a multi-router topology—classic and named modes, passive interfaces, route summarization, authentication, and hands-on verification beyond basic adjacency setup.',
     tags: ['IPv6 EIGRP', 'Routing tuning & security', 'Topology documentation'],
     image: `${BASE}images/ipv6-network.png`,
     fallback: `${BASE}images/ipv6-network-placeholder.svg`,
