@@ -137,7 +137,7 @@ const PROJECTS = [
     featured: true,
     image: `${BASE}images/blackboxnet-dashboard.png`,
     fallback: `${BASE}images/blackboxnet-dashboard.png`,
-    imagePosition: 'center top',
+    imagePosition: 'center center',
     github: 'https://github.com/dkabduli/BlackBoxNet',
     external: 'https://blackboxnet-web.onrender.com',
     externalLabel: 'Live demo',
@@ -195,11 +195,11 @@ const PROJECTS = [
     screenshots: [
       {
         src: `${BASE}images/blackboxnet-dashboard.png`,
-        alt: 'BlackBoxNet dashboard with vendor navigation and scenario tabs',
+        alt: 'BlackBoxNet dashboard with Nokia VPRN scenario, topology preview, and T1–T5 simulation',
         eyebrow: 'Dashboard',
-        title: 'Vendor + scenario catalog',
+        title: 'Live demo — multi-vendor dashboard',
         caption:
-          'Header tabs filter Cisco, Juniper, or Nokia scenarios. The simulation card runs T1→T5 for the active scenario only; topology and devices update per scenario_id.',
+          'Vendor tabs (Cisco, Juniper, Nokia), scenario picker, React Flow topology, simulation controls, and per-device health on the public Render deployment.',
       },
       {
         src: `${BASE}images/blackboxnet-incident.png`,
