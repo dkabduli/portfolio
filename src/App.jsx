@@ -19,10 +19,10 @@ const NAV_ITEMS = [
 ]
 
 const QUICK_STATS = [
-  { value: '3', label: 'SSC ROLES' },
-  { value: '12', label: 'BLACKBOXNET LABS' },
-  { value: '6', label: 'SKILL DOMAINS' },
-  { value: '2027', label: 'BIT GRAD YEAR' },
+  { value: '2+', label: 'YRS EXPERIENCE' },
+  { value: '50+', label: 'SWITCHES UPGRADED' },
+  { value: '132', label: 'INACTIVE USERS FOUND' },
+  { value: '500+', label: 'INVENTORY RECORDS' },
 ]
 
 const KEY_STRENGTHS = ['Infrastructure', 'Automation', 'NetDevOps']
