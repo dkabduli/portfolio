@@ -25,17 +25,19 @@ const QUICK_STATS = [
   { value: '500+', label: 'INVENTORY RECORDS' },
 ]
 
-const KEY_STRENGTHS = ['Routing', 'Automation', 'Operational Support']
+const KEY_STRENGTHS = ['Infrastructure', 'Automation', 'NetDevOps']
 
 const COURSEWORK = [
-  'Advanced Network Routing',
-  'Network Security',
-  'Wireless Networks',
   'DevOps',
-  'Networking Tech & Automation',
-  'Intermediate Networking',
-  'Routing and Switching',
-  'Database Concepts & SQL',
+  'Real-time Systems',
+  'Network Management and ML',
+  'IP Architecture and Solutions',
+  'Desktop and Server Environments II',
+  'Transmission Systems',
+  'Computer Architecture',
+  'Wireless Networks',
+  'Data Structures',
+  'Databases',
 ]
 
 const EXPERIENCE = [
@@ -44,30 +46,52 @@ const EXPERIENCE = [
     period: 'MAY 2026 — PRESENT',
     title: 'Infrastructure Dev Intern',
     company: 'Shared Services Canada',
+    location: 'Ottawa, Ontario',
     image: `${BASE}images/aap-logo.png`,
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
     summary:
-      'Infrastructure development at Shared Services Canada focused on Ansible-driven SSL/TLS certificate automation for Azure-compatible environments, multi-hop deployment workflows across jump hosts and GitLab, and n8n platform migration from development to pre-production.',
+      'Infrastructure development at Shared Services Canada: n8n platform migration to Azure pre-production, Ansible/OpenSSL certificate automation for SSC NAI environments, and a validated multi-hop Ansible path through jump hosts to GitLab for SWLINUX operations.',
     outcome:
-      'Cut manual certificate setup from 20–30 minutes to under 2 minutes per request, established a validated multi-hop Ansible path for SWLINUX certificate distribution, and reduced n8n environment deployment time from several hours to 20–30 minutes.',
+      'Migrated 7 active n8n workflows with provisioning under 10 minutes, cut manual certificate setup from 20–30 minutes to under 2 minutes per request, and standardized inventory plus SSH proxy routing for future production certificate deployments.',
     capabilities: [
       'Ansible roles & playbooks',
       'OpenSSL / TLS certificate workflows',
       'Multi-hop SSH & proxy routing',
-      'Azure & GitLab integration',
-      'n8n automation platform',
-      'Reverse proxy & HTTPS troubleshooting',
+      'Azure & GitLab (git02)',
+      'n8n workflow automation',
+      'SSL, reverse proxy & container networking',
     ],
     timelineBullets: [
-      'Automated Azure-compatible SSL/TLS certificate request generation using Ansible and OpenSSL, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for SSC NAI environments, reducing manual certificate setup time from 20–30 minutes to under 2 minutes per request.',
-      'Engineered and validated a multi-hop SSH/Ansible deployment workflow across devHost, jump hosts, and Azure GitLab infrastructure (git02), enabling centralized certificate automation and secure repository distribution for SWLINUX operations while standardizing inventory, SSH proxy routing, and environment configuration for future production deployments.',
-      'Migrated an internal n8n automation platform from an Azure development VM to a pre-production environment, resolving SSL, reverse-proxy, and network routing issues to restore secure external HTTPS access, reducing deployment time from several hours to 20–30 minutes through a repeatable process.',
+      'Migrated internal n8n automation platform to Azure pre-production, resolving SSL, reverse-proxy, and container networking issues; migrated 7 active workflows and established deployment process reducing provisioning time from hours to under 10 minutes.',
+      'Automated Azure-compatible SSL/TLS certificate request generation using Ansible and OpenSSL, creating a reusable role-based workflow for SSC NAI environments that reduced manual certificate setup from 20–30 minutes to under 2 minutes per request.',
+      'Engineered and validated a multi-hop SSH/Ansible deployment workflow across devHost, jump hosts, and Azure GitLab (git02) for centralized certificate automation and SWLINUX repository distribution.',
     ],
     detailBullets: [
+      'Migrated internal n8n automation platform to Azure pre-production, resolving SSL, reverse-proxy, and container networking issues; migrated 7 active workflows and established deployment process reducing provisioning time from hours to under 10 minutes.',
       'Automated Azure-compatible SSL/TLS certificate request generation using Ansible and OpenSSL, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for SSC NAI environments, reducing manual certificate setup time from 20–30 minutes to under 2 minutes per request.',
       'Engineered and validated a multi-hop SSH/Ansible deployment workflow across devHost, jump hosts, and Azure GitLab infrastructure (git02), enabling centralized certificate automation and secure repository distribution for SWLINUX operations while standardizing inventory, SSH proxy routing, and environment configuration for future production deployments.',
-      'Migrated an internal n8n automation platform from an Azure development VM to a pre-production environment, resolving SSL, reverse-proxy, and network routing issues to restore secure external HTTPS access, reducing deployment time from several hours to 20–30 minutes through a repeatable process.',
+    ],
+    detailSections: [
+      {
+        title: 'n8n migration to pre-production',
+        paragraphs: [
+          'The internal n8n instance lived on an Azure development VM and needed to move into a pre-production environment with working external HTTPS. That meant debugging SSL termination, reverse-proxy routing, and container networking—not just copying files.',
+          'Seven production workflows were carried over and a repeatable deployment process was documented so the team could reprovision the stack in under 10 minutes instead of spending hours on ad hoc setup.',
+        ],
+      },
+      {
+        title: 'Certificate automation role',
+        paragraphs: [
+          'Operators previously spent 20–30 minutes per SSC NAI certificate request assembling CSRs, keys, and OpenSSL configs by hand. The Ansible role wraps that into one run: standardized configs, generated CSRs and private keys, and outputs ready for the Azure-compatible request path.',
+        ],
+      },
+      {
+        title: 'Multi-hop Ansible to GitLab',
+        paragraphs: [
+          'SWLINUX certificate artifacts could not be pushed from a single jump point—automation had to traverse devHost, intermediate jump hosts, and git02 on Azure GitLab. Inventory groups, SSH proxy settings, and environment variables were aligned so the same playbook path can scale toward production without reworking connectivity each time.',
+        ],
+      },
     ],
   },
   {
@@ -75,34 +99,61 @@ const EXPERIENCE = [
     period: 'APR 2025 — APR 2026',
     title: 'NetDevOps Intern',
     company: 'Shared Services Canada',
+    location: 'Ottawa, Ontario',
     image: `${BASE}images/aap-logo.png`,
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
     summary:
-      'NetDevOps work at Shared Services Canada spanning GitLab identity auditing, Ansible-based device health automation, CI/CD monitoring integration, and Lighthouse-driven inventory validation across large record sets.',
+      'NetDevOps at Shared Services Canada: GitLab identity auditing, Ansible health polling across 75+ devices, Zabbix in CI/CD across dev/staging/prod, Ansible Forms assessment, playbook refactoring, and Lighthouse inventory validation.',
     outcome:
-      'Delivered measurable outcomes: 132 inactive GitLab users flagged for deactivation, 75+ devices under automated health polling, Zabbix wired into CI/CD across three tiers, and 500+ inventory records validated through an expanded Lighthouse pipeline.',
+      '132 inactive GitLab users identified for licensing savings, 75+ devices under automated health polling, manual release health checks removed across three tiers, 30% redundant Ansible steps eliminated, and 500+ inventory records validated on six attributes per device.',
     capabilities: [
-      'Ansible automation & playbooks',
-      'API-driven GitLab workflows',
-      'CI/CD and monitoring integration (Zabbix)',
+      'Ansible Automation Platform',
+      'GitLab API automation',
+      'CI/CD & Zabbix integration',
       'Python scripting & reporting',
-      'Lighthouse / inventory validation',
-      'Linux administration',
+      'Lighthouse inventory audits',
+      'Ansible Forms assessment',
     ],
     timelineBullets: [
-      'Led a GitLab account audit via the API, identifying 132 inactive users and supporting a deactivation strategy aligned with licensing and platform constraints.',
-      'Developed and maintained Ansible playbooks that polled 75+ network devices for health metrics with automated alerting for incident detection.',
-      'Integrated Zabbix real-time monitoring into CI/CD pipelines across three environment tiers, removing manual health checks from the release path.',
-      'Reworked the Lighthouse audit pipeline to validate six attributes per device (for example IP, DNS, name, model, serial, ownership), improving inventory accuracy across 500+ records.',
+      'Led a GitLab account audit using the GitLab API, identifying 132 inactive users and enabling a deactivation strategy that reduced licensing costs while adhering to platform constraints.',
+      'Developed and maintained Ansible playbooks that continuously polled 75+ network devices for health metrics, triggering automated alerts for timely incident detection and resolution.',
+      'Integrated Zabbix real-time monitoring into CI/CD pipelines across dev, staging, and prod tiers, eliminating manual health checks and reducing mean incident response time.',
+      'Reworked the Lighthouse audit pipeline to validate 6 asset attributes per device (IP, DNS, name, model, serial, ownership), improving inventory accuracy across 500+ records.',
     ],
     detailBullets: [
-      'Owned the GitLab user audit end to end: API-driven reporting, inactive-user identification (132 accounts), and recommendations that fed licensing and deactivation decisions while respecting platform constraints.',
-      'Built and maintained Ansible automation that continuously polled 75+ devices for health signals and escalated anomalies, tightening the loop between infrastructure state and operator response.',
-      'Partnered on monitoring strategy by integrating Zabbix into CI/CD across three tiers so deployments were gated on automated health evidence instead of manual checks.',
-      'Assessed Ansible Forms and similar self-service patterns for cross-team workflows, producing a scoped roadmap senior engineers accepted for rollout.',
-      'Audited and refactored 20+ Ansible playbooks and automated 15 monitoring jobs, cutting redundant steps and stabilizing recurring network checks.',
-      'Expanded the Lighthouse audit pipeline to six validated attributes per asset, reducing discrepancies across 500+ inventory rows and giving teams a trustworthy device baseline.',
+      'Led a GitLab account audit using the GitLab API, identifying 132 inactive users and enabling a deactivation strategy that reduced licensing costs while adhering to platform constraints.',
+      'Developed and maintained a suite of Ansible playbooks that continuously polled 75+ network devices for health metrics, triggering automated alerts for timely incident detection and resolution.',
+      'Integrated Zabbix real-time monitoring into CI/CD pipelines across dev, staging, and prod tiers, eliminating all manual health checks and reducing mean incident response time.',
+      'Assessed Ansible Forms as a self-service automation interface for cross-team workflows, delivering a scoped implementation roadmap that was accepted by senior engineers for rollout.',
+      'Audited and refactored 20+ Ansible playbooks and automated 15 network monitoring jobs, eliminating 30% of redundant execution steps and improving reliability of automated network checks.',
+      'Reworked the Lighthouse audit pipeline to validate 6 asset attributes per device (IP, DNS, name, model, serial, ownership), improving inventory accuracy across 500+ records and reducing audit discrepancies.',
+    ],
+    detailSections: [
+      {
+        title: 'GitLab identity audit',
+        paragraphs: [
+          'Using the GitLab API, inactive accounts were surfaced with evidence teams could act on—132 users flagged for deactivation while staying within platform and licensing rules the organization had to follow.',
+        ],
+      },
+      {
+        title: 'Device health automation',
+        paragraphs: [
+          'Playbooks polled more than 75 network devices on a schedule and raised alerts when metrics drifted, so operators were not relying on manual spot checks to catch degrading gear.',
+        ],
+      },
+      {
+        title: 'Monitoring in the release path',
+        paragraphs: [
+          'Zabbix health signals were wired into CI/CD for dev, staging, and production so promotions could fail on automated evidence instead of someone manually confirming device state after each deploy.',
+        ],
+      },
+      {
+        title: 'Inventory quality (Lighthouse)',
+        paragraphs: [
+          'The Lighthouse pipeline was expanded to check six fields per asset. That gave a consistent baseline across 500+ records and cut the back-and-forth when IP, DNS, serial, or ownership data did not match reality.',
+        ],
+      },
     ],
   },
   {
@@ -110,64 +161,61 @@ const EXPERIENCE = [
     period: 'MAY 2024 — APR 2025',
     title: 'LAN Operations Technician',
     company: 'Shared Services Canada',
+    location: 'Ottawa, Ontario',
     image: `${BASE}images/ssc-switch-upgrade.png`,
     imageAlt: 'Abdul Rehman Baseem upgrading switches in a network environment',
     summary:
-      'Hands-on LAN operations: Juniper-focused firmware upgrades at scale, Visio topology design for NCR sites, and consolidated documentation so field and ops teams could respond faster.',
+      'LAN operations at Shared Services Canada: large-scale Juniper EX-4300 P/MP firmware upgrades, Visio topology standards for National Capital Region sites, and centralized site documentation for faster incident response.',
     outcome:
-      'Delivered 50+ switch upgrades aligned to security baselines, formal Visio references for 10+ sites, and centralized documentation that reduced ops lookup time materially.',
+      '50+ switches upgraded to current security baselines, Visio diagrams adopted as the primary field reference for 10+ NCR sites, and consolidated documentation that reduced ops lookup time by 40%.',
     capabilities: [
-      'Hands-on enterprise switching',
-      'Firmware & image lifecycle',
-      'Linux in network operations',
-      'Field staging & hardware logistics',
-      'Network diagramming & documentation',
-      'Multi-site topology design',
+      'Juniper EX-4300 operations',
+      'Firmware lifecycle & Linux scripting',
+      'Visio topology documentation',
+      'Multi-site NCR operations',
+      'Security baseline alignment',
+      'Ops documentation systems',
     ],
     timelineBullets: [
-      'Upgraded firmware on 50+ Juniper EX-4300 switches using Linux-based scripting, closing known gaps and aligning devices to current security baselines.',
-      'Authored Visio topology diagrams for 10+ National Capital Region sites covering subnets and physical layout—adopted as the primary reference for field technicians during incidents.',
-      'Consolidated fragmented site documentation (configs, topologies, switch inventory) for 10+ sites into one reference system, cutting how long ops spent hunting for answers.',
-      'Prepared, packaged, and shipped refreshed hardware for rollout, pairing documentation accuracy with dependable logistics.',
+      'Upgraded firmware on 50+ Juniper EX-4300 P and MP switches via Linux scripting, resolving multiple known vulnerabilities and aligning all devices to current security baselines.',
+      'Designed Visio topology diagrams for 10+ NCR sites documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
+      'Consolidated fragmented site documentation (network configurations, topologies, and switch inventory for 10+ NCR sites) into a centralized reference system, reducing ops team lookup time by 40%.',
     ],
     detailBullets: [
-      'Executed large-scale Juniper EX-4300 firmware upgrades with Linux-assisted workflows, validating images and ensuring every device met the expected security posture before handoff.',
-      'Partnered with teams across NCR sites to capture accurate Visio diagrams that engineers relied on during outages because they mirrored both logical and physical reality.',
-      'Centralized previously scattered site records so incident responders and planners referenced a single source of truth instead of conflicting spreadsheets or ad hoc notes.',
-      'Continued to support USB staging, packaging, and shipping workflows so hardware arrived on site ready for install without rework.',
+      'Upgraded firmware on 50+ Juniper EX-4300 P and MP switches via Linux scripting, resolving multiple known vulnerabilities and aligning all devices to current security baselines.',
+      'Designed Visio topology diagrams for 10+ NCR sites documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
+      'Consolidated fragmented site documentation (network configurations, topologies, and switch inventory for 10+ NCR sites) into a centralized reference system, reducing ops team lookup time by 40% and enabling faster incident response.',
+    ],
+    detailSections: [
+      {
+        title: 'Firmware upgrades at scale',
+        paragraphs: [
+          'EX-4300 P and MP platforms were upgraded with Linux-assisted scripting so image validation and security baseline checks could be repeated consistently across more than 50 switches.',
+        ],
+      },
+      {
+        title: 'Topology documentation',
+        paragraphs: [
+          'Visio diagrams for 10+ NCR sites captured both subnet layout and physical placement. Field teams used them as the first reference during incidents instead of hunting through scattered notes.',
+        ],
+      },
+      {
+        title: 'Centralized site records',
+        paragraphs: [
+          'Configs, topology drawings, and switch inventory for the same sites had lived in different places. Pulling them into one reference cut lookup time by about 40% when ops needed an answer under pressure.',
+        ],
+      },
     ],
   },
 ]
 
 const SKILLS = {
-  Languages: ['Python', 'Java', 'C', 'C++', 'TypeScript', 'LC-3', 'Arduino (C/C++)'],
-  Networking: [
-    'Routing & switching design',
-    'Cisco IOS & Juniper Junos CLI',
-    'IPv4 / IPv6 operations',
-    'BGP route policy',
-    'OSPFv2 / OSPFv3',
-    'EIGRP tuning & verification',
-    'MPLS fundamentals',
-    'Spanning tree operations',
-  ],
-  'Automation & NetDevOps': [
-    'Ansible Automation Platform',
-    'Infrastructure automation',
-    'CI/CD practices',
-    'API-driven development',
-    'Docker & GitLab workflows',
-    'Secrets management',
-  ],
-  Systems: [
-    'Linux administration',
-    'Git workflows',
-    'Zabbix / NNMI monitoring',
-    'Wireshark & packet analysis',
-    'MATLAB',
-    'PostgreSQL & MySQL',
-    'Visio topology documentation',
-  ],
+  'Languages & Frameworks': ['Python', 'Java', 'C', 'C++', 'MATLAB', 'LC-3 Assembly', 'TypeScript', 'React', 'FastAPI'],
+  'Network Operating Systems': ['Cisco IOS CLI', 'Juniper Junos', 'Aruba CLI'],
+  'Automation & DevOps': ['Ansible Automation Platform (AAP)', 'Docker', 'Git', 'GitLab'],
+  'Tools & Databases': ['VS Code', 'PyCharm', 'Wireshark', 'PuTTY', 'MobaXterm', 'VMware Fusion', 'Visio', 'MySQL'],
+  'Platforms & Monitoring': ['Zabbix', 'NNMI', 'Elasticsearch', 'HashiCorp Vault', 'DocuSeal', 'Lighthouse'],
+  'Networking Protocols': ['TCP/IP', 'STP', 'ARP', 'RIP', 'BGP', 'OSPFv2/v3', 'EIGRP', 'MPLS'],
 }
 
 const PROJECTS = [
@@ -175,102 +223,126 @@ const PROJECTS = [
     name: 'BlackBoxNet',
     slug: 'blackboxnet',
     year: '2026',
-    description: 'Built a network state replay platform that helps operators move from outage symptoms to root cause faster through Git-backed config history, event correlation, topology context, and guided diff analysis.',
-    tags: ['React', 'FastAPI', 'PostgreSQL', 'Git', 'Docker'],
+    description:
+      'Git-backed network state replay platform with 12 multi-vendor labs (Cisco, Juniper, Nokia), FastAPI/PostgreSQL storage, correlation engine with semantic diff parsers, and a React Flow UI for T1→T5 outage replay.',
+    tags: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'Git'],
     featured: true,
     image: `${BASE}images/blackboxnet-dashboard.png`,
     fallback: `${BASE}images/blackboxnet-dashboard.png`,
     imagePosition: 'center top',
-    github: null,
-    external: null,
-    detailMeta: ['Product concept + full-stack build', 'Simulation-driven MVP', 'NetDevOps / observability'],
-    outcome: 'Turned outage analysis into a clearer operator workflow by connecting evidence, topology, and root-cause explanation in one interface.',
-    overviewTitle: 'Overview',
-    pillarsTitle: 'What BlackBoxNet Is Trying To Accomplish',
-    flowTitle: 'Incident Explanation Experience',
-    deepDiveTitle: 'Why The Demo Works',
-    learningTitle: 'What I Learned',
+    github: 'https://github.com/dkabduli/BlackBoxNet',
+    external: 'https://blackboxnet-web.onrender.com',
+    externalLabel: 'Live demo',
+    detailMeta: ['Full-stack · Author: Abdul Rehman', '12 scripted outage scenarios', 'Public demo on Render + Neon'],
+    outcome:
+      'Replay scripted outages across Cisco IOS, Juniper Junos, and Nokia SR OS from one dashboard—step T1→T5, inspect topology, correlate root cause, and diff configs in Git.',
+    overviewTitle: 'What it is',
+    pillarsTitle: 'Features',
+    flowTitle: 'How to use the live demo',
+    deepDiveTitle: 'Architecture & scenario library',
+    learningTitle: 'What I built & learned',
     screenshotsIntro:
-      'These screens show the part of the product I focused on most: turning outage evidence into a clean, guided investigation flow.',
-    sidebarNarrativeTitle: 'Why it feels human',
-    sidebarTraitsTitle: 'Key product traits',
+      'Screens from the portfolio build; the live demo at blackboxnet-web.onrender.com reflects the current multi-vendor Phase 2 product.',
+    sidebarNarrativeTitle: 'Why it exists',
+    sidebarTraitsTitle: 'Technical highlights',
     sidebarNarrative:
-      'Instead of stopping at "an outage happened," the product is built to explain the chain of reasoning behind that conclusion. That is what makes the demo feel more like a real operational tool and less like a backend debug screen.',
+      'Network teams often see symptoms first and spend time proving which config change caused the failure. BlackBoxNet records snapshots, metrics, and events into a Git-backed timeline—like an aircraft black box—so you can replay T1→T5 and walk from outage to root cause with topology and diffs in one place.',
     summary:
-      'BlackBoxNet is a network-state replay platform built to make outage analysis more explainable. The idea was to treat an incident like a flight recorder for infrastructure: capture configuration history, metrics, and event timing, then reconstruct what changed before service failed so an operator can move from symptoms to root cause quickly.',
+      'BlackBoxNet is a network state replay platform that records configuration snapshots, health metrics, and network events into a Git-backed timeline. Operators pick a vendor (Cisco, Juniper, or Nokia), run a scripted failure story step by step (T1→T5), view Packet Tracer–style topology from JSON, open the incident timeline with rules-based root-cause correlation, and compare configs between steps in Git.',
     objective:
-      'The product is trying to solve a common problem in network operations: teams can see that something is broken, but it is often slow and messy to prove which change caused it, how that change propagated downstream, and what the next remediation step should be. BlackBoxNet turns that investigation into a guided workflow instead of a pile of disconnected logs and device outputs.',
+      'The public demo runs on Render (web + API) with Neon Postgres. Config history lives under configs/{scenario_id}/{device}/T{n}.txt and is namespaced per scenario so resetting one lab does not disturb the other eleven. On the free tier the API may sleep after idle time—the first Run T1 after a cold start can take 30–60 seconds.',
     humanSummary: [
       {
-        label: 'What it does',
-        value: 'Turns raw network state, config history, and health events into a guided outage investigation flow.',
+        label: 'Live demo',
+        value: 'blackboxnet-web.onrender.com — try Cisco → ACL Regression → T1→T5, then switch vendors in the header.',
       },
       {
-        label: 'Core idea',
-        value: 'Treat the network like a black box recorder so operators can replay what changed before an outage.',
+        label: 'Repository',
+        value: 'github.com/dkabduli/BlackBoxNet — FastAPI backend, React 18 + Vite + Tailwind + React Flow frontend.',
       },
       {
-        label: 'Why it matters',
-        value: 'Makes the root cause easier to explain to engineers, interviewers, and non-specialists without losing technical depth.',
+        label: 'Scale',
+        value: '12 scenarios across three vendors; data-driven topology from JSON presets; simulation scoped per scenario_id.',
       },
       {
-        label: 'Next action',
-        value: 'Surface the most suspicious config change fast, then connect it to evidence and a clear remediation recommendation.',
+        label: 'Stack',
+        value: 'Python 3.11, FastAPI, SQLAlchemy, Alembic, PostgreSQL 15, GitPython, GitHub Actions CI (14 API tests, ~74 KB gzipped frontend).',
       },
     ],
     pillars: [
-      'Record configuration snapshots, metrics, and events into a Git-backed timeline so the system always has historical context.',
-      'Correlate symptoms like latency spikes, packet loss, interface degradation, and outages against the exact config changes that happened before them.',
-      'Explain incidents in plain language first, then let a deeper layer reveal the raw config diff, rule identifiers, and supporting evidence.',
-      'Keep the demo deterministic enough for interviews and portfolio walkthroughs while still feeling like a believable NOC / NetDevOps product.',
+      'Multi-vendor scenarios — twelve scripted failure stories across Cisco IOS, Juniper Junos, and Nokia SR OS.',
+      'Header vendor navigation — Cisco / Juniper / Nokia tabs with logos; dashboard shows only that vendor’s scenarios.',
+      'Data-driven topology — React Flow diagrams from JSON (ports, subnets, link-type legend); layouts include linear, OSPF areas, triangle, Junos triangle, Nokia hub.',
+      'Simulation T1→T5 — per-scenario state; reset one scenario without touching others; confirmation when switching vendor/scenario with progress.',
+      'Incident timeline & root-cause panel — rules-based correlation with vendor-aware semantic diff (ACL, OSPF timers, BGP community, STP priority, LDP label collision, Junos hold-time, and more).',
+      'Git-backed configs — configs/{scenario_id}/{device}/T{n}.txt; optional Phase 1.5 live SSH for one Cisco device (redacted before storage).',
     ],
     incidentFlow: [
       {
-        title: '1. Summary before detail',
-        text: 'The incident page is designed to answer what broke, where it broke, and who was affected within a few seconds, before the viewer has to parse any raw telemetry.',
+        title: '1. Pick vendor & scenario',
+        text: 'Use the header next to BlackBoxNet to choose Cisco, Juniper, or Nokia. On the dashboard, pick a scenario (e.g. ACL Regression, LDP Collision). Each switch resets that scenario to T1 (with confirmation if you had progress).',
       },
       {
-        title: '2. Root cause with evidence',
-        text: 'BlackBoxNet highlights the most suspicious config change, ties it to the affected device and subnet, and shows why that change matters in human-readable language.',
+        title: '2. Run T1 → T5',
+        text: 'On the simulation card, click Run T1 through Run T5. Each step collects snapshots and events into Postgres and Git for that scenario_id only.',
       },
       {
-        title: '3. Timeline to action',
-        text: 'The investigation then walks through the event chain in chronological order and ends with an explicit recommendation such as rolling back or reordering an ACL entry.',
+        title: '3. Investigate',
+        text: 'Open the incident for timeline, root-cause summary, and semantic diff. Topology highlights impacted subnets, device health, and annotations (e.g. rogue STP switch, LFIB collision).',
+      },
+      {
+        title: '4. Reset & explore',
+        text: 'Reset replays the active scenario from T1. Try Juniper BGP hold-time or Nokia SDP blackhole to see different layouts and correlation rules.',
       },
     ],
     deepDive: [
-      'Phase 1 replays a deterministic ACL regression across three devices so the product can prove its UX, correlation logic, and diff experience in a controlled environment.',
-      'Phase 1.5 extends the concept by allowing one device to provide a live running-config over SSH while keeping the rest of the timeline simulated, which helps bridge the gap between a pure demo and a real operational workflow.',
-      'The incident explanation flow became the strongest part of the project because it turns backend signals such as config diffs, suspicion flags, and topology context into a narrative that feels understandable instead of noisy.',
+      'Browser (React 18 + TypeScript + Vite + Tailwind + React Flow) → FastAPI ScenarioManager (12 JSON fixtures) → PostgreSQL (scenario_id namespaced rows) → Git repo (configs/{scenario_id}/…), seeded on API startup.',
+      'Cisco IOS: ACL Regression (linear), OSPF Multi-Area, BGP Route Leak, STP Root Hijack. Juniper Junos: BGP Hold Timer, IS-IS Wide Metric, RSVP-TE LSP, SRX Policer. Nokia SR OS: LDP Collision, SDP Blackhole, VPRN Leak, QoS Policer.',
+      'API highlights: GET /api/scenarios (catalog + topology), GET/POST simulation status/run-step/reset per scenario_id, GET /api/diff/{scenario_id}/{device_id} for unified diffs between Git snapshots.',
+      'Topology is declarative in packages/mock-scenarios/topology-presets.json—links include from/to, ports, subnet, type (routed, trunk, ibgp, ldp, etc.); device nodes use live API health and root-cause highlight.',
+      'Deployed via render.yaml; API docs at blackboxnet-api.onrender.com/docs. Postgres persists in Neon; Git on API disk is ephemeral on Render free tier but bundled configs re-seed on startup.',
     ],
     learningNotes: [
-      'I got better at translating low-level technical signals into product decisions that make the investigation feel clear instead of overwhelming.',
-      'The project reinforced how valuable explainability is in infrastructure tools, especially when the audience includes operators, recruiters, and non-specialist reviewers.',
-      'It also sharpened my thinking around full-stack system design, where backend evidence only becomes valuable once the frontend makes the story understandable.',
+      'Architected Git-backed replay with 12 multi-vendor labs, FastAPI/PostgreSQL storage, Git config versioning, and a correlation engine with three semantic diff parsers (Cisco IOS, Juniper Junos, Nokia SR OS).',
+      'Built the React/TypeScript UI with React Flow lab maps, five-step outage replay, and incident config-diff viewer; shipped Render + Neon with GitHub Actions CI.',
+      'Learned to keep scenario state isolated (scenario_id everywhere), make topology data-driven so new labs do not require React rewrites, and design explainable correlation instead of opaque ML for demo walkthroughs.',
     ],
     screenshots: [
+      {
+        src: `${BASE}images/blackboxnet-dashboard.png`,
+        alt: 'BlackBoxNet dashboard with vendor navigation and scenario tabs',
+        eyebrow: 'Dashboard',
+        title: 'Vendor + scenario catalog',
+        caption:
+          'Header tabs filter Cisco, Juniper, or Nokia scenarios. The simulation card runs T1→T5 for the active scenario only; topology and devices update per scenario_id.',
+      },
       {
         src: `${BASE}images/blackboxnet-incident.png`,
         alt: 'BlackBoxNet incident summary and correlation analysis screen',
         eyebrow: 'Incident investigation',
-        title: 'Guided summary and recommendation',
+        title: 'Root cause & correlation',
         caption:
-          'This view condenses the outage into a recruiter-friendly story: impacted subnet, root device, correlation analysis, supporting flags, and a recommendation banner that clearly points toward the next operator action.',
+          'Rules-based correlation ties symptoms to the suspicious config change, with human-readable analysis before the raw unified diff.',
       },
       {
         src: `${BASE}images/blackboxnet-outage.png`,
-        alt: 'BlackBoxNet root cause mismatch and investigation timeline screen',
+        alt: 'BlackBoxNet root cause and investigation timeline screen',
         eyebrow: 'Evidence layer',
-        title: 'Root cause + event timeline',
+        title: 'Timeline + config diff',
         caption:
-          'The deeper evidence layer connects the suspicious ACL change to the degradation sequence, showing which event is treated as the primary suspect and giving the operator a direct path into the config diff.',
+          'Chronological events lead into Git-backed config comparison—the same evidence path operators would use to justify rollback or ACL reorder.',
       },
     ],
     sidebarFacts: [
-      'React + TypeScript frontend with a FastAPI backend and PostgreSQL persistence.',
-      'Git-backed config history for replayable snapshots and diff generation.',
-      'Rules-based correlation engine chosen intentionally for explainability.',
-      'Compact topology preview to keep the affected path and root device visible during an incident.',
+      'Live demo: blackboxnet-web.onrender.com · API: blackboxnet-api.onrender.com',
+      'React Flow topology from JSON; layouts: linear, ospf-areas, triangle, junos-triangle, nokia-hub, star',
+      'Semantic extractors per vendor; 14 backend pytest tests; production frontend build in CI',
+      'Regenerate fixtures: python3 scripts/generate_phase2_scenarios.py',
+    ],
+    resourceLinks: [
+      { label: 'Live demo', href: 'https://blackboxnet-web.onrender.com' },
+      { label: 'API docs', href: 'https://blackboxnet-api.onrender.com/docs' },
+      { label: 'GitHub repository', href: 'https://github.com/dkabduli/BlackBoxNet' },
     ],
   },
   {
@@ -377,7 +449,14 @@ const PROJECTS = [
 ]
 
 function hasExperienceDetails(job) {
-  return Boolean(job.summary?.trim() || job.outcome?.trim() || job.capabilities.length || job.timelineBullets.length || job.detailBullets.length)
+  return Boolean(
+    job.summary?.trim() ||
+      job.outcome?.trim() ||
+      job.capabilities.length ||
+      job.timelineBullets.length ||
+      job.detailBullets.length ||
+      job.detailSections?.length,
+  )
 }
 
 const EXPERIENCE_LINKS = EXPERIENCE.filter(hasExperienceDetails).map((job) => ({
@@ -581,8 +660,10 @@ function ContactMethodIcon({ id }) {
 
 function ExperienceDetailPage({ job }) {
   const hasSummary = Boolean(job.summary?.trim())
+  const hasOutcome = Boolean(job.outcome?.trim())
   const hasCapabilities = Boolean(job.capabilities.length)
   const hasContributions = Boolean(job.detailBullets.length)
+  const hasDeepDive = Boolean(job.detailSections?.length)
 
   return (
     <div className={styles.detailPage}>
@@ -615,6 +696,7 @@ function ExperienceDetailPage({ job }) {
             <div className={styles.detailMeta}>
               <span>{job.company}</span>
               <span>{job.period}</span>
+              {job.location ? <span>{job.location}</span> : null}
             </div>
 
             <div className={styles.detailGrid}>
@@ -623,6 +705,13 @@ function ExperienceDetailPage({ job }) {
                   <section className={styles.detailSection}>
                     <h2 className={styles.detailSectionTitle}>Summary</h2>
                     <p className={styles.detailText}>{job.summary}</p>
+                  </section>
+                ) : null}
+
+                {hasOutcome ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>Impact</h2>
+                    <p className={styles.detailText}>{job.outcome}</p>
                   </section>
                 ) : null}
 
@@ -641,7 +730,7 @@ function ExperienceDetailPage({ job }) {
 
                 {hasContributions ? (
                   <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Key Contributions</h2>
+                    <h2 className={styles.detailSectionTitle}>Key contributions</h2>
                     <ul className={styles.detailBullets}>
                       {job.detailBullets.map((bullet) => (
                         <li key={bullet}>{bullet}</li>
@@ -649,6 +738,19 @@ function ExperienceDetailPage({ job }) {
                     </ul>
                   </section>
                 ) : null}
+
+                {hasDeepDive
+                  ? job.detailSections.map((section) => (
+                      <section key={section.title} className={styles.detailSection}>
+                        <h2 className={styles.detailSectionTitle}>{section.title}</h2>
+                        {section.paragraphs.map((paragraph) => (
+                          <p key={paragraph} className={styles.detailText}>
+                            {paragraph}
+                          </p>
+                        ))}
+                      </section>
+                    ))
+                  : null}
               </div>
 
               <aside className={styles.detailSidebar}>
@@ -708,6 +810,28 @@ function ProjectDetailPage({ project }) {
                 <span key={item}>{item}</span>
               ))}
             </div>
+
+            {project.external || project.github || project.resourceLinks?.length ? (
+              <div className={styles.projectDetailLinks}>
+                {project.external ? (
+                  <a href={project.external} className={styles.primaryButton} target="_blank" rel="noreferrer">
+                    {project.externalLabel || 'Live demo'}
+                  </a>
+                ) : null}
+                {project.github ? (
+                  <a href={project.github} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
+                    Repository
+                  </a>
+                ) : null}
+                {project.resourceLinks?.map((link) =>
+                  link.href === project.external || link.href === project.github ? null : (
+                    <a key={link.href} href={link.href} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
+                      {link.label}
+                    </a>
+                  ),
+                )}
+              </div>
+            ) : null}
 
             <div className={styles.projectSummaryGrid}>
               {project.humanSummary.map((item) => (
@@ -1021,7 +1145,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.15 }}
                   >
-                    NetDevOps Intern
+                    Infrastructure Dev Intern · Shared Services Canada
                   </motion.p>
                   <motion.p
                     className={styles.heroLocation}
@@ -1168,7 +1292,7 @@ export default function App() {
               <div className={styles.courseworkHeader}>
                 <p className={styles.aboutKicker}>Selected Coursework</p>
                 <p className={styles.courseworkText}>
-                  Routing, security, wireless, automation, and systems foundations.
+                  DevOps, routing architecture, wireless, data structures, and systems foundations (Carleton BIT, Network Technology).
                 </p>
               </div>
               <div className={styles.courseworkGrid}>
@@ -1221,7 +1345,7 @@ export default function App() {
                         ) : null}
                         {project.external ? (
                           <a href={project.external} target="_blank" rel="noreferrer">
-                            Live link
+                            {project.externalLabel || 'Live demo'}
                           </a>
                         ) : null}
                         {project.slug ? (
