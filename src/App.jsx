@@ -50,20 +50,18 @@ const EXPERIENCE = [
     image: `${BASE}images/ai-intro01.png`,
     imageAlt: 'Infrastructure development and automation',
     imageContain: false,
-    capabilities: [
-      'Ansible roles & playbooks',
-      'OpenSSL / TLS certificate workflows',
-      'Multi-hop SSH & proxy routing',
-      'Azure & GitLab (git02)',
-      'n8n workflow automation',
-      'SSL, reverse proxy & container networking',
-    ],
     timelineBullets: [
-      'Migrated internal n8n automation platform to Azure pre-production, resolving SSL, reverse-proxy, and container networking issues; migrated 7 active workflows and established deployment process reducing provisioning time from hours to under 10 minutes.',
-      'Automated Azure-compatible SSL/TLS certificate request generation using Ansible and OpenSSL, creating a reusable role-based workflow for SSC NAI environments that reduced manual certificate setup from 20–30 minutes to under 2 minutes per request.',
-      'Engineered and validated a multi-hop SSH/Ansible deployment workflow across devHost, jump hosts, and Azure GitLab (git02) for centralized certificate automation and SWLINUX repository distribution.',
+      'Migrated internal **n8n** automation platform to **Azure** pre-production, resolving **SSL**, **reverse-proxy**, and **container networking** issues; migrated **7 active workflows** and established deployment process reducing provisioning time from hours to **under 10 minutes**.',
+      'Automated **Azure-compatible SSL/TLS** certificate request generation using **Ansible** and **OpenSSL**, creating a reusable role-based workflow for **SSC NAI** environments that reduced manual certificate setup from **20–30 minutes** to **under 2 minutes** per request.',
+      'Engineered and validated a **multi-hop SSH/Ansible** deployment workflow across **devHost**, **jump hosts**, and **Azure GitLab (git02)** for centralized certificate automation and **SWLINUX** repository distribution.',
     ],
-    detailExtras: [],
+    roleDetail: [
+      '**Infrastructure Dev Intern** on Shared Services Canada’s platform and automation side—supporting internal teams that rely on workflow tooling, certificate services, and repeatable deployments in a federal, security-conscious environment.',
+      'The role sits between operators who need self-serve automation and engineers who own **Azure**, **GitLab**, and segmented network paths. I was the person building and hardening those handoffs—not running a single product line, but keeping platforms deployable and auditable.',
+      'Day-to-day scope spanned **workflow platforms** (internal automation estate), **certificate lifecycle** for NAI-bound requests, and **Ansible delivery** through restricted hops so artifacts land in the right repos without manual copy steps.',
+    ],
+    sidebarNote:
+      'Federal infrastructure context: pre-production rigor, change control, and coordination with platform owners before production rollout.',
   },
   {
     slug: 'netdevops-intern',
@@ -74,24 +72,21 @@ const EXPERIENCE = [
     image: `${BASE}images/aap-logo.png`,
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
-    capabilities: [
-      'Ansible Automation Platform',
-      'GitLab API automation',
-      'CI/CD & Zabbix integration',
-      'Python scripting & reporting',
-      'Lighthouse inventory audits',
-      'Ansible Forms assessment',
-    ],
     timelineBullets: [
-      'Led a GitLab account audit using the GitLab API, identifying 132 inactive users and enabling a deactivation strategy that reduced licensing costs while adhering to platform constraints.',
-      'Developed and maintained Ansible playbooks that continuously polled 75+ network devices for health metrics, triggering automated alerts for timely incident detection and resolution.',
-      'Integrated Zabbix real-time monitoring into CI/CD pipelines across dev, staging, and prod tiers, eliminating manual health checks and reducing mean incident response time.',
-      'Reworked the Lighthouse audit pipeline to validate 6 asset attributes per device (IP, DNS, name, model, serial, ownership), improving inventory accuracy across 500+ records.',
+      'Led a **GitLab** account audit using the **GitLab API**, identifying **132 inactive users** and enabling a deactivation strategy that reduced **licensing** costs while adhering to platform constraints.',
+      'Developed and maintained **Ansible playbooks** that continuously polled **75+ network devices** for health metrics, triggering automated alerts for timely incident detection and resolution.',
+      'Integrated **Zabbix** real-time monitoring into **CI/CD** pipelines across **dev, staging, and prod** tiers, eliminating manual health checks and reducing mean incident response time.',
+      'Assessed **Ansible Forms** as a self-service automation interface for cross-team workflows, delivering a scoped implementation roadmap that was accepted by senior engineers for rollout.',
+      'Audited and refactored **20+ Ansible playbooks** and automated **15 network monitoring jobs**, eliminating **30%** of redundant execution steps and improving reliability of automated network checks.',
+      'Reworked the **Lighthouse** audit pipeline to validate **6 asset attributes** per device (**IP, DNS, name, model, serial, ownership**), improving inventory accuracy across **500+ records**.',
     ],
-    detailExtras: [
-      'Assessed Ansible Forms as a self-service automation interface for cross-team workflows, delivering a scoped implementation roadmap that was accepted by senior engineers for rollout.',
-      'Audited and refactored 20+ Ansible playbooks and automated 15 network monitoring jobs, eliminating 30% of redundant execution steps and improving reliability of automated network checks.',
+    roleDetail: [
+      '**NetDevOps Intern** embedded with SSC’s automation and network operations stakeholders—translating recurring operational pain (stale accounts, noisy monitoring, inventory drift) into scripted, reviewable pipelines.',
+      'I was the intern engineers handed cross-cutting hygiene work to: identity and access on **GitLab**, health signal collection at scale, and making sure releases could trust monitoring instead of manual spot checks.',
+      'The team expectation was not ticket-by-ticket device config—it was improving how the organization runs automation: cleaner playbooks, observable pipelines, trustworthy inventory, and practical self-service designs senior staff could approve.',
     ],
+    sidebarNote:
+      'Worked inside SSC’s NetDevOps practice with **Ansible Automation Platform**, engineering leads, and ops teams who consumed reports and pipeline gates.',
   },
   {
     slug: 'lan-operations-technician',
@@ -101,20 +96,18 @@ const EXPERIENCE = [
     location: 'Ottawa, Ontario',
     image: `${BASE}images/ssc-switch-upgrade.png`,
     imageAlt: 'Abdul Rehman Baseem upgrading switches in a network environment',
-    capabilities: [
-      'Juniper EX-4300 operations',
-      'Firmware lifecycle & Linux scripting',
-      'Visio topology documentation',
-      'Multi-site NCR operations',
-      'Security baseline alignment',
-      'Ops documentation systems',
-    ],
     timelineBullets: [
-      'Upgraded firmware on 50+ Juniper EX-4300 P and MP switches via Linux scripting, resolving multiple known vulnerabilities and aligning all devices to current security baselines.',
-      'Designed Visio topology diagrams for 10+ NCR sites documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
-      'Consolidated fragmented site documentation (network configurations, topologies, and switch inventory for 10+ NCR sites) into a centralized reference system, reducing ops team lookup time by 40%.',
+      'Upgraded firmware on **50+ Juniper EX-4300 P and MP** switches via **Linux scripting**, resolving multiple known vulnerabilities and aligning all devices to current **security baselines**.',
+      'Designed **Visio** topology diagrams for **10+ NCR sites** documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
+      'Consolidated fragmented site documentation (network configurations, topologies, and switch inventory for **10+ NCR sites**) into a centralized reference system, reducing ops team lookup time by **40%**.',
     ],
-    detailExtras: [],
+    roleDetail: [
+      '**LAN Operations Technician** for SSC’s National Capital Region footprint—hands-on switching work paired with documentation discipline so field techs and central ops shared the same picture during incidents.',
+      'I was on the team that keeps access layers maintainable: firmware posture on **Juniper** access gear, accurate diagrams when bridges open, and one place to find configs instead of scattered folders.',
+      'The role was field-adjacent operations support—executing controlled change windows, publishing references technicians actually use, and reducing friction between site knowledge and the ops center.',
+    ],
+    sidebarNote:
+      'NCR LAN operations: coordination with field technicians, ops planners, and security baseline expectations on government-managed switching.',
   },
 ]
 
@@ -303,8 +296,21 @@ const PROJECTS = [
   },
 ]
 
+function renderRichText(text) {
+  return text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={index} className={styles.textStrong}>
+          {part.slice(2, -2)}
+        </strong>
+      )
+    }
+    return part
+  })
+}
+
 function hasExperienceDetails(job) {
-  return Boolean(job.capabilities.length || job.detailExtras?.length || job.image)
+  return Boolean(job.roleDetail?.length)
 }
 
 const EXPERIENCE_LINKS = EXPERIENCE.filter(hasExperienceDetails).map((job) => ({
@@ -507,9 +513,6 @@ function ContactMethodIcon({ id }) {
 }
 
 function ExperienceDetailPage({ job }) {
-  const hasCapabilities = Boolean(job.capabilities.length)
-  const hasExtras = Boolean(job.detailExtras?.length)
-
   return (
     <div className={styles.detailPage}>
       <header className={styles.detailHeader}>
@@ -546,35 +549,14 @@ function ExperienceDetailPage({ job }) {
 
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
-                <p className={styles.detailText}>
-                  {hasExtras
-                    ? 'Metrics and main deliverables are on the Experience timeline. This page adds context not listed there.'
-                    : 'Metrics and deliverables are on the Experience timeline. This page covers tools and scope for the role.'}
-                </p>
-
-                {hasCapabilities ? (
-                  <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Core capabilities</h2>
-                    <div className={styles.detailSkills}>
-                      {job.capabilities.map((item) => (
-                        <span key={item} className={styles.detailSkillTag}>
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </section>
-                ) : null}
-
-                {hasExtras ? (
-                  <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Also in this role</h2>
-                    <ul className={styles.detailBullets}>
-                      {job.detailExtras.map((bullet) => (
-                        <li key={bullet}>{bullet}</li>
-                      ))}
-                    </ul>
-                  </section>
-                ) : null}
+                <section className={styles.detailSection}>
+                  <h2 className={styles.detailSectionTitle}>Role & team</h2>
+                  {job.roleDetail.map((paragraph) => (
+                    <p key={paragraph} className={styles.detailText}>
+                      {renderRichText(paragraph)}
+                    </p>
+                  ))}
+                </section>
               </div>
 
               <aside className={styles.detailSidebar}>
@@ -587,9 +569,7 @@ function ExperienceDetailPage({ job }) {
                 </div>
                 <div className={styles.detailSidebarCard}>
                   <PlaceholderLogo />
-                  <p className={styles.detailSidebarText}>
-                    Work completed within a federal government environment focused on secure, large-scale infrastructure operations.
-                  </p>
+                  <p className={styles.detailSidebarText}>{job.sidebarNote}</p>
                 </div>
               </aside>
             </div>
@@ -1063,7 +1043,7 @@ export default function App() {
                     {job.timelineBullets.length ? (
                       <ul className={styles.timelineBullets}>
                         {job.timelineBullets.map((bullet) => (
-                          <li key={bullet}>{bullet}</li>
+                          <li key={bullet}>{renderRichText(bullet)}</li>
                         ))}
                       </ul>
                     ) : null}

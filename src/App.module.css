@@ -727,6 +727,12 @@
   line-height: 1.75;
 }
 
+.timelineBullets li .textStrong,
+.detailText .textStrong {
+  color: var(--navy);
+  font-weight: 600;
+}
+
 .caseStudyLink {
   display: inline-flex;
   align-items: center;
