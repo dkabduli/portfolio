@@ -1130,7 +1130,7 @@ export default function App() {
                     </div>
                   </div>
                   <div className={styles.projectBody}>
-                    <div className={styles.projectMetaRow}>
+                    <div className={styles.projectMeta}>
                       <div className={styles.projectTags}>
                         {project.tags.map((tag) => (
                           <span key={tag} className={styles.projectTag}>
@@ -1138,7 +1138,7 @@ export default function App() {
                           </span>
                         ))}
                       </div>
-                      <span className={styles.projectYear}>{project.year}</span>
+                      <p className={styles.projectYear}>{project.year}</p>
                     </div>
                     <h2 className={styles.projectTitle}>{project.name}</h2>
                     <p className={styles.projectDescription}>{project.description}</p>
