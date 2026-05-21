@@ -19,10 +19,10 @@ const NAV_ITEMS = [
 ]
 
 const QUICK_STATS = [
-  { value: '2+', label: 'YRS EXPERIENCE' },
-  { value: '50+', label: 'SWITCHES UPGRADED' },
-  { value: '132', label: 'INACTIVE USERS FOUND' },
-  { value: '500+', label: 'INVENTORY RECORDS' },
+  { value: '3', label: 'SSC ROLES' },
+  { value: '12', label: 'BLACKBOXNET LABS' },
+  { value: '6', label: 'SKILL DOMAINS' },
+  { value: '2027', label: 'BIT GRAD YEAR' },
 ]
 
 const KEY_STRENGTHS = ['Infrastructure', 'Automation', 'NetDevOps']
@@ -47,11 +47,9 @@ const EXPERIENCE = [
     title: 'Infrastructure Dev Intern',
     company: 'Shared Services Canada',
     location: 'Ottawa, Ontario',
-    image: `${BASE}images/aap-logo.png`,
-    imageAlt: 'Ansible Automation Platform logo',
-    imageContain: true,
-    summary:
-      'Infrastructure development at SSC—workflow platforms, certificate lifecycle automation, and Ansible delivery across restricted Azure and GitLab paths.',
+    image: `${BASE}images/ai-intro01.png`,
+    imageAlt: 'Infrastructure development and automation',
+    imageContain: false,
     capabilities: [
       'Ansible roles & playbooks',
       'OpenSSL / TLS certificate workflows',
@@ -65,32 +63,7 @@ const EXPERIENCE = [
       'Automated Azure-compatible SSL/TLS certificate request generation using Ansible and OpenSSL, creating a reusable role-based workflow for SSC NAI environments that reduced manual certificate setup from 20–30 minutes to under 2 minutes per request.',
       'Engineered and validated a multi-hop SSH/Ansible deployment workflow across devHost, jump hosts, and Azure GitLab (git02) for centralized certificate automation and SWLINUX repository distribution.',
     ],
-    detailBullets: [
-      'Migrated internal n8n automation platform to Azure pre-production, resolving SSL, reverse-proxy, and container networking issues; migrated 7 active workflows and established deployment process reducing provisioning time from hours to under 10 minutes.',
-      'Automated Azure-compatible SSL/TLS certificate request generation using Ansible and OpenSSL, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for SSC NAI environments, reducing manual certificate setup time from 20–30 minutes to under 2 minutes per request.',
-      'Engineered and validated a multi-hop SSH/Ansible deployment workflow across devHost, jump hosts, and Azure GitLab infrastructure (git02), enabling centralized certificate automation and secure repository distribution for SWLINUX operations while standardizing inventory, SSH proxy routing, and environment configuration for future production deployments.',
-    ],
-    detailSections: [
-      {
-        title: 'n8n migration to pre-production',
-        paragraphs: [
-          'The platform moved from an Azure development VM into pre-production with external HTTPS. Work focused on SSL termination, reverse-proxy paths, and container networking—not a lift-and-shift of the VM image.',
-          'Active workflows were migrated with a documented redeploy process so the environment could be rebuilt reliably instead of rebuilt by hand each time.',
-        ],
-      },
-      {
-        title: 'Certificate automation role',
-        paragraphs: [
-          'Manual SSC NAI requests meant assembling CSRs, keys, and OpenSSL configs piece by piece. The Ansible role standardizes that into one run with outputs aligned to the Azure-compatible request path.',
-        ],
-      },
-      {
-        title: 'Multi-hop Ansible to GitLab',
-        paragraphs: [
-          'Artifacts could not reach git02 from a single host—playbooks run through devHost and jump inventory with SSH proxy settings and environment config fixed for production-style rollout later.',
-        ],
-      },
-    ],
+    detailExtras: [],
   },
   {
     slug: 'netdevops-intern',
@@ -101,8 +74,6 @@ const EXPERIENCE = [
     image: `${BASE}images/aap-logo.png`,
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
-    summary:
-      'NetDevOps internship at SSC—automation, monitoring in the release path, and inventory quality at federal scale.',
     capabilities: [
       'Ansible Automation Platform',
       'GitLab API automation',
@@ -117,39 +88,9 @@ const EXPERIENCE = [
       'Integrated Zabbix real-time monitoring into CI/CD pipelines across dev, staging, and prod tiers, eliminating manual health checks and reducing mean incident response time.',
       'Reworked the Lighthouse audit pipeline to validate 6 asset attributes per device (IP, DNS, name, model, serial, ownership), improving inventory accuracy across 500+ records.',
     ],
-    detailBullets: [
-      'Led a GitLab account audit using the GitLab API, identifying 132 inactive users and enabling a deactivation strategy that reduced licensing costs while adhering to platform constraints.',
-      'Developed and maintained a suite of Ansible playbooks that continuously polled 75+ network devices for health metrics, triggering automated alerts for timely incident detection and resolution.',
-      'Integrated Zabbix real-time monitoring into CI/CD pipelines across dev, staging, and prod tiers, eliminating all manual health checks and reducing mean incident response time.',
+    detailExtras: [
       'Assessed Ansible Forms as a self-service automation interface for cross-team workflows, delivering a scoped implementation roadmap that was accepted by senior engineers for rollout.',
       'Audited and refactored 20+ Ansible playbooks and automated 15 network monitoring jobs, eliminating 30% of redundant execution steps and improving reliability of automated network checks.',
-      'Reworked the Lighthouse audit pipeline to validate 6 asset attributes per device (IP, DNS, name, model, serial, ownership), improving inventory accuracy across 500+ records and reducing audit discrepancies.',
-    ],
-    detailSections: [
-      {
-        title: 'GitLab identity audit',
-        paragraphs: [
-          'API-driven reports gave owners evidence for deactivation decisions while staying inside platform and licensing constraints—not a blanket disable list.',
-        ],
-      },
-      {
-        title: 'Device health automation',
-        paragraphs: [
-          'Scheduled polling replaced ad hoc checks; alerts fire when metrics drift so the first signal is automated, not a manual show-command tour.',
-        ],
-      },
-      {
-        title: 'Monitoring in the release path',
-        paragraphs: [
-          'Zabbix checks gate promotions across dev, staging, and production so a release does not rely on someone manually confirming device health after the fact.',
-        ],
-      },
-      {
-        title: 'Inventory quality (Lighthouse)',
-        paragraphs: [
-          'Six attributes per asset are validated in the pipeline so IP, DNS, serial, and ownership mismatches surface during audit runs instead of during an outage.',
-        ],
-      },
     ],
   },
   {
@@ -160,8 +101,6 @@ const EXPERIENCE = [
     location: 'Ottawa, Ontario',
     image: `${BASE}images/ssc-switch-upgrade.png`,
     imageAlt: 'Abdul Rehman Baseem upgrading switches in a network environment',
-    summary:
-      'Hands-on LAN operations at SSC—Juniper switching, NCR topology documentation, and consolidated site records for field and ops teams.',
     capabilities: [
       'Juniper EX-4300 operations',
       'Firmware lifecycle & Linux scripting',
@@ -175,31 +114,7 @@ const EXPERIENCE = [
       'Designed Visio topology diagrams for 10+ NCR sites documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
       'Consolidated fragmented site documentation (network configurations, topologies, and switch inventory for 10+ NCR sites) into a centralized reference system, reducing ops team lookup time by 40%.',
     ],
-    detailBullets: [
-      'Upgraded firmware on 50+ Juniper EX-4300 P and MP switches via Linux scripting, resolving multiple known vulnerabilities and aligning all devices to current security baselines.',
-      'Designed Visio topology diagrams for 10+ NCR sites documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
-      'Consolidated fragmented site documentation (network configurations, topologies, and switch inventory for 10+ NCR sites) into a centralized reference system, reducing ops team lookup time by 40% and enabling faster incident response.',
-    ],
-    detailSections: [
-      {
-        title: 'Firmware upgrades at scale',
-        paragraphs: [
-          'EX-4300 P and MP images were applied with Linux-assisted scripting so validation and baseline checks followed the same steps on every switch in the batch.',
-        ],
-      },
-      {
-        title: 'Topology documentation',
-        paragraphs: [
-          'Visio sets for NCR sites pair logical subnets with physical layout so field techs open one diagram during incidents instead of reconciling conflicting notes.',
-        ],
-      },
-      {
-        title: 'Centralized site records',
-        paragraphs: [
-          'Configs, diagrams, and inventory for the same sites now live in one reference—ops no longer chase three different sources during a bridge call.',
-        ],
-      },
-    ],
+    detailExtras: [],
   },
 ]
 
@@ -217,8 +132,7 @@ const PROJECTS = [
     name: 'BlackBoxNet',
     slug: 'blackboxnet',
     year: '2026',
-    description:
-      'Git-backed network state replay platform with 12 multi-vendor labs (Cisco, Juniper, Nokia), FastAPI/PostgreSQL storage, correlation engine with semantic diff parsers, and a React Flow UI for T1→T5 outage replay.',
+    description: 'Network state replay with 12 vendor labs and a public live demo.',
     tags: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'Git'],
     featured: true,
     image: `${BASE}images/blackboxnet-dashboard.png`,
@@ -227,49 +141,33 @@ const PROJECTS = [
     github: 'https://github.com/dkabduli/BlackBoxNet',
     external: 'https://blackboxnet-web.onrender.com',
     externalLabel: 'Live demo',
-    detailMeta: ['Full-stack · Author: Abdul Rehman', '12 scripted outage scenarios', 'Public demo on Render + Neon'],
-    outcome:
-      'Replay scripted outages across Cisco IOS, Juniper Junos, and Nokia SR OS from one dashboard—step T1→T5, inspect topology, correlate root cause, and diff configs in Git.',
+    detailMeta: ['Full-stack · Author: Abdul Rehman', '12 scripted outage scenarios', 'Render + Neon'],
     overviewTitle: 'What it is',
     pillarsTitle: 'Features',
-    flowTitle: 'How to use the live demo',
-    deepDiveTitle: 'Architecture & scenario library',
-    learningTitle: 'What I built & learned',
-    screenshotsIntro:
-      'Screens from the portfolio build; the live demo at blackboxnet-web.onrender.com reflects the current multi-vendor Phase 2 product.',
+    flowTitle: 'Live demo walkthrough',
+    deepDiveTitle: 'Architecture',
+    screenshotsIntro: 'UI captures from the product; open the live demo for current behavior.',
     sidebarNarrativeTitle: 'Why it exists',
-    sidebarTraitsTitle: 'Technical highlights',
+    sidebarTraitsTitle: 'Technical notes',
     sidebarNarrative:
-      'Network teams often see symptoms first and spend time proving which config change caused the failure. BlackBoxNet records snapshots, metrics, and events into a Git-backed timeline—like an aircraft black box—so you can replay T1→T5 and walk from outage to root cause with topology and diffs in one place.',
+      'Like a flight recorder for network state: replay what changed before an outage instead of reconstructing it from scattered logs.',
     summary:
-      'BlackBoxNet is a network state replay platform that records configuration snapshots, health metrics, and network events into a Git-backed timeline. Operators pick a vendor (Cisco, Juniper, or Nokia), run a scripted failure story step by step (T1→T5), view Packet Tracer–style topology from JSON, open the incident timeline with rules-based root-cause correlation, and compare configs between steps in Git.',
-    objective:
-      'The public demo runs on Render (web + API) with Neon Postgres. Config history lives under configs/{scenario_id}/{device}/T{n}.txt and is namespaced per scenario so resetting one lab does not disturb the other eleven. On the free tier the API may sleep after idle time—the first Run T1 after a cold start can take 30–60 seconds.',
+      'Records config snapshots, metrics, and events in a Git-backed timeline. Pick Cisco, Juniper, or Nokia, run a scripted story T1→T5, inspect JSON-driven topology, and open incidents with rules-based correlation and config diffs. Public stack: Render web/API, Neon Postgres, namespaced configs per scenario. Free-tier API may sleep—first Run T1 after idle can take 30–60s.',
     humanSummary: [
       {
         label: 'Live demo',
-        value: 'blackboxnet-web.onrender.com — try Cisco → ACL Regression → T1→T5, then switch vendors in the header.',
+        value: 'blackboxnet-web.onrender.com',
       },
       {
         label: 'Repository',
-        value: 'github.com/dkabduli/BlackBoxNet — FastAPI backend, React 18 + Vite + Tailwind + React Flow frontend.',
-      },
-      {
-        label: 'Scale',
-        value: '12 scenarios across three vendors; data-driven topology from JSON presets; simulation scoped per scenario_id.',
-      },
-      {
-        label: 'Stack',
-        value: 'Python 3.11, FastAPI, SQLAlchemy, Alembic, PostgreSQL 15, GitPython, GitHub Actions CI (14 API tests, ~74 KB gzipped frontend).',
+        value: 'github.com/dkabduli/BlackBoxNet',
       },
     ],
     pillars: [
-      'Multi-vendor scenarios — twelve scripted failure stories across Cisco IOS, Juniper Junos, and Nokia SR OS.',
-      'Header vendor navigation — Cisco / Juniper / Nokia tabs with logos; dashboard shows only that vendor’s scenarios.',
-      'Data-driven topology — React Flow diagrams from JSON (ports, subnets, link-type legend); layouts include linear, OSPF areas, triangle, Junos triangle, Nokia hub.',
-      'Simulation T1→T5 — per-scenario state; reset one scenario without touching others; confirmation when switching vendor/scenario with progress.',
-      'Incident timeline & root-cause panel — rules-based correlation with vendor-aware semantic diff (ACL, OSPF timers, BGP community, STP priority, LDP label collision, Junos hold-time, and more).',
-      'Git-backed configs — configs/{scenario_id}/{device}/T{n}.txt; optional Phase 1.5 live SSH for one Cisco device (redacted before storage).',
+      'Twelve scripted scenarios across Cisco IOS, Juniper Junos, and Nokia SR OS with vendor tabs and per-scenario reset.',
+      'React Flow topology from JSON presets (linear, OSPF areas, triangle, Junos triangle, Nokia hub).',
+      'T1→T5 simulation, incident timeline, and vendor-aware semantic diff (ACL, OSPF, BGP, STP, LDP, hold-time, etc.).',
+      'Git configs at configs/{scenario_id}/{device}/T{n}.txt; optional live Cisco SSH with redaction (Phase 1.5).',
     ],
     incidentFlow: [
       {
@@ -290,16 +188,9 @@ const PROJECTS = [
       },
     ],
     deepDive: [
-      'Browser (React 18 + TypeScript + Vite + Tailwind + React Flow) → FastAPI ScenarioManager (12 JSON fixtures) → PostgreSQL (scenario_id namespaced rows) → Git repo (configs/{scenario_id}/…), seeded on API startup.',
-      'Cisco IOS: ACL Regression (linear), OSPF Multi-Area, BGP Route Leak, STP Root Hijack. Juniper Junos: BGP Hold Timer, IS-IS Wide Metric, RSVP-TE LSP, SRX Policer. Nokia SR OS: LDP Collision, SDP Blackhole, VPRN Leak, QoS Policer.',
-      'API highlights: GET /api/scenarios (catalog + topology), GET/POST simulation status/run-step/reset per scenario_id, GET /api/diff/{scenario_id}/{device_id} for unified diffs between Git snapshots.',
-      'Topology is declarative in packages/mock-scenarios/topology-presets.json—links include from/to, ports, subnet, type (routed, trunk, ibgp, ldp, etc.); device nodes use live API health and root-cause highlight.',
-      'Deployed via render.yaml; API docs at blackboxnet-api.onrender.com/docs. Postgres persists in Neon; Git on API disk is ephemeral on Render free tier but bundled configs re-seed on startup.',
-    ],
-    learningNotes: [
-      'Architected Git-backed replay with 12 multi-vendor labs, FastAPI/PostgreSQL storage, Git config versioning, and a correlation engine with three semantic diff parsers (Cisco IOS, Juniper Junos, Nokia SR OS).',
-      'Built the React/TypeScript UI with React Flow lab maps, five-step outage replay, and incident config-diff viewer; shipped Render + Neon with GitHub Actions CI.',
-      'Learned to keep scenario state isolated (scenario_id everywhere), make topology data-driven so new labs do not require React rewrites, and design explainable correlation instead of opaque ML for demo walkthroughs.',
+      'React + FastAPI + PostgreSQL + GitPython; scenario_id namespacing on every API and DB row.',
+      'Topology source: packages/mock-scenarios/topology-presets.json (regenerate via scripts/generate_phase2_scenarios.py).',
+      'CI: 14 API pytest tests; production frontend build on push to main.',
     ],
     screenshots: [
       {
@@ -328,22 +219,16 @@ const PROJECTS = [
       },
     ],
     sidebarFacts: [
-      'Live demo: blackboxnet-web.onrender.com · API: blackboxnet-api.onrender.com',
-      'React Flow topology from JSON; layouts: linear, ospf-areas, triangle, junos-triangle, nokia-hub, star',
-      'Semantic extractors per vendor; 14 backend pytest tests; production frontend build in CI',
-      'Regenerate fixtures: python3 scripts/generate_phase2_scenarios.py',
+      'API docs: blackboxnet-api.onrender.com/docs',
+      'Three semantic extractors: Cisco IOS, Juniper Junos, Nokia SR OS',
     ],
-    resourceLinks: [
-      { label: 'Live demo', href: 'https://blackboxnet-web.onrender.com' },
-      { label: 'API docs', href: 'https://blackboxnet-api.onrender.com/docs' },
-      { label: 'GitHub repository', href: 'https://github.com/dkabduli/BlackBoxNet' },
-    ],
+    resourceLinks: [{ label: 'API docs', href: 'https://blackboxnet-api.onrender.com/docs' }],
   },
   {
     name: 'IPv6 EIGRP Network',
     slug: 'ipv6-eigrp-network',
     year: '2024',
-    description: 'Built and tuned a multi-router IPv6 EIGRP lab with named and classic configurations, passive-interface controls, route summarization, authentication, and route filtering to strengthen end-to-end routing validation.',
+    description: 'IPv6 EIGRP lab in Packet Tracer—tuning, security, and verification beyond basic adjacency.',
     tags: ['IPv6 EIGRP', 'Routing tuning & security', 'Topology documentation'],
     image: `${BASE}images/ipv6-network.png`,
     fallback: `${BASE}images/ipv6-network-placeholder.svg`,
@@ -351,36 +236,23 @@ const PROJECTS = [
     github: null,
     external: null,
     detailMeta: ['Advanced routing lab', 'IPv6 control-plane tuning', 'Cisco Packet Tracer'],
-    outcome: 'Strengthened practical IPv6 routing skills by moving beyond adjacency setup into tuning, security, summarization, and verification.',
     overviewTitle: 'Overview',
-    pillarsTitle: 'What The Lab Covered',
-    flowTitle: 'Key Routing Tasks',
-    deepDiveTitle: 'What I Validated',
-    learningTitle: 'What I Learned',
-    screenshotsIntro:
-      'This project focused on configuring, tuning, and verifying EIGRP for IPv6 across a multi-router topology rather than building a frontend product.',
+    pillarsTitle: 'What the lab covered',
+    flowTitle: 'Lab sequence',
+    deepDiveTitle: 'What I validated',
+    screenshotsIntro: 'Topology and configs from the Packet Tracer lab.',
     sidebarNarrativeTitle: 'Why it matters',
-    sidebarTraitsTitle: 'Key technical areas',
+    sidebarTraitsTitle: 'Verification',
     summary:
-      'This lab focused on implementing and tuning EIGRP for IPv6 across a routed topology with multiple interfaces, loopbacks, and VLAN segments. I used it to build stronger hands-on understanding of how IPv6 EIGRP adjacencies form, how route exchange behaves across classic and named configurations, and how control-plane choices affect convergence and visibility.',
-    objective:
-      'The work went beyond basic adjacency setup. I configured IPv6 unicast routing, router IDs, interface-level EIGRP participation, passive-interface controls, default-route propagation, route summarization, authentication, load-balancing behavior, and route filtering so the lab reflected a more realistic routing-engineering exercise.',
+      'Multi-router IPv6 EIGRP lab (classic and named modes) with passive interfaces, default-route propagation, summarization, authentication (MD5 and HMAC-SHA-256), and route filtering—beyond basic adjacency bring-up.',
     humanSummary: [
       {
-        label: 'What it does',
-        value: 'Implements and tunes EIGRP for IPv6 across a multi-router topology with routed links, VLAN interfaces, and loopbacks.',
+        label: 'Environment',
+        value: 'Cisco Packet Tracer — routed links, VLAN subinterfaces, loopbacks.',
       },
       {
-        label: 'Core focus',
-        value: 'Move from basic adjacency formation to stronger control over propagation, summarization, authentication, and verification.',
-      },
-      {
-        label: 'Why it matters',
-        value: 'Shows practical routing depth beyond simple Packet Tracer connectivity by validating how protocol behavior changes with tuning decisions.',
-      },
-      {
-        label: 'Outcome',
-        value: 'Built confidence with IPv6 routing operations, verification commands, and optimization techniques used in larger network environments.',
+        label: 'Verification',
+        value: 'show ipv6 eigrp neighbors, interfaces, route eigrp, topology table.',
       },
     ],
     pillars: [
@@ -409,11 +281,6 @@ const PROJECTS = [
       'Summarized multiple loopback networks into a single route advertisement to reduce routing-table noise and better understand how summarization affects the rest of the topology.',
       'Implemented interface-based authentication with both MD5 key chains and HMAC-SHA-256, then verified that adjacencies only returned once both ends of a link were configured correctly.',
     ],
-    learningNotes: [
-      'This lab helped me understand that routing work is not just about making neighbors come up, but about controlling how routes are advertised, summarized, and protected.',
-      'I became more confident reading verification outputs and comparing how EIGRP behavior changes when passive interfaces, summaries, default routes, and authentication are introduced.',
-      'It also gave me stronger hands-on comfort with protocol tuning choices that affect scalability, visibility, and operational security.',
-    ],
     screenshots: [
       {
         src: `${BASE}images/ipv6-network.png`,
@@ -424,14 +291,8 @@ const PROJECTS = [
           'The topology includes routed links, VLAN subinterfaces, loopbacks, and downstream segments so protocol behavior can be validated across more than a simple point-to-point setup.',
       },
     ],
-    sidebarNarrative:
-      'This project is valuable because it shows routing depth, not just configuration familiarity. It demonstrates that I can move from getting EIGRP for IPv6 working to tuning, securing, summarizing, and verifying it in a more disciplined way.',
-    sidebarFacts: [
-      'Classic and named EIGRP for IPv6 configuration models.',
-      'Passive interfaces, summarization, default-route propagation, and filtering.',
-      'MD5 and HMAC-SHA-256 authentication at the interface level.',
-      'Hands-on verification of neighbors, interfaces, topology, and learned routes.',
-    ],
+    sidebarNarrative: 'Routing depth beyond “neighbors up”—control plane tuning with evidence from show commands.',
+    sidebarFacts: ['Classic and named EIGRP for IPv6', 'MD5 and HMAC-SHA-256 on interfaces'],
     configLinks: [
       { label: 'Router R1 configuration', href: `${BASE}configs/eigrp/r1.txt` },
       { label: 'Router R2 configuration', href: `${BASE}configs/eigrp/r2.txt` },
@@ -442,19 +303,8 @@ const PROJECTS = [
   },
 ]
 
-function getAdditionalDetailBullets(job) {
-  if (!job.detailBullets?.length) return []
-  const onTimeline = new Set(job.timelineBullets)
-  return job.detailBullets.filter((bullet) => !onTimeline.has(bullet))
-}
-
 function hasExperienceDetails(job) {
-  return Boolean(
-    job.summary?.trim() ||
-      job.capabilities.length ||
-      getAdditionalDetailBullets(job).length ||
-      job.detailSections?.length,
-  )
+  return Boolean(job.capabilities.length || job.detailExtras?.length || job.image)
 }
 
 const EXPERIENCE_LINKS = EXPERIENCE.filter(hasExperienceDetails).map((job) => ({
@@ -657,11 +507,8 @@ function ContactMethodIcon({ id }) {
 }
 
 function ExperienceDetailPage({ job }) {
-  const hasSummary = Boolean(job.summary?.trim())
   const hasCapabilities = Boolean(job.capabilities.length)
-  const additionalBullets = getAdditionalDetailBullets(job)
-  const hasContributions = Boolean(additionalBullets.length)
-  const hasDeepDive = Boolean(job.detailSections?.length)
+  const hasExtras = Boolean(job.detailExtras?.length)
 
   return (
     <div className={styles.detailPage}>
@@ -699,12 +546,11 @@ function ExperienceDetailPage({ job }) {
 
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
-                {hasSummary ? (
-                  <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Summary</h2>
-                    <p className={styles.detailText}>{job.summary}</p>
-                  </section>
-                ) : null}
+                <p className={styles.detailText}>
+                  {hasExtras
+                    ? 'Metrics and main deliverables are on the Experience timeline. This page adds context not listed there.'
+                    : 'Metrics and deliverables are on the Experience timeline. This page covers tools and scope for the role.'}
+                </p>
 
                 {hasCapabilities ? (
                   <section className={styles.detailSection}>
@@ -719,29 +565,16 @@ function ExperienceDetailPage({ job }) {
                   </section>
                 ) : null}
 
-                {hasContributions ? (
+                {hasExtras ? (
                   <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Additional highlights</h2>
+                    <h2 className={styles.detailSectionTitle}>Also in this role</h2>
                     <ul className={styles.detailBullets}>
-                      {additionalBullets.map((bullet) => (
+                      {job.detailExtras.map((bullet) => (
                         <li key={bullet}>{bullet}</li>
                       ))}
                     </ul>
                   </section>
                 ) : null}
-
-                {hasDeepDive
-                  ? job.detailSections.map((section) => (
-                      <section key={section.title} className={styles.detailSection}>
-                        <h2 className={styles.detailSectionTitle}>{section.title}</h2>
-                        {section.paragraphs.map((paragraph) => (
-                          <p key={paragraph} className={styles.detailText}>
-                            {paragraph}
-                          </p>
-                        ))}
-                      </section>
-                    ))
-                  : null}
               </div>
 
               <aside className={styles.detailSidebar}>
@@ -824,21 +657,22 @@ function ProjectDetailPage({ project }) {
               </div>
             ) : null}
 
-            <div className={styles.projectSummaryGrid}>
-              {project.humanSummary.map((item) => (
-                <section key={item.label} className={styles.projectSummaryCard}>
-                  <p className={styles.projectSummaryLabel}>{item.label}</p>
-                  <p className={styles.projectSummaryValue}>{item.value}</p>
-                </section>
-              ))}
-            </div>
+            {project.humanSummary?.length ? (
+              <div className={styles.projectSummaryGrid}>
+                {project.humanSummary.map((item) => (
+                  <section key={item.label} className={styles.projectSummaryCard}>
+                    <p className={styles.projectSummaryLabel}>{item.label}</p>
+                    <p className={styles.projectSummaryValue}>{item.value}</p>
+                  </section>
+                ))}
+              </div>
+            ) : null}
 
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
                 <section className={styles.detailSection}>
                   <h2 className={styles.detailSectionTitle}>{project.overviewTitle || 'Overview'}</h2>
                   <p className={styles.detailText}>{project.summary}</p>
-                  <p className={styles.detailText}>{project.objective}</p>
                 </section>
 
                 <section className={styles.detailSection}>
@@ -870,17 +704,6 @@ function ProjectDetailPage({ project }) {
                     ))}
                   </ul>
                 </section>
-
-                {project.learningNotes?.length ? (
-                  <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>{project.learningTitle || 'What I Learned'}</h2>
-                    <ul className={styles.detailBullets}>
-                      {project.learningNotes.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </section>
-                ) : null}
 
                 <section className={styles.detailSection}>
                   <div className={styles.projectScreenshotHeader}>
