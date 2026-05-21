@@ -51,9 +51,7 @@ const EXPERIENCE = [
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
     summary:
-      'Infrastructure development at Shared Services Canada: n8n platform migration to Azure pre-production, Ansible/OpenSSL certificate automation for SSC NAI environments, and a validated multi-hop Ansible path through jump hosts to GitLab for SWLINUX operations.',
-    outcome:
-      'Migrated 7 active n8n workflows with provisioning under 10 minutes, cut manual certificate setup from 20–30 minutes to under 2 minutes per request, and standardized inventory plus SSH proxy routing for future production certificate deployments.',
+      'Infrastructure development at SSC—workflow platforms, certificate lifecycle automation, and Ansible delivery across restricted Azure and GitLab paths.',
     capabilities: [
       'Ansible roles & playbooks',
       'OpenSSL / TLS certificate workflows',
@@ -76,20 +74,20 @@ const EXPERIENCE = [
       {
         title: 'n8n migration to pre-production',
         paragraphs: [
-          'The internal n8n instance lived on an Azure development VM and needed to move into a pre-production environment with working external HTTPS. That meant debugging SSL termination, reverse-proxy routing, and container networking—not just copying files.',
-          'Seven production workflows were carried over and a repeatable deployment process was documented so the team could reprovision the stack in under 10 minutes instead of spending hours on ad hoc setup.',
+          'The platform moved from an Azure development VM into pre-production with external HTTPS. Work focused on SSL termination, reverse-proxy paths, and container networking—not a lift-and-shift of the VM image.',
+          'Active workflows were migrated with a documented redeploy process so the environment could be rebuilt reliably instead of rebuilt by hand each time.',
         ],
       },
       {
         title: 'Certificate automation role',
         paragraphs: [
-          'Operators previously spent 20–30 minutes per SSC NAI certificate request assembling CSRs, keys, and OpenSSL configs by hand. The Ansible role wraps that into one run: standardized configs, generated CSRs and private keys, and outputs ready for the Azure-compatible request path.',
+          'Manual SSC NAI requests meant assembling CSRs, keys, and OpenSSL configs piece by piece. The Ansible role standardizes that into one run with outputs aligned to the Azure-compatible request path.',
         ],
       },
       {
         title: 'Multi-hop Ansible to GitLab',
         paragraphs: [
-          'SWLINUX certificate artifacts could not be pushed from a single jump point—automation had to traverse devHost, intermediate jump hosts, and git02 on Azure GitLab. Inventory groups, SSH proxy settings, and environment variables were aligned so the same playbook path can scale toward production without reworking connectivity each time.',
+          'Artifacts could not reach git02 from a single host—playbooks run through devHost and jump inventory with SSH proxy settings and environment config fixed for production-style rollout later.',
         ],
       },
     ],
@@ -104,9 +102,7 @@ const EXPERIENCE = [
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
     summary:
-      'NetDevOps at Shared Services Canada: GitLab identity auditing, Ansible health polling across 75+ devices, Zabbix in CI/CD across dev/staging/prod, Ansible Forms assessment, playbook refactoring, and Lighthouse inventory validation.',
-    outcome:
-      '132 inactive GitLab users identified for licensing savings, 75+ devices under automated health polling, manual release health checks removed across three tiers, 30% redundant Ansible steps eliminated, and 500+ inventory records validated on six attributes per device.',
+      'NetDevOps internship at SSC—automation, monitoring in the release path, and inventory quality at federal scale.',
     capabilities: [
       'Ansible Automation Platform',
       'GitLab API automation',
@@ -133,25 +129,25 @@ const EXPERIENCE = [
       {
         title: 'GitLab identity audit',
         paragraphs: [
-          'Using the GitLab API, inactive accounts were surfaced with evidence teams could act on—132 users flagged for deactivation while staying within platform and licensing rules the organization had to follow.',
+          'API-driven reports gave owners evidence for deactivation decisions while staying inside platform and licensing constraints—not a blanket disable list.',
         ],
       },
       {
         title: 'Device health automation',
         paragraphs: [
-          'Playbooks polled more than 75 network devices on a schedule and raised alerts when metrics drifted, so operators were not relying on manual spot checks to catch degrading gear.',
+          'Scheduled polling replaced ad hoc checks; alerts fire when metrics drift so the first signal is automated, not a manual show-command tour.',
         ],
       },
       {
         title: 'Monitoring in the release path',
         paragraphs: [
-          'Zabbix health signals were wired into CI/CD for dev, staging, and production so promotions could fail on automated evidence instead of someone manually confirming device state after each deploy.',
+          'Zabbix checks gate promotions across dev, staging, and production so a release does not rely on someone manually confirming device health after the fact.',
         ],
       },
       {
         title: 'Inventory quality (Lighthouse)',
         paragraphs: [
-          'The Lighthouse pipeline was expanded to check six fields per asset. That gave a consistent baseline across 500+ records and cut the back-and-forth when IP, DNS, serial, or ownership data did not match reality.',
+          'Six attributes per asset are validated in the pipeline so IP, DNS, serial, and ownership mismatches surface during audit runs instead of during an outage.',
         ],
       },
     ],
@@ -165,9 +161,7 @@ const EXPERIENCE = [
     image: `${BASE}images/ssc-switch-upgrade.png`,
     imageAlt: 'Abdul Rehman Baseem upgrading switches in a network environment',
     summary:
-      'LAN operations at Shared Services Canada: large-scale Juniper EX-4300 P/MP firmware upgrades, Visio topology standards for National Capital Region sites, and centralized site documentation for faster incident response.',
-    outcome:
-      '50+ switches upgraded to current security baselines, Visio diagrams adopted as the primary field reference for 10+ NCR sites, and consolidated documentation that reduced ops lookup time by 40%.',
+      'Hands-on LAN operations at SSC—Juniper switching, NCR topology documentation, and consolidated site records for field and ops teams.',
     capabilities: [
       'Juniper EX-4300 operations',
       'Firmware lifecycle & Linux scripting',
@@ -190,19 +184,19 @@ const EXPERIENCE = [
       {
         title: 'Firmware upgrades at scale',
         paragraphs: [
-          'EX-4300 P and MP platforms were upgraded with Linux-assisted scripting so image validation and security baseline checks could be repeated consistently across more than 50 switches.',
+          'EX-4300 P and MP images were applied with Linux-assisted scripting so validation and baseline checks followed the same steps on every switch in the batch.',
         ],
       },
       {
         title: 'Topology documentation',
         paragraphs: [
-          'Visio diagrams for 10+ NCR sites captured both subnet layout and physical placement. Field teams used them as the first reference during incidents instead of hunting through scattered notes.',
+          'Visio sets for NCR sites pair logical subnets with physical layout so field techs open one diagram during incidents instead of reconciling conflicting notes.',
         ],
       },
       {
         title: 'Centralized site records',
         paragraphs: [
-          'Configs, topology drawings, and switch inventory for the same sites had lived in different places. Pulling them into one reference cut lookup time by about 40% when ops needed an answer under pressure.',
+          'Configs, diagrams, and inventory for the same sites now live in one reference—ops no longer chase three different sources during a bridge call.',
         ],
       },
     ],
@@ -448,13 +442,17 @@ const PROJECTS = [
   },
 ]
 
+function getAdditionalDetailBullets(job) {
+  if (!job.detailBullets?.length) return []
+  const onTimeline = new Set(job.timelineBullets)
+  return job.detailBullets.filter((bullet) => !onTimeline.has(bullet))
+}
+
 function hasExperienceDetails(job) {
   return Boolean(
     job.summary?.trim() ||
-      job.outcome?.trim() ||
       job.capabilities.length ||
-      job.timelineBullets.length ||
-      job.detailBullets.length ||
+      getAdditionalDetailBullets(job).length ||
       job.detailSections?.length,
   )
 }
@@ -660,9 +658,9 @@ function ContactMethodIcon({ id }) {
 
 function ExperienceDetailPage({ job }) {
   const hasSummary = Boolean(job.summary?.trim())
-  const hasOutcome = Boolean(job.outcome?.trim())
   const hasCapabilities = Boolean(job.capabilities.length)
-  const hasContributions = Boolean(job.detailBullets.length)
+  const additionalBullets = getAdditionalDetailBullets(job)
+  const hasContributions = Boolean(additionalBullets.length)
   const hasDeepDive = Boolean(job.detailSections?.length)
 
   return (
@@ -708,13 +706,6 @@ function ExperienceDetailPage({ job }) {
                   </section>
                 ) : null}
 
-                {hasOutcome ? (
-                  <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Impact</h2>
-                    <p className={styles.detailText}>{job.outcome}</p>
-                  </section>
-                ) : null}
-
                 {hasCapabilities ? (
                   <section className={styles.detailSection}>
                     <h2 className={styles.detailSectionTitle}>Core capabilities</h2>
@@ -730,9 +721,9 @@ function ExperienceDetailPage({ job }) {
 
                 {hasContributions ? (
                   <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Key contributions</h2>
+                    <h2 className={styles.detailSectionTitle}>Additional highlights</h2>
                     <ul className={styles.detailBullets}>
-                      {job.detailBullets.map((bullet) => (
+                      {additionalBullets.map((bullet) => (
                         <li key={bullet}>{bullet}</li>
                       ))}
                     </ul>
@@ -1246,8 +1237,6 @@ export default function App() {
                       <p className={styles.timelineCompany}>{job.company}</p>
                       <PlaceholderLogo />
                     </div>
-                    {job.outcome?.trim() ? <p className={styles.timelineOutcome}>{job.outcome}</p> : null}
-                    {job.timelineBullets.length ? <div className={styles.timelineRule} /> : null}
                     {job.timelineBullets.length ? (
                       <ul className={styles.timelineBullets}>
                         {job.timelineBullets.map((bullet) => (
@@ -1289,12 +1278,7 @@ export default function App() {
             </div>
 
             <div className={styles.courseworkPanel}>
-              <div className={styles.courseworkHeader}>
-                <p className={styles.aboutKicker}>Selected Coursework</p>
-                <p className={styles.courseworkText}>
-                  DevOps, routing architecture, wireless, data structures, and systems foundations (Carleton BIT, Network Technology).
-                </p>
-              </div>
+              <p className={styles.aboutKicker}>Selected Coursework</p>
               <div className={styles.courseworkGrid}>
                 {COURSEWORK.map((course) => (
                   <span key={course} className={styles.courseworkTag}>
@@ -1334,7 +1318,6 @@ export default function App() {
                       <span className={styles.projectYear}>{project.year}</span>
                     </div>
                     <h2 className={styles.projectTitle}>{project.name}</h2>
-                    <p className={styles.projectOutcome}>{project.outcome}</p>
                     <p className={styles.projectDescription}>{project.description}</p>
                     {project.github || project.external || project.slug ? (
                       <div className={styles.projectLinks}>
