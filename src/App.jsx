@@ -22,7 +22,7 @@ const QUICK_STATS = [
   { value: '2+', label: 'YRS EXPERIENCE' },
   { value: '50+', label: 'SWITCHES UPGRADED' },
   { value: '132', label: 'INACTIVE USERS FOUND' },
-  { value: '500+', label: 'INVENTORY RECORDS' },
+  { value: '500+', label: 'INVENTORY RECORDS AUDITED' },
 ]
 
 const KEY_STRENGTHS = ['Infrastructure', 'Automation', 'NetDevOps']
