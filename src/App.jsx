@@ -59,10 +59,6 @@ const EXPERIENCE = [
       '**Infrastructure Dev Intern** with SSC platform engineering—shipping migrations and automation that survive federal change control, not one-off scripts. You work with service owners, NetOps intake, and the teams that own **Azure**, **GitLab**, and internal workflow platforms.',
     detailDepth: [
       {
-        title: 'Service intake automation',
-        text: 'Built routing logic that classifies requests by service area, blocks duplicate tickets, and lands unassigned work in a shared queue. NetOps gets a single intake path with accountable ownership instead of ad hoc threads and re-opened duplicates.',
-      },
-      {
         title: 'n8n on app01',
         text: '**n8n** runs internal workflow automation on SSC container standards. Moving off **dev01** meant rebuilding the app stack on **app01**, restoring workflow DB state, and proving **HTTPS** through the production reverse-proxy chain—not lifting the old VM image.',
       },
@@ -91,35 +87,14 @@ const EXPERIENCE = [
       'Led a **GitLab** account audit using the **GitLab API**, identifying **132 inactive users** and enabling a deactivation strategy that reduced **licensing** costs while adhering to platform constraints.',
       'Developed and maintained **Ansible playbooks** that continuously polled **75+ network devices** for health metrics, triggering automated alerts for timely incident detection and resolution.',
       'Integrated **Zabbix** real-time monitoring into **CI/CD** pipelines across **dev, staging, and prod** tiers, eliminating manual health checks and reducing mean incident response time.',
-      'Assessed **Ansible Forms** as a self-service automation interface for cross-team workflows, delivering a scoped implementation roadmap that was accepted by senior engineers for rollout.',
       'Audited and refactored **20+ Ansible playbooks** and automated **15 network monitoring jobs**, eliminating **30%** of redundant execution steps and improving reliability of automated network checks.',
     ],
     roleContext:
-      '**NetDevOps Intern** on SSC’s automation practice—paired with senior engineers on cross-cutting hygiene (identity, monitoring, inventory, playbook quality) rather than one-off device tickets.',
+      '**NetDevOps Intern** with SSC’s automation practice—hygiene work across **GitLab**, monitoring, and the playbook library with senior engineers, not one-off device tickets.',
     detailDepth: [
       {
-        title: 'GitLab identity hygiene',
-        text: 'API-driven reports surfaced last-activity and membership signals so platform owners could approve deactivations against licensing policy—evidence for humans, not a bulk-disable script.',
-      },
-      {
-        title: 'Scheduled device health',
-        text: 'Playbooks treat health polling as a contract: consistent inventory groups, threshold alerts, and fewer “SSH in and look” rounds when metrics drift.',
-      },
-      {
-        title: 'Monitoring in the release path',
-        text: '**Zabbix** checks became CI/CD gates across **dev, staging, and prod**—promotions fail when health evidence is missing, shifting validation left of production surprises.',
-      },
-      {
         title: 'Ansible Forms assessment',
-        text: 'Scoped which cross-team jobs could become self-service job templates versus engineer-only playbooks, with a phased rollout plan senior staff accepted.',
-      },
-      {
-        title: 'Playbook library hardening',
-        text: 'Refactor pass removed duplicate task blocks and brittle host loops so scheduled automation finishes faster and fails more predictably.',
-      },
-      {
-        title: 'Lighthouse inventory audits',
-        text: 'Pipeline now validates six attributes per asset (**IP, DNS, name, model, serial, ownership**) so mismatches surface in batch audits instead of during bridge calls.',
+        text: 'Evaluated **Ansible Forms** as a self-service front end for approved automation. Mapped which cross-team requests could become job templates (read-only checks first, then constrained changes), documented inventory and credential boundaries, and delivered a phased rollout plan senior engineers accepted before anything hit production.',
       },
     ],
     sidebarNote:
@@ -136,22 +111,13 @@ const EXPERIENCE = [
     timelineBullets: [
       'Upgraded firmware on **50+ Juniper EX-4300 P and MP** switches via **Linux scripting**, resolving multiple known vulnerabilities and aligning all devices to current **security baselines**.',
       'Designed **Visio** topology diagrams for **10+ NCR sites** documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
-      'Consolidated fragmented site documentation (network configurations, topologies, and switch inventory for **10+ NCR sites**) into a centralized reference system, reducing ops team lookup time by **40%**.',
     ],
     roleContext:
-      '**LAN Operations Technician** for SSC’s **National Capital Region** access layer—firmware and documentation work that field techs and the ops center both trust when bridges open.',
+      '**LAN Operations Technician** for SSC’s **National Capital Region** access layer—hands-on **Juniper** work and documentation field techs and the ops center use during incidents.',
     detailDepth: [
       {
-        title: 'Firmware upgrade program',
-        text: '**Juniper EX-4300 P and MP** batches used **Linux** scripting for image validation and baseline checks so every switch in a site visit followed the same steps.',
-      },
-      {
-        title: 'Topology standards',
-        text: '**Visio** sets pair logical subnets with physical layout so technicians open one diagram during incidents instead of reconciling outdated exports.',
-      },
-      {
-        title: 'Central site index',
-        text: 'Merged configs, diagrams, and switch inventory per site into one reference—ops stopped hunting separate shares during outages.',
+        title: 'Centralized site documentation',
+        text: 'Configs, topology drawings, and switch inventory for **10+ NCR sites** had lived in separate shares. Built one indexed reference per site so bridge calls start from a single source. Ops reported about **40%** less time hunting for answers during incidents.',
       },
     ],
     sidebarNote:
@@ -569,7 +535,7 @@ function ExperienceDetailPage({ job }) {
       <main className={styles.detailMain}>
         <div className={styles.container}>
           <article className={styles.detailCard}>
-            <p className={styles.detailLabel}>More Info</p>
+            <p className={styles.detailLabel}>Read more</p>
             <h1 className={styles.detailTitle}>{job.title}</h1>
             <div className={styles.detailMeta}>
               <span>{job.company}</span>
@@ -578,11 +544,11 @@ function ExperienceDetailPage({ job }) {
             </div>
 
             <p className={styles.detailLead}>
-              Outcomes and metrics are on the{' '}
+              Headline outcomes are on the{' '}
               <a href={`${BASE}#experience`} className={styles.detailLeadLink}>
                 Experience
               </a>{' '}
-              timeline. What follows is who you were on the team and how the work was done.
+              timeline. Below: who you were on the team, plus expanded detail on work not shown there.
             </p>
 
             <div className={styles.detailGrid}>
