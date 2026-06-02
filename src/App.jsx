@@ -52,7 +52,7 @@ const EXPERIENCE = [
     imageContain: false,
     timelineBullets: [
       'Designed and led end-to-end implementation of an automated workflow that analyzes incoming requests, routes work across **10+ infrastructure service areas**, prevents duplicate ticket creation, centralizes unassigned work into a shared queue, and standardizes operational intake—validated with **25+ production-ready tickets** for the **NetOps** team.',
-      'Led migration of **n8n** and **DocuSeal** from **dev01** to **app01** as part of a server decommissioning initiative—rebuilt application environments, migrated databases and application data, validated production networking and **HTTPS**, and executed final synchronization before cutover. Consolidated two production services with **100% data integrity**, reduced **n8n** deployment and recovery from **20–30 minutes** to **under 10 minutes**, and enabled retirement of critical workloads from legacy **dev01**.',
+      'Migrated **n8n** and **DocuSeal** from **dev01** to **app01** during **server decommissioning**—rebuilt both services on the target host, moved databases and application state, validated **HTTPS** in production, and completed a verified cutover with **100% data integrity**. Cut **n8n** deploy and recovery from **20–30 minutes** to **under 10 minutes** and retired legacy **dev01** workloads.',
       'Automated **Azure-compatible SSL/TLS** certificate request generation using **Ansible** and **OpenSSL**, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for **SSC NAI** environments, reducing manual certificate setup from **20–30 minutes** to **under 2 minutes** per request.',
     ],
     detailOnlyItems: [
