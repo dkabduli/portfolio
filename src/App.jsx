@@ -19,11 +19,12 @@ const NAV_ITEMS = [
 ]
 
 const QUICK_STATS = [
-  { value: '2+', label: 'YRS EXPERIENCE' },
+  { value: '2+', label: 'YRS INDUSTRY EXP.' },
   { value: '50+', label: 'SWITCHES UPGRADED' },
-  { value: '132', label: 'INACTIVE USERS FOUND' },
-  { value: '500+', label: 'INVENTORY RECORDS AUDITED' },
+  { value: '132', label: 'ACCOUNTS IDENTIFIED' },
+  { value: '500+', label: 'RECORDS AUDITED' },
 ]
+
 
 const KEY_STRENGTHS = ['Infrastructure', 'Automation', 'NetDevOps']
 
@@ -51,12 +52,12 @@ const EXPERIENCE = [
     imageAlt: 'Infrastructure development and automation',
     imageContain: false,
     timelineBullets: [
-      'Designed and led end-to-end implementation of an automated workflow that analyzes incoming requests, routes work across **10+ infrastructure service areas**, prevents duplicate ticket creation, centralizes unassigned work into a shared queue, and standardizes operational intake—validated with **25+ production-ready tickets** for the **NetOps** team.',
-      'Migrated **n8n** and **DocuSeal** from **dev01** to **app01** during **server decommissioning**—rebuilt both services on the target host, moved databases and application state, validated **HTTPS** in production, and completed a verified cutover with **100% data integrity**. Cut **n8n** deploy and recovery from **20–30 minutes** to **under 10 minutes** and retired legacy **dev01** workloads.',
-      'Automated **Azure-compatible SSL/TLS** certificate request generation using **Ansible** and **OpenSSL**, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for **SSC NAI** environments, reducing manual certificate setup from **20–30 minutes** to **under 2 minutes** per request.',
+      'Designed and deployed an intelligent intake automation using **n8n** that routes requests across **10+ infrastructure service areas**, eliminates duplicate ticket creation, and centralizes unassigned work into a shared queue—validated against **25+ production-ready NetOps tickets** before handoff.',
+      'Executed server migration of **n8n** and **DocuSeal** from **dev01** to **app01** with **100% data integrity** verified across **120 templates**, **251 completed documents**, and **494 storage objects**; reduced deployment recovery time from **20–30 min** to **under 10 min**.',
+      'Automated **Azure-compatible SSL/TLS** certificate request generation using **Ansible** and **OpenSSL**, building a reusable role-based workflow that produces CSRs, private keys, and standardized configurations for **SSC NAI** environments—cutting manual setup from **20–30 minutes** to **under 2 minutes** per request.',
     ],
     roleContext:
-      '**Infrastructure Dev Intern** with SSC platform engineering—shipping migrations and automation that survive federal change control, not one-off scripts. You work with service owners, NetOps intake, and the teams that own **Azure**, **GitLab**, and internal workflow platforms.',
+      'Operated inside SSC platform engineering under federal change-control constraints—every deployment touched production-facing services used by government clients, requiring documented testing, approval workflows, and sign-off from service owners before going live. Toolchain spanned **n8n**, **DocuSeal**, **Ansible AAP**, **OpenSSL**, **GitLab CI**, and **HashiCorp Vault** alongside internal ITSM and ticketing systems. All changes were reviewed against SSC security baseline expectations prior to production rollout.',
     detailDepth: [
       {
         title: 'n8n on app01',
@@ -86,12 +87,16 @@ const EXPERIENCE = [
     timelineBullets: [
       'Led a **GitLab** account audit using the **GitLab API**, identifying **132 inactive users** and enabling a deactivation strategy that reduced **licensing** costs while adhering to platform constraints.',
       'Developed and maintained **Ansible playbooks** that continuously polled **75+ network devices** for health metrics, triggering automated alerts for timely incident detection and resolution.',
-      'Integrated **Zabbix** real-time monitoring into **CI/CD** pipelines across **dev, staging, and prod** tiers, eliminating manual health checks and reducing mean incident response time.',
+      'Integrated **Zabbix** real-time monitoring into **CI/CD** pipelines across **dev, staging, and prod** tiers, replacing manual health checks with automated alerting and cutting incident detection lag from hours to minutes.',
       'Audited and refactored **20+ Ansible playbooks** and automated **15 network monitoring jobs**, eliminating **30%** of redundant execution steps and improving reliability of automated network checks.',
     ],
     roleContext:
-      '**NetDevOps Intern** with SSC’s automation practice—hygiene work across **GitLab**, monitoring, and the playbook library with senior engineers, not one-off device tickets.',
+      "Embedded in SSC’s NetDevOps practice alongside senior engineers who owned the **Ansible Automation Platform** and live monitoring stack. Scope covered improving a production playbook library (**20+ playbooks**, **75+ polled devices**) and integrating **Zabbix** into **CI/CD** pipeline gates—not one-off fixes, but changes the ops team depended on daily. All automation was version-controlled in **GitLab** and reviewed before pipeline deployment. The **GitLab API** audit scope extended across the full organizational account, requiring coordination with platform admins to scope deactivation without disrupting active teams.",
     detailDepth: [
+      {
+        title: 'Zabbix + CI/CD pipeline integration',
+        text: 'Zabbix had been running as a standalone monitoring tool—alerts existed but nothing acted on them in the pipeline. Wired **Zabbix** health checks into **GitLab CI** gates across **dev, staging, and prod** so a degraded device could block a deployment before it reached the next tier. The integration required mapping Zabbix host groups to pipeline environment variables so the same job template worked across tiers without hardcoded thresholds.',
+      },
       {
         title: 'Ansible Forms assessment',
         text: 'Evaluated **Ansible Forms** as a self-service front end for approved automation. Mapped which cross-team requests could become job templates (read-only checks first, then constrained changes), documented inventory and credential boundaries, and delivered a phased rollout plan senior engineers accepted before anything hit production.',
@@ -113,11 +118,15 @@ const EXPERIENCE = [
       'Designed **Visio** topology diagrams for **10+ NCR sites** documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
     ],
     roleContext:
-      '**LAN Operations Technician** for SSC’s **National Capital Region** access layer—hands-on **Juniper** work and documentation field techs and the ops center use during incidents.',
+      "Worked hands-on in SSC’s National Capital Region LAN operations—coordinating directly with field technicians and the ops center during live incidents. Interfaced with security teams on vulnerability remediation timelines and with operations planners on documentation standards. The firmware upgrade scope required scripting a repeatable process across **50+ Juniper EX-4300** devices without disrupting live traffic, accounting for scheduled maintenance windows and rollback procedures. Topology documentation created here was formally adopted as the single source of truth for bridge calls, replacing scattered per-site shares that had no consistent format.",
     detailDepth: [
       {
         title: 'Centralized site documentation',
-        text: 'Configs, topology drawings, and switch inventory for **10+ NCR sites** had lived in separate shares. Built one indexed reference per site so bridge calls start from a single source. Ops reported about **40%** less time hunting for answers during incidents.',
+        text: 'Configs, topology drawings, and switch inventory for **10+ NCR sites** had lived in separate, inconsistently named file shares. Built a single indexed reference per site—subnet tables, physical layout diagrams, and device lists in one place. Ops teams reported roughly **40%** less time spent hunting for answers during bridge calls.',
+      },
+      {
+        title: 'Firmware upgrade scripting',
+        text: 'Upgrading **50+ Juniper EX-4300** devices manually would have required a technician at each device across multiple sites. Wrote **Linux shell scripts** to push firmware bundles and validate version post-install, letting the process run in batch during approved maintenance windows and producing a per-device status log for the security baseline sign-off.',
       },
     ],
     sidebarNote:
@@ -544,11 +553,10 @@ function ExperienceDetailPage({ job }) {
             </div>
 
             <p className={styles.detailLead}>
-              Headline outcomes are on the{' '}
+              The bullet points capture what shipped. This page goes deeper — the constraints, the team context, and what didn't fit in three lines.{' '}
               <a href={`${BASE}#experience`} className={styles.detailLeadLink}>
-                Experience
-              </a>{' '}
-              timeline. Below: who you were on the team, plus expanded detail on work not shown there.
+                Back to timeline →
+              </a>
             </p>
 
             <div className={styles.detailGrid}>
@@ -667,7 +675,9 @@ function ProjectDetailPage({ project }) {
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
                 <p className={styles.detailLead}>
-                  The project card has the short version. Below: how it works{project.slug === 'blackboxnet' ? ' and how to try the demo' : ''}.
+                  {project.slug === 'blackboxnet'
+                    ? 'Architecture, design decisions, and a walkthrough of the live demo — pick up where the project card left off.'
+                    : 'A closer look at scope, methodology, and verification — what the project card couldn\'t fit.'}
                 </p>
 
                 <section className={styles.detailSection}>
@@ -787,7 +797,7 @@ export default function App() {
   })
   const sectionIds = useMemo(() => NAV_ITEMS.map((item) => item.id), [])
   const activeSection = useActiveSection(sectionIds)
-  const contactLinks = contactMethods.filter((item) => ['email', 'linkedin', 'github', 'lol'].includes(item.id))
+  const contactLinks = contactMethods.filter((item) => ['email', 'linkedin', 'github', 'discord'].includes(item.id))
   const activeExperienceDetail = detailRoute
     ? EXPERIENCE.find((job) => `${EXPERIENCE_ROUTE_PREFIX}${job.slug}` === detailRoute)
     : null
@@ -857,7 +867,7 @@ export default function App() {
                       <a
                         href={`#${item.id}`}
                         className={`${styles.navLink} ${activeSection === item.id ? styles.navLinkActive : ''}`}
-                        aria-haspopup="true"
+                        aria-haspopup="menu"
                       >
                         <span className={styles.navLinkInner}>
                           {item.label}
@@ -970,7 +980,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    4th-year BIT (Network Technology) student at Carleton University (expected graduation: April 2027).
+                    Building infrastructure automation and network tooling at Shared Services Canada — Ansible migrations, Zabbix CI/CD pipelines, and firmware upgrades across government LAN.
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}
@@ -1016,7 +1026,7 @@ export default function App() {
             </div>
           </section>
 
-          <Section id="about" label="// 00 — SUMMARY">
+          <Section id="about" label="// 00 — ABOUT">
             <div className={styles.aboutStatsRow}>
               <div className={styles.aboutPortraitFrame}>
                 <img
@@ -1151,7 +1161,7 @@ export default function App() {
                         ) : null}
                         {project.slug ? (
                           <a href={`#/${PROJECT_ROUTE_PREFIX}${project.slug}`}>
-                            More info
+                            Case study →
                           </a>
                         ) : null}
                       </div>
@@ -1165,7 +1175,7 @@ export default function App() {
           <Section id="contact" label="// 04 — CONTACT">
             <div className={styles.contactInfo}>
               <p className={styles.contactIntro}>
-                Best reach is email or LinkedIn—links below.
+                Targeting full-time infrastructure and NetDevOps roles starting April 2027. Fastest reach is email — I check it daily. LinkedIn for professional connection; GitHub for code.
               </p>
               <div className={styles.contactLinks}>
                 {contactLinks.map((item) => (
