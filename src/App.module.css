@@ -733,6 +733,29 @@
   font-weight: 600;
 }
 
+.detailOnlyStack {
+  display: grid;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.detailOnlyCard {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--navy);
+  background: rgba(238, 243, 255, 0.35);
+  border-radius: 0 10px 10px 0;
+}
+
+.detailOnlyTitle {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-family: var(--font-mono-alt);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .caseStudyLink {
   display: inline-flex;
   align-items: center;

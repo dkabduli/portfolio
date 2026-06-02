@@ -52,11 +52,22 @@ const EXPERIENCE = [
     imageContain: false,
     timelineBullets: [
       'Designed and led end-to-end implementation of an automated workflow that analyzes incoming requests, routes work across **10+ infrastructure service areas**, prevents duplicate ticket creation, centralizes unassigned work into a shared queue, and standardizes operational intake—validated with **25+ production-ready tickets** for the **NetOps** team.',
-      'Migrated internal **n8n** automation platform to **Azure** pre-production, resolving **SSL**, **reverse-proxy**, and **container networking** issues; migrated **7 active workflows** and established deployment process reducing provisioning time from hours to **under 10 minutes**.',
+      'Led migration of **n8n** and **DocuSeal** from **dev01** to **app01** as part of a server decommissioning initiative—rebuilt application environments, migrated databases and application data, validated production networking and **HTTPS**, and executed final synchronization before cutover. Consolidated two production services with **100% data integrity**, reduced **n8n** deployment and recovery from **20–30 minutes** to **under 10 minutes**, and enabled retirement of critical workloads from legacy **dev01**.',
       'Automated **Azure-compatible SSL/TLS** certificate request generation using **Ansible** and **OpenSSL**, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for **SSC NAI** environments, reducing manual certificate setup from **20–30 minutes** to **under 2 minutes** per request.',
     ],
-    detailOnlyBullets: [
-      'Engineered and validated a **multi-hop SSH/Ansible** deployment workflow across **devHost**, **jump hosts**, and **Azure GitLab infrastructure (git02)**, enabling **centralized certificate automation** and secure repository distribution for **SWLINUX** operations while standardizing **inventory**, **SSH proxy routing**, and environment configuration for future production deployments.',
+    detailOnlyItems: [
+      {
+        title: 'n8n migration',
+        text: 'Migrated **n8n** from legacy **dev01** to **app01**, rebuilding the application environment, migrating database and workflow data, and validating **reverse-proxy** and **HTTPS** connectivity. Migrated **7 active workflows** and established a repeatable deployment process that reduced provisioning and recovery time from **20–30 minutes** to **under 10 minutes**.',
+      },
+      {
+        title: 'DocuSeal migration',
+        text: 'Migrated **DocuSeal** from legacy **dev01** to **app01** to support infrastructure consolidation and server decommissioning, rebuilding the custom **SSC** container image, migrating application and **PostgreSQL** data, and validating **reverse-proxy/HTTPS** connectivity. Performed final synchronization and data integrity validation to preserve **120 templates**, **117 submissions**, **251 completed documents**, and **494 storage objects**, achieving **100% data parity**, **zero data loss**, and successful production cutover.',
+      },
+      {
+        title: 'Multi-hop Ansible to GitLab',
+        text: 'Engineered and validated a **multi-hop SSH/Ansible** deployment workflow across **devHost**, **jump hosts**, and **Azure GitLab infrastructure (git02)**, enabling **centralized certificate automation** and secure repository distribution for **SWLINUX** operations while standardizing **inventory**, **SSH proxy routing**, and environment configuration for future production deployments.',
+      },
     ],
     roleDetail: [
       '**Infrastructure Dev Intern** on Shared Services Canada’s platform and automation side—supporting internal teams that rely on workflow tooling, certificate services, and repeatable deployments in a federal, security-conscious environment.',
@@ -313,7 +324,7 @@ function renderRichText(text) {
 }
 
 function hasExperienceDetails(job) {
-  return Boolean(job.roleDetail?.length || job.detailOnlyBullets?.length)
+  return Boolean(job.roleDetail?.length || job.detailOnlyItems?.length || job.detailOnlyBullets?.length)
 }
 
 const EXPERIENCE_LINKS = EXPERIENCE.filter(hasExperienceDetails).map((job) => ({
@@ -560,6 +571,20 @@ function ExperienceDetailPage({ job }) {
                         {renderRichText(paragraph)}
                       </p>
                     ))}
+                  </section>
+                ) : null}
+
+                {job.detailOnlyItems?.length ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>Additional work</h2>
+                    <div className={styles.detailOnlyStack}>
+                      {job.detailOnlyItems.map((item) => (
+                        <article key={item.title} className={styles.detailOnlyCard}>
+                          <h3 className={styles.detailOnlyTitle}>{item.title}</h3>
+                          <p className={styles.detailText}>{renderRichText(item.text)}</p>
+                        </article>
+                      ))}
+                    </div>
                   </section>
                 ) : null}
 
