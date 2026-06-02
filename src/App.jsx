@@ -51,14 +51,16 @@ const EXPERIENCE = [
     imageAlt: 'Infrastructure development and automation',
     imageContain: false,
     timelineBullets: [
+      'Designed and led end-to-end implementation of an automated workflow that analyzes incoming requests, routes work across **10+ infrastructure service areas**, prevents duplicate ticket creation, centralizes unassigned work into a shared queue, and standardizes operational intake—validated with **25+ production-ready tickets** for the **NetOps** team.',
       'Migrated internal **n8n** automation platform to **Azure** pre-production, resolving **SSL**, **reverse-proxy**, and **container networking** issues; migrated **7 active workflows** and established deployment process reducing provisioning time from hours to **under 10 minutes**.',
-      'Automated **Azure-compatible SSL/TLS** certificate request generation using **Ansible** and **OpenSSL**, creating a reusable role-based workflow for **SSC NAI** environments that reduced manual certificate setup from **20–30 minutes** to **under 2 minutes** per request.',
-      'Engineered and validated a **multi-hop SSH/Ansible** deployment workflow across **devHost**, **jump hosts**, and **Azure GitLab (git02)** for centralized certificate automation and **SWLINUX** repository distribution.',
+      'Automated **Azure-compatible SSL/TLS** certificate request generation using **Ansible** and **OpenSSL**, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for **SSC NAI** environments, reducing manual certificate setup from **20–30 minutes** to **under 2 minutes** per request.',
+    ],
+    detailOnlyBullets: [
+      'Engineered and validated a **multi-hop SSH/Ansible** deployment workflow across **devHost**, **jump hosts**, and **Azure GitLab infrastructure (git02)**, enabling **centralized certificate automation** and secure repository distribution for **SWLINUX** operations while standardizing **inventory**, **SSH proxy routing**, and environment configuration for future production deployments.',
     ],
     roleDetail: [
       '**Infrastructure Dev Intern** on Shared Services Canada’s platform and automation side—supporting internal teams that rely on workflow tooling, certificate services, and repeatable deployments in a federal, security-conscious environment.',
-      'The role sits between operators who need self-serve automation and engineers who own **Azure**, **GitLab**, and segmented network paths. I was the person building and hardening those handoffs—not running a single product line, but keeping platforms deployable and auditable.',
-      'Day-to-day scope spanned **workflow platforms** (internal automation estate), **certificate lifecycle** for NAI-bound requests, and **Ansible delivery** through restricted hops so artifacts land in the right repos without manual copy steps.',
+      'The role sits between operators who need self-serve automation and engineers who own **Azure** and **GitLab**. I was the person building and hardening those handoffs—not running a single product line, but keeping platforms deployable and auditable.',
     ],
     sidebarNote:
       'Federal infrastructure context: pre-production rigor, change control, and coordination with platform owners before production rollout.',
@@ -78,7 +80,6 @@ const EXPERIENCE = [
       'Integrated **Zabbix** real-time monitoring into **CI/CD** pipelines across **dev, staging, and prod** tiers, eliminating manual health checks and reducing mean incident response time.',
       'Assessed **Ansible Forms** as a self-service automation interface for cross-team workflows, delivering a scoped implementation roadmap that was accepted by senior engineers for rollout.',
       'Audited and refactored **20+ Ansible playbooks** and automated **15 network monitoring jobs**, eliminating **30%** of redundant execution steps and improving reliability of automated network checks.',
-      'Reworked the **Lighthouse** audit pipeline to validate **6 asset attributes** per device (**IP, DNS, name, model, serial, ownership**), improving inventory accuracy across **500+ records**.',
     ],
     roleDetail: [
       '**NetDevOps Intern** embedded with SSC’s automation and network operations stakeholders—translating recurring operational pain (stale accounts, noisy monitoring, inventory drift) into scripted, reviewable pipelines.',
@@ -312,7 +313,7 @@ function renderRichText(text) {
 }
 
 function hasExperienceDetails(job) {
-  return Boolean(job.roleDetail?.length)
+  return Boolean(job.roleDetail?.length || job.detailOnlyBullets?.length)
 }
 
 const EXPERIENCE_LINKS = EXPERIENCE.filter(hasExperienceDetails).map((job) => ({
@@ -551,14 +552,27 @@ function ExperienceDetailPage({ job }) {
 
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
-                <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>Role & team</h2>
-                  {job.roleDetail.map((paragraph) => (
-                    <p key={paragraph} className={styles.detailText}>
-                      {renderRichText(paragraph)}
-                    </p>
-                  ))}
-                </section>
+                {job.roleDetail?.length ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>Role & team</h2>
+                    {job.roleDetail.map((paragraph) => (
+                      <p key={paragraph} className={styles.detailText}>
+                        {renderRichText(paragraph)}
+                      </p>
+                    ))}
+                  </section>
+                ) : null}
+
+                {job.detailOnlyBullets?.length ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>Additional work</h2>
+                    <ul className={styles.detailBullets}>
+                      {job.detailOnlyBullets.map((bullet) => (
+                        <li key={bullet}>{renderRichText(bullet)}</li>
+                      ))}
+                    </ul>
+                  </section>
+                ) : null}
               </div>
 
               <aside className={styles.detailSidebar}>
