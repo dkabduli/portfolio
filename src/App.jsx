@@ -55,23 +55,25 @@ const EXPERIENCE = [
       'Migrated **n8n** and **DocuSeal** from **dev01** to **app01** during **server decommissioning**—rebuilt both services on the target host, moved databases and application state, validated **HTTPS** in production, and completed a verified cutover with **100% data integrity**. Cut **n8n** deploy and recovery from **20–30 minutes** to **under 10 minutes** and retired legacy **dev01** workloads.',
       'Automated **Azure-compatible SSL/TLS** certificate request generation using **Ansible** and **OpenSSL**, creating a reusable role-based workflow that generated CSRs, private keys, and standardized OpenSSL configurations for **SSC NAI** environments, reducing manual certificate setup from **20–30 minutes** to **under 2 minutes** per request.',
     ],
-    detailOnlyItems: [
+    roleContext:
+      '**Infrastructure Dev Intern** with SSC platform engineering—shipping migrations and automation that survive federal change control, not one-off scripts. You work with service owners, NetOps intake, and the teams that own **Azure**, **GitLab**, and internal workflow platforms.',
+    detailDepth: [
       {
-        title: 'n8n migration',
-        text: 'Migrated **n8n** from legacy **dev01** to **app01**, rebuilding the application environment, migrating database and workflow data, and validating **reverse-proxy** and **HTTPS** connectivity. Migrated **7 active workflows** and established a repeatable deployment process that reduced provisioning and recovery time from **20–30 minutes** to **under 10 minutes**.',
+        title: 'Service intake automation',
+        text: 'Built routing logic that classifies requests by service area, blocks duplicate tickets, and lands unassigned work in a shared queue. NetOps gets a single intake path with accountable ownership instead of ad hoc threads and re-opened duplicates.',
       },
       {
-        title: 'DocuSeal migration',
-        text: 'Migrated **DocuSeal** from legacy **dev01** to **app01** to support infrastructure consolidation and server decommissioning, rebuilding the custom **SSC** container image, migrating application and **PostgreSQL** data, and validating **reverse-proxy/HTTPS** connectivity. Performed final synchronization and data integrity validation to preserve **120 templates**, **117 submissions**, **251 completed documents**, and **494 storage objects**, achieving **100% data parity**, **zero data loss**, and successful production cutover.',
+        title: 'n8n on app01',
+        text: '**n8n** runs internal workflow automation on SSC container standards. Moving off **dev01** meant rebuilding the app stack on **app01**, restoring workflow DB state, and proving **HTTPS** through the production reverse-proxy chain—not lifting the old VM image.',
+      },
+      {
+        title: 'DocuSeal on app01',
+        text: '**DocuSeal** uses a custom **SSC** image and **PostgreSQL** backend. Cutover required image rebuild on **app01**, database dump/restore, blob sync, and row-count checks on **120 templates**, **117 submissions**, **251 completed documents**, and **494 storage objects** before DNS flipped—parity validation, not assume-success.',
       },
       {
         title: 'Multi-hop Ansible to GitLab',
-        text: 'Engineered and validated a **multi-hop SSH/Ansible** deployment workflow across **devHost**, **jump hosts**, and **Azure GitLab infrastructure (git02)**, enabling **centralized certificate automation** and secure repository distribution for **SWLINUX** operations while standardizing **inventory**, **SSH proxy routing**, and environment configuration for future production deployments.',
+        text: '**SWLINUX** certificate output cannot reach **git02** from one hop. Playbooks chain **devHost** → jump inventory → **Azure GitLab** with **SSH proxy** settings so the same role run publishes to the correct project namespace for production-style rollout later.',
       },
-    ],
-    roleDetail: [
-      '**Infrastructure Dev Intern** on Shared Services Canada’s platform and automation side—supporting internal teams that rely on workflow tooling, certificate services, and repeatable deployments in a federal, security-conscious environment.',
-      'The role sits between operators who need self-serve automation and engineers who own **Azure** and **GitLab**. I was the person building and hardening those handoffs—not running a single product line, but keeping platforms deployable and auditable.',
     ],
     sidebarNote:
       'Federal infrastructure context: pre-production rigor, change control, and coordination with platform owners before production rollout.',
@@ -92,10 +94,33 @@ const EXPERIENCE = [
       'Assessed **Ansible Forms** as a self-service automation interface for cross-team workflows, delivering a scoped implementation roadmap that was accepted by senior engineers for rollout.',
       'Audited and refactored **20+ Ansible playbooks** and automated **15 network monitoring jobs**, eliminating **30%** of redundant execution steps and improving reliability of automated network checks.',
     ],
-    roleDetail: [
-      '**NetDevOps Intern** embedded with SSC’s automation and network operations stakeholders—translating recurring operational pain (stale accounts, noisy monitoring, inventory drift) into scripted, reviewable pipelines.',
-      'I was the intern engineers handed cross-cutting hygiene work to: identity and access on **GitLab**, health signal collection at scale, and making sure releases could trust monitoring instead of manual spot checks.',
-      'The team expectation was not ticket-by-ticket device config—it was improving how the organization runs automation: cleaner playbooks, observable pipelines, trustworthy inventory, and practical self-service designs senior staff could approve.',
+    roleContext:
+      '**NetDevOps Intern** on SSC’s automation practice—paired with senior engineers on cross-cutting hygiene (identity, monitoring, inventory, playbook quality) rather than one-off device tickets.',
+    detailDepth: [
+      {
+        title: 'GitLab identity hygiene',
+        text: 'API-driven reports surfaced last-activity and membership signals so platform owners could approve deactivations against licensing policy—evidence for humans, not a bulk-disable script.',
+      },
+      {
+        title: 'Scheduled device health',
+        text: 'Playbooks treat health polling as a contract: consistent inventory groups, threshold alerts, and fewer “SSH in and look” rounds when metrics drift.',
+      },
+      {
+        title: 'Monitoring in the release path',
+        text: '**Zabbix** checks became CI/CD gates across **dev, staging, and prod**—promotions fail when health evidence is missing, shifting validation left of production surprises.',
+      },
+      {
+        title: 'Ansible Forms assessment',
+        text: 'Scoped which cross-team jobs could become self-service job templates versus engineer-only playbooks, with a phased rollout plan senior staff accepted.',
+      },
+      {
+        title: 'Playbook library hardening',
+        text: 'Refactor pass removed duplicate task blocks and brittle host loops so scheduled automation finishes faster and fails more predictably.',
+      },
+      {
+        title: 'Lighthouse inventory audits',
+        text: 'Pipeline now validates six attributes per asset (**IP, DNS, name, model, serial, ownership**) so mismatches surface in batch audits instead of during bridge calls.',
+      },
     ],
     sidebarNote:
       'Worked inside SSC’s NetDevOps practice with **Ansible Automation Platform**, engineering leads, and ops teams who consumed reports and pipeline gates.',
@@ -113,10 +138,21 @@ const EXPERIENCE = [
       'Designed **Visio** topology diagrams for **10+ NCR sites** documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
       'Consolidated fragmented site documentation (network configurations, topologies, and switch inventory for **10+ NCR sites**) into a centralized reference system, reducing ops team lookup time by **40%**.',
     ],
-    roleDetail: [
-      '**LAN Operations Technician** for SSC’s National Capital Region footprint—hands-on switching work paired with documentation discipline so field techs and central ops shared the same picture during incidents.',
-      'I was on the team that keeps access layers maintainable: firmware posture on **Juniper** access gear, accurate diagrams when bridges open, and one place to find configs instead of scattered folders.',
-      'The role was field-adjacent operations support—executing controlled change windows, publishing references technicians actually use, and reducing friction between site knowledge and the ops center.',
+    roleContext:
+      '**LAN Operations Technician** for SSC’s **National Capital Region** access layer—firmware and documentation work that field techs and the ops center both trust when bridges open.',
+    detailDepth: [
+      {
+        title: 'Firmware upgrade program',
+        text: '**Juniper EX-4300 P and MP** batches used **Linux** scripting for image validation and baseline checks so every switch in a site visit followed the same steps.',
+      },
+      {
+        title: 'Topology standards',
+        text: '**Visio** sets pair logical subnets with physical layout so technicians open one diagram during incidents instead of reconciling outdated exports.',
+      },
+      {
+        title: 'Central site index',
+        text: 'Merged configs, diagrams, and switch inventory per site into one reference—ops stopped hunting separate shares during outages.',
+      },
     ],
     sidebarNote:
       'NCR LAN operations: coordination with field technicians, ops planners, and security baseline expectations on government-managed switching.',
@@ -158,7 +194,7 @@ const PROJECTS = [
     sidebarNarrative:
       'Like a flight recorder for network state: replay what changed before an outage instead of reconstructing it from scattered logs.',
     summary:
-      'Records config snapshots, metrics, and events in a Git-backed timeline. Pick Cisco, Juniper, or Nokia, run a scripted story T1→T5, inspect JSON-driven topology, and open incidents with rules-based correlation and config diffs. Public stack: Render web/API, Neon Postgres, namespaced configs per scenario. Free-tier API may sleep—first Run T1 after idle can take 30–60s.',
+      'Full-stack platform I designed and built: scripted outages are replayed step-by-step, config history lives in Git, and a rules engine explains which change likely caused the failure—scoped per vendor and scenario so labs do not interfere.',
     humanSummary: [
       {
         label: 'Live demo',
@@ -168,12 +204,6 @@ const PROJECTS = [
         label: 'Repository',
         value: 'github.com/dkabduli/BlackBoxNet',
       },
-    ],
-    pillars: [
-      'Twelve scripted scenarios across Cisco IOS, Juniper Junos, and Nokia SR OS with vendor tabs and per-scenario reset.',
-      'React Flow topology from JSON presets (linear, OSPF areas, triangle, Junos triangle, Nokia hub).',
-      'T1→T5 simulation, incident timeline, and vendor-aware semantic diff (ACL, OSPF, BGP, STP, LDP, hold-time, etc.).',
-      'Git configs at configs/{scenario_id}/{device}/T{n}.txt; optional live Cisco SSH with redaction (Phase 1.5).',
     ],
     incidentFlow: [
       {
@@ -194,40 +224,34 @@ const PROJECTS = [
       },
     ],
     deepDive: [
-      'React + FastAPI + PostgreSQL + GitPython; scenario_id namespacing on every API and DB row.',
-      'Topology source: packages/mock-scenarios/topology-presets.json (regenerate via scripts/generate_phase2_scenarios.py).',
-      'CI: 14 API pytest tests; production frontend build on push to main.',
+      '**scenario_id** namespacing on API, database, and Git paths so reset or vendor switch never corrupts another lab.',
+      'Topology and failure stories live in JSON fixtures—new labs extend data, not React layout code.',
+      'Shipped with **14** API tests and production frontend build in CI on push to main.',
     ],
     screenshots: [
       {
         src: `${BASE}images/blackboxnet-dashboard.png`,
         alt: 'BlackBoxNet dashboard with Nokia VPRN scenario, topology preview, and T1–T5 simulation',
         eyebrow: 'Dashboard',
-        title: 'Live demo — multi-vendor dashboard',
-        caption:
-          'Vendor tabs (Cisco, Juniper, Nokia), scenario picker, React Flow topology, simulation controls, and per-device health on the public Render deployment.',
+        title: 'Multi-vendor dashboard',
+        caption: 'Nokia VPRN leak scenario on the public Render deployment.',
       },
       {
         src: `${BASE}images/blackboxnet-incident.png`,
         alt: 'BlackBoxNet incident summary and correlation analysis screen',
         eyebrow: 'Incident investigation',
         title: 'Root cause & correlation',
-        caption:
-          'Rules-based correlation ties symptoms to the suspicious config change, with human-readable analysis before the raw unified diff.',
+        caption: 'Correlation narrative before the raw unified diff.',
       },
       {
         src: `${BASE}images/blackboxnet-outage.png`,
         alt: 'BlackBoxNet root cause and investigation timeline screen',
         eyebrow: 'Evidence layer',
         title: 'Timeline + config diff',
-        caption:
-          'Chronological events lead into Git-backed config comparison—the same evidence path operators would use to justify rollback or ACL reorder.',
+        caption: 'Event order tied to Git-backed config comparison.',
       },
     ],
-    sidebarFacts: [
-      'API docs: blackboxnet-api.onrender.com/docs',
-      'Three semantic extractors: Cisco IOS, Juniper Junos, Nokia SR OS',
-    ],
+    sidebarFacts: ['Semantic diff parsers per vendor (IOS, Junos, SR OS)', 'API docs on Render'],
     resourceLinks: [{ label: 'API docs', href: 'https://blackboxnet-api.onrender.com/docs' }],
   },
   {
@@ -251,42 +275,34 @@ const PROJECTS = [
     sidebarNarrativeTitle: 'Why it matters',
     sidebarTraitsTitle: 'Verification',
     summary:
-      'Multi-router IPv6 EIGRP lab (classic and named modes) with passive interfaces, default-route propagation, summarization, authentication (MD5 and HMAC-SHA-256), and route filtering—beyond basic adjacency bring-up.',
+      'Advanced **Packet Tracer** lab focused on control-plane decisions—when to suppress adjacencies, how summaries propagate, and how authentication changes what you see in the routing table.',
     humanSummary: [
       {
         label: 'Environment',
-        value: 'Cisco Packet Tracer — routed links, VLAN subinterfaces, loopbacks.',
+        value: 'Cisco Packet Tracer — multi-router IPv6 with VLANs and loopbacks.',
       },
       {
-        label: 'Verification',
-        value: 'show ipv6 eigrp neighbors, interfaces, route eigrp, topology table.',
+        label: 'Configs',
+        value: 'R1, R2, R3, D1, D2 — linked below.',
       },
-    ],
-    pillars: [
-      'Configured IPv6 addressing, link-local interfaces, router IDs, and EIGRP participation across routers, loopbacks, and router-on-a-stick VLAN segments.',
-      'Worked with both classic and named EIGRP for IPv6 configurations to understand how adjacency formation and interface activation differ across models.',
-      'Applied passive-interface tuning, default-route propagation, summary routes, authentication, and route filtering to improve routing control and reduce unnecessary protocol exposure.',
-      'Verified outcomes using commands such as `show ipv6 eigrp neighbors`, `show ipv6 eigrp interfaces`, `show ipv6 route eigrp`, and topology-table inspection.',
     ],
     incidentFlow: [
       {
-        title: '1. Establish adjacency',
-        text: 'Configured IPv6 unicast routing, router IDs, and interface-level EIGRP activation so neighbors could form correctly across the routed topology.',
+        title: '1. Bring up adjacencies',
+        text: 'IPv6 unicast routing, router IDs, and interface participation across classic and named **EIGRP for IPv6** models.',
       },
       {
-        title: '2. Tune route behavior',
-        text: 'Adjusted passive interfaces, propagated a default route, and summarized loopback networks to control what was advertised and how efficiently routes were carried.',
+        title: '2. Control advertisements',
+        text: 'Passive interfaces, default-route injection, and loopback summarization to limit unnecessary protocol exposure.',
       },
       {
-        title: '3. Secure and verify',
-        text: 'Implemented MD5 and HMAC-SHA-256 authentication, then validated neighbor state, interface participation, and learned routes with verification commands.',
+        title: '3. Secure and prove it',
+        text: '**MD5** and **HMAC-SHA-256** on links, then neighbor, interface, and route verification with `show ipv6 eigrp` commands.',
       },
     ],
     deepDive: [
-      'Configured passive-interface behavior both per interface and through default-passive methods, which helped reinforce the operational trade-off between reachability and routing-protocol exposure.',
-      'Tested two default-route propagation approaches: redistributing a static default route and injecting a summary default route, then compared how they appeared as external versus internal EIGRP routes.',
-      'Summarized multiple loopback networks into a single route advertisement to reduce routing-table noise and better understand how summarization affects the rest of the topology.',
-      'Implemented interface-based authentication with both MD5 key chains and HMAC-SHA-256, then verified that adjacencies only returned once both ends of a link were configured correctly.',
+      'Compared static default redistribution versus summary default injection and how each appears in the IPv6 topology table.',
+      'Used summarization to shrink loopback advertisements and observed downstream reachability impact.',
     ],
     screenshots: [
       {
@@ -298,8 +314,8 @@ const PROJECTS = [
           'The topology includes routed links, VLAN subinterfaces, loopbacks, and downstream segments so protocol behavior can be validated across more than a simple point-to-point setup.',
       },
     ],
-    sidebarNarrative: 'Routing depth beyond “neighbors up”—control plane tuning with evidence from show commands.',
-    sidebarFacts: ['Classic and named EIGRP for IPv6', 'MD5 and HMAC-SHA-256 on interfaces'],
+    sidebarNarrative: 'Lab goal: explain routing behavior from verification output, not just config paste.',
+    sidebarFacts: ['Classic vs named EIGRP for IPv6'],
     configLinks: [
       { label: 'Router R1 configuration', href: `${BASE}configs/eigrp/r1.txt` },
       { label: 'Router R2 configuration', href: `${BASE}configs/eigrp/r2.txt` },
@@ -324,7 +340,7 @@ function renderRichText(text) {
 }
 
 function hasExperienceDetails(job) {
-  return Boolean(job.roleDetail?.length || job.detailOnlyItems?.length || job.detailOnlyBullets?.length)
+  return Boolean(job.roleContext || job.detailDepth?.length)
 }
 
 const EXPERIENCE_LINKS = EXPERIENCE.filter(hasExperienceDetails).map((job) => ({
@@ -561,41 +577,34 @@ function ExperienceDetailPage({ job }) {
               {job.location ? <span>{job.location}</span> : null}
             </div>
 
+            <p className={styles.detailLead}>
+              Outcomes and metrics are on the{' '}
+              <a href={`${BASE}#experience`} className={styles.detailLeadLink}>
+                Experience
+              </a>{' '}
+              timeline. What follows is who you were on the team and how the work was done.
+            </p>
+
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
-                {job.roleDetail?.length ? (
+                {job.roleContext ? (
                   <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Role & team</h2>
-                    {job.roleDetail.map((paragraph) => (
-                      <p key={paragraph} className={styles.detailText}>
-                        {renderRichText(paragraph)}
-                      </p>
-                    ))}
+                    <h2 className={styles.detailSectionTitle}>About this role</h2>
+                    <p className={styles.detailText}>{renderRichText(job.roleContext)}</p>
                   </section>
                 ) : null}
 
-                {job.detailOnlyItems?.length ? (
+                {job.detailDepth?.length ? (
                   <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Additional work</h2>
+                    <h2 className={styles.detailSectionTitle}>Deeper look</h2>
                     <div className={styles.detailOnlyStack}>
-                      {job.detailOnlyItems.map((item) => (
+                      {job.detailDepth.map((item) => (
                         <article key={item.title} className={styles.detailOnlyCard}>
                           <h3 className={styles.detailOnlyTitle}>{item.title}</h3>
                           <p className={styles.detailText}>{renderRichText(item.text)}</p>
                         </article>
                       ))}
                     </div>
-                  </section>
-                ) : null}
-
-                {job.detailOnlyBullets?.length ? (
-                  <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>Additional work</h2>
-                    <ul className={styles.detailBullets}>
-                      {job.detailOnlyBullets.map((bullet) => (
-                        <li key={bullet}>{renderRichText(bullet)}</li>
-                      ))}
-                    </ul>
                   </section>
                 ) : null}
               </div>
@@ -691,40 +700,39 @@ function ProjectDetailPage({ project }) {
 
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
+                <p className={styles.detailLead}>
+                  The project card has the short version. Below: how it works{project.slug === 'blackboxnet' ? ' and how to try the demo' : ''}.
+                </p>
+
                 <section className={styles.detailSection}>
                   <h2 className={styles.detailSectionTitle}>{project.overviewTitle || 'Overview'}</h2>
                   <p className={styles.detailText}>{project.summary}</p>
                 </section>
 
-                <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>{project.pillarsTitle || 'Project Scope'}</h2>
-                  <ul className={styles.detailBullets}>
-                    {project.pillars.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </section>
+                {project.incidentFlow?.length ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>{project.flowTitle || 'Process'}</h2>
+                    <div className={styles.projectFlowGrid}>
+                      {project.incidentFlow.map((step) => (
+                        <article key={step.title} className={styles.projectFlowCard}>
+                          <p className={styles.projectFlowTitle}>{step.title}</p>
+                          <p className={styles.projectFlowText}>{step.text}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
 
-                <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>{project.flowTitle || 'Process'}</h2>
-                  <div className={styles.projectFlowGrid}>
-                    {project.incidentFlow.map((step) => (
-                      <article key={step.title} className={styles.projectFlowCard}>
-                        <p className={styles.projectFlowTitle}>{step.title}</p>
-                        <p className={styles.projectFlowText}>{step.text}</p>
-                      </article>
-                    ))}
-                  </div>
-                </section>
-
-                <section className={styles.detailSection}>
-                  <h2 className={styles.detailSectionTitle}>{project.deepDiveTitle || 'Details'}</h2>
-                  <ul className={styles.detailBullets}>
-                    {project.deepDive.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </section>
+                {project.deepDive?.length ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>{project.deepDiveTitle || 'Details'}</h2>
+                    <ul className={styles.detailBullets}>
+                      {project.deepDive.map((item) => (
+                        <li key={item}>{renderRichText(item)}</li>
+                      ))}
+                    </ul>
+                  </section>
+                ) : null}
 
                 <section className={styles.detailSection}>
                   <div className={styles.projectScreenshotHeader}>
@@ -1090,7 +1098,7 @@ export default function App() {
                     ) : null}
                     {hasExperienceDetails(job) ? (
                       <a href={`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`} className={styles.caseStudyLink}>
-                        More info →
+                        Read more →
                       </a>
                     ) : null}
                   </div>
