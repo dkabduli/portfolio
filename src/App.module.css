@@ -1112,8 +1112,8 @@
 }
 
 .projectBody {
-  display: grid;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
   gap: 14px;
   padding: 22px 22px 24px;
 }
@@ -1169,6 +1169,7 @@
 .projectLinks {
   display: flex;
   gap: 16px;
+  margin-top: auto;
 }
 
 .projectPending {
