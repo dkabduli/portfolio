@@ -562,11 +562,13 @@
 }
 
 .aboutBio {
-  margin-top: 20px;
+  grid-column: 1 / -1;
+  margin-top: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
   color: var(--slate);
   font-size: 1.05rem;
   line-height: 1.9;
-  max-width: 76ch;
 }
 
 .aboutKicker {

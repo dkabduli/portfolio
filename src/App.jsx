@@ -142,6 +142,7 @@ const SKILLS = {
   'Tools & Databases': ['VS Code', 'PyCharm', 'Wireshark', 'PuTTY', 'MobaXterm', 'Visio', 'MySQL', 'PostgreSQL'],
   'Platforms & Monitoring': ['Zabbix', 'NNMI', 'Elasticsearch', 'DocuSeal'],
   'Networking Protocols': ['TCP/IP', 'STP', 'ARP', 'RIP', 'BGP', 'OSPFv2/v3', 'EIGRP', 'MPLS'],
+  'Security': ['Firewalls', 'VPN', 'IDPS', 'Network Hardening'],
 }
 
 const PROJECTS = [
@@ -981,7 +982,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    B.IT. Network Technology student at Carleton University — three co-op terms at Shared Services Canada building infrastructure automation, CI/CD-integrated network monitoring, and workflow tooling across federal government environments. Targeting network engineering, NetDevOps, and infrastructure roles from April 2027.
+                    Building infrastructure automation and network tooling at Shared Services Canada — Ansible-based provisioning, Zabbix CI/CD pipelines, and workflow orchestration deployed under federal change-control constraints.
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}
@@ -1044,10 +1045,10 @@ export default function App() {
                   </div>
                 ))}
               </div>
+              <p className={styles.aboutBio}>
+                Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), completing three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, and infrastructure automation. My work runs under federal change-control and security baseline requirements — production environments, not sandboxes. Outside of work, I built BlackBoxNet: a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments. Canadian citizen — no sponsorship required, available for new-grad roles from April 2027.
+              </p>
             </div>
-            <p className={styles.aboutBio}>
-              Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), with three consecutive co-op terms at Shared Services Canada spanning enterprise LAN operations, network monitoring automation, and infrastructure DevOps. My work runs in production environments under federal change-control and security baseline requirements — Ansible-based certificate provisioning, Zabbix CI/CD integration, and workflow orchestration at government scale. Outside of work, I built BlackBoxNet, a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments. Canadian citizen — no sponsorship required, available for new-grad roles from April 2027.
-            </p>
           </Section>
 
           <Section id="experience" label="// 01 — EXPERIENCE">
