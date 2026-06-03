@@ -1145,7 +1145,6 @@ export default function App() {
                   <div className={`${styles.aboutInfoItem} ${styles.aboutInfoItemAccent}`}>
                     <img src={`${BASE}images/goc-logo.png`} alt="Government of Canada" className={styles.gocLogo} />
                     <p className={styles.aboutInfoLabel}>Security Clearance</p>
-                    <p className={styles.aboutInfoValue}>Secret</p>
                     <p className={styles.aboutInfoSub}>Issued April 2025 · Valid until April 2035</p>
                   </div>
                 </div>
