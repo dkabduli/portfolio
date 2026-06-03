@@ -1131,7 +1131,11 @@ export default function App() {
                   <div className={styles.aboutInfoItem}>
                     <p className={styles.aboutInfoLabel}>Education</p>
                     <p className={styles.aboutInfoValue}>Carleton University</p>
-                    <p className={styles.aboutInfoSub}>B.IT. Network Technology · April 2027 · General In-Course Scholarship</p>
+                    <p className={styles.aboutInfoSub}>B.IT. Network Technology · April 2027</p>
+                    <div className={styles.aboutInfoTags}>
+                      <span className={styles.aboutInfoTag}>General In-Course Scholarship</span>
+                      <span className={styles.aboutInfoTag}>English · Urdu</span>
+                    </div>
                   </div>
                   <div className={`${styles.aboutInfoItem} ${styles.aboutInfoItemAccent}`}>
                     <p className={styles.aboutInfoLabel}>Security Clearance</p>
@@ -1280,7 +1284,7 @@ export default function App() {
           <Section id="contact" label="// 04 — CONTACT">
             <div className={styles.contactInfo}>
               <p className={styles.contactIntro}>
-                Open to network engineering, NetDevOps, and infrastructure roles — graduating April 2027, inshallah.
+                Open to network engineering, NetDevOps, and infrastructure roles — graduating April 2027.
               </p>
               <div className={styles.contactLinks}>
                 {contactLinks.map((item) => (
