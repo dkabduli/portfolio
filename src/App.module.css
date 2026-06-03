@@ -612,7 +612,7 @@
 .carletonLogo {
   display: block;
   width: 100%;
-  max-width: 172px;
+  max-width: 180px;
   height: auto;
   margin-bottom: 14px;
 }
@@ -620,7 +620,7 @@
 .gocLogo {
   display: block;
   width: 100%;
-  max-width: 200px;
+  max-width: 180px;
   height: auto;
   margin-bottom: 14px;
   mix-blend-mode: multiply;
