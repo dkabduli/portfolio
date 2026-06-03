@@ -23,20 +23,4 @@ export const contactMethods = [
     external: true,
     icon: '🐙',
   },
-  {
-    id: 'discord',
-    label: 'Discord',
-    value: 'ykabduli',
-    href: null,
-    external: false,
-    icon: '💬',
-  },
-  {
-    id: 'lol',
-    label: 'League of Legends',
-    value: 'dkabduli',
-    href: null,
-    external: false,
-    icon: '🎮',
-  },
 ];
