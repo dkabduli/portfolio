@@ -26,7 +26,7 @@ const QUICK_STATS = [
 ]
 
 
-const KEY_STRENGTHS = ['Infrastructure', 'Automation', 'NetDevOps']
+const KEY_STRENGTHS = ['Infrastructure', 'Automation', 'NetDevOps', 'Full-Stack']
 
 const COURSEWORK = [
   'DevOps',
@@ -65,11 +65,11 @@ const EXPERIENCE = [
       },
       {
         title: 'DocuSeal on app01',
-        text: '**DocuSeal** uses a custom **SSC** image and **PostgreSQL** backend. Cutover required image rebuild on **app01**, database dump/restore, blob sync, and row-count checks on **120 templates**, **117 submissions**, **251 completed documents**, and **494 storage objects** before DNS flipped—parity validation, not assume-success.',
+        text: '**DocuSeal** runs on a custom **SSC Docker** image with a **PostgreSQL** backend. Cutover required rebuilding the image on **app01**, performing a database dump/restore, syncing blob storage, and running row-count parity checks across **120 templates**, **117 submissions**, **251 completed documents**, and **494 storage objects** before the DNS flip — every count verified before go-live, not assumed.',
       },
       {
         title: 'Multi-hop Ansible to GitLab',
-        text: '**SWLINUX** certificate output cannot reach **git02** from one hop. Playbooks chain **devHost** → jump inventory → **Azure GitLab** with **SSH proxy** settings so the same role run publishes to the correct project namespace for production-style rollout later.',
+        text: '**SWLINUX** certificate output cannot reach **git02** directly from a single network hop. Playbooks chain **devHost** as a jump host through the inventory into **Azure GitLab** using **SSH proxy** settings — so the same Ansible role run publishes CSRs and keys to the correct project namespace for production-style rollout without manual file transfer.',
       },
     ],
     sidebarNote:
@@ -137,7 +137,7 @@ const EXPERIENCE = [
 const SKILLS = {
   'Languages & Frameworks': ['Python', 'Java', 'C', 'C++', 'MATLAB', 'LC-3 Assembly', 'TypeScript', 'React', 'FastAPI'],
   'Network Operating Systems': ['Cisco IOS CLI', 'Juniper Junos', 'Aruba CLI'],
-  'Automation & DevOps': ['Ansible Automation Platform (AAP)', 'Docker', 'Git', 'GitLab CI/CD', 'n8n', 'OpenSSL'],
+  'Automation & DevOps': ['Ansible Automation Platform (AAP)', 'Docker', 'Git', 'GitLab CI/CD', 'n8n', 'OpenSSL', 'REST APIs'],
   'Cloud & Infrastructure': ['Azure', 'VMware Fusion', 'HashiCorp Vault', 'Linux'],
   'Tools & Databases': ['VS Code', 'PyCharm', 'Wireshark', 'PuTTY', 'MobaXterm', 'Visio', 'MySQL', 'PostgreSQL'],
   'Platforms & Monitoring': ['Zabbix', 'NNMI', 'Elasticsearch', 'DocuSeal'],
@@ -150,7 +150,7 @@ const PROJECTS = [
     slug: 'blackboxnet',
     year: '2026',
     description:
-      'A Git-backed network state replay platform with twelve scripted outage labs across Cisco, Juniper, and Nokia. Operators step through T1→T5, view live topology, correlate root cause, and compare configs—available as a public demo on Render.',
+      'Full-stack network replay platform with 12 scripted multi-vendor outage labs across Cisco, Juniper, and Nokia. Step through T1→T5, investigate live topology, correlate root cause from semantic config diffs, and replay what changed before the failure — deployed with GitHub Actions CI on Render.',
     tags: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'Git'],
     featured: true,
     image: `${BASE}images/blackboxnet-dashboard.png`,
@@ -170,7 +170,7 @@ const PROJECTS = [
     sidebarNarrative:
       'Like a flight recorder for network state: replay what changed before an outage instead of reconstructing it from scattered logs.',
     summary:
-      'Full-stack platform I designed and built: scripted outages are replayed step-by-step, config history lives in Git, and a rules engine explains which change likely caused the failure—scoped per vendor and scenario so labs do not interfere.',
+      'End-to-end platform designed and built from scratch: scripted outages replay step-by-step, config history is Git-backed with per-commit snapshots, and a vendor-specific rules engine correlates which change caused the failure. All state is namespaced by scenario_id so vendor switching and resets never corrupt an active lab. Currently deployed on Render with Neon PostgreSQL.',
     humanSummary: [
       {
         label: 'Live demo',
@@ -200,9 +200,9 @@ const PROJECTS = [
       },
     ],
     deepDive: [
-      '**scenario_id** namespacing on API, database, and Git paths so reset or vendor switch never corrupts another lab.',
-      'Topology and failure stories live in JSON fixtures—new labs extend data, not React layout code.',
-      'Shipped with **14** API tests and production frontend build in CI on push to main.',
+      '**scenario_id** namespacing on all API routes, database queries, and Git commit paths — reset or vendor switch never corrupts another active lab\'s state.',
+      'Topology diagrams and failure narratives live in JSON fixtures — adding a new lab extends data, not React layout code.',
+      'Shipped with **14** API endpoint tests and a production frontend build gate in **GitHub Actions** CI on every push to main.',
     ],
     screenshots: [
       {
@@ -227,7 +227,7 @@ const PROJECTS = [
         caption: 'Event order tied to Git-backed config comparison.',
       },
     ],
-    sidebarFacts: ['Semantic diff parsers per vendor (IOS, Junos, SR OS)', 'API docs on Render'],
+    sidebarFacts: ['Semantic diff parsers per vendor (IOS, Junos, SR OS)', 'GitHub Actions CI on push to main', 'API docs on Render'],
     resourceLinks: [{ label: 'API docs', href: 'https://blackboxnet-api.onrender.com/docs' }],
   },
   {
@@ -235,7 +235,7 @@ const PROJECTS = [
     slug: 'ipv6-eigrp-network',
     year: '2024',
     description:
-      'A Cisco Packet Tracer lab building and tuning EIGRP for IPv6 on a multi-router topology—classic and named modes, passive interfaces, route summarization, authentication, and hands-on verification beyond basic adjacency setup.',
+      'IPv6 routing lab exploring EIGRP control-plane behavior on a multi-router Cisco topology — classic and named modes, passive interfaces, route summarization, MD5/HMAC-SHA-256 authentication, and verification-first methodology that explains why routes appear and disappear rather than just pasting config.',
     tags: ['IPv6 EIGRP', 'Routing tuning & security', 'Topology documentation'],
     image: `${BASE}images/ipv6-network.png`,
     fallback: `${BASE}images/ipv6-network-placeholder.svg`,
@@ -251,7 +251,7 @@ const PROJECTS = [
     sidebarNarrativeTitle: 'Why it matters',
     sidebarTraitsTitle: 'Verification',
     summary:
-      'Advanced **Packet Tracer** lab focused on control-plane decisions—when to suppress adjacencies, how summaries propagate, and how authentication changes what you see in the routing table.',
+      'Advanced **Cisco Packet Tracer** lab focused on IPv6 routing control-plane decisions — when to suppress adjacencies using passive interfaces, how route summaries propagate across the topology, and how **MD5** and **HMAC-SHA-256** authentication changes what appears in the routing and topology tables. Every conclusion is drawn from `show ipv6 eigrp` verification output, not assumed from config.',
     humanSummary: [
       {
         label: 'Environment',
@@ -277,8 +277,8 @@ const PROJECTS = [
       },
     ],
     deepDive: [
-      'Compared static default redistribution versus summary default injection and how each appears in the IPv6 topology table.',
-      'Used summarization to shrink loopback advertisements and observed downstream reachability impact.',
+      'Compared **static default redistribution** versus **summary default injection** and verified how each propagates differently in the IPv6 EIGRP topology table across R1, R2, and R3.',
+      'Applied route summarization on loopback addresses and validated the downstream reachability impact on R2 and R3 routing tables using `show ipv6 route`.',
     ],
     screenshots: [
       {
@@ -290,8 +290,8 @@ const PROJECTS = [
           'The topology includes routed links, VLAN subinterfaces, loopbacks, and downstream segments so protocol behavior can be validated across more than a simple point-to-point setup.',
       },
     ],
-    sidebarNarrative: 'Lab goal: explain routing behavior from verification output, not just config paste.',
-    sidebarFacts: ['Classic vs named EIGRP for IPv6'],
+    sidebarNarrative: 'Goal: reason about EIGRP behavior from `show` command output — understand why routes appear and disappear, not just apply config and move on.',
+    sidebarFacts: ['Classic vs. named EIGRP for IPv6', 'MD5 and HMAC-SHA-256 authentication verified', 'Route summarization and default injection validated'],
     configLinks: [
       { label: 'Router R1 configuration', href: `${BASE}configs/eigrp/r1.txt` },
       { label: 'Router R2 configuration', href: `${BASE}configs/eigrp/r2.txt` },
@@ -981,7 +981,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    Building infrastructure automation and network tooling at Shared Services Canada — n8n workflow orchestration, Ansible-based SSL/TLS provisioning, Zabbix monitoring integrated into CI/CD pipelines, and enterprise LAN operations across federal government infrastructure.
+                    B.IT. Network Technology student at Carleton University — three co-op terms at Shared Services Canada building infrastructure automation, CI/CD-integrated network monitoring, and workflow tooling across federal government environments. Targeting network engineering, NetDevOps, and infrastructure roles from April 2027.
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}
@@ -1045,6 +1045,9 @@ export default function App() {
                 ))}
               </div>
             </div>
+            <p className={styles.aboutBio}>
+              Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), with three consecutive co-op terms at Shared Services Canada spanning enterprise LAN operations, network monitoring automation, and infrastructure DevOps. My work runs in production environments under federal change-control and security baseline requirements — Ansible-based certificate provisioning, Zabbix CI/CD integration, and workflow orchestration at government scale. Outside of work, I built BlackBoxNet, a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments. Canadian citizen — no sponsorship required, available for new-grad roles from April 2027.
+            </p>
           </Section>
 
           <Section id="experience" label="// 01 — EXPERIENCE">
@@ -1176,7 +1179,7 @@ export default function App() {
           <Section id="contact" label="// 04 — CONTACT">
             <div className={styles.contactInfo}>
               <p className={styles.contactIntro}>
-                Targeting full-time infrastructure and NetDevOps roles starting April 2027. Fastest reach is email — I check it daily. LinkedIn for professional connection; GitHub for code.
+                Open to network engineering, NetDevOps, and infrastructure co-op or new-grad roles — graduating April 2027, Canadian citizen, no sponsorship required. Email is fastest; LinkedIn for professional connection, GitHub for code.
               </p>
               <div className={styles.contactLinks}>
                 {contactLinks.map((item) => (

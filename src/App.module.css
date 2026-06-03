@@ -561,6 +561,14 @@
   height: fit-content;
 }
 
+.aboutBio {
+  margin-top: 20px;
+  color: var(--slate);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  max-width: 76ch;
+}
+
 .aboutKicker {
   color: var(--slate);
   font-family: var(--font-mono-alt);
