@@ -28,6 +28,18 @@ const QUICK_STATS = [
 
 const KEY_STRENGTHS = ['Infrastructure', 'Automation', 'NetDevOps', 'Full-Stack']
 
+const CREDENTIALS = [
+  {
+    label: 'Active Federal Clearance',
+    name: 'Secret Security Clearance',
+    issuer: 'Government of Canada',
+    issued: 'April 2025',
+    expires: 'April 2035',
+    note: 'Active Secret-level clearance — eligible for classified federal roles and environments requiring GoC security screening.',
+  },
+]
+
+
 const COURSEWORK = [
   'DevOps',
   'Real-time Systems',
@@ -1030,6 +1042,7 @@ export default function App() {
 
           <Section id="about" label="// 00 — ABOUT">
             <div className={styles.aboutStatsRow}>
+
               <div className={styles.aboutPortraitFrame}>
                 <img
                   src={`${BASE}images/about-face.png`}
@@ -1046,8 +1059,19 @@ export default function App() {
                 ))}
               </div>
               <p className={styles.aboutBio}>
-                Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), completing three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, and infrastructure automation. My work runs under federal change-control and security baseline requirements — production environments, not sandboxes. Outside of work, I built BlackBoxNet: a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments. Canadian citizen — no sponsorship required, available for new-grad roles from April 2027.
+                Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), completing three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, and infrastructure automation. My work runs under federal change-control and security baseline requirements — production environments, not sandboxes. Outside of work, I built BlackBoxNet: a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments.
               </p>
+            </div>
+            <div className={styles.credentialsRow}>
+              {CREDENTIALS.map((cred) => (
+                <div key={cred.name} className={styles.credentialCard}>
+                  <p className={styles.credentialLabel}>{cred.label}</p>
+                  <h3 className={styles.credentialName}>{cred.name}</h3>
+                  <p className={styles.credentialIssuer}>{cred.issuer}</p>
+                  <p className={styles.credentialDates}>Issued {cred.issued} · Valid until {cred.expires}</p>
+                  <p className={styles.credentialNote}>{cred.note}</p>
+                </div>
+              ))}
             </div>
           </Section>
 
@@ -1180,7 +1204,7 @@ export default function App() {
           <Section id="contact" label="// 04 — CONTACT">
             <div className={styles.contactInfo}>
               <p className={styles.contactIntro}>
-                Open to network engineering, NetDevOps, and infrastructure co-op or new-grad roles — graduating April 2027, Canadian citizen, no sponsorship required. Email is fastest; LinkedIn for professional connection, GitHub for code.
+                Open to network engineering, NetDevOps, and infrastructure roles — graduating April 2027. Email is fastest; LinkedIn for professional connection, GitHub for code.
               </p>
               <div className={styles.contactLinks}>
                 {contactLinks.map((item) => (
