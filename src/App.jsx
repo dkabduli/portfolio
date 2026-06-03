@@ -1119,7 +1119,6 @@ export default function App() {
 
           <Section id="about" label="// 00 — ABOUT">
             <div className={styles.aboutStatsRow}>
-
               <div className={styles.aboutPortraitFrame}>
                 <img
                   src={`${BASE}images/about-face.png`}
@@ -1127,48 +1126,28 @@ export default function App() {
                   className={styles.aboutPortrait}
                 />
               </div>
-              <div className={styles.statsGrid}>
-                {QUICK_STATS.map((stat) => (
-                  <AnimatedStat key={stat.label} value={stat.value} label={stat.label} />
-                ))}
+              <div className={styles.aboutRightCol}>
+                <div className={styles.aboutInfoRow}>
+                  <div className={styles.aboutInfoItem}>
+                    <p className={styles.aboutInfoLabel}>Education</p>
+                    <p className={styles.aboutInfoValue}>Carleton University</p>
+                    <p className={styles.aboutInfoSub}>B.IT. Network Technology · April 2027 · General In-Course Scholarship</p>
+                  </div>
+                  <div className={`${styles.aboutInfoItem} ${styles.aboutInfoItemAccent}`}>
+                    <p className={styles.aboutInfoLabel}>Security Clearance</p>
+                    <p className={styles.aboutInfoValue}>Secret · Government of Canada</p>
+                    <p className={styles.aboutInfoSub}>Issued April 2025 · Valid until April 2035</p>
+                  </div>
+                </div>
+                <div className={styles.statsGrid}>
+                  {QUICK_STATS.map((stat) => (
+                    <AnimatedStat key={stat.label} value={stat.value} label={stat.label} />
+                  ))}
+                </div>
               </div>
               <p className={styles.aboutBio}>
                 Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), completing three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, and infrastructure automation. My work runs under federal change-control and security baseline requirements — production environments, not sandboxes. Outside of work, I built BlackBoxNet: a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments.
               </p>
-            </div>
-            <div className={styles.credentialsRow}>
-              {CREDENTIALS.map((cred) => (
-                <div key={cred.name} className={styles.credentialCard}>
-                  <p className={styles.credentialLabel}>{cred.label}</p>
-                  <h3 className={styles.credentialName}>{cred.name}</h3>
-                  <p className={styles.credentialIssuer}>{cred.issuer}</p>
-                  <p className={styles.credentialDates}>Issued {cred.issued} · Valid until {cred.expires}</p>
-                  <p className={styles.credentialNote}>{cred.note}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.educationCard}>
-              <div className={styles.educationHeader}>
-                <div>
-                  <p className={styles.educationLabel}>Education</p>
-                  <h3 className={styles.educationInstitution}>{EDUCATION.institution}</h3>
-                  <p className={styles.educationJoint}>{EDUCATION.joint}</p>
-                </div>
-                <p className={styles.educationPeriod}>{EDUCATION.period}</p>
-              </div>
-              <p className={styles.educationDegree}>{EDUCATION.degree} · {EDUCATION.year} · {EDUCATION.location}</p>
-              <div className={styles.educationMeta}>
-                {EDUCATION.awards.map((a) => (
-                  <span key={a} className={styles.educationAwardTag}>{a}</span>
-                ))}
-                {EDUCATION.languages.map((l) => (
-                  <span key={l} className={styles.educationTag}>{l}</span>
-                ))}
-                {EDUCATION.extracurriculars.map((e) => (
-                  <span key={e} className={styles.educationTag}>{e}</span>
-                ))}
-              </div>
             </div>
           </Section>
 
@@ -1301,7 +1280,7 @@ export default function App() {
           <Section id="contact" label="// 04 — CONTACT">
             <div className={styles.contactInfo}>
               <p className={styles.contactIntro}>
-                Open to network engineering, NetDevOps, and infrastructure roles — graduating April 2027. Email is fastest; LinkedIn for professional connection, GitHub for code.
+                Open to network engineering, NetDevOps, and infrastructure roles — graduating April 2027, inshallah.
               </p>
               <div className={styles.contactLinks}>
                 {contactLinks.map((item) => (
