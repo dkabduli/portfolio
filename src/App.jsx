@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import { LazyMotion, domAnimation, motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { LazyMotion, domAnimation, motion, AnimatePresence, useReducedMotion, useScroll, useSpring, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
 import { contactMethods } from './data/contact'
 import styles from './App.module.css'
 
@@ -326,6 +326,58 @@ const PROJECTS = [
     ],
   },
 ]
+
+const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*<>/'
+
+function useScramble(finalText, { duration = 1100, skip = false } = {}) {
+  const [text, setText] = useState(finalText)
+  useEffect(() => {
+    if (skip) { setText(finalText); return }
+    let frame = 0
+    const totalFrames = Math.floor(duration / 28)
+    const id = setInterval(() => {
+      frame++
+      const progress = frame / totalFrames
+      setText(
+        finalText.split('').map((char, i) => {
+          if (char === ' ') return ' '
+          if (i / finalText.length < progress) return char
+          return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+        }).join('')
+      )
+      if (frame >= totalFrames) { clearInterval(id); setText(finalText) }
+    }, 28)
+    return () => clearInterval(id)
+  }, [finalText, duration, skip])
+  return text
+}
+
+function AnimatedStat({ value, label }) {
+  const shouldReduceMotion = useReducedMotion()
+  const match = value.match(/^(\d+)(.*)$/)
+  const num = match ? parseInt(match[1]) : 0
+  const suffix = match ? match[2] : ''
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
+  const count = useMotionValue(0)
+  const rounded = useTransform(count, (v) => Math.round(v))
+
+  useEffect(() => {
+    if (shouldReduceMotion) { count.set(num); return }
+    if (!isInView) return
+    const controls = animate(count, num, { duration: 1.5, ease: 'easeOut' })
+    return controls.stop
+  }, [isInView, shouldReduceMotion, num, count])
+
+  return (
+    <div ref={ref} className={styles.statCard}>
+      <strong className={styles.statValue}>
+        <motion.span>{rounded}</motion.span>{suffix}
+      </strong>
+      <span className={styles.statLabel}>{label}</span>
+    </div>
+  )
+}
 
 function renderRichText(text) {
   return text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map((part, index) => {
@@ -815,6 +867,7 @@ export default function App() {
   const [mounted, setMounted] = useState(false)
   const [detailRoute, setDetailRoute] = useState(getDetailRoute)
   const shouldReduceMotion = useReducedMotion()
+  const kickerText = useScramble('$ whoami', { duration: 1100, skip: !!shouldReduceMotion })
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -858,24 +911,23 @@ export default function App() {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [activeExperienceDetail, activeProjectDetail])
 
-  if (activeExperienceDetail) {
-    return (
-      <LazyMotion features={domAnimation}>
-        <ExperienceDetailPage job={activeExperienceDetail} />
-      </LazyMotion>
-    )
-  }
-
-  if (activeProjectDetail) {
-    return (
-      <LazyMotion features={domAnimation}>
-        <ProjectDetailPage project={activeProjectDetail} />
-      </LazyMotion>
-    )
-  }
+  const pageTransition = shouldReduceMotion
+    ? {}
+    : { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 }, transition: { duration: 0.22, ease: 'easeInOut' } }
 
   return (
     <LazyMotion features={domAnimation}>
+      <AnimatePresence mode="wait">
+        {activeExperienceDetail ? (
+          <motion.div key={`exp-${activeExperienceDetail.slug}`} {...pageTransition} style={{ minHeight: '100vh' }}>
+            <ExperienceDetailPage job={activeExperienceDetail} />
+          </motion.div>
+        ) : activeProjectDetail ? (
+          <motion.div key={`proj-${activeProjectDetail.slug}`} {...pageTransition} style={{ minHeight: '100vh' }}>
+            <ProjectDetailPage project={activeProjectDetail} />
+          </motion.div>
+        ) : (
+          <motion.div key="main" {...pageTransition}>
       <div className={styles.pageShell}>
         <motion.div className={styles.progressBar} style={{ scaleX: progress }} />
 
@@ -987,7 +1039,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0 }}
                   >
-                    $ whoami
+                    {kickerText}
                   </motion.p>
                   <motion.h1
                     className={styles.heroTitle}
@@ -1077,10 +1129,7 @@ export default function App() {
               </div>
               <div className={styles.statsGrid}>
                 {QUICK_STATS.map((stat) => (
-                  <div key={stat.label} className={styles.statCard}>
-                    <strong className={styles.statValue}>{stat.value}</strong>
-                    <span className={styles.statLabel}>{stat.label}</span>
-                  </div>
+                  <AnimatedStat key={stat.label} value={stat.value} label={stat.label} />
                 ))}
               </div>
               <p className={styles.aboutBio}>
@@ -1286,6 +1335,9 @@ export default function App() {
           </div>
         </footer>
       </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </LazyMotion>
   )
 }
