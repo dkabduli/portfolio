@@ -52,18 +52,24 @@ const CREDENTIALS = [
 ]
 
 
-const COURSEWORK = [
-  'DevOps',
-  'Real-time Systems',
-  'Network Management and ML',
-  'IP Architecture and Solutions',
-  'Desktop and Server Environments II',
-  'Transmission Systems',
-  'Computer Architecture',
-  'Wireless Networks',
-  'Data Structures',
-  'Databases',
-]
+const COURSEWORK = {
+  'Networking': [
+    'Network Management and ML',
+    'IP Architecture and Solutions',
+    'Wireless Networks',
+    'Transmission Systems',
+  ],
+  'Systems': [
+    'Real-time Systems',
+    'Computer Architecture',
+    'Desktop and Server Environments II',
+  ],
+  'Software & Data': [
+    'DevOps',
+    'Data Structures',
+    'Databases',
+  ],
+}
 
 const EXPERIENCE = [
   {
@@ -1129,8 +1135,7 @@ export default function App() {
               <div className={styles.aboutRightCol}>
                 <div className={styles.aboutInfoRow}>
                   <div className={styles.aboutInfoItem}>
-                    <p className={styles.aboutInfoLabel}>Education</p>
-                    <p className={styles.aboutInfoValue}>Carleton University</p>
+                    <img src={`${BASE}images/carleton-logo.svg`} alt="Carleton University" className={styles.carletonLogo} />
                     <p className={styles.aboutInfoSub}>B.IT. Network Technology · April 2027</p>
                     <div className={styles.aboutInfoTags}>
                       <span className={styles.aboutInfoTag}>General In-Course Scholarship</span>
@@ -1216,11 +1221,18 @@ export default function App() {
 
             <div className={styles.courseworkPanel}>
               <p className={styles.aboutKicker}>Selected Coursework</p>
-              <div className={styles.courseworkGrid}>
-                {COURSEWORK.map((course) => (
-                  <span key={course} className={styles.courseworkTag}>
-                    {course}
-                  </span>
+              <div className={styles.courseworkCategoryGrid}>
+                {Object.entries(COURSEWORK).map(([group, courses]) => (
+                  <div key={group} className={styles.courseworkCategory}>
+                    <p className={styles.courseworkGroupLabel}>{group}</p>
+                    <div className={styles.courseworkGrid}>
+                      {courses.map((course) => (
+                        <span key={course} className={styles.courseworkTag}>
+                          {course}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
