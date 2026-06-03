@@ -21,8 +21,8 @@ const NAV_ITEMS = [
 const QUICK_STATS = [
   { value: '2+', label: 'YRS INDUSTRY EXP.' },
   { value: '50+', label: 'SWITCHES UPGRADED' },
-  { value: '132', label: 'ACCOUNTS IDENTIFIED' },
-  { value: '500+', label: 'RECORDS AUDITED' },
+  { value: '132', label: 'INACTIVE ACCOUNTS FOUND' },
+  { value: '15×', label: 'FASTER CERT PROVISIONING' },
 ]
 
 
@@ -52,16 +52,16 @@ const EXPERIENCE = [
     imageAlt: 'Infrastructure development and automation',
     imageContain: false,
     timelineBullets: [
-      'Designed and deployed an intelligent intake automation using **n8n** that routes requests across **10+ infrastructure service areas**, eliminates duplicate ticket creation, and centralizes unassigned work into a shared queue—validated against **25+ production-ready NetOps tickets** before handoff.',
-      'Executed server migration of **n8n** and **DocuSeal** from **dev01** to **app01** with **100% data integrity** verified across **120 templates**, **251 completed documents**, and **494 storage objects**; reduced deployment recovery time from **20–30 min** to **under 10 min**.',
-      'Automated **Azure-compatible SSL/TLS** certificate request generation using **Ansible** and **OpenSSL**, building a reusable role-based workflow that produces CSRs, private keys, and standardized configurations for **SSC NAI** environments—cutting manual setup from **20–30 minutes** to **under 2 minutes** per request.',
+      'Reduced ticket intake overhead across **10+ infrastructure service areas** by designing and deploying an **n8n** automated routing workflow that eliminated duplicate creation and centralized unassigned work into a shared queue—validated against **25+ production-ready NetOps tickets** under SSC change-control approval.',
+      'Achieved zero-data-loss platform migration of **n8n** and **DocuSeal** from **dev01** to **app01**—verified across **120 templates**, **251 completed documents**, and **494 storage objects** via database dump/restore, blob sync, and row-count parity checks—cutting deployment recovery time from **20–30 min** to **under 10 min**.',
+      'Cut **SSL/TLS certificate provisioning from 20–30 minutes to under 2 minutes** per request by building a reusable **Ansible** role that automates CSR generation, private key handling, and **OpenSSL** configuration for **Azure**-compatible **SSC NAI** environments.',
     ],
     roleContext:
-      'Operated inside SSC platform engineering under federal change-control constraints—every deployment touched production-facing services used by government clients, requiring documented testing, approval workflows, and sign-off from service owners before going live. Toolchain spanned **n8n**, **DocuSeal**, **Ansible AAP**, **OpenSSL**, **GitLab CI**, and **HashiCorp Vault** alongside internal ITSM and ticketing systems. All changes were reviewed against SSC security baseline expectations prior to production rollout.',
+      'Operated inside SSC platform engineering under federal change-control constraints—every deployment touched production-facing services requiring documented testing, approval workflows, and service-owner sign-off before going live. Toolchain spanned **n8n**, **DocuSeal** (**PostgreSQL** backend), **Ansible AAP**, **OpenSSL**, **GitLab CI**, and **HashiCorp Vault** alongside internal ITSM and ticketing systems. Work involved **Docker**-based container deployments, multi-hop **SSH** jump configurations across SSC network boundaries, and **SSL/TLS** lifecycle management—all reviewed against the security baseline prior to production rollout.',
     detailDepth: [
       {
         title: 'n8n on app01',
-        text: '**n8n** runs internal workflow automation on SSC container standards. Moving off **dev01** meant rebuilding the app stack on **app01**, restoring workflow DB state, and proving **HTTPS** through the production reverse-proxy chain—not lifting the old VM image.',
+        text: '**n8n** runs internal workflow automation on SSC container standards. Moving off **dev01** meant rebuilding the **Docker**-based app stack on **app01**, restoring workflow DB state, and proving **HTTPS** through the production reverse-proxy chain—not lifting the old VM image.',
       },
       {
         title: 'DocuSeal on app01',
@@ -85,13 +85,13 @@ const EXPERIENCE = [
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
     timelineBullets: [
-      'Led a **GitLab** account audit using the **GitLab API**, identifying **132 inactive users** and enabling a deactivation strategy that reduced **licensing** costs while adhering to platform constraints.',
-      'Developed and maintained **Ansible playbooks** that continuously polled **75+ network devices** for health metrics, triggering automated alerts for timely incident detection and resolution.',
-      'Integrated **Zabbix** real-time monitoring into **CI/CD** pipelines across **dev, staging, and prod** tiers, replacing manual health checks with automated alerting and cutting incident detection lag from hours to minutes.',
-      'Audited and refactored **20+ Ansible playbooks** and automated **15 network monitoring jobs**, eliminating **30%** of redundant execution steps and improving reliability of automated network checks.',
+      'Reduced platform licensing costs by identifying **132 inactive accounts** across the full organizational **GitLab** instance—delivering a prioritized deactivation plan to platform admins—by engineering a **REST API** audit script that systematically covered the complete account scope.',
+      'Improved network health coverage across **75+ devices** by building **Ansible** playbooks that automated continuous polling and alert triggering, replacing manual checks that previously left off-hours anomalies undetected.',
+      'Cut incident detection lag **from hours to minutes** across **dev, staging, and prod** by integrating **Zabbix** real-time monitoring into **GitLab CI/CD** pipeline gates—ensuring degraded device health blocked deployments before advancing to the next environment tier.',
+      'Improved automation reliability by refactoring **20+ Ansible playbooks** and automating **15 network monitoring jobs**—eliminating **30%** of redundant execution steps—through a structured audit of the production playbook library consumed daily by SSC network operations.',
     ],
     roleContext:
-      "Embedded in SSC’s NetDevOps practice alongside senior engineers who owned the **Ansible Automation Platform** and live monitoring stack. Scope covered improving a production playbook library (**20+ playbooks**, **75+ polled devices**) and integrating **Zabbix** into **CI/CD** pipeline gates—not one-off fixes, but changes the ops team depended on daily. All automation was version-controlled in **GitLab** and reviewed before pipeline deployment. The **GitLab API** audit scope extended across the full organizational account, requiring coordination with platform admins to scope deactivation without disrupting active teams.",
+      "Embedded in SSC's NetDevOps practice alongside senior engineers who owned the **Ansible Automation Platform** and live monitoring stack. Scope covered improving a production playbook library (**20+ playbooks**, **75+ polled devices**) and integrating **Zabbix** into **CI/CD** pipeline gates—not one-off fixes, but changes the ops team depended on daily. Automation work applied **Python** scripting, **REST API** integration, and **GitLab CI** pipeline configuration; all changes were version-controlled and peer-reviewed before pipeline deployment. The **GitLab API** audit required designing a programmatic approach to traverse the full organizational account scope and coordinate deactivation timing with platform admins to avoid disrupting active teams.",
     detailDepth: [
       {
         title: 'Zabbix + CI/CD pipeline integration',
@@ -99,11 +99,11 @@ const EXPERIENCE = [
       },
       {
         title: 'Ansible Forms assessment',
-        text: 'Evaluated **Ansible Forms** as a self-service front end for approved automation. Mapped which cross-team requests could become job templates (read-only checks first, then constrained changes), documented inventory and credential boundaries, and delivered a phased rollout plan senior engineers accepted before anything hit production.',
+        text: 'Assessed **Ansible Forms** as a self-service front end for approved cross-team automation. Mapped which requests could safely become parameterized job templates—read-only health checks first, then constrained operational changes—documented inventory and credential scope boundaries, and delivered a phased rollout plan that senior engineers approved before any change reached the production **Ansible AAP** environment.',
       },
     ],
     sidebarNote:
-      'Worked inside SSC’s NetDevOps practice with **Ansible Automation Platform**, engineering leads, and ops teams who consumed reports and pipeline gates.',
+      "Worked inside SSC's NetDevOps practice with **Ansible Automation Platform**, engineering leads, and ops teams who consumed reports and pipeline gates.",
   },
   {
     slug: 'lan-operations-technician',
@@ -114,11 +114,11 @@ const EXPERIENCE = [
     image: `${BASE}images/ssc-switch-upgrade.png`,
     imageAlt: 'Abdul Rehman Baseem upgrading switches in a network environment',
     timelineBullets: [
-      'Upgraded firmware on **50+ Juniper EX-4300 P and MP** switches via **Linux scripting**, resolving multiple known vulnerabilities and aligning all devices to current **security baselines**.',
-      'Designed **Visio** topology diagrams for **10+ NCR sites** documenting subnet structures and physical layouts, formally adopted as the primary reference for field technicians during incident response.',
+      'Brought **50+ Juniper EX-4300** switches into full **security baseline compliance** by scripting a **Linux**-based batch firmware upgrade that automated push and post-install version validation across multiple NCR sites—eliminating per-device manual upgrades and remediating **CVE**-flagged vulnerabilities during approved maintenance windows.',
+      'Reduced bridge call resolution time by **~40%** across **10+ NCR sites** by designing **Visio** topology diagrams—formally adopted by field technicians as the single source of truth—that centralized subnet tables, physical layouts, and device inventory previously scattered across inconsistently named file shares.',
     ],
     roleContext:
-      "Worked hands-on in SSC’s National Capital Region LAN operations—coordinating directly with field technicians and the ops center during live incidents. Interfaced with security teams on vulnerability remediation timelines and with operations planners on documentation standards. The firmware upgrade scope required scripting a repeatable process across **50+ Juniper EX-4300** devices without disrupting live traffic, accounting for scheduled maintenance windows and rollback procedures. Topology documentation created here was formally adopted as the single source of truth for bridge calls, replacing scattered per-site shares that had no consistent format.",
+      "Worked hands-on in SSC's National Capital Region LAN operations—coordinating with field technicians, the ops center, and security teams during live incidents. Interfaced with security on **vulnerability remediation** timelines (**CVE** tracking and baseline sign-off) and with operations planners on documentation standards. The firmware upgrade scope required scripting a repeatable **Linux** process across **50+ Juniper EX-4300** devices without disrupting live traffic, accounting for maintenance windows and rollback procedures. Topology documentation formally replaced per-site file shares with no consistent format, cutting the lookup overhead field technicians reported spending during incidents by roughly 40%.",
     detailDepth: [
       {
         title: 'Centralized site documentation',
@@ -126,7 +126,7 @@ const EXPERIENCE = [
       },
       {
         title: 'Firmware upgrade scripting',
-        text: 'Upgrading **50+ Juniper EX-4300** devices manually would have required a technician at each device across multiple sites. Wrote **Linux shell scripts** to push firmware bundles and validate version post-install, letting the process run in batch during approved maintenance windows and producing a per-device status log for the security baseline sign-off.',
+        text: 'Upgrading **50+ Juniper EX-4300** devices manually would have required a technician at each device across multiple NCR sites. Wrote **Linux shell scripts** to push firmware bundles, validate post-install versions, and log per-device status—enabling batch execution during approved maintenance windows and producing an audit trail for **security baseline sign-off** and **CVE** remediation documentation.',
       },
     ],
     sidebarNote:
@@ -137,9 +137,10 @@ const EXPERIENCE = [
 const SKILLS = {
   'Languages & Frameworks': ['Python', 'Java', 'C', 'C++', 'MATLAB', 'LC-3 Assembly', 'TypeScript', 'React', 'FastAPI'],
   'Network Operating Systems': ['Cisco IOS CLI', 'Juniper Junos', 'Aruba CLI'],
-  'Automation & DevOps': ['Ansible Automation Platform (AAP)', 'Docker', 'Git', 'GitLab'],
-  'Tools & Databases': ['VS Code', 'PyCharm', 'Wireshark', 'PuTTY', 'MobaXterm', 'VMware Fusion', 'Visio', 'MySQL'],
-  'Platforms & Monitoring': ['Zabbix', 'NNMI', 'Elasticsearch', 'HashiCorp Vault', 'DocuSeal', 'Lighthouse'],
+  'Automation & DevOps': ['Ansible Automation Platform (AAP)', 'Docker', 'Git', 'GitLab CI/CD', 'n8n', 'OpenSSL'],
+  'Cloud & Infrastructure': ['Azure', 'VMware Fusion', 'HashiCorp Vault', 'Linux'],
+  'Tools & Databases': ['VS Code', 'PyCharm', 'Wireshark', 'PuTTY', 'MobaXterm', 'Visio', 'MySQL', 'PostgreSQL'],
+  'Platforms & Monitoring': ['Zabbix', 'NNMI', 'Elasticsearch', 'DocuSeal'],
   'Networking Protocols': ['TCP/IP', 'STP', 'ARP', 'RIP', 'BGP', 'OSPFv2/v3', 'EIGRP', 'MPLS'],
 }
 
@@ -980,7 +981,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    Building infrastructure automation and network tooling at Shared Services Canada — Ansible migrations, Zabbix CI/CD pipelines, and firmware upgrades across government LAN.
+                    Building infrastructure automation and network tooling at Shared Services Canada — n8n workflow orchestration, Ansible-based SSL/TLS provisioning, Zabbix monitoring integrated into CI/CD pipelines, and enterprise LAN operations across federal government infrastructure.
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}
