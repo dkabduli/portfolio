@@ -620,9 +620,10 @@
 .gocLogo {
   display: block;
   width: 100%;
-  max-width: 260px;
+  max-width: 200px;
   height: auto;
   margin-bottom: 14px;
+  mix-blend-mode: multiply;
 }
 
 .aboutInfoRow {
