@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { LazyMotion, domAnimation, motion, AnimatePresence, useReducedMotion, useScroll, useSpring, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
 import { contactMethods } from './data/contact'
+import { scrollTo } from './utils/scrollTo'
 import styles from './App.module.css'
 
 const BASE = import.meta.env.BASE_URL || '/'
@@ -419,6 +420,14 @@ function getDetailRoute() {
   const { hash } = window.location
   if (!hash.startsWith('#/')) return null
   return hash.slice(2)
+}
+
+/** Bare section anchor (`#experience`), as opposed to a detail route (`#/experience/slug`). */
+function getSectionHash() {
+  if (typeof window === 'undefined') return null
+  const { hash } = window.location
+  if (!hash || hash.startsWith('#/')) return null
+  return hash.slice(1) || null
 }
 
 function useActiveSection(ids) {
@@ -916,6 +925,39 @@ export default function App() {
     if (!activeExperienceDetail && !activeProjectDetail) return
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [activeExperienceDetail, activeProjectDetail])
+
+  /**
+   * Restore a `#section` anchor when the portfolio view *becomes* visible — on a cold
+   * load of e.g. /portfolio/#experience, and when returning from a detail route.
+   * In both cases the target section is absent from the DOM at the moment the hash is
+   * applied, so the browser's native anchor scroll silently no-ops and the visitor is
+   * left at the top of the page. Ordinary in-page nav clicks are untouched: the view is
+   * already active, so this effect does not re-run and the native smooth scroll stands.
+   */
+  const portfolioViewActive = !activeExperienceDetail && !activeProjectDetail
+  const portfolioViewWasActive = useRef(false)
+
+  useEffect(() => {
+    const wasActive = portfolioViewWasActive.current
+    portfolioViewWasActive.current = portfolioViewActive
+    if (!portfolioViewActive || wasActive) return
+
+    const sectionId = getSectionHash()
+    if (!sectionId) return
+
+    /** The exit transition delays the portfolio remount, so retry for ~1s of frames. */
+    let framesLeft = 60
+    let frame = requestAnimationFrame(function attempt() {
+      if (scrollTo(sectionId, 'auto')) return
+      if (framesLeft-- > 0) frame = requestAnimationFrame(attempt)
+    })
+
+    return () => {
+      cancelAnimationFrame(frame)
+      /** StrictMode remounts this effect; rewind so the retry re-arms on the second pass. */
+      portfolioViewWasActive.current = wasActive
+    }
+  }, [portfolioViewActive])
 
   const pageTransition = shouldReduceMotion
     ? {}

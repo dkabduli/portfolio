@@ -1,6 +1,6 @@
-export function scrollTo(sectionId) {
+export function scrollTo(sectionId, behavior = 'smooth') {
   const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  if (!element) return false;
+  element.scrollIntoView({ behavior, block: 'start' });
+  return true;
 }
