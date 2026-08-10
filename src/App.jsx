@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { LazyMotion, domAnimation, motion, AnimatePresence, useReducedMotion, useScroll, useSpring, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
 import { contactMethods } from './data/contact'
 import styles from './App.module.css'
@@ -82,13 +82,40 @@ const EXPERIENCE = [
     imageAlt: 'Infrastructure development and automation',
     imageContain: false,
     timelineBullets: [
+      'Replaced a legacy **Excel**-based Commercial Wireless Services intake process by designing and shipping a production full-stack tracking system — **Next.js 15**, **React 19**, **Prisma**, **PostgreSQL 16**, **Docker** — with an **eight-status request lifecycle**, role-based access across **4 global and 5 request-level roles**, **Microsoft Entra SAML SSO**, and full-text search across every request field.',
+      'Eliminated manual shared-mailbox triage by building a scheduled **Python** service that reads **Microsoft 365** mail via **Microsoft Graph**, deduplicates processed messages, auto-creates and routes **Taiga** tickets, and posts **Teams** notifications — hardened by **25 automated tests** and a safe-by-default dry-run mode before production rollout.',
       'Reduced ticket intake overhead across **10+ infrastructure service areas** by designing and deploying an **n8n** automated routing workflow that eliminated duplicate creation and centralized unassigned work into a shared queue—validated against **25+ production-ready NetOps tickets** under SSC change-control approval.',
       'Achieved zero-data-loss platform migration of **n8n** (**7 active workflows**) and **DocuSeal** from **dev01** to **app01**—verified across **120 templates**, **251 completed documents**, and **494 storage objects** via database dump/restore, blob sync, and row-count parity checks—cutting deployment recovery time from **20–30 min** to **under 10 min**.',
-      'Cut **SSL/TLS certificate provisioning from 20–30 minutes to under 2 minutes** per request by building a reusable **Ansible** role that automates CSR generation, private key handling, and **OpenSSL** configuration for **Azure**-compatible **SSC NAI** environments.',
     ],
     roleContext:
-      'Operated inside SSC platform engineering under federal change-control constraints—every deployment touched production-facing services requiring documented testing, approval workflows, and service-owner sign-off before going live. Toolchain spanned **n8n**, **DocuSeal** (**PostgreSQL** backend), **Ansible AAP**, **OpenSSL**, **GitLab CI**, and **HashiCorp Vault** alongside internal ITSM and ticketing systems. Work involved **Docker**-based container deployments, multi-hop **SSH** jump configurations across SSC network boundaries, and **SSL/TLS** lifecycle management—all reviewed against the security baseline prior to production rollout.',
+      'Operated inside SSC platform engineering under federal change-control constraints—every deployment touched production-facing services requiring documented testing, approval workflows, and service-owner sign-off before going live. Scope spanned full-stack application delivery (**Next.js**, **Prisma**, **PostgreSQL**), mailbox automation (**Python**, **Microsoft Graph**, **Taiga**), and platform work across **n8n**, **DocuSeal**, **Ansible AAP**, **GitLab CI**, and **HashiCorp Vault** alongside internal ITSM and ticketing systems. Work involved **Docker**-based container deployments, **Microsoft Entra SAML SSO** integration, and multi-hop **SSH** jump configurations across SSC network boundaries—all reviewed against the security baseline prior to production rollout.',
     detailDepth: [
+      {
+        title: 'CWS Intake App — production intake platform',
+        text: 'A full-stack replacement for the legacy **Excel**-based Commercial Wireless Services intake process, built with **Next.js 15**, **React 19**, **Prisma**, **PostgreSQL 16**, **Docker**, and **Zod** — **22 API route files**, **10 Prisma models**, **17 enums**, and **16 database migrations** — now in production use, converting unstructured spreadsheet workflows into a searchable, filterable, role-aware request tracking system.',
+        bullets: [
+          'Structured request lifecycle across **8 statuses** — **draft → submitted → in review → awaiting client → procurement → implementation → complete/cancelled** — the foundation for operational dashboards, audit history, and standardized service-delivery tracking.',
+          'Protected client collaboration links with token/password access, expiry handling, encrypted invite secrets, email delivery, save-progress support, and a send-back-to-SSC workflow — validated by **48 automated test cases** across unit and E2E coverage.',
+          'Role-based access engineered for **4 global user roles** and **5 request membership roles** — separating **Admin**, **SSC**, **Client**, and **GC WiFi** permissions across internal routes, APIs, and protected external links, with unauthorized protected-link edits rejected again at the API layer.',
+          'Multi-building and campus request support backed by dedicated **CwsBuilding**, **CoverageArea**, and **CablingAssessment** models — one intake record manages multiple buildings with per-building coverage areas, cabling assessments, access details, support data, and file attachments.',
+          '**Microsoft Entra SAML SSO** alongside environment-driven local authentication: signed HTTP-only sessions, logout handling, protected routes, and configurable dev/prod auth behavior.',
+          'Audit tracking across **5 audit categories** and **8 audit sources** — field-level change history, actor tracking, review acknowledgements, and protected-link activity for request ownership and operational accountability.',
+          '**PostgreSQL** full-text search and trigram indexes across request text, departments, civic addresses, contacts, floors, notes, and site details — fast dashboard filtering and request lookup.',
+          'Release hardening through **5 quality gates**: **TypeScript** typecheck, production build, **Vitest** unit tests, **Playwright** E2E tests, and local smoke testing through `/api/health` — plus deployment docs covering the **Docker** pre-production flow, certificate handling, and regression matrices.',
+        ],
+      },
+      {
+        title: 'Mailbox-to-Taiga integration',
+        text: 'A scheduled **Python** automation service — **10 source modules**, **7 test files** — that reads a **Microsoft 365** shared mailbox through **Microsoft Graph**, parses incoming requests, deduplicates processed mail, and creates **Taiga** issues or user stories — replacing manual mailbox triage with auditable automation.',
+        bullets: [
+          'Safe-by-default **dry-run mode** logs intended Taiga payloads without creating tickets or marking mail processed — controlled validation before anything went live.',
+          'Duplicate prevention keyed on both **Graph message IDs** and internet message IDs — validated by automated duplicate-detection tests, so repeated mailbox scans never create duplicate tickets.',
+          'Configurable routing: single-domain matches assigned directly to owners, ambiguous or unmatched work routed to a shared bin user — with **Taiga** project membership validated before live creation, so tickets are never created unassigned when configured users are missing.',
+          '**Teams** notifications for newly created tickets plus daily reminders for open bin-assigned work — unassigned requests don\'t sit unnoticed.',
+          'Least-privileged **Microsoft Graph** client using **Mail.Read** scope for mailbox reads, attachment discovery, retry handling, and optional mark-as-read behavior.',
+          '**25 automated Python tests** covering parsing, routing, assignment, duplicate prevention, persistence, Taiga assignment resolution, and **Teams** webhook behavior — plus deployment docs for **Linux VM** setup, **cron** installation, dry-run validation, and first-live-ticket testing.',
+        ],
+      },
       {
         title: 'n8n on app01',
         text: '**n8n** runs internal workflow automation on SSC container standards. Moving off **dev01** meant rebuilding the **Docker**-based app stack on **app01**, restoring workflow DB state, and proving **HTTPS** through the production reverse-proxy chain—not lifting the old VM image.',
@@ -96,10 +123,6 @@ const EXPERIENCE = [
       {
         title: 'DocuSeal on app01',
         text: '**DocuSeal** runs on a custom **SSC Docker** image with a **PostgreSQL** backend. Cutover required rebuilding the image on **app01**, performing a database dump/restore, syncing blob storage, and running row-count parity checks across **120 templates**, **117 submissions**, **251 completed documents**, and **494 storage objects** before the DNS flip — every count verified before go-live, not assumed.',
-      },
-      {
-        title: 'Multi-hop Ansible to GitLab',
-        text: '**SWLINUX** certificate output cannot reach **git02** directly from a single network hop. Playbooks chain **devHost** as a jump host through the inventory into **Azure GitLab** using **SSH proxy** settings — so the same Ansible role run publishes CSRs and keys to the correct project namespace for production-style rollout without manual file transfer.',
       },
     ],
     sidebarNote:
@@ -117,15 +140,30 @@ const EXPERIENCE = [
     timelineBullets: [
       'Reduced platform licensing costs by identifying **132 inactive accounts** across the full organizational **GitLab** instance—delivering a prioritized deactivation plan to platform admins—by engineering a **REST API** audit script that systematically covered the complete account scope.',
       'Improved network health coverage across **75+ devices** by building **Ansible** playbooks that automated continuous polling and alert triggering, replacing manual checks that previously left off-hours anomalies undetected.',
+      'Cut **SSL/TLS certificate provisioning from 20–30 minutes to under 2 minutes** per request by building a reusable **Ansible** role that automates CSR generation, private key handling, and **OpenSSL** configuration for **Azure**-compatible SSC environments.',
       'Cut incident detection lag **from hours to minutes** across **dev, staging, and prod** by integrating **Zabbix** real-time monitoring into **GitLab CI/CD** pipeline gates—ensuring degraded device health blocked deployments before advancing to the next environment tier.',
       'Improved automation reliability by refactoring **20+ Ansible playbooks** and automating **15 network monitoring jobs**—eliminating **30%** of redundant execution steps—through a structured audit of the production playbook library consumed daily by SSC network operations.',
     ],
     roleContext:
-      "Embedded in SSC's NetDevOps practice alongside senior engineers who owned the **Ansible Automation Platform** and live monitoring stack. Scope covered improving a production playbook library (**20+ playbooks**, **75+ polled devices**) and integrating **Zabbix** into **CI/CD** pipeline gates—not one-off fixes, but changes the ops team depended on daily. Automation work applied **Python** scripting, **REST API** integration, and **GitLab CI** pipeline configuration; all changes were version-controlled and peer-reviewed before pipeline deployment. The **GitLab API** audit required designing a programmatic approach to traverse the full organizational account scope and coordinate deactivation timing with platform admins to avoid disrupting active teams.",
+      "Embedded in SSC's NetDevOps practice alongside senior engineers who owned the **Ansible Automation Platform** and live monitoring stack. Scope covered improving a production playbook library (**20+ playbooks**, **75+ polled devices**), integrating **Zabbix** into **CI/CD** pipeline gates, and replacing a manual **OpenSSL** certificate workflow with a reusable **Ansible** role—not one-off fixes, but changes the ops team depended on daily. Automation work applied **Python** scripting, **REST API** integration, and **GitLab CI** pipeline configuration; all changes were version-controlled and peer-reviewed before pipeline deployment. The **GitLab API** audit required designing a programmatic approach to traverse the full organizational account scope and coordinate deactivation timing with platform admins to avoid disrupting active teams.",
     detailDepth: [
       {
         title: 'Zabbix + CI/CD pipeline integration',
         text: 'Zabbix had been running as a standalone monitoring tool—alerts existed but nothing acted on them in the pipeline. Wired **Zabbix** health checks into **GitLab CI** gates across **dev, staging, and prod** so a degraded device could block a deployment before it reached the next tier. The integration required mapping Zabbix host groups to pipeline environment variables so the same job template worked across tiers without hardcoded thresholds.',
+      },
+      {
+        title: 'SWLINUXPatching / Azure CSR automation',
+        text: 'Replaced a manual **OpenSSL** certificate workflow with **Ansible** automation across **5 roles** — playbooks, templates, role defaults, and an **OpenSSL Jinja2** template that generate **Azure**/TLS Protect–compatible CSR and private-key artifacts — then extended the same role structure into Linux patching validation.',
+        bullets: [
+          'Certificate request prep dropped from a **20–30 minute** manual OpenSSL process to a repeatable role-driven run generating the standardized OpenSSL config, private key, and CSR in the expected **TLS Protect/Azure** format.',
+          'Validation workflows for **14 documented Linux servers** across **Barrie EC63** and **Borden EC04** environments — health checks spanning primary, secondary, backup, jump, and lab infrastructure groups.',
+          'Documented separate login models for **12 netops-managed servers** and **2 personal BOKS-access servers**, plus manual restart requirements — repeatable post-maintenance validation during patching windows.',
+          'Structured inventory, host variables, and role-specific tasks so patching checks can be rerun and adapted across multiple SSC server environments.',
+        ],
+      },
+      {
+        title: 'Multi-hop Ansible to GitLab',
+        text: '**SWLINUX** certificate output cannot reach **git02** directly from a single network hop. Playbooks chain **devHost** as a jump host through the inventory into **Azure GitLab** using **SSH proxy** settings — so the same Ansible role run publishes CSRs and keys to the correct project namespace for production-style rollout without manual file transfer.',
       },
       {
         title: 'Ansible Forms assessment',
@@ -165,12 +203,12 @@ const EXPERIENCE = [
 ]
 
 const SKILLS = {
-  'Languages & Frameworks': ['Python', 'Java', 'C', 'C++', 'MATLAB', 'LC-3 Assembly', 'TypeScript', 'React', 'FastAPI'],
+  'Languages & Frameworks': ['Python', 'Java', 'C', 'C++', 'MATLAB', 'LC-3 Assembly', 'TypeScript', 'React', 'Next.js', 'FastAPI', 'Prisma'],
   'Network Operating Systems': ['Cisco IOS CLI', 'Juniper Junos', 'Aruba CLI'],
-  'Automation & DevOps': ['Ansible Automation Platform (AAP)', 'Docker', 'Git', 'GitLab CI/CD', 'n8n', 'OpenSSL', 'REST APIs'],
-  'Cloud & Infrastructure': ['Azure', 'VMware Fusion', 'HashiCorp Vault', 'Linux'],
+  'Automation & DevOps': ['Ansible Automation Platform (AAP)', 'Docker', 'Git', 'GitLab CI/CD', 'n8n', 'OpenSSL', 'REST APIs', 'Vitest', 'Playwright'],
+  'Cloud & Infrastructure': ['Azure', 'Microsoft Entra (SAML SSO)', 'VMware Fusion', 'HashiCorp Vault', 'Linux'],
   'Tools & Databases': ['VS Code', 'PyCharm', 'Wireshark', 'PuTTY', 'MobaXterm', 'Visio', 'MySQL', 'PostgreSQL'],
-  'Platforms & Monitoring': ['Zabbix', 'NNMI', 'Elasticsearch', 'DocuSeal'],
+  'Platforms & Monitoring': ['Zabbix', 'NNMI', 'Elasticsearch', 'DocuSeal', 'Microsoft Graph', 'Taiga'],
   'Networking Protocols': ['TCP/IP', 'STP', 'ARP', 'RIP', 'BGP', 'OSPFv2/v3', 'EIGRP', 'MPLS'],
   'Security': ['Firewalls', 'VPN', 'IDPS', 'Network Hardening'],
 }
@@ -467,7 +505,9 @@ function Section({ id, label, children, className = '', contentClassName = '' })
       className={`${styles.section} ${className}`.trim()}
       initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
       whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      /** `amount` is a fraction of the element, so a tall section (mobile #experience) can need
+       *  more pixels than the viewport has and never reveal. Trigger on first pixel instead. */
+      viewport={{ once: true, amount: 'some', margin: '-80px' }}
       transition={{ duration: shouldReduceMotion ? 0.1 : 0.5, ease: 'easeOut' }}
     >
       {label ? <p className={styles.sectionLabel}>{label}</p> : null}
@@ -607,7 +647,7 @@ function ExperienceDetailPage({ job }) {
       <header className={styles.detailHeader}>
         <div className={styles.container}>
           <div className={styles.detailNav}>
-            <a href={`${BASE}#experience`} className={styles.detailBackLink}>
+            <a href="#experience" className={styles.detailBackLink} onClick={(e) => { e.preventDefault(); window.history.pushState(null, '', '#experience'); window.dispatchEvent(new HashChangeEvent('hashchange')) }}>
               ← Back to portfolio
             </a>
             <div className={styles.detailActions}>
@@ -660,6 +700,13 @@ function ExperienceDetailPage({ job }) {
                         <article key={item.title} className={styles.detailOnlyCard}>
                           <h3 className={styles.detailOnlyTitle}>{item.title}</h3>
                           <p className={styles.detailText}>{renderRichText(item.text)}</p>
+                          {item.bullets?.length ? (
+                            <ul className={styles.detailBullets}>
+                              {item.bullets.map((bullet) => (
+                                <li key={bullet}>{renderRichText(bullet)}</li>
+                              ))}
+                            </ul>
+                          ) : null}
                         </article>
                       ))}
                     </div>
@@ -694,7 +741,7 @@ function ProjectDetailPage({ project }) {
       <header className={styles.detailHeader}>
         <div className={styles.container}>
           <div className={styles.detailNav}>
-            <a href={`${BASE}#projects`} className={styles.detailBackLink}>
+            <a href="#projects" className={styles.detailBackLink} onClick={(e) => { e.preventDefault(); window.history.pushState(null, '', '#projects'); window.dispatchEvent(new HashChangeEvent('hashchange')) }}>
               ← Back to portfolio
             </a>
             <div className={styles.detailActions}>
@@ -907,9 +954,24 @@ export default function App() {
   }, [menuOpen])
 
   useEffect(() => {
-    const onHashChange = () => setDetailRoute(getDetailRoute())
-    window.addEventListener('hashchange', onHashChange)
-    return () => window.removeEventListener('hashchange', onHashChange)
+    const onRouteChange = () => setDetailRoute(getDetailRoute())
+    window.addEventListener('hashchange', onRouteChange)
+    window.addEventListener('popstate', onRouteChange)
+    return () => {
+      window.removeEventListener('hashchange', onRouteChange)
+      window.removeEventListener('popstate', onRouteChange)
+    }
+  }, [])
+
+  // iOS Safari sometimes swallows hashchange for hashes containing '/' with no matching element.
+  // Calling setDetailRoute directly in onClick avoids depending on hashchange firing at all.
+  const handleDetailNav = useCallback((href) => (e) => {
+    e.preventDefault()
+    const route = href.startsWith('#/') ? href.slice(2) : null
+    if (route) {
+      window.history.pushState(null, '', href)
+      setDetailRoute(route)
+    }
   }, [])
 
   useEffect(() => {
@@ -1019,7 +1081,7 @@ export default function App() {
                   </a>
                   <div className={styles.mobileNavSubmenu}>
                     {getNavDropdownLinks(item.id).map((link) => (
-                      <a key={link.href} href={link.href} className={styles.mobileNavSubLink} onClick={() => setMenuOpen(false)}>
+                      <a key={link.href} href={link.href} className={styles.mobileNavSubLink} onClick={(e) => { handleDetailNav(link.href)(e); setMenuOpen(false) }}>
                         {link.shortLabel}
                       </a>
                     ))}
@@ -1061,7 +1123,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.15 }}
                   >
-                    Infrastructure Dev Intern · Shared Services Canada
+                    Infrastructure & NetDevOps — Shared Services Canada · B.IT. '27
                   </motion.p>
                   <motion.p
                     className={styles.heroLocation}
@@ -1077,7 +1139,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    Building infrastructure automation and network tooling at Shared Services Canada — Ansible-based provisioning, Zabbix CI/CD pipelines, and workflow orchestration deployed under federal change-control constraints.
+                    Building production systems at Shared Services Canada — a full-stack intake platform (Next.js/PostgreSQL), Ansible-based provisioning, Zabbix CI/CD pipelines, and mailbox-to-ticket automation, all deployed under federal change-control constraints.
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}
@@ -1155,7 +1217,7 @@ export default function App() {
                 </div>
               </div>
               <p className={styles.aboutBio}>
-                Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), completing three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, and infrastructure automation. My work runs under federal change-control and security baseline requirements — production environments, not sandboxes. Outside of work, I built BlackBoxNet: a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments.
+                Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), completing three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, infrastructure automation, and full-stack application delivery. My work runs under federal change-control and security baseline requirements — production environments, not sandboxes. Outside of work, I built BlackBoxNet: a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments.
               </p>
             </div>
           </Section>
@@ -1168,7 +1230,7 @@ export default function App() {
                   className={styles.timelineItem}
                   initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
                   whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
+                  viewport={{ once: true, amount: 'some', margin: '-80px' }}
                   transition={{ duration: shouldReduceMotion ? 0.1 : 0.5, delay: index * 0.08 }}
                 >
                   <span className={styles.timelineDot} aria-hidden="true" />
@@ -1187,7 +1249,7 @@ export default function App() {
                       </ul>
                     ) : null}
                     {hasExperienceDetails(job) ? (
-                      <a href={`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`} className={styles.caseStudyLink}>
+                      <a href={`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`} className={styles.caseStudyLink} onClick={handleDetailNav(`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`)}>
                         Read more →
                       </a>
                     ) : null}
@@ -1281,7 +1343,7 @@ export default function App() {
                           </a>
                         ) : null}
                         {project.slug ? (
-                          <a href={`#/${PROJECT_ROUTE_PREFIX}${project.slug}`}>
+                          <a href={`#/${PROJECT_ROUTE_PREFIX}${project.slug}`} onClick={handleDetailNav(`#/${PROJECT_ROUTE_PREFIX}${project.slug}`)}>
                             Case study →
                           </a>
                         ) : null}
@@ -1296,7 +1358,7 @@ export default function App() {
           <Section id="contact" label="// 04 — CONTACT">
             <div className={styles.contactInfo}>
               <p className={styles.contactIntro}>
-                Open to network engineering, NetDevOps, and infrastructure roles — graduating April 2027.
+                Seeking new grad network engineering, NetDevOps, and infrastructure roles — graduating April 2027.
               </p>
               <div className={styles.contactLinks}>
                 {contactLinks.map((item) => (

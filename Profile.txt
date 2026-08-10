@@ -1,0 +1,227 @@
+Candidate Profile — Abdul Rehman
+
+Basic Information
+
+* Full Name: Abdul Rehman
+* Phone: +1 (343) 540-7126
+* Email: abdulrehman6@cmail.carleton.ca
+* LinkedIn: linkedin.com/in/abdulrehmanbaseem
+* GitHub: github.com/dkabduli
+* Portfolio: dkabduli.github.io/portfolio
+
+⸻
+
+Education
+
+Bachelor of Information Technology – Network Technology (B.IT.)
+Carleton University (joint with Algonquin College)
+
+* Expected Graduation: April 2027
+* Status: Entering 4th Year
+* Location: Ottawa, Ontario, Canada
+
+⸻
+
+Work Authorization
+
+* Canadian citizen (no sponsorship required)
+
+⸻
+
+Professional Experience
+
+Infrastructure Development Intern
+
+Shared Services Canada
+May 2026 – Present
+
+* Designed and deployed an automated ticket routing workflow handling 25+ production tickets across 10+ infrastructure domains
+* Migrated n8n automation platform to Azure pre-production, resolving SSL, reverse proxy, and container networking issues
+* Automated SSL/TLS certificate generation using Ansible + OpenSSL, reducing setup time from 20–30 minutes to under 2 minutes
+
+⸻
+
+NetDevOps Intern
+
+Shared Services Canada
+April 2025 – April 2026
+
+* Conducted GitLab API audit identifying 132 inactive users, enabling cost optimization
+* Built Ansible playbooks monitoring 75+ network devices with automated alerting
+* Integrated Zabbix monitoring into CI/CD pipelines, eliminating manual health checks
+* Refactored 20+ playbooks and automated 15 monitoring jobs, improving reliability and reducing redundancy
+
+⸻
+
+LAN Operations Technician
+
+Shared Services Canada
+May 2024 – April 2025
+
+* Upgraded firmware on 50+ Juniper EX-4300 switches via Linux scripting
+* Designed network topology diagrams for 10+ enterprise sites using Visio
+* Centralized network documentation, reducing lookup time by 40%
+
+⸻
+
+Key Project
+
+BlackBoxNet
+
+* Stack: FastAPI, React, TypeScript, PostgreSQL, Docker, Git
+* Live: blackboxnet-web.onrender.com
+* Built a Git-backed network replay platform with 12 multi-vendor labs (Cisco, Juniper, Nokia)
+* Developed React UI with interactive lab maps and outage replay system
+* Implemented config diff engine and version-controlled network states
+* Deployed with CI/CD (GitHub Actions) and optimized frontend (74 KB gzipped)
+
+⸻
+
+Technical Skills
+
+Programming & Development
+
+* Python, Java, C, C++, TypeScript
+* React, FastAPI
+* MATLAB, LC3 Assembly
+
+Networking
+
+* TCP/IP, BGP, OSPFv2/v3, EIGRP, MPLS
+* STP, VLANs, ARP, RIP
+* Cisco IOS CLI, Juniper Junos, Aruba CLI
+
+Automation & DevOps
+
+* Ansible Automation Platform
+* Docker
+* Git, GitLab CI/CD
+* n8n workflow automation
+
+Monitoring & Observability
+
+* Zabbix, NNMI
+* Elasticsearch
+* Wireshark
+
+Cloud & Infrastructure
+
+* Azure (pre-production experience)
+* VMware Fusion
+* HashiCorp Vault
+
+Databases
+
+* MySQL, PostgreSQL
+
+Tools
+
+* VS Code, PyCharm
+* PuTTY, MobaXterm
+* Visio
+
+Security
+
+* Firewalls, IDPS, VPN
+* Network hardening
+* Adversarial machine learning (introductory)
+
+⸻
+
+Academic Technical Foundation (Derived from Coursework)
+
+Networking & Infrastructure
+
+* Enterprise routing & switching (OSPF, BGP, MPLS, VLANs, STP)
+* Wireless networking (802.11, RF design)
+* Network troubleshooting and performance optimization
+* Software-defined networking and API-based automation
+
+Systems & OS
+
+* Linux, Unix, Windows Server administration
+* DNS, DHCP, SMTP, HTTP, SSH configuration
+* Virtualization and server environments
+
+Security
+
+* Network security architecture (firewalls, VPNs, IDPS)
+* Cloud and IoT security fundamentals
+* Adversarial ML and advanced threat models
+
+Software & Data
+
+* Data structures (trees, graphs, recursion)
+* SQL, database design, normalization
+* Web development (HTML, CSS, JS, HTTP)
+
+Cloud & Modern Infrastructure
+
+* Virtual machines, containers, orchestration
+* Cloud provisioning and micro-segmentation
+
+Real-Time & Systems Programming
+
+* Concurrency, interrupts, synchronization
+* Low-level programming concepts
+
+⸻
+
+Tools & Technologies Exposure
+
+* Cisco-style networking labs (CCNA/CCNP-aligned concepts)
+* Network simulation tools (Packet Tracer / similar)
+* Linux CLI + server administration
+* API-based automation and scripting
+* Introductory machine learning for networking
+
+⸻
+
+Soft Skills
+
+* Technical writing and communication
+* Cross-team collaboration in enterprise environments
+* Problem-solving and analytical thinking
+* Project ownership and initiative
+* Business and operational awareness
+
+⸻
+
+Target Roles
+
+Tier 1 (Primary)
+
+* Network Engineer (New Grad)
+* DevOps / NetDevOps Engineer
+* Network Automation Engineer
+* Infrastructure / Cloud Network Engineer
+
+Tier 2 (Secondary)
+
+* Software Developer (Backend / Full-Stack)
+* Site Reliability Engineer (SRE)
+* Cloud Engineer
+
+Tier 3 (Broad)
+
+* Junior IT Analyst
+* Junior Developer (any stack)
+* Systems / Operations roles
+
+⸻
+
+Professional Summary (For Resume / LinkedIn)
+
+Fourth-year B.IT. Network Technology student at Carleton University with hands-on experience at Shared Services Canada across infrastructure automation, NetDevOps, and enterprise networking. Proven ability to build scalable automation systems using Ansible, Docker, and CI/CD pipelines, alongside strong networking fundamentals (BGP, OSPF, MPLS). Creator of BlackBoxNet, a multi-vendor network simulation platform, demonstrating full-stack and DevOps capabilities. Seeking new grad roles in network engineering, DevOps, or backend development.
+
+⸻
+
+Constraints for AI Resume Generation (CRITICAL)
+
+* Do NOT invent:
+    * Certifications (CCNA, AWS, etc.)
+    * New roles, companies, or projects
+* Only reword and reorder existing experience
+* Degree must always be listed as “Expected April 2027”
+* Always include BlackBoxNet when relevant
+* Emphasize Shared Services Canada (3 co-op terms) for credibility
