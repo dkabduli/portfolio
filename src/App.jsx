@@ -300,6 +300,95 @@ const PROJECTS = [
     resourceLinks: [{ label: 'API docs', href: 'https://blackboxnet-api.onrender.com/docs' }],
   },
   {
+    name: 'VisionCompanion',
+    slug: 'visioncompanion',
+    year: '2026',
+    description:
+      'AI walking companion for blind and low-vision pedestrians. The phone\'s rear camera snapshots the street every 0.8 s, Gemini flags hazards — potholes, curbs, construction, traffic signals — and pre-recorded ElevenLabs voice clips announce them through open-ear headphones about 2 seconds after they appear. A hazard map built from ~1,500 open City of Ottawa 311 reports warns about damage reported ahead. Built at Hack the Hill III.',
+    tags: ['Gemini', 'ElevenLabs', 'FastAPI', 'React', 'TypeScript', 'PostgreSQL'],
+    image: `${BASE}images/visioncompanion-near-me.jpg`,
+    fallback: `${BASE}images/visioncompanion-near-me.jpg`,
+    imagePosition: 'center top',
+    github: 'https://github.com/dkabduli/VisionCompanion',
+    external: 'https://visioncompanion.vercel.app',
+    externalLabel: 'Live app',
+    detailMeta: ['AI accessibility PWA · Team Goobers', 'Hack the Hill III — Sept 2026', 'Vercel + Tiger Data'],
+    overviewTitle: 'What it is',
+    flowTitle: 'How a walk works',
+    deepDiveTitle: 'Engineering decisions',
+    screenshotsIntro: 'Home screen, hazard map, and the signal path from camera to ear.',
+    sidebarNarrativeTitle: 'Why it exists',
+    sidebarTraitsTitle: 'Technical notes',
+    sidebarNarrative:
+      'A white cane finds the ground — VisionCompanion finds everything else: hazards announced before the walker reaches them, silence about everything that doesn\'t matter.',
+    summary:
+      'A hands-free pipeline that runs continuously while walking: snapshots go to **Gemini** for hazard analysis (median **2.0 s**), the phone decides whether the result deserves a voice, and **ElevenLabs** clips play instantly through open-ear headphones. Two snapshots stay in flight at once, so a fresh look at the street arrives about every second. Voice commands ("VisionCompanion, what\'s ahead?") answer in a median **2.5 s**, and a **Tiger Data** (PostgreSQL + TimescaleDB) hazard map layers in ~**1,500** City of Ottawa 311 reports for GPS alerts like "lifted or sunken sidewalk panel reported about 40 metres ahead." Fully bilingual — English and French across screen, voice, and commands — with VoiceOver support and a large-text mode for low-vision users.',
+    humanSummary: [
+      {
+        label: 'Live app',
+        value: 'visioncompanion.vercel.app',
+      },
+      {
+        label: 'Repository',
+        value: 'github.com/dkabduli/VisionCompanion',
+      },
+    ],
+    incidentFlow: [
+      {
+        title: '1. Capture',
+        text: 'The rear camera takes a 768 px snapshot every 0.8 s with the phone hung on the chest. Two requests stay in flight simultaneously so coverage never gaps while an answer is pending.',
+      },
+      {
+        title: '2. Analyze',
+        text: 'Each snapshot goes to Gemini with a strict hazard rubric: stop signs, potholes, steps, doors, construction, head-height obstacles, crosswalks, and traffic lights within 10–15 m.',
+      },
+      {
+        title: '3. Decide',
+        text: 'The phone filters for what deserves a voice — each hazard is announced once per 30–45 s, trip hazards get a second warning under 2 m, and uncertain detections are never announced.',
+      },
+      {
+        title: '4. Speak',
+        text: 'Pre-recorded ElevenLabs clips play instantly; live questions get synthesized speech in 0.36 s. After 10 quiet seconds, an ambient description ("Before you, a wide sidewalk with trees") confirms the system is alive.',
+      },
+    ],
+    deepDive: [
+      'Model choice was measured, not assumed: the larger Gemini model took **3.9–37.7 s** per frame — the Flash-Lite tier\'s ~**2 s** median is what makes real-time walking alerts possible.',
+      '**478** pre-recorded voice clips across **4 voices and 2 languages** cover the full hazard vocabulary, eliminating synthesis latency on the critical path.',
+      'People, cars, and chairs are deliberately excluded from automatic alerts — in early tests they drowned out the hazards that matter. The app informs but never commands: it will not say "go," "clear," or "safe."',
+      'GPS hazard warnings compute "distance minus accuracy" so alerts fire early rather than late, and snapshots are discarded immediately after analysis for privacy.',
+      'Shipped with **186** phone tests and **91** server tests; the FastAPI backend on Vercel is rate-limited to 400 requests/minute.',
+    ],
+    screenshots: [
+      {
+        src: `${BASE}images/visioncompanion-near-me.jpg`,
+        alt: 'VisionCompanion home screen with usage steps, a potholes-near-me answer, and the Start walk button',
+        eyebrow: 'Home screen',
+        title: 'Street mode & voice answers',
+        caption: '"Potholes near me" answered with distances and addresses before leaving home.',
+      },
+      {
+        src: `${BASE}images/visioncompanion-hazard-map.jpg`,
+        alt: 'VisionCompanion hazard map of downtown Ottawa with pothole, uneven pavement, and crossing signal filters',
+        eyebrow: 'Hazard map',
+        title: 'Ottawa 311 reports, mapped',
+        caption: 'Open 311 reports and walker-reported hazards stored in Tiger Data, filterable by type and age.',
+      },
+      {
+        src: `${BASE}images/visioncompanion-signal-path.png`,
+        alt: 'Diagram of the VisionCompanion pipeline from camera to Gemini to ElevenLabs to headphones',
+        eyebrow: 'Architecture',
+        title: 'Camera to ear in ~2 seconds',
+        caption: 'Photo → Gemini hazard analysis → decision layer → ElevenLabs voice → open-ear headphones.',
+      },
+    ],
+    sidebarFacts: [
+      'Median 2.0 s snapshot analysis · ~2 s hazard-to-heard latency',
+      '478 pre-recorded clips — 4 voices, English + French',
+      '186 phone + 91 server automated tests',
+      'Never claims "safe to cross" — informs, never commands',
+    ],
+  },
+  {
     name: 'IPv6 EIGRP Network',
     slug: 'ipv6-eigrp-network',
     year: '2024',
