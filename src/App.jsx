@@ -221,6 +221,7 @@ const PROJECTS = [
     description:
       'AI walking companion for blind and low-vision pedestrians. The phone\'s rear camera snapshots the street every 0.8 s, Gemini flags hazards — potholes, curbs, construction, traffic signals — and pre-recorded ElevenLabs voice clips announce them through open-ear headphones about 2 seconds after they appear. A hazard map built from ~1,500 open City of Ottawa 311 reports warns about damage reported ahead. Built at Hack the Hill III.',
     tags: ['Gemini', 'ElevenLabs', 'FastAPI', 'React', 'TypeScript', 'PostgreSQL'],
+    featured: true,
     image: `${BASE}images/visioncompanion-logo.png`,
     fallback: `${BASE}images/visioncompanion-logo.png`,
     imagePosition: 'center center',
@@ -310,7 +311,6 @@ const PROJECTS = [
     description:
       'Full-stack network replay platform with 12 scripted multi-vendor outage labs across Cisco, Juniper, and Nokia. Step through T1→T5, investigate live topology, correlate root cause from semantic config diffs, and replay what changed before the failure — deployed with GitHub Actions CI on Render.',
     tags: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'Git'],
-    featured: true,
     image: `${BASE}images/blackboxnet-dashboard.png`,
     fallback: `${BASE}images/blackboxnet-dashboard.png`,
     imagePosition: 'center center',
