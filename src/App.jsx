@@ -13,8 +13,8 @@ const PROJECT_ROUTE_PREFIX = 'projects/'
 const NAV_ITEMS = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
-  { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
+  { id: 'skills', label: 'Skills' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -81,6 +81,11 @@ const EXPERIENCE = [
     image: `${BASE}images/ai-intro01.png`,
     imageAlt: 'Infrastructure development and automation',
     imageContain: false,
+    highlights: [
+      'Shipped a **production** intake platform replacing a legacy Excel process — **Next.js**, **PostgreSQL**, **Entra SSO**.',
+      'Automated ticket intake across **10+ service areas** with **n8n** and a tested **Python** mailbox-to-**Taiga** service.',
+      '**Zero-data-loss** migration of n8n and DocuSeal, cutting recovery time from **20–30 min** to **under 10**.',
+    ],
     timelineBullets: [
       'Replaced a legacy **Excel**-based Commercial Wireless Services intake process by designing and shipping a production full-stack tracking system — **Next.js 15**, **React 19**, **Prisma**, **PostgreSQL 16**, **Docker** — with an **eight-status request lifecycle**, role-based access across **4 global and 5 request-level roles**, **Microsoft Entra SAML SSO**, and full-text search across every request field.',
       'Eliminated manual shared-mailbox triage by building a scheduled **Python** service that reads **Microsoft 365** mail via **Microsoft Graph**, deduplicates processed messages, auto-creates and routes **Taiga** tickets, and posts **Teams** notifications — hardened by **25 automated tests** and a safe-by-default dry-run mode before production rollout.',
@@ -137,6 +142,11 @@ const EXPERIENCE = [
     image: `${BASE}images/aap-logo.png`,
     imageAlt: 'Ansible Automation Platform logo',
     imageContain: true,
+    highlights: [
+      'Cut certificate provisioning from **20–30 min** to **under 2** with a reusable **Ansible** role.',
+      'Cut incident detection from **hours to minutes** by gating **GitLab CI/CD** on **Zabbix** health checks.',
+      'Automated health polling for **75+ devices**; a **REST API** audit found **132** inactive GitLab accounts.',
+    ],
     timelineBullets: [
       'Reduced platform licensing costs by identifying **132 inactive accounts** across the full organizational **GitLab** instance—delivering a prioritized deactivation plan to platform admins—by engineering a **REST API** audit script that systematically covered the complete account scope.',
       'Improved network health coverage across **75+ devices** by building **Ansible** playbooks that automated continuous polling and alert triggering, replacing manual checks that previously left off-hours anomalies undetected.',
@@ -181,6 +191,10 @@ const EXPERIENCE = [
     location: 'Ottawa, Ontario',
     image: `${BASE}images/ssc-switch-upgrade.png`,
     imageAlt: 'Abdul Rehman Baseem upgrading switches in a network environment',
+    highlights: [
+      'Brought **50+ Juniper switches** into security baseline compliance with scripted firmware upgrades.',
+      '**~40%** faster bridge-call resolution across **10+ NCR sites** with standardized topology docs.',
+    ],
     timelineBullets: [
       'Brought **50+ Juniper EX-4300** switches into full **security baseline compliance** by scripting a **Linux**-based batch firmware upgrade that automated push and post-install version validation across multiple NCR sites—eliminating per-device manual upgrades and remediating **CVE**-flagged vulnerabilities during approved maintenance windows.',
       'Reduced bridge call resolution time by **~40%** across **10+ NCR sites** by designing **Visio** topology diagrams—formally adopted by field technicians as the single source of truth—that centralized subnet tables, physical layouts, and device inventory previously scattered across inconsistently named file shares.',
@@ -203,14 +217,11 @@ const EXPERIENCE = [
 ]
 
 const SKILLS = {
-  'Languages & Frameworks': ['Python', 'Java', 'C', 'C++', 'MATLAB', 'LC-3 Assembly', 'TypeScript', 'React', 'Next.js', 'FastAPI', 'Prisma'],
-  'Network Operating Systems': ['Cisco IOS CLI', 'Juniper Junos', 'Aruba CLI'],
+  'Networking': ['Cisco IOS CLI', 'Juniper Junos', 'Aruba CLI', 'BGP', 'OSPFv2/v3', 'EIGRP', 'MPLS', 'STP', 'TCP/IP', 'ARP', 'RIP'],
   'Automation & DevOps': ['Ansible Automation Platform (AAP)', 'Docker', 'Git', 'GitLab CI/CD', 'n8n', 'OpenSSL', 'REST APIs', 'Vitest', 'Playwright'],
-  'Cloud & Infrastructure': ['Azure', 'Microsoft Entra (SAML SSO)', 'VMware Fusion', 'HashiCorp Vault', 'Linux'],
-  'Tools & Databases': ['VS Code', 'PyCharm', 'Wireshark', 'PuTTY', 'MobaXterm', 'Visio', 'MySQL', 'PostgreSQL'],
-  'Platforms & Monitoring': ['Zabbix', 'NNMI', 'Elasticsearch', 'DocuSeal', 'Microsoft Graph', 'Taiga'],
-  'Networking Protocols': ['TCP/IP', 'STP', 'ARP', 'RIP', 'BGP', 'OSPFv2/v3', 'EIGRP', 'MPLS'],
-  'Security': ['Firewalls', 'VPN', 'IDPS', 'Network Hardening'],
+  'Languages & Frameworks': ['Python', 'TypeScript', 'Java', 'C', 'C++', 'React', 'Next.js', 'FastAPI', 'Prisma'],
+  'Cloud, Data & Security': ['Azure', 'Microsoft Entra (SAML SSO)', 'HashiCorp Vault', 'Linux', 'PostgreSQL', 'MySQL', 'Firewalls', 'VPN', 'IDPS', 'Network Hardening'],
+  'Monitoring & Tools': ['Zabbix', 'NNMI', 'Elasticsearch', 'Wireshark', 'Visio', 'Microsoft Graph', 'Taiga', 'DocuSeal'],
 }
 
 const PROJECTS = [
@@ -586,22 +597,11 @@ function getNavDropdownLinks(itemId) {
 }
 
 function Section({ id, label, children, className = '', contentClassName = '' }) {
-  const shouldReduceMotion = useReducedMotion()
-
   return (
-    <motion.section
-      id={id}
-      className={`${styles.section} ${className}`.trim()}
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-      whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-      /** `amount` is a fraction of the element, so a tall section (mobile #experience) can need
-       *  more pixels than the viewport has and never reveal. Trigger on first pixel instead. */
-      viewport={{ once: true, amount: 'some', margin: '-80px' }}
-      transition={{ duration: shouldReduceMotion ? 0.1 : 0.5, ease: 'easeOut' }}
-    >
+    <section id={id} className={`${styles.section} ${className}`.trim()}>
       {label ? <p className={styles.sectionLabel}>{label}</p> : null}
       <div className={`${styles.sectionContent} ${contentClassName}`.trim()}>{children}</div>
-    </motion.section>
+    </section>
   )
 }
 
@@ -766,7 +766,7 @@ function ExperienceDetailPage({ job }) {
             </div>
 
             <p className={styles.detailLead}>
-              The bullet points capture what shipped. This page goes deeper — the constraints, the team context, and what didn't fit in three lines.{' '}
+              The timeline shows the headlines. This page has the full results, the constraints, and the team context.{' '}
               <a href={`${BASE}#experience`} className={styles.detailLeadLink}>
                 Back to timeline →
               </a>
@@ -774,6 +774,17 @@ function ExperienceDetailPage({ job }) {
 
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
+                {job.timelineBullets?.length ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>Key results</h2>
+                    <ul className={styles.detailBullets}>
+                      {job.timelineBullets.map((bullet) => (
+                        <li key={bullet}>{renderRichText(bullet)}</li>
+                      ))}
+                    </ul>
+                  </section>
+                ) : null}
+
                 {job.roleContext ? (
                   <section className={styles.detailSection}>
                     <h2 className={styles.detailSectionTitle}>About this role</h2>
@@ -1204,7 +1215,8 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.05 }}
                   >
-                    Abdul Rehman Baseem
+                    <span className={styles.heroTitleLine}>Abdul Rehman</span>
+                    <span className={styles.heroTitleLine}>Baseem</span>
                   </motion.h1>
                   <motion.p
                     className={styles.heroMeta}
@@ -1306,22 +1318,15 @@ export default function App() {
                 </div>
               </div>
               <p className={styles.aboutBio}>
-                Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), completing three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, infrastructure automation, and full-stack application delivery. My work runs under federal change-control and security baseline requirements — production environments, not sandboxes. Outside of work, I built BlackBoxNet: a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments.
+                Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), completing three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, infrastructure automation, and full-stack application delivery. My work runs under federal change-control and security baseline requirements — production environments, not sandboxes. Outside of work, I build things end to end: VisionCompanion, an AI walking companion that announces street hazards to blind and low-vision pedestrians, and BlackBoxNet, a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments.
               </p>
             </div>
           </Section>
 
           <Section id="experience" label="// 01 — EXPERIENCE">
             <div className={styles.timeline}>
-              {EXPERIENCE.map((job, index) => (
-                <motion.article
-                  key={job.title}
-                  className={styles.timelineItem}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 'some', margin: '-80px' }}
-                  transition={{ duration: shouldReduceMotion ? 0.1 : 0.5, delay: index * 0.08 }}
-                >
+              {EXPERIENCE.map((job) => (
+                <article key={job.title} className={styles.timelineItem}>
                   <span className={styles.timelineDot} aria-hidden="true" />
                   <div className={styles.timelineCard}>
                     <p className={styles.timelinePeriod}>{job.period}</p>
@@ -1330,9 +1335,9 @@ export default function App() {
                       <p className={styles.timelineCompany}>{job.company}</p>
                       <PlaceholderLogo />
                     </div>
-                    {job.timelineBullets.length ? (
+                    {job.highlights.length ? (
                       <ul className={styles.timelineBullets}>
-                        {job.timelineBullets.map((bullet) => (
+                        {job.highlights.map((bullet) => (
                           <li key={bullet}>{renderRichText(bullet)}</li>
                         ))}
                       </ul>
@@ -1343,7 +1348,7 @@ export default function App() {
                       </a>
                     ) : null}
                   </div>
-                </motion.article>
+                </article>
               ))}
             </div>
 
@@ -1352,44 +1357,7 @@ export default function App() {
             </a>
           </Section>
 
-          <Section id="skills" label="// 02 — SKILLS">
-            <div className={styles.skillsPanel}>
-              <div className={styles.skillsGrid}>
-                {Object.entries(SKILLS).map(([category, items]) => (
-                  <article key={category} className={styles.skillColumn}>
-                    <h2 className={styles.skillHeading}>{category}</h2>
-                    <div className={styles.skillTags}>
-                      {items.map((skill) => (
-                        <span key={skill} className={styles.skillTag}>
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.courseworkPanel}>
-              <p className={styles.aboutKicker}>Selected Coursework</p>
-              <div className={styles.courseworkCategoryGrid}>
-                {Object.entries(COURSEWORK).map(([group, courses]) => (
-                  <div key={group} className={styles.courseworkCategory}>
-                    <p className={styles.courseworkGroupLabel}>{group}</p>
-                    <div className={styles.courseworkGrid}>
-                      {courses.map((course) => (
-                        <span key={course} className={styles.courseworkTag}>
-                          {course}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Section>
-
-          <Section id="projects" label="// 03 — PROJECTS">
+          <Section id="projects" label="// 02 — PROJECTS">
             <div className={styles.projectGrid}>
               {PROJECTS.map((project) => (
                 <motion.article
@@ -1441,6 +1409,43 @@ export default function App() {
                   </div>
                 </motion.article>
               ))}
+            </div>
+          </Section>
+
+          <Section id="skills" label="// 03 — SKILLS">
+            <div className={styles.skillsPanel}>
+              <div className={styles.skillsGrid}>
+                {Object.entries(SKILLS).map(([category, items]) => (
+                  <article key={category} className={styles.skillColumn}>
+                    <h2 className={styles.skillHeading}>{category}</h2>
+                    <div className={styles.skillTags}>
+                      {items.map((skill) => (
+                        <span key={skill} className={styles.skillTag}>
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.courseworkPanel}>
+              <p className={styles.aboutKicker}>Selected Coursework</p>
+              <div className={styles.courseworkCategoryGrid}>
+                {Object.entries(COURSEWORK).map(([group, courses]) => (
+                  <div key={group} className={styles.courseworkCategory}>
+                    <p className={styles.courseworkGroupLabel}>{group}</p>
+                    <div className={styles.courseworkGrid}>
+                      {courses.map((course) => (
+                        <span key={course} className={styles.courseworkTag}>
+                          {course}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </Section>
 

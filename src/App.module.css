@@ -365,12 +365,16 @@
 }
 
 .heroTitle {
-  max-width: 10ch;
   font-family: var(--font-display);
-  font-size: clamp(4.5rem, 10vw, 6rem);
+  font-size: clamp(3.5rem, 6.4vw, 5.25rem);
   line-height: 0.94;
   color: var(--navy);
   font-weight: 400;
+}
+
+.heroTitleLine {
+  display: block;
+  white-space: nowrap;
 }
 
 .heroMeta {
@@ -1017,9 +1021,17 @@
 
 .skillsGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 20px;
   align-items: stretch;
+}
+
+.skillsGrid > .skillColumn {
+  grid-column: span 2;
+}
+
+.skillsGrid > .skillColumn:nth-child(n + 4) {
+  grid-column: span 3;
 }
 
 .skillsPanel {
@@ -1942,7 +1954,7 @@
 
 @media (max-width: 1200px) {
   .skillsGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 
@@ -1957,6 +1969,15 @@
 
   .skillsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skillsGrid > .skillColumn,
+  .skillsGrid > .skillColumn:nth-child(n + 4) {
+    grid-column: auto;
+  }
+
+  .skillsGrid > .skillColumn:last-child {
+    grid-column: 1 / -1;
   }
 
   .heroArt {
@@ -2080,6 +2101,11 @@
     grid-template-columns: 1fr;
   }
 
+  .skillsGrid > .skillColumn,
+  .skillsGrid > .skillColumn:last-child {
+    grid-column: auto;
+  }
+
   .desktopNav,
   .navSocials {
     display: none;
@@ -2154,7 +2180,7 @@
   }
 
   .heroTitle {
-    font-size: clamp(3rem, 15vw, 4.25rem);
+    font-size: clamp(2.6rem, 12vw, 3.5rem);
   }
 
   .heroMeta {
