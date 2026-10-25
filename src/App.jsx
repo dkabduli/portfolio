@@ -1171,9 +1171,20 @@ export default function App() {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [activeExperienceDetail, activeProjectDetail])
 
-  const onDetailPage = Boolean(activeExperienceDetail || activeProjectDetail)
   useEffect(() => {
-    if (onDetailPage) return undefined
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
+    if (window.location.hash.startsWith('#experience-')) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search)
+    }
+    if (!window.location.hash) window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  }, [])
+
+  const onDetailPage = Boolean(activeExperienceDetail || activeProjectDetail)
+  const wasOnDetailPage = useRef(onDetailPage)
+  useEffect(() => {
+    const returning = wasOnDetailPage.current && !onDetailPage
+    wasOnDetailPage.current = onDetailPage
+    if (!returning) return undefined
     const id = decodeURIComponent(window.location.hash.slice(1))
     if (!id || id.startsWith('/')) return undefined
     let frame = 0
@@ -1183,6 +1194,8 @@ export default function App() {
       const target = document.getElementById(id)
       if (target) {
         target.scrollIntoView({ behavior: 'instant', block: target.tagName === 'ARTICLE' ? 'center' : 'start' })
+        // The return target is one-off; a reload after this should start at the top.
+        window.history.replaceState(null, '', window.location.pathname + window.location.search)
         return
       }
       if (performance.now() - started < 2000) frame = requestAnimationFrame(seek)
