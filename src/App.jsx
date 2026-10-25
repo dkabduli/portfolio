@@ -55,25 +55,6 @@ const CREDENTIALS = [
 ]
 
 
-const COURSEWORK = {
-  'Networking': [
-    'Network Management and ML',
-    'IP Architecture and Solutions',
-    'Wireless Networks',
-    'Transmission Systems',
-  ],
-  'Systems': [
-    'Real-time Systems',
-    'Computer Architecture',
-    'Desktop and Server Environments II',
-  ],
-  'Software & Data': [
-    'DevOps',
-    'Data Structures',
-    'Databases',
-  ],
-}
-
 const EXPERIENCE = [
   {
     slug: '4ummah-software-developer',
@@ -330,11 +311,9 @@ const EXTRACURRICULARS = [
 ]
 
 const SKILLS = {
-  'Networking': ['Cisco IOS CLI', 'Juniper Junos', 'Aruba CLI', 'BGP', 'OSPFv2/v3', 'EIGRP', 'MPLS', 'STP', 'TCP/IP', 'ARP', 'RIP'],
-  'Automation & DevOps': ['Ansible Automation Platform (AAP)', 'Docker', 'Git', 'GitLab CI/CD', 'n8n', 'OpenSSL', 'REST APIs', 'Vitest', 'Playwright'],
-  'Languages & Frameworks': ['Python', 'TypeScript', 'Java', 'C', 'C++', 'React', 'Next.js', 'FastAPI', 'Prisma'],
-  'Cloud, Data & Security': ['Azure', 'Microsoft Entra (SAML SSO)', 'HashiCorp Vault', 'Linux', 'PostgreSQL', 'MySQL', 'Firewalls', 'VPN', 'IDPS', 'Network Hardening'],
-  'Monitoring & Tools': ['Zabbix', 'NNMI', 'Elasticsearch', 'Wireshark', 'Visio', 'Microsoft Graph', 'Taiga', 'DocuSeal'],
+  Networking: ['Cisco IOS', 'Juniper Junos', 'BGP', 'OSPF', 'EIGRP', 'MPLS', 'VLANs'],
+  'Automation & Infrastructure': ['Ansible', 'Docker', 'GitLab CI/CD', 'Zabbix', 'Linux', 'Azure'],
+  Development: ['Python', 'TypeScript', 'React', 'Next.js', 'PostgreSQL', 'Supabase'],
 }
 
 const PROJECTS = [
@@ -1623,16 +1602,15 @@ export default function App() {
                   <div className={styles.extraLogo}>
                     <img src={item.logo} alt={`${item.org} logo`} loading="lazy" />
                   </div>
-                  <h2 className={styles.extraRole}>{item.role}</h2>
-                  <p className={styles.extraOrg}>{item.org}</p>
-                  <div className={styles.extraDates}>
+                  <div className={styles.extraHead}>
+                    <h2 className={styles.extraRole}>{item.role}</h2>
+                    <p className={styles.extraOrg}>{item.org}</p>
+                  </div>
+                  <div className={styles.extraMeta}>
                     <p className={styles.extraPeriod}>{item.period}</p>
                     {item.previous ? <p className={styles.extraPrevious}>{item.previous}</p> : null}
                   </div>
-                  <div>
-                    <span className={styles.extraCause}>{item.cause}</span>
-                  </div>
-                  <p className={styles.extraText}>{item.text}</p>
+                  {item.text ? <p className={styles.extraText}>{item.text}</p> : <span aria-hidden="true" />}
                   <a href={item.href} className={styles.extraLink} target="_blank" rel="noreferrer">
                     Learn more ↗
                   </a>
@@ -1642,39 +1620,19 @@ export default function App() {
           </Section>
 
           <Section id="skills" label="// 04 — SKILLS">
-            <div className={styles.skillsPanel}>
-              <div className={styles.skillsGrid}>
-                {Object.entries(SKILLS).map(([category, items]) => (
-                  <article key={category} className={styles.skillColumn}>
-                    <h2 className={styles.skillHeading}>{category}</h2>
-                    <div className={styles.skillTags}>
-                      {items.map((skill) => (
-                        <span key={skill} className={styles.skillTag}>
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.courseworkPanel}>
-              <p className={styles.aboutKicker}>Selected Coursework</p>
-              <div className={styles.courseworkCategoryGrid}>
-                {Object.entries(COURSEWORK).map(([group, courses]) => (
-                  <div key={group} className={styles.courseworkCategory}>
-                    <p className={styles.courseworkGroupLabel}>{group}</p>
-                    <div className={styles.courseworkGrid}>
-                      {courses.map((course) => (
-                        <span key={course} className={styles.courseworkTag}>
-                          {course}
-                        </span>
-                      ))}
-                    </div>
+            <div className={styles.toolbox}>
+              {Object.entries(SKILLS).map(([category, items]) => (
+                <div key={category} className={styles.toolboxRow}>
+                  <h2 className={styles.toolboxLabel}>{category}</h2>
+                  <div className={styles.skillTags}>
+                    {items.map((skill) => (
+                      <span key={skill} className={styles.skillTag}>
+                        {skill}
+                      </span>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </Section>
 
