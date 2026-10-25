@@ -1635,7 +1635,8 @@ export default function App() {
           <Section id="contact" label="// 05 — CONTACT">
             <div className={styles.contactInfo}>
               <p className={styles.contactIntro}>
-                Seeking new grad network engineering, NetDevOps, and infrastructure roles — graduating April 2027.
+                <span className={styles.contactIntroLine}>Seeking new grad roles in network engineering, NetDevOps and infrastructure.</span>
+                <span className={styles.contactIntroLine}>Graduating April 2027.</span>
               </p>
               <div className={styles.contactLinks}>
                 {contactLinks.map((item) => (
@@ -1651,7 +1652,16 @@ export default function App() {
                     </span>
                     <span>
                       <strong>{item.label}</strong>
-                      <span>{item.value}</span>
+                      <span>
+                        {item.id === 'email' && item.value.includes('@') ? (
+                          <>
+                            {item.value.split('@')[0]}@<wbr />
+                            {item.value.split('@').slice(1).join('@')}
+                          </>
+                        ) : (
+                          item.value
+                        )}
+                      </span>
                     </span>
                   </a>
                 ))}

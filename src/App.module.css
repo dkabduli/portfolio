@@ -1986,6 +1986,11 @@
   text-align: center;
 }
 
+.contactIntroLine {
+  display: block;
+  text-wrap: balance;
+}
+
 .contactLinks {
   display: grid;
   gap: 14px;
