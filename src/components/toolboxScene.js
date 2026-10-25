@@ -7,15 +7,10 @@ const BODY_D = 1.9
 const WALL = 0.08
 const SLOT_H = 0.56
 const FRONT_H = 0.48
-const PULL = 0.95
+const PULL = 1.15
 
 const FRONT_COLOR = new THREE.Color('#eef1f7')
 const ACTIVE_COLOR = new THREE.Color('#3b6fe8')
-const TOOL_COLORS = [
-  ['#f59e0b', '#2563eb', '#10b981'],
-  ['#ef4444', '#8b5cf6', '#f59e0b'],
-  ['#0ea5e9', '#22c55e', '#f43f5e'],
-]
 
 /** Drawer 0 is the top drawer, matching the order of the skills rows. */
 export function createToolbox(container, { count, reducedMotion }) {
@@ -53,7 +48,17 @@ export function createToolbox(container, { count, reducedMotion }) {
   const bodyMaterial = track(new THREE.MeshPhysicalMaterial({ color: '#24324f', roughness: 0.42, metalness: 0.2, clearcoat: 0.8, clearcoatRoughness: 0.3 }))
   const chromeMaterial = track(new THREE.MeshStandardMaterial({ color: '#d7dde8', metalness: 1, roughness: 0.22 }))
   const trayMaterial = track(new THREE.MeshStandardMaterial({ color: '#1a2438', roughness: 0.7 }))
-  const shaftMaterial = track(new THREE.MeshStandardMaterial({ color: '#c3cad6', metalness: 0.9, roughness: 0.3 }))
+  const metalMaterial = track(new THREE.MeshStandardMaterial({ color: '#c9ced8', metalness: 0.9, roughness: 0.32 }))
+  const darkMetalMaterial = track(new THREE.MeshStandardMaterial({ color: '#4b5563', metalness: 0.8, roughness: 0.4 }))
+  const pcbMaterial = track(new THREE.MeshStandardMaterial({ color: '#0f5132', roughness: 0.6 }))
+  const portMaterial = track(new THREE.MeshStandardMaterial({ color: '#0b1220', roughness: 0.8 }))
+  const ledMaterial = track(new THREE.MeshStandardMaterial({ color: '#22c55e', emissive: '#22c55e', emissiveIntensity: 1.4 }))
+  const plugMaterial = track(new THREE.MeshPhysicalMaterial({ color: '#e6edf5', roughness: 0.15, transparent: true, opacity: 0.85 }))
+  const colorMaterials = new Map()
+  const colored = (color) => {
+    if (!colorMaterials.has(color)) colorMaterials.set(color, track(new THREE.MeshStandardMaterial({ color, roughness: 0.5 })))
+    return colorMaterials.get(color)
+  }
 
   const group = new THREE.Group()
   scene.add(group)
@@ -90,9 +95,91 @@ export function createToolbox(container, { count, reducedMotion }) {
   const drawerW = BODY_W - WALL * 2 - 0.04
   const trayD = BODY_D - 0.25
   const frontZ = BODY_D / 2 - 0.05
-  const toolHandleGeometry = track(new THREE.CylinderGeometry(0.065, 0.065, 0.46, 16))
-  const toolShaftGeometry = track(new THREE.CylinderGeometry(0.018, 0.018, 0.4, 8))
-  const nutGeometry = track(new THREE.CylinderGeometry(0.1, 0.1, 0.06, 6))
+  const trayTop = -FRONT_H / 2 + 0.045
+  // Gear sits in the part of the tray that clears the shell when a drawer is pulled out.
+  const gearZ = frontZ - 0.78
+
+  function lineCard(parent, x, z) {
+    const card = new THREE.Group()
+    card.position.set(x, trayTop, z)
+    addBox(1.2, 0.03, 0.46, pcbMaterial, 0, 0.015, -0.23, card)
+    for (const [cx, cz] of [[-0.35, -0.2], [0.05, -0.28], [0.38, -0.18]]) {
+      addBox(0.2, 0.06, 0.15, darkMetalMaterial, cx, 0.06, cz, card)
+    }
+    addBox(1.26, 0.13, 0.03, metalMaterial, 0, 0.065, 0.015, card, true)
+    for (let p = 0; p < 8; p += 1) {
+      addBox(0.07, 0.05, 0.02, portMaterial, -0.42 + p * 0.1, 0.07, 0.034, card)
+    }
+    for (let l = 0; l < 3; l += 1) {
+      addBox(0.025, 0.025, 0.01, ledMaterial, 0.42 + l * 0.05, 0.08, 0.034, card)
+    }
+    for (const side of [-1, 1]) {
+      const lever = addBox(0.1, 0.035, 0.05, darkMetalMaterial, side * 0.61, 0.06, 0.05, card)
+      lever.rotation.y = side * 0.35
+    }
+    parent.add(card)
+  }
+
+  function optic(parent, x, z, tabColor, { width = 0.09, length = 0.32 } = {}) {
+    const module = new THREE.Group()
+    module.position.set(x, trayTop, z)
+    addBox(width, 0.05, length, metalMaterial, 0, 0.025, 0, module, true)
+    addBox(width * 0.7, 0.012, 0.03, portMaterial, 0, 0.03, length / 2 + 0.005, module)
+    addBox(width * 0.6, 0.008, 0.16, colored(tabColor), 0, 0.055, length / 2 + 0.06, module)
+    parent.add(module)
+  }
+
+  function connector(parent, point, tangent, bootColor, kind) {
+    const plug = new THREE.Group()
+    plug.position.copy(point)
+    plug.lookAt(point.clone().add(tangent))
+    if (kind === 'lc') {
+      addBox(0.028, 0.028, 0.06, colored('#38bdf8'), -0.018, 0, 0.03, plug)
+      addBox(0.028, 0.028, 0.06, colored('#e7dcc4'), 0.018, 0, 0.03, plug)
+      addBox(0.07, 0.03, 0.05, colored(bootColor), 0, 0, -0.01, plug)
+    } else {
+      addBox(0.055, 0.04, 0.07, colored(bootColor), 0, 0, -0.02, plug)
+      addBox(0.05, 0.035, 0.08, plugMaterial, 0, 0, 0.05, plug)
+      addBox(0.02, 0.01, 0.05, plugMaterial, 0, 0.022, 0.05, plug)
+    }
+    parent.add(plug)
+  }
+
+  function cable(parent, x, z, { color, radius = 0.28, turns = 2.4, tube = 0.028, plug = 'rj45' }) {
+    const points = []
+    const steps = 140
+    for (let n = 0; n <= steps; n += 1) {
+      const t = n / steps
+      const angle = t * turns * Math.PI * 2
+      const r = radius * (0.5 + 0.5 * t)
+      points.push(new THREE.Vector3(x + Math.cos(angle) * r, trayTop + tube + t * tube * 2.4, z + Math.sin(angle) * r))
+    }
+    const end = points[points.length - 1]
+    points.push(new THREE.Vector3(end.x + 0.18, end.y, end.z + 0.12))
+    const curve = new THREE.CatmullRomCurve3(points)
+    const mesh = new THREE.Mesh(track(new THREE.TubeGeometry(curve, 320, tube, 10)), colored(color))
+    mesh.castShadow = true
+    parent.add(mesh)
+    connector(parent, curve.getPoint(0), curve.getTangent(0).negate(), color, plug)
+    connector(parent, curve.getPoint(1), curve.getTangent(1), color, plug)
+  }
+
+  const gearSets = [
+    (drawer) => {
+      lineCard(drawer, -0.55, gearZ + 0.22)
+      ;['#2563eb', '#16a34a', '#2563eb'].forEach((tab, k) => optic(drawer, 0.55 + k * 0.17, gearZ + 0.02, tab))
+    },
+    (drawer) => {
+      cable(drawer, -0.72, gearZ, { color: '#2563eb' })
+      cable(drawer, 0.02, gearZ, { color: '#facc15', turns: 2 })
+      ;['#111827', '#7c3aed'].forEach((tab, k) => optic(drawer, 0.66 + k * 0.16, gearZ + 0.02, tab, { width: 0.07, length: 0.25 }))
+    },
+    (drawer) => {
+      cable(drawer, -0.7, gearZ, { color: '#38bdf8', turns: 2.2, tube: 0.026 })
+      cable(drawer, 0.14, gearZ, { color: '#f97316', turns: 3, tube: 0.014, plug: 'lc' })
+      optic(drawer, 0.82, gearZ + 0.02, '#0ea5e9', { width: 0.07, length: 0.25 })
+    },
+  ]
   const pullGeometry = track(new THREE.CylinderGeometry(0.035, 0.035, 0.9, 16))
   const postGeometry = track(new THREE.CylinderGeometry(0.025, 0.025, 0.12, 10))
 
@@ -123,30 +210,7 @@ export function createToolbox(container, { count, reducedMotion }) {
     addBox(0.03, 0.28, trayD, trayMaterial, drawerW / 2 - 0.03, -FRONT_H / 2 + 0.16, trayZ, drawer)
     addBox(drawerW - 0.04, 0.28, 0.03, trayMaterial, 0, -FRONT_H / 2 + 0.16, frontZ - 0.05 - trayD, drawer)
 
-    // A few tools resting in the tray; only visible once the drawer is pulled out.
-    const toolY = -FRONT_H / 2 + 0.1
-    TOOL_COLORS[i % TOOL_COLORS.length].forEach((color, k) => {
-      const handleMaterial = track(new THREE.MeshStandardMaterial({ color, roughness: 0.45 }))
-      const tool = new THREE.Group()
-      const grip = new THREE.Mesh(toolHandleGeometry, handleMaterial)
-      grip.rotation.z = Math.PI / 2
-      const shaft = new THREE.Mesh(toolShaftGeometry, shaftMaterial)
-      shaft.rotation.z = Math.PI / 2
-      shaft.position.x = 0.38
-      tool.add(grip, shaft)
-      tool.position.set(-0.78 + k * 0.08, toolY, frontZ - 0.45 - k * 0.17)
-      tool.rotation.y = 0.12 * (k - 1)
-      tool.traverse((child) => {
-        child.castShadow = true
-      })
-      drawer.add(tool)
-    })
-    for (let n = 0; n < 3; n += 1) {
-      const nut = new THREE.Mesh(nutGeometry, shaftMaterial)
-      nut.position.set(0.55 + n * 0.24, toolY - 0.03, frontZ - 0.5 - (n % 2) * 0.2)
-      nut.castShadow = true
-      drawer.add(nut)
-    }
+    gearSets[i % gearSets.length](drawer)
 
     drawers.push({ group: drawer, frontMaterial, progress: 0 })
   }
