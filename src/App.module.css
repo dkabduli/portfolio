@@ -781,6 +781,159 @@
   line-height: 1.35;
 }
 
+.experienceLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.careerStack {
+  position: sticky;
+  top: 110px;
+  width: 420px;
+  height: min(560px, calc(100vh - 150px));
+  margin-left: 40px;
+}
+
+.careerStackCanvas {
+  position: absolute;
+  inset: 0;
+}
+
+.careerStackCanvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.careerStackLabels {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.careerStackLabel {
+  position: absolute;
+  top: 0;
+  left: 66%;
+  display: grid;
+  gap: 3px;
+  padding: 6px 0 6px 12px;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+
+.careerStackCanvas[data-ready] ~ .careerStackLabels .careerStackLabel {
+  opacity: 1;
+}
+
+.careerStackLabel::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 26px;
+  height: 1px;
+  background: var(--line);
+  transition: background-color 200ms ease, width 200ms ease;
+}
+
+.careerStackLayer {
+  font-family: var(--font-code);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: var(--mist);
+  transition: color 200ms ease;
+}
+
+.careerStackRole {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--slate);
+  transition: color 200ms ease;
+}
+
+.careerStackLabelActive::before {
+  width: 40px;
+  background: var(--accent);
+}
+
+.careerStackLabelActive .careerStackLayer {
+  color: var(--accent);
+}
+
+.careerStackLabelActive .careerStackRole {
+  color: var(--navy);
+}
+
+.careerStackLabel:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.timelineMetaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.timelineLayer {
+  font-family: var(--font-code);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mist);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 10px;
+  transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+
+.timelineItemActive .timelineLayer {
+  color: var(--accent);
+  border-color: rgba(37, 99, 235, 0.35);
+  background: var(--accent-light);
+}
+
+.timelineItemActive .timelineCard {
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
+@media (max-width: 1024px) {
+  .experienceLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .careerStack {
+    order: -1;
+    position: relative;
+    top: auto;
+    width: 100%;
+    height: 320px;
+    margin: 0 0 28px;
+  }
+
+  .careerStackLayer {
+    font-size: 0.625rem;
+    letter-spacing: 0.04em;
+  }
+
+  .careerStackRole {
+    font-size: 0.95rem;
+  }
+}
+
 .timeline {
   position: relative;
   margin-left: 24px;

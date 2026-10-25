@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { LazyMotion, domAnimation, motion, AnimatePresence, useReducedMotion, useScroll, useSpring, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
 import { contactMethods } from './data/contact'
 import styles from './App.module.css'
+import CareerStack from './components/CareerStack'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const RESUME_URL = `${BASE}resume/Resume.pdf`
@@ -74,6 +75,7 @@ const COURSEWORK = {
 const EXPERIENCE = [
   {
     slug: '4ummah-software-developer',
+    layer: 'Applications',
     period: 'SEPT 2026 — PRESENT',
     title: 'Software Developer',
     company: '4Ummah',
@@ -135,6 +137,7 @@ const EXPERIENCE = [
   },
   {
     slug: 'infrastructure-dev-intern',
+    layer: 'Platforms',
     period: 'MAY 2026 — PRESENT',
     title: 'Infrastructure Dev Intern',
     company: 'Shared Services Canada',
@@ -196,6 +199,7 @@ const EXPERIENCE = [
   },
   {
     slug: 'netdevops-intern',
+    layer: 'Automation',
     period: 'APR 2025 — APR 2026',
     title: 'NetDevOps Intern',
     company: 'Shared Services Canada',
@@ -246,6 +250,7 @@ const EXPERIENCE = [
   },
   {
     slug: 'lan-operations-technician',
+    layer: 'Network',
     period: 'MAY 2024 — APR 2025',
     title: 'LAN Operations Technician',
     company: 'Shared Services Canada',
@@ -1140,6 +1145,44 @@ export default function App() {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [activeExperienceDetail, activeProjectDetail])
 
+  const [activeJob, setActiveJob] = useState(0)
+  const timelineItemRefs = useRef([])
+
+  useEffect(() => {
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const focusLine = window.innerHeight * 0.42
+      let best = 0
+      let bestDistance = Infinity
+      timelineItemRefs.current.forEach((el, i) => {
+        if (!el) return
+        const rect = el.getBoundingClientRect()
+        const distance = rect.top <= focusLine && rect.bottom >= focusLine ? 0 : Math.min(Math.abs(rect.top - focusLine), Math.abs(rect.bottom - focusLine))
+        if (distance < bestDistance) {
+          bestDistance = distance
+          best = i
+        }
+      })
+      setActiveJob(best)
+    }
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [activeExperienceDetail, activeProjectDetail])
+
+  const scrollToJob = useCallback((index) => {
+    timelineItemRefs.current[index]?.scrollIntoView({ behavior: shouldReduceMotion ? 'auto' : 'smooth', block: 'center' })
+  }, [shouldReduceMotion])
+
   const pageTransition = shouldReduceMotion
     ? {}
     : { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 }, transition: { duration: 0.22, ease: 'easeInOut' } }
@@ -1385,32 +1428,46 @@ export default function App() {
           </Section>
 
           <Section id="experience" label="// 01 — EXPERIENCE">
-            <div className={styles.timeline}>
-              {EXPERIENCE.map((job) => (
-                <article key={job.title} className={styles.timelineItem}>
-                  <span className={styles.timelineDot} aria-hidden="true" />
-                  <div className={styles.timelineCard}>
-                    <p className={styles.timelinePeriod}>{job.period}</p>
-                    <h2 className={styles.timelineTitle}>{job.title}</h2>
-                    <div className={styles.timelineCompanyRow}>
-                      <p className={styles.timelineCompany}>{job.company}</p>
-                      <PlaceholderLogo src={job.logo} />
+            <div className={styles.experienceLayout}>
+              <div className={styles.timeline}>
+                {EXPERIENCE.map((job, index) => (
+                  <article
+                    key={job.title}
+                    ref={(el) => {
+                      timelineItemRefs.current[index] = el
+                    }}
+                    className={`${styles.timelineItem} ${index === activeJob ? styles.timelineItemActive : ''}`.trim()}
+                  >
+                    <span className={styles.timelineDot} aria-hidden="true" />
+                    <div className={styles.timelineCard}>
+                      <div className={styles.timelineMetaRow}>
+                        <p className={styles.timelinePeriod}>{job.period}</p>
+                        <span className={styles.timelineLayer}>
+                          L{EXPERIENCE.length - index} · {job.layer}
+                        </span>
+                      </div>
+                      <h2 className={styles.timelineTitle}>{job.title}</h2>
+                      <div className={styles.timelineCompanyRow}>
+                        <p className={styles.timelineCompany}>{job.company}</p>
+                        <PlaceholderLogo src={job.logo} />
+                      </div>
+                      {job.highlights.length ? (
+                        <ul className={styles.timelineBullets}>
+                          {job.highlights.map((bullet) => (
+                            <li key={bullet}>{renderRichText(bullet)}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+                      {hasExperienceDetails(job) ? (
+                        <a href={`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`} className={styles.caseStudyLink} onClick={handleDetailNav(`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`)}>
+                          Read more →
+                        </a>
+                      ) : null}
                     </div>
-                    {job.highlights.length ? (
-                      <ul className={styles.timelineBullets}>
-                        {job.highlights.map((bullet) => (
-                          <li key={bullet}>{renderRichText(bullet)}</li>
-                        ))}
-                      </ul>
-                    ) : null}
-                    {hasExperienceDetails(job) ? (
-                      <a href={`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`} className={styles.caseStudyLink} onClick={handleDetailNav(`#/${EXPERIENCE_ROUTE_PREFIX}${job.slug}`)}>
-                        Read more →
-                      </a>
-                    ) : null}
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
+              <CareerStack jobs={EXPERIENCE} activeIndex={activeJob} onSelect={scrollToJob} />
             </div>
 
             <a href={RESUME_URL} className={styles.resumeLink} target="_blank" rel="noreferrer">
