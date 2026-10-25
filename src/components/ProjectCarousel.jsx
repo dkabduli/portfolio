@@ -9,7 +9,7 @@ export default function ProjectCarousel({ items, getKey, getLabel, renderItem })
   const trackRef = useRef(null)
   const drag = useRef(null)
   const suppressClick = useRef(false)
-  const [active, setActive] = useState(0)
+  const [visibleRange, setVisibleRange] = useState([0, 0])
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
   const [dragging, setDragging] = useState(false)
@@ -37,18 +37,20 @@ export default function ProjectCarousel({ items, getKey, getLabel, renderItem })
     const max = track.scrollWidth - track.clientWidth
     setAtStart(track.scrollLeft <= 2)
     setAtEnd(track.scrollLeft >= max - 2)
-    let nearest = 0
-    let nearestDistance = Infinity
-    for (let i = 0; i < items.length; i += 1) {
-      const distance = Math.abs(slideLeft(i) - track.scrollLeft)
-      if (distance < nearestDistance) {
-        nearestDistance = distance
-        nearest = i
+    const view = track.getBoundingClientRect()
+    let first = -1
+    let last = -1
+    Array.from(track.children).forEach((slide, i) => {
+      const rect = slide.getBoundingClientRect()
+      const shown = Math.min(rect.right, view.right) - Math.max(rect.left, view.left)
+      if (shown >= rect.width * 0.6) {
+        if (first === -1) first = i
+        last = i
       }
-    }
-    // The last slides can never reach the left edge, so the end of the track means the last item.
-    setActive(track.scrollLeft >= max - 2 ? items.length - 1 : nearest)
-  }, [items.length, slideLeft])
+    })
+    if (first === -1) return
+    setVisibleRange((prev) => (prev[0] === first && prev[1] === last ? prev : [first, last]))
+  }, [])
 
   useEffect(() => {
     sync()
@@ -83,7 +85,7 @@ export default function ProjectCarousel({ items, getKey, getLabel, renderItem })
     if (trackRef.current.hasPointerCapture(event.pointerId)) trackRef.current.releasePointerCapture(event.pointerId)
     const dx = event.clientX - state.x
     const direction = Math.abs(dx) > 60 ? (dx < 0 ? 1 : -1) : 0
-    goTo(active + direction)
+    goTo(visibleRange[0] + direction)
   }
 
   function onClickCapture(event) {
@@ -97,21 +99,17 @@ export default function ProjectCarousel({ items, getKey, getLabel, renderItem })
     if (event.target !== trackRef.current) return
     if (event.key === 'ArrowRight') {
       event.preventDefault()
-      goTo(active + 1)
+      goTo(visibleRange[0] + 1)
     } else if (event.key === 'ArrowLeft') {
       event.preventDefault()
-      goTo(active - 1)
+      goTo(visibleRange[0] - 1)
     }
   }
 
-  const trackClass = [
-    styles.projectTrack,
-    dragging ? styles.projectTrackDragging : '',
-    atStart ? '' : styles.projectTrackFadeLeft,
-    atEnd ? '' : styles.projectTrackFadeRight,
-  ]
-    .filter(Boolean)
-    .join(' ')
+  const trackClass = `${styles.projectTrack} ${dragging ? styles.projectTrackDragging : ''}`.trim()
+  const [first, last] = visibleRange
+  const pad = (n) => String(n).padStart(2, '0')
+  const isShown = (index) => index >= first && index <= last
 
   return (
     <div className={styles.projectCarousel}>
@@ -150,21 +148,21 @@ export default function ProjectCarousel({ items, getKey, getLabel, renderItem })
             <button
               key={getKey(item)}
               type="button"
-              className={`${styles.projectDot} ${index === active ? styles.projectDotActive : ''}`.trim()}
+              className={`${styles.projectDot} ${isShown(index) ? styles.projectDotActive : ''}`.trim()}
               aria-label={`Show ${getLabel(item)}`}
-              aria-current={index === active ? 'true' : undefined}
+              aria-current={isShown(index) ? 'true' : undefined}
               onClick={() => goTo(index)}
             />
           ))}
         </div>
         <p className={styles.projectCounter} aria-live="polite">
-          {String(active + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
+          {first === last ? pad(first + 1) : `${pad(first + 1)}–${pad(last + 1)}`} / {pad(items.length)}
         </p>
         <div className={styles.projectArrows}>
-          <button type="button" className={styles.projectArrow} onClick={() => goTo(active - 1)} disabled={atStart} aria-label="Previous project">
+          <button type="button" className={styles.projectArrow} onClick={() => goTo(visibleRange[0] - 1)} disabled={atStart} aria-label="Previous project">
             ←
           </button>
-          <button type="button" className={styles.projectArrow} onClick={() => goTo(active + 1)} disabled={atEnd} aria-label="Next project">
+          <button type="button" className={styles.projectArrow} onClick={() => goTo(visibleRange[0] + 1)} disabled={atEnd} aria-label="Next project">
             →
           </button>
         </div>

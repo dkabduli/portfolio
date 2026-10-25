@@ -1338,7 +1338,6 @@
   margin: -8px -2px -12px;
   cursor: grab;
   outline: none;
-  transition: mask-position 200ms ease;
 }
 
 .projectTrack::-webkit-scrollbar {
@@ -1357,36 +1356,10 @@
   user-select: none;
 }
 
-.projectTrackFadeRight {
-  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 72px), transparent);
-  mask-image: linear-gradient(to right, #000 calc(100% - 72px), transparent);
-}
-
-.projectTrackFadeLeft {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 72px);
-  mask-image: linear-gradient(to right, transparent, #000 72px);
-}
-
-.projectTrackFadeLeft.projectTrackFadeRight {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 72px, #000 calc(100% - 72px), transparent);
-  mask-image: linear-gradient(to right, transparent, #000 72px, #000 calc(100% - 72px), transparent);
-}
-
 .projectSlide {
-  flex: 0 0 min(860px, 84%);
+  flex: 0 0 calc((100% - 28px) / 2);
   scroll-snap-align: start;
   display: grid;
-}
-
-@media (min-width: 1025px) {
-  .projectSlide .projectCard {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    grid-template-rows: none;
-  }
-
-  .projectSlide .projectMedia {
-    align-content: center;
-  }
 }
 
 .projectSlide img {
