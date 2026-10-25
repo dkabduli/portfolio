@@ -113,6 +113,35 @@ export default function ProjectCarousel({ items, getKey, getLabel, renderItem })
 
   return (
     <div className={styles.projectCarousel}>
+      <div className={styles.projectControls}>
+        <div className={styles.projectDots}>
+          {items.map((item, index) => (
+            <button
+              key={getKey(item)}
+              type="button"
+              className={`${styles.projectDot} ${isShown(index) ? styles.projectDotActive : ''}`.trim()}
+              aria-label={`Show ${getLabel(item)}`}
+              aria-current={isShown(index) ? 'true' : undefined}
+              onClick={() => goTo(index)}
+            />
+          ))}
+        </div>
+        <p className={styles.projectHint} aria-hidden="true">
+          <span className={styles.projectHintPointer}>Drag or use the arrows</span>
+          <span className={styles.projectHintTouch}>Swipe for more</span>
+        </p>
+        <p className={styles.projectCounter} aria-live="polite">
+          {first === last ? pad(first + 1) : `${pad(first + 1)}–${pad(last + 1)}`} / {pad(items.length)}
+        </p>
+        <div className={styles.projectArrows}>
+          <button type="button" className={styles.projectArrow} onClick={() => goTo(visibleRange[0] - 1)} disabled={atStart} aria-label="Previous project">
+            ←
+          </button>
+          <button type="button" className={styles.projectArrow} onClick={() => goTo(visibleRange[0] + 1)} disabled={atEnd} aria-label="Next project">
+            →
+          </button>
+        </div>
+      </div>
       <div
         ref={trackRef}
         className={trackClass}
@@ -142,31 +171,6 @@ export default function ProjectCarousel({ items, getKey, getLabel, renderItem })
         ))}
       </div>
 
-      <div className={styles.projectControls}>
-        <div className={styles.projectDots}>
-          {items.map((item, index) => (
-            <button
-              key={getKey(item)}
-              type="button"
-              className={`${styles.projectDot} ${isShown(index) ? styles.projectDotActive : ''}`.trim()}
-              aria-label={`Show ${getLabel(item)}`}
-              aria-current={isShown(index) ? 'true' : undefined}
-              onClick={() => goTo(index)}
-            />
-          ))}
-        </div>
-        <p className={styles.projectCounter} aria-live="polite">
-          {first === last ? pad(first + 1) : `${pad(first + 1)}–${pad(last + 1)}`} / {pad(items.length)}
-        </p>
-        <div className={styles.projectArrows}>
-          <button type="button" className={styles.projectArrow} onClick={() => goTo(visibleRange[0] - 1)} disabled={atStart} aria-label="Previous project">
-            ←
-          </button>
-          <button type="button" className={styles.projectArrow} onClick={() => goTo(visibleRange[0] + 1)} disabled={atEnd} aria-label="Next project">
-            →
-          </button>
-        </div>
-      </div>
     </div>
   )
 }

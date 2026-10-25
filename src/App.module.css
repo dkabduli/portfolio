@@ -1399,6 +1399,28 @@
   outline-offset: 3px;
 }
 
+.projectHint {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.projectHintTouch {
+  display: none;
+}
+
+@media (hover: none) {
+  .projectHintPointer {
+    display: none;
+  }
+
+  .projectHintTouch {
+    display: inline;
+  }
+}
+
 .projectCounter {
   font-family: var(--font-code);
   font-size: 0.75rem;
@@ -1409,6 +1431,9 @@
 .projectArrows {
   display: flex;
   gap: 10px;
+}
+
+.projectCounter {
   margin-left: auto;
 }
 
@@ -1446,6 +1471,18 @@
 @media (max-width: 720px) {
   .projectSlide {
     flex-basis: 88%;
+  }
+
+  .projectCounter {
+    display: none;
+  }
+
+  .projectHint {
+    white-space: nowrap;
+  }
+
+  .projectArrows {
+    margin-left: auto;
   }
 
   .projectTrack {
