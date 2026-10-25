@@ -3,6 +3,7 @@ import { LazyMotion, domAnimation, motion, AnimatePresence, useReducedMotion, us
 import { contactMethods } from './data/contact'
 import styles from './App.module.css'
 import CareerStack from './components/CareerStack'
+import ProjectCarousel from './components/ProjectCarousel'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const RESUME_URL = `${BASE}resume/Resume.pdf`
@@ -1476,8 +1477,11 @@ export default function App() {
           </Section>
 
           <Section id="projects" label="// 02 — PROJECTS">
-            <div className={styles.projectGrid}>
-              {PROJECTS.map((project) => (
+            <ProjectCarousel
+              items={PROJECTS}
+              getKey={(project) => project.slug}
+              getLabel={(project) => project.name}
+              renderItem={(project) => (
                 <motion.article
                   key={project.name}
                   className={styles.projectCard}
@@ -1526,8 +1530,8 @@ export default function App() {
                     ) : null}
                   </div>
                 </motion.article>
-              ))}
-            </div>
+              )}
+            />
           </Section>
 
           <Section id="skills" label="// 03 — SKILLS">

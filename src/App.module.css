@@ -1321,6 +1321,165 @@
   color: var(--accent);
 }
 
+.projectCarousel {
+  display: grid;
+  gap: 22px;
+}
+
+.projectTrack {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 8px 2px 12px;
+  margin: -8px -2px -12px;
+  cursor: grab;
+  outline: none;
+  transition: mask-position 200ms ease;
+}
+
+.projectTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.projectTrack:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent);
+  border-radius: 18px;
+}
+
+.projectTrackDragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  user-select: none;
+}
+
+.projectTrackFadeRight {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 72px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 72px), transparent);
+}
+
+.projectTrackFadeLeft {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 72px);
+  mask-image: linear-gradient(to right, transparent, #000 72px);
+}
+
+.projectTrackFadeLeft.projectTrackFadeRight {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 72px, #000 calc(100% - 72px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 72px, #000 calc(100% - 72px), transparent);
+}
+
+.projectSlide {
+  flex: 0 0 min(860px, 84%);
+  scroll-snap-align: start;
+  display: grid;
+}
+
+@media (min-width: 1025px) {
+  .projectSlide .projectCard {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+
+  .projectSlide .projectMedia {
+    align-content: center;
+  }
+}
+
+.projectSlide img {
+  -webkit-user-drag: none;
+}
+
+.projectControls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.projectDots {
+  display: flex;
+  gap: 8px;
+}
+
+.projectDot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--line);
+  cursor: pointer;
+  transition: width 220ms ease, background-color 220ms ease;
+}
+
+.projectDotActive {
+  width: 26px;
+  background: var(--accent);
+}
+
+.projectDot:focus-visible,
+.projectArrow:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.projectCounter {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--mist);
+}
+
+.projectArrows {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.projectArrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--navy);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.projectArrow:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.projectArrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media (max-width: 1024px) {
+  .projectSlide {
+    flex-basis: min(560px, 88%);
+  }
+}
+
+@media (max-width: 720px) {
+  .projectSlide {
+    flex-basis: 88%;
+  }
+
+  .projectTrack {
+    gap: 16px;
+  }
+}
+
 .projectGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
