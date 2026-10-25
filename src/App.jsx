@@ -4,6 +4,7 @@ import { contactMethods } from './data/contact'
 import styles from './App.module.css'
 import CareerStack from './components/CareerStack'
 import ProjectCarousel from './components/ProjectCarousel'
+import SkillsToolbox from './components/SkillsToolbox'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const RESUME_URL = `${BASE}resume/Resume.pdf`
@@ -63,15 +64,9 @@ const EXPERIENCE = [
     title: 'Software Developer',
     company: '4Ummah',
     logo: `${BASE}images/4ummah-logo.jpg`,
-    image: `${BASE}images/4ummah-logo.jpg`,
-    imageAlt: '4Ummah logo',
-    imageContain: true,
-    preview: {
-      title: 'The product',
-      src: `${BASE}images/4ummah-homepage.jpg`,
-      alt: '4Ummah homepage: "Digital home of the Muslim ecosystem", with a wall of listed app icons',
-      caption: 'The 4Ummah homepage, with 310 products listed so far.',
-    },
+    image: `${BASE}images/4ummah-homepage.jpg`,
+    imageAlt: '4Ummah homepage: "Digital home of the Muslim ecosystem", with a wall of listed app icons',
+    imageNatural: true,
     highlights: [
       'Built the organisation side **end to end**, from registration and admin review to job postings, on **Next.js** and **Supabase**.',
       'Pulled real listings in automatically: job postings from company **applicant tracking systems** and apps from the **App Store**.',
@@ -871,16 +866,6 @@ function ExperienceDetailPage({ job }) {
 
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
-                {job.preview ? (
-                  <section className={styles.detailSection}>
-                    <h2 className={styles.detailSectionTitle}>{job.preview.title}</h2>
-                    <figure className={styles.detailPreview}>
-                      <img src={job.preview.src} alt={job.preview.alt} className={styles.detailPreviewImage} />
-                      <figcaption className={styles.detailPreviewCaption}>{job.preview.caption}</figcaption>
-                    </figure>
-                  </section>
-                ) : null}
-
                 {job.timelineBullets?.length ? (
                   <section className={styles.detailSection}>
                     <h2 className={styles.detailSectionTitle}>Key results</h2>
@@ -926,7 +911,7 @@ function ExperienceDetailPage({ job }) {
                   <img
                     src={job.image}
                     alt={job.imageAlt}
-                    className={`${styles.detailImage} ${job.imageContain ? styles.detailImageContain : ''}`}
+                    className={`${styles.detailImage} ${job.imageContain ? styles.detailImageContain : ''} ${job.imageNatural ? styles.detailImageNatural : ''}`}
                   />
                 </div>
                 <div className={styles.detailSidebarCard}>
@@ -1598,42 +1583,20 @@ export default function App() {
           <Section id="extracurriculars" label="// 03 — EXTRACURRICULARS">
             <div className={styles.extraGrid}>
               {EXTRACURRICULARS.map((item) => (
-                <article key={item.org} className={styles.extraCard}>
-                  <div className={styles.extraLogo}>
-                    <img src={item.logo} alt={`${item.org} logo`} loading="lazy" />
-                  </div>
-                  <div className={styles.extraHead}>
-                    <h2 className={styles.extraRole}>{item.role}</h2>
-                    <p className={styles.extraOrg}>{item.org}</p>
-                  </div>
-                  <div className={styles.extraMeta}>
-                    <p className={styles.extraPeriod}>{item.period}</p>
-                    {item.previous ? <p className={styles.extraPrevious}>{item.previous}</p> : null}
-                  </div>
-                  {item.text ? <p className={styles.extraText}>{item.text}</p> : <span aria-hidden="true" />}
-                  <a href={item.href} className={styles.extraLink} target="_blank" rel="noreferrer">
-                    Learn more ↗
-                  </a>
-                </article>
+                <a key={item.org} href={item.href} className={styles.extraCard} target="_blank" rel="noreferrer" aria-label={`${item.role} at ${item.org}, ${item.period}. Opens ${item.org} website`}>
+                  <span className={styles.extraLogo}>
+                    <img src={item.logo} alt="" loading="lazy" />
+                  </span>
+                  <span className={styles.extraRole}>{item.role}</span>
+                  <span className={styles.extraPeriod}>{item.period}</span>
+                  <span className={styles.extraArrow} aria-hidden="true">↗</span>
+                </a>
               ))}
             </div>
           </Section>
 
           <Section id="skills" label="// 04 — SKILLS">
-            <div className={styles.toolbox}>
-              {Object.entries(SKILLS).map(([category, items]) => (
-                <div key={category} className={styles.toolboxRow}>
-                  <h2 className={styles.toolboxLabel}>{category}</h2>
-                  <div className={styles.skillTags}>
-                    {items.map((skill) => (
-                      <span key={skill} className={styles.skillTag}>
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <SkillsToolbox skills={SKILLS} />
           </Section>
 
           <Section id="contact" label="// 05 — CONTACT">
