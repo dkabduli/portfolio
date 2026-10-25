@@ -287,16 +287,16 @@ const EXPERIENCE = [
 const EXTRACURRICULARS = [
   {
     org: "Carleton University Muslim Students' Association",
-    mark: 'MSA',
+    logo: `${BASE}images/msa-logo.png`,
     role: 'Resource Director, Islamic Awareness Week',
     period: 'Aug 2026 – Present',
     cause: 'Education',
-    previous: 'Volunteer · Sep 2024 – Aug 2026',
+    previous: 'Previously Volunteer, Sep 2024 – Aug 2026',
     href: 'https://cumsa.ca',
   },
   {
     org: 'Human Concern International',
-    mark: 'HCI',
+    logo: `${BASE}images/hci-logo.svg`,
     role: 'Volunteer',
     period: 'Jan 2021 – Present',
     cause: 'Disaster and Humanitarian Relief',
@@ -305,7 +305,7 @@ const EXTRACURRICULARS = [
   },
   {
     org: 'Penny Appeal Canada',
-    mark: 'PA',
+    logo: `${BASE}images/pennyappeal-logo.svg`,
     role: 'Community Volunteer',
     period: 'May 2021 – 2024',
     cause: 'Poverty Alleviation',
@@ -314,7 +314,7 @@ const EXTRACURRICULARS = [
   },
   {
     org: 'Relay For Life',
-    mark: 'RFL',
+    logo: `${BASE}images/relayforlife-logo.png`,
     role: 'Member',
     period: 'Dec 2022 – Jun 2023',
     cause: 'Health',
@@ -1578,15 +1578,19 @@ export default function App() {
             <div className={styles.extraGrid}>
               {EXTRACURRICULARS.map((item) => (
                 <article key={item.org} className={styles.extraCard}>
-                  <span className={styles.extraMark} aria-hidden="true">
-                    {item.mark}
-                  </span>
+                  <div className={styles.extraLogo}>
+                    <img src={item.logo} alt={`${item.org} logo`} loading="lazy" />
+                  </div>
                   <h2 className={styles.extraRole}>{item.role}</h2>
                   <p className={styles.extraOrg}>{item.org}</p>
-                  <p className={styles.extraPeriod}>{item.period}</p>
-                  {item.previous ? <p className={styles.extraPrevious}>Previously {item.previous}</p> : null}
-                  <span className={styles.extraCause}>{item.cause}</span>
-                  {item.text ? <p className={styles.extraText}>{item.text}</p> : null}
+                  <div className={styles.extraDates}>
+                    <p className={styles.extraPeriod}>{item.period}</p>
+                    {item.previous ? <p className={styles.extraPrevious}>{item.previous}</p> : null}
+                  </div>
+                  <div>
+                    <span className={styles.extraCause}>{item.cause}</span>
+                  </div>
+                  <p className={styles.extraText}>{item.text}</p>
                   <a href={item.href} className={styles.extraLink} target="_blank" rel="noreferrer">
                     Learn more ↗
                   </a>
