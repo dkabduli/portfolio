@@ -16,6 +16,7 @@ const NAV_ITEMS = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
+  { id: 'extracurriculars', label: 'Extracurriculars' },
   { id: 'skills', label: 'Skills' },
   { id: 'contact', label: 'Contact' },
 ]
@@ -280,6 +281,45 @@ const EXPERIENCE = [
     ],
     sidebarNote:
       'NCR LAN operations: coordination with field technicians, ops planners, and security baseline expectations on government-managed switching.',
+  },
+]
+
+const EXTRACURRICULARS = [
+  {
+    org: "Carleton University Muslim Students' Association",
+    mark: 'MSA',
+    role: 'Resource Director, Islamic Awareness Week',
+    period: 'Aug 2026 – Present',
+    cause: 'Education',
+    previous: 'Volunteer · Sep 2024 – Aug 2026',
+    href: 'https://cumsa.ca',
+  },
+  {
+    org: 'Human Concern International',
+    mark: 'HCI',
+    role: 'Volunteer',
+    period: 'Jan 2021 – Present',
+    cause: 'Disaster and Humanitarian Relief',
+    text: 'Sending medical equipment and aid boxes to Lebanon, and raising awareness of Indigenous injustices.',
+    href: 'https://humanconcern.org',
+  },
+  {
+    org: 'Penny Appeal Canada',
+    mark: 'PA',
+    role: 'Community Volunteer',
+    period: 'May 2021 – 2024',
+    cause: 'Poverty Alleviation',
+    text: "Supported Penny Appeal's work with less fortunate communities.",
+    href: 'https://pennyappeal.ca',
+  },
+  {
+    org: 'Relay For Life',
+    mark: 'RFL',
+    role: 'Member',
+    period: 'Dec 2022 – Jun 2023',
+    cause: 'Health',
+    text: 'Raised money to fund cancer research and support people affected by cancer.',
+    href: 'https://www.relayforlife.ca',
   },
 ]
 
@@ -1534,7 +1574,28 @@ export default function App() {
             />
           </Section>
 
-          <Section id="skills" label="// 03 — SKILLS">
+          <Section id="extracurriculars" label="// 03 — EXTRACURRICULARS">
+            <div className={styles.extraGrid}>
+              {EXTRACURRICULARS.map((item) => (
+                <article key={item.org} className={styles.extraCard}>
+                  <span className={styles.extraMark} aria-hidden="true">
+                    {item.mark}
+                  </span>
+                  <h2 className={styles.extraRole}>{item.role}</h2>
+                  <p className={styles.extraOrg}>{item.org}</p>
+                  <p className={styles.extraPeriod}>{item.period}</p>
+                  {item.previous ? <p className={styles.extraPrevious}>Previously {item.previous}</p> : null}
+                  <span className={styles.extraCause}>{item.cause}</span>
+                  {item.text ? <p className={styles.extraText}>{item.text}</p> : null}
+                  <a href={item.href} className={styles.extraLink} target="_blank" rel="noreferrer">
+                    Learn more ↗
+                  </a>
+                </article>
+              ))}
+            </div>
+          </Section>
+
+          <Section id="skills" label="// 04 — SKILLS">
             <div className={styles.skillsPanel}>
               <div className={styles.skillsGrid}>
                 {Object.entries(SKILLS).map(([category, items]) => (
@@ -1571,7 +1632,7 @@ export default function App() {
             </div>
           </Section>
 
-          <Section id="contact" label="// 04 — CONTACT">
+          <Section id="contact" label="// 05 — CONTACT">
             <div className={styles.contactInfo}>
               <p className={styles.contactIntro}>
                 Seeking new grad network engineering, NetDevOps, and infrastructure roles — graduating April 2027.
