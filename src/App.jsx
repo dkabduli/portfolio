@@ -73,6 +73,67 @@ const COURSEWORK = {
 
 const EXPERIENCE = [
   {
+    slug: '4ummah-software-developer',
+    period: 'SEPT 2026 — PRESENT',
+    title: 'Software Developer',
+    company: '4Ummah',
+    logo: `${BASE}images/4ummah-logo.jpg`,
+    image: `${BASE}images/4ummah-logo.jpg`,
+    imageAlt: '4Ummah logo',
+    imageContain: true,
+    highlights: [
+      'Built the organisation side **end to end**, from registration and admin review to job postings, on **Next.js** and **Supabase**.',
+      'Pulled real listings in automatically: job postings from company **applicant tracking systems** and apps from the **App Store**.',
+      '**100+ commits** shipped through code review on a team of **5 developers**.',
+    ],
+    timelineBullets: [
+      'Built the organisation experience end to end on **Next.js 16**, **React 19** and **Supabase**: registration with a guidelines agreement, an admin review queue, takedown and reinstatement, a reapply path for declined organisations, and organisation-level job publishing.',
+      'Completed the account lifecycle with **password recovery**, **email confirmation** and route **middleware**, and fixed public company pages that returned a **500 error** to signed-out visitors.',
+      'Built importers that pull job postings from company **applicant tracking systems** and fill product listings and screenshots from the **App Store**, with checks that refuse redirects onto private hosts.',
+      'Added the search foundations a directory depends on: **structured data** for jobs, products, events and companies, plus a **sitemap** and **robots** rules behind an indexing switch.',
+      'Audited session, route and **Postgres Row Level Security** boundaries and revoked access nobody needed.',
+      'Redesigned the home, events and organisation pages with a new display typeface and warm palette, and added admin tools for featuring listings.',
+    ],
+    roleContext:
+      '4Ummah is building digital infrastructure for the global Muslim community, starting with a searchable directory of Muslim-built products and jobs. Joined the core team as a software developer in the main **Next.js** and **Supabase** monorepo, shipping **100+ commits** alongside **4 other developers**. Work is planned in **Jira** sprints and every change goes through a pull request reviewed by the lead developer. The project keeps strict rules: authorization is enforced in **Postgres Row Level Security** and column grants, applied migrations are never edited, and all database access runs through a single services layer.',
+    detailDepth: [
+      {
+        title: 'The organisation side, end to end',
+        text: 'Organisations are how companies get onto 4Ummah, so this flow had to work from the first form to a published job. Built the whole path in one feature branch, then hardened it through review.',
+        bullets: [
+          'Registration that asks who is registering and requires agreement to the community guidelines.',
+          'A tabbed **admin review queue**, plus takedown and reinstatement for verified organisations. A takedown also takes their jobs down.',
+          'A reapply path for declined organisations, so a rejection is not a dead end.',
+          'Organisation-level **job publishing**, company profile fields, and a public company page.',
+        ],
+      },
+      {
+        title: 'Bringing in real listings',
+        text: 'A directory is only useful once it has real content. Built importers so listings come from the source instead of being typed in by hand.',
+        bullets: [
+          'Job postings pulled from company **applicant tracking systems**, matched to verified organisations by slug, with only published roles shown.',
+          'Product listings, logos and screenshots filled from the **App Store**, querying the right storefront for each app.',
+          'Fetching that refuses a redirect onto a private host before following it, so the importer cannot be pointed at internal services.',
+        ],
+      },
+      {
+        title: 'Search visibility',
+        text: 'The site is server-rendered because most visitors will arrive from search. Added the pieces that let search engines understand it.',
+        bullets: [
+          '**Structured data** for jobs, products, events and companies.',
+          'A **sitemap** and **robots** rules behind an indexing switch, keeping suspended organisations out of the sitemap.',
+          'Listing ids accepted as permalinks and redirected to their readable slug.',
+        ],
+      },
+      {
+        title: 'Security boundaries',
+        text: 'Audited the session, route and **Row Level Security** boundaries and revoked grants nobody needed. Data changes ship as forward-only **migrations**, with database types regenerated against the CI-pinned Supabase CLI.',
+      },
+    ],
+    sidebarNote:
+      'Startup team: Jira sprints, pull request review, and Postgres Row Level Security as the security boundary.',
+  },
+  {
     slug: 'infrastructure-dev-intern',
     period: 'MAY 2026 — PRESENT',
     title: 'Infrastructure Dev Intern',
@@ -634,10 +695,10 @@ function LogoMark() {
   return <span className={styles.logoMark}>ARB</span>
 }
 
-function PlaceholderLogo() {
+function PlaceholderLogo({ src = `${BASE}images/ssc-logo.png` }) {
   return (
     <span className={styles.companyLogoWrap} aria-hidden="true">
-      <img src={`${BASE}images/ssc-logo.png`} alt="" className={styles.companyLogo} />
+      <img src={src} alt="" className={styles.companyLogo} />
     </span>
   )
 }
@@ -823,7 +884,7 @@ function ExperienceDetailPage({ job }) {
                   />
                 </div>
                 <div className={styles.detailSidebarCard}>
-                  <PlaceholderLogo />
+                  <PlaceholderLogo src={job.logo} />
                   <p className={styles.detailSidebarText}>{job.sidebarNote}</p>
                 </div>
               </aside>
@@ -1333,7 +1394,7 @@ export default function App() {
                     <h2 className={styles.timelineTitle}>{job.title}</h2>
                     <div className={styles.timelineCompanyRow}>
                       <p className={styles.timelineCompany}>{job.company}</p>
-                      <PlaceholderLogo />
+                      <PlaceholderLogo src={job.logo} />
                     </div>
                     {job.highlights.length ? (
                       <ul className={styles.timelineBullets}>
