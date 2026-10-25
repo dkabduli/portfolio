@@ -85,6 +85,12 @@ const EXPERIENCE = [
     image: `${BASE}images/4ummah-logo.jpg`,
     imageAlt: '4Ummah logo',
     imageContain: true,
+    preview: {
+      title: 'The product',
+      src: `${BASE}images/4ummah-homepage.jpg`,
+      alt: '4Ummah homepage: "Digital home of the Muslim ecosystem", with a wall of listed app icons',
+      caption: 'The 4Ummah homepage, with 310 products listed so far.',
+    },
     highlights: [
       'Built the organisation side **end to end**, from registration and admin review to job postings, on **Next.js** and **Supabase**.',
       'Pulled real listings in automatically: job postings from company **applicant tracking systems** and apps from the **App Store**.',
@@ -837,13 +843,18 @@ function ContactMethodIcon({ id }) {
   )
 }
 
+function returnToPortfolio(hash) {
+  window.history.pushState(null, '', hash)
+  window.dispatchEvent(new HashChangeEvent('hashchange'))
+}
+
 function ExperienceDetailPage({ job }) {
   return (
     <div className={styles.detailPage}>
       <header className={styles.detailHeader}>
         <div className={styles.container}>
           <div className={styles.detailNav}>
-            <a href="#experience" className={styles.detailBackLink} onClick={(e) => { e.preventDefault(); window.history.pushState(null, '', '#experience'); window.dispatchEvent(new HashChangeEvent('hashchange')) }}>
+            <a href={`#experience-${job.slug}`} className={styles.detailBackLink} onClick={(e) => { e.preventDefault(); returnToPortfolio(`#experience-${job.slug}`) }}>
               ← Back to portfolio
             </a>
             <div className={styles.detailActions}>
@@ -874,13 +885,23 @@ function ExperienceDetailPage({ job }) {
 
             <p className={styles.detailLead}>
               The timeline shows the headlines. This page has the full results, the constraints, and the team context.{' '}
-              <a href={`${BASE}#experience`} className={styles.detailLeadLink}>
+              <a href={`#experience-${job.slug}`} className={styles.detailLeadLink} onClick={(e) => { e.preventDefault(); returnToPortfolio(`#experience-${job.slug}`) }}>
                 Back to timeline →
               </a>
             </p>
 
             <div className={styles.detailGrid}>
               <div className={styles.detailContent}>
+                {job.preview ? (
+                  <section className={styles.detailSection}>
+                    <h2 className={styles.detailSectionTitle}>{job.preview.title}</h2>
+                    <figure className={styles.detailPreview}>
+                      <img src={job.preview.src} alt={job.preview.alt} className={styles.detailPreviewImage} />
+                      <figcaption className={styles.detailPreviewCaption}>{job.preview.caption}</figcaption>
+                    </figure>
+                  </section>
+                ) : null}
+
                 {job.timelineBullets?.length ? (
                   <section className={styles.detailSection}>
                     <h2 className={styles.detailSectionTitle}>Key results</h2>
@@ -948,7 +969,7 @@ function ProjectDetailPage({ project }) {
       <header className={styles.detailHeader}>
         <div className={styles.container}>
           <div className={styles.detailNav}>
-            <a href="#projects" className={styles.detailBackLink} onClick={(e) => { e.preventDefault(); window.history.pushState(null, '', '#projects'); window.dispatchEvent(new HashChangeEvent('hashchange')) }}>
+            <a href="#projects" className={styles.detailBackLink} onClick={(e) => { e.preventDefault(); returnToPortfolio('#projects') }}>
               ← Back to portfolio
             </a>
             <div className={styles.detailActions}>
@@ -1185,6 +1206,26 @@ export default function App() {
     if (!activeExperienceDetail && !activeProjectDetail) return
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [activeExperienceDetail, activeProjectDetail])
+
+  const onDetailPage = Boolean(activeExperienceDetail || activeProjectDetail)
+  useEffect(() => {
+    if (onDetailPage) return undefined
+    const id = decodeURIComponent(window.location.hash.slice(1))
+    if (!id || id.startsWith('/')) return undefined
+    let frame = 0
+    const started = performance.now()
+    // The portfolio mounts after the detail page's exit transition, so wait for the target to exist.
+    const seek = () => {
+      const target = document.getElementById(id)
+      if (target) {
+        target.scrollIntoView({ behavior: 'instant', block: target.tagName === 'ARTICLE' ? 'center' : 'start' })
+        return
+      }
+      if (performance.now() - started < 2000) frame = requestAnimationFrame(seek)
+    }
+    frame = requestAnimationFrame(seek)
+    return () => cancelAnimationFrame(frame)
+  }, [onDetailPage])
 
   const [activeJob, setActiveJob] = useState(0)
   const timelineItemRefs = useRef([])
@@ -1474,6 +1515,7 @@ export default function App() {
                 {EXPERIENCE.map((job, index) => (
                   <article
                     key={job.title}
+                    id={`experience-${job.slug}`}
                     ref={(el) => {
                       timelineItemRefs.current[index] = el
                     }}
