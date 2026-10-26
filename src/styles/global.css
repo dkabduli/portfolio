@@ -1,14 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg: #f8f8f6;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --navy: #1a2744;
-  --slate: #3d4f6b;
-  --mist: #566680;
-  --line: #cfd7e3;
-  --accent: #2563eb;
-  --accent-light: #eef3ff;
+  --ink: #0a0a0a;
+  --navy: #0a0a0a;
+  --slate: #262626;
+  --mist: #525252;
+  --line: #0a0a0a;
+  --accent: #1f3fd6;
+  --accent-light: #e8edff;
+  --highlight: #ffd600;
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono-alt: 'DM Mono', monospace;

@@ -3003,3 +3003,244 @@
     transition-duration: 100ms;
   }
 }
+
+/* Ink & Electric: outlined cards with hard offset shadows, black ink, electric blue emphasis. */
+.pageShell {
+  background: var(--bg);
+}
+
+.progressBar {
+  background: var(--accent);
+}
+
+.navWrap,
+.navWrapScrolled {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 2px solid var(--ink);
+  box-shadow: none;
+}
+
+.sectionLabel {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.heroTitle,
+.timelineTitle,
+.projectTitle,
+.detailTitle,
+.extraRole {
+  font-weight: 600;
+}
+
+.heroArt {
+  color: rgba(10, 10, 10, 0.5);
+}
+
+.timelineCard,
+.projectCard,
+.extraCard,
+.toolbox,
+.statCard,
+.credentialCard,
+.educationCard,
+.contactLink,
+.detailSection,
+.detailSidebarCard,
+.detailImageCard,
+.detailOnlyCard,
+.projectFlowCard,
+.projectSummaryCard,
+.projectScreenshotCard,
+.navDropdownMenu,
+.heroNodeCard {
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--surface);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.detailCard,
+.contactInfo {
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--surface);
+  box-shadow: none;
+}
+
+.timelineCard,
+.projectCard,
+.extraCard,
+.contactLink,
+.statCard {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.timelineItem:hover .timelineCard,
+.projectCard:hover,
+.extraCard:hover,
+.extraCard:focus-visible,
+.contactLink:hover,
+.statCard:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--ink);
+  border-color: var(--ink);
+}
+
+.timelineItemActive .timelineCard {
+  border-color: var(--ink);
+  box-shadow: 6px 6px 0 var(--accent);
+}
+
+.timeline::before {
+  width: 2px;
+  background: var(--ink);
+}
+
+.timelineDot {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--ink);
+}
+
+.timelineItem:first-child .timelineDot {
+  animation: none;
+}
+
+.timelineBullets li {
+  border-left: 3px solid var(--accent);
+  background: transparent;
+  color: var(--slate);
+}
+
+.timelineBullets li:hover {
+  background: var(--accent-light);
+  border-left-color: var(--ink);
+}
+
+.skillTag,
+.projectTag,
+.timelineLayer,
+.courseworkTag,
+.detailSkillTag,
+.educationTag,
+.heroStrengthTag,
+.projectConfigLink {
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.timelineItemActive .timelineLayer {
+  background: var(--accent);
+  border-color: var(--ink);
+  color: #ffffff;
+}
+
+.featuredBadge {
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  background: var(--highlight);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.primaryButton {
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.primaryButton:hover {
+  background: var(--accent);
+  color: #ffffff;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.heroKicker {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 8px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.companyLogoWrap,
+.extraLogo,
+.aboutPortraitFrame,
+.projectImageFrame,
+.detailImage {
+  border-radius: 0;
+}
+
+.companyLogoWrap,
+.extraLogo,
+.aboutPortraitFrame {
+  border: 1.5px solid var(--ink);
+  background: var(--surface);
+}
+
+.projectImageFrame {
+  border: 2px solid var(--ink);
+  box-shadow: none;
+}
+
+.projectMedia {
+  background: var(--surface);
+}
+
+.projectArrow {
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.projectArrow:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--ink);
+  color: #ffffff;
+}
+
+.projectDot {
+  border-radius: 0;
+  background: #d4d4d4;
+}
+
+.projectDotActive {
+  background: var(--accent);
+}
+
+.toolboxRowActive::before {
+  width: 3px;
+  background: var(--accent);
+}
+
+.footer {
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.projectTrack {
+  padding: 8px 10px 14px 2px;
+  margin: -8px -10px -14px -2px;
+}
+
+.detailPage {
+  background: var(--bg);
+}
+
+.detailHeader {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 2px solid var(--ink);
+}
+
+.detailBullets li {
+  border-left: 3px solid var(--accent);
+  background: transparent;
+}

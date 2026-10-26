@@ -9,8 +9,8 @@ const SLOT_H = 0.56
 const FRONT_H = 0.48
 const PULL = 1.15
 
-const FRONT_COLOR = new THREE.Color('#eef1f7')
-const ACTIVE_COLOR = new THREE.Color('#3b6fe8')
+const FRONT_COLOR = new THREE.Color('#fafafa')
+const ACTIVE_COLOR = new THREE.Color('#0f2bb8')
 
 /** Drawer 0 is the top drawer, matching the order of the skills rows. */
 export function createToolbox(container, { count, reducedMotion }) {
@@ -45,9 +45,9 @@ export function createToolbox(container, { count, reducedMotion }) {
     return item
   }
 
-  const bodyMaterial = track(new THREE.MeshPhysicalMaterial({ color: '#24324f', roughness: 0.42, metalness: 0.2, clearcoat: 0.8, clearcoatRoughness: 0.3 }))
+  const bodyMaterial = track(new THREE.MeshPhysicalMaterial({ color: '#151515', roughness: 0.42, metalness: 0.2, clearcoat: 0.8, clearcoatRoughness: 0.3 }))
   const chromeMaterial = track(new THREE.MeshStandardMaterial({ color: '#d7dde8', metalness: 1, roughness: 0.22 }))
-  const trayMaterial = track(new THREE.MeshStandardMaterial({ color: '#1a2438', roughness: 0.7 }))
+  const trayMaterial = track(new THREE.MeshStandardMaterial({ color: '#262626', roughness: 0.7 }))
   const metalMaterial = track(new THREE.MeshStandardMaterial({ color: '#c9ced8', metalness: 0.9, roughness: 0.32 }))
   const darkMetalMaterial = track(new THREE.MeshStandardMaterial({ color: '#4b5563', metalness: 0.8, roughness: 0.4 }))
   const pcbMaterial = track(new THREE.MeshStandardMaterial({ color: '#0f5132', roughness: 0.6 }))
@@ -190,7 +190,7 @@ export function createToolbox(container, { count, reducedMotion }) {
     drawer.position.y = baseY
     group.add(drawer)
 
-    const frontMaterial = track(new THREE.MeshPhysicalMaterial({ color: FRONT_COLOR.clone(), roughness: 0.35, metalness: 0.05, clearcoat: 0.6 }))
+    const frontMaterial = track(new THREE.MeshPhysicalMaterial({ color: FRONT_COLOR.clone(), roughness: 0.5, metalness: 0.05, clearcoat: 0.15, emissive: new THREE.Color('#000000') }))
     addBox(drawerW, FRONT_H, 0.1, frontMaterial, 0, 0, frontZ, drawer, true)
 
     const pull = new THREE.Mesh(pullGeometry, chromeMaterial)
@@ -277,7 +277,8 @@ export function createToolbox(container, { count, reducedMotion }) {
       const goal = i === active ? 1 : 0
       drawer.progress += (goal - drawer.progress) * ease
       drawer.group.position.z = drawer.progress * PULL
-      drawer.frontMaterial.color.copy(FRONT_COLOR).lerp(ACTIVE_COLOR, drawer.progress * 0.9)
+      drawer.frontMaterial.color.copy(FRONT_COLOR).lerp(ACTIVE_COLOR, drawer.progress)
+      drawer.frontMaterial.emissive.copy(ACTIVE_COLOR).multiplyScalar(drawer.progress * 0.35)
     })
 
     renderer.render(scene, camera)

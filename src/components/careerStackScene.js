@@ -10,8 +10,8 @@ const SLIDE = 0.5
 const LIFT = 0.06
 const PORTS = 6
 
-const BASE_COLOR = new THREE.Color('#f4f6fa')
-const ACTIVE_COLOR = new THREE.Color('#3b6fe8')
+const BASE_COLOR = new THREE.Color('#fafafa')
+const ACTIVE_COLOR = new THREE.Color('#0f2bb8')
 const LED_IDLE = new THREE.Color('#9aa7bd')
 const LED_ON = new THREE.Color('#22c55e')
 
@@ -53,7 +53,7 @@ export function createCareerStack(container, { count, reducedMotion, getLabels }
   const unitGeometry = new RoundedBoxGeometry(UNIT_W, UNIT_H, UNIT_D, 4, 0.12)
   const portGeometry = new THREE.BoxGeometry(0.11, 0.08, 0.02)
   const ledGeometry = new THREE.BoxGeometry(0.07, 0.045, 0.02)
-  const portMaterial = new THREE.MeshStandardMaterial({ color: '#1a2744', roughness: 0.6 })
+  const portMaterial = new THREE.MeshStandardMaterial({ color: '#0a0a0a', roughness: 0.6 })
   const disposables = [unitGeometry, portGeometry, ledGeometry, portMaterial]
 
   const units = []
@@ -62,10 +62,11 @@ export function createCareerStack(container, { count, reducedMotion, getLabels }
     const level = count - 1 - i
     const material = new THREE.MeshPhysicalMaterial({
       color: BASE_COLOR.clone(),
-      roughness: 0.38,
+      roughness: 0.5,
       metalness: 0.05,
-      clearcoat: 0.6,
-      clearcoatRoughness: 0.28,
+      clearcoat: 0.15,
+      clearcoatRoughness: 0.4,
+      emissive: new THREE.Color('#000000'),
     })
     const mesh = new THREE.Mesh(unitGeometry, material)
     mesh.castShadow = true
@@ -93,7 +94,7 @@ export function createCareerStack(container, { count, reducedMotion, getLabels }
     units.push({ mesh, material, leds, baseY, progress: 0 })
   }
 
-  const railMaterial = new THREE.LineDashedMaterial({ color: '#8a9bb5', dashSize: 0.07, gapSize: 0.07, transparent: true, opacity: 0.7 })
+  const railMaterial = new THREE.LineDashedMaterial({ color: '#0a0a0a', dashSize: 0.07, gapSize: 0.07, transparent: true, opacity: 0.55 })
   disposables.push(railMaterial)
   const railBottom = -centerOffset - UNIT_H / 2
   const railTop = centerOffset + UNIT_H / 2 + 0.25
@@ -192,7 +193,8 @@ export function createCareerStack(container, { count, reducedMotion, getLabels }
       unit.progress += (target - unit.progress) * ease
       unit.mesh.position.z = unit.progress * SLIDE
       unit.mesh.position.y = unit.baseY + unit.progress * LIFT
-      unit.material.color.copy(BASE_COLOR).lerp(ACTIVE_COLOR, unit.progress * 0.88)
+      unit.material.color.copy(BASE_COLOR).lerp(ACTIVE_COLOR, unit.progress)
+      unit.material.emissive.copy(ACTIVE_COLOR).multiplyScalar(unit.progress * 0.35)
       unit.leds.forEach((led, k) => {
         const blink = reducedMotion ? 1 : 0.55 + 0.45 * Math.sin(t * 5 + k * 1.7)
         led.material.color.copy(LED_IDLE).lerp(LED_ON, unit.progress)
