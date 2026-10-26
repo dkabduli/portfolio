@@ -3361,3 +3361,57 @@
   border-radius: 999px;
   background: var(--accent);
 }
+
+.projectSlide .projectMedia {
+  gap: 10px;
+  padding: 14px;
+}
+
+.projectSlide .projectImageFrame {
+  aspect-ratio: 2.1 / 1;
+}
+
+.projectSlide .projectBody {
+  gap: 10px;
+  padding: 16px 20px 20px;
+}
+
+.projectSlide .projectBody h2,
+.projectSlide .projectBody p {
+  margin: 0;
+}
+
+.projectSlide .projectTitle {
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+.projectSlide .projectDescription {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.heroMetaLine {
+  display: block;
+}
+
+.heroMetaLine + .heroMetaLine {
+  margin-top: 4px;
+  color: var(--mist);
+  font-size: 0.9em;
+}
+
+@media (min-width: 1025px) and (max-height: 780px) {
+  .projectSlide .projectImageFrame {
+    aspect-ratio: 2.8 / 1;
+  }
+}
+
+.noWrap {
+  white-space: nowrap;
+}

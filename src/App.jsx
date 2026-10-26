@@ -1537,7 +1537,8 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.15 }}
                   >
-                    Infrastructure & NetDevOps — Shared Services Canada · B.IT. '27
+                    <span className={styles.heroMetaLine}>Infrastructure &amp; NetDevOps</span>
+                    <span className={styles.heroMetaLine}>Shared Services Canada · <span className={styles.noWrap}>Carleton B.IT. '27</span></span>
                   </motion.p>
                   <motion.p
                     className={styles.heroLocation}
@@ -1545,7 +1546,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.2 }}
                   >
-                    Carleton University · Ottawa, ON
+                    Ottawa, ON
                   </motion.p>
                   <motion.p
                     className={styles.heroBody}
@@ -1553,7 +1554,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    Building production systems at Shared Services Canada — a full-stack intake platform (Next.js/PostgreSQL), Ansible-based provisioning, Zabbix CI/CD pipelines, and mailbox-to-ticket automation, all deployed under federal change-control constraints.
+                    Building production systems at Shared Services Canada: a full-stack intake platform (Next.js/PostgreSQL), Ansible-based provisioning, Zabbix CI/CD pipelines, and mailbox-to-ticket automation, all deployed under federal change-control constraints.
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}
