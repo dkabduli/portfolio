@@ -403,6 +403,156 @@ const PROJECTS = [
     ],
   },
   {
+    name: '5G Network Slicing Capstone',
+    slug: '5g-network-slicing',
+    year: '2026–27',
+    status: 'Ongoing',
+    description:
+      'Capstone team project: three isolated 5G network slices (passenger broadband, ultra-low-latency station safety and operator management) sharing one physical backhaul, built with Free5GC, UERANSIM and Containerlab. Per-slice QoS cut the safety slice\'s latency from 53.9 ms to 0.10 ms while another slice flooded the link, and isolation tests show no cross-slice reachability.',
+    tags: ['5G Core', 'Free5GC', 'Containerlab', 'FRR', 'Linux QoS', 'Python'],
+    image: `${BASE}images/capstone-3d-map.jpg`,
+    fallback: `${BASE}images/capstone-network-overview.jpg`,
+    imagePosition: 'center center',
+    github: null,
+    external: null,
+    detailMeta: ['NET 4901 Capstone · Carleton University', 'Team of 5 · Supervisor: Prof. Ashraf Matrawy', '2026–27 · in progress'],
+    overviewTitle: 'What it is',
+    flowTitle: 'How isolation is enforced',
+    deepDiveTitle: 'What we measured',
+    screenshotsIntro: 'Figures from the project repository.',
+    sidebarNarrativeTitle: 'Why it matters',
+    sidebarTraitsTitle: 'Highlights',
+    sidebarNarrative:
+      'If slices share the same hardware, is the separation real? The project answers with measurements, not diagrams: a compromised device on the passenger slice cannot reach the safety systems, and cannot slow them down by flooding the link.',
+    summary:
+      'A shared mobile network has to serve customers with incompatible needs: passengers want bandwidth, safety systems want near-zero delay, and the operator\'s own systems must always work. **5G network slicing** runs separate logical networks over the same hardware. The project builds three slices for an O-Train station (**eMBB** passenger broadband, **URLLC** station safety and dispatch over MQTT, and an operator **management** slice for billing and monitoring), each separated end to end from the radio to its own data network, and measures whether that separation holds up under attack.',
+    humanSummary: [
+      {
+        label: 'Status',
+        value: 'In progress · phase 1 transport lab verified',
+      },
+      {
+        label: 'Stack',
+        value: 'Free5GC v4.2.3 · UERANSIM · Containerlab · FRR',
+      },
+    ],
+    incidentFlow: [
+      {
+        title: '1. Access',
+        text: 'One routing table per slice, chosen by ingress port, plus anti-spoofing ACLs: a device forging another slice\'s address is dropped at the access router.',
+      },
+      {
+        title: '2. Transport',
+        text: 'A VRF per slice with no route leaking, explicit source filters, and a per-slice HTB queue so a flood in one slice cannot starve another.',
+      },
+      {
+        title: '3. Core',
+        text: 'A separate UPF and data network per slice, with each subscriber permitted only its own slice. Configured, with validation on the full 5G core in progress.',
+      },
+    ],
+    deepDive: [
+      'With one slice saturating the shared **200 Mbit/s** backhaul, per-slice **HTB** queues cut the safety slice\'s median latency from **53.90 ms** to **0.10 ms**, **518×** lower, while the flooding slice\'s own throughput rose from 177 to **193 Mbit/s**.',
+      'The guarantee held flat from **1 to 50** concurrent sessions per slice: about **0.13 ms** for the safety slice versus **57 ms** on a shared queue, with Jain fairness of **0.999** or better.',
+      'Isolation tests regenerate on every run: each slice reaches only its own services, all **6** device-to-device paths are blocked, and **5/5** spoofed packets are dropped at the access router.',
+      'Next: running the full **Free5GC** core with **UERANSIM** on a department lab server, to test slice admission, registration load and control-plane security.',
+    ],
+    screenshots: [
+      {
+        src: `${BASE}images/capstone-network-overview.jpg`,
+        alt: 'Diagram of passengers, station safety systems and the operator sharing one 5G network split into three slices',
+        eyebrow: 'Architecture',
+        title: 'One network, three slices',
+        caption: 'An O-Train station: passengers, station safety systems and the operator share one physical network.',
+      },
+      {
+        src: `${BASE}images/capstone-qos-contention.png`,
+        alt: 'Chart of safety-slice round-trip time with a shared queue versus per-slice HTB while another slice floods the backhaul',
+        eyebrow: 'Measured result',
+        title: 'Safety-slice latency under a flood',
+        caption: 'Shared queue versus per-slice HTB while the broadband slice saturates the backhaul.',
+      },
+      {
+        src: `${BASE}images/capstone-scale-latency.png`,
+        alt: 'Chart of safety-slice latency staying flat from 1 to 50 concurrent sessions',
+        eyebrow: 'Scale test',
+        title: 'Flat from 1 to 50 sessions',
+        caption: 'The latency guarantee does not erode as sessions are added.',
+      },
+    ],
+    sidebarFacts: [
+      '518× lower latency for the safety slice under load',
+      'No cross-slice reachability; 5/5 spoofed packets dropped',
+      'Free5GC, UERANSIM and Containerlab',
+      'Team of 5, supervised by Prof. Ashraf Matrawy',
+    ],
+  },
+  {
+    name: 'Shop Elsewhere Arnprior',
+    slug: 'shop-elsewhere-arnprior',
+    year: '2026',
+    status: 'Client project',
+    description:
+      'Freelance e-commerce site for a small Arnprior business selling native plants and organic sourdough. Customers browse the catalogue, reserve plants, book a pickup slot for baked goods and pay at pickup, while the owners run products, bake batches, inventory, orders and pickup slots from their own admin dashboard.',
+    tags: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Resend', 'Vercel'],
+    image: `${BASE}images/shop-elsewhere-home.jpg`,
+    fallback: `${BASE}images/shop-elsewhere-home.jpg`,
+    imagePosition: 'left center',
+    github: null,
+    external: 'https://shop-elsewhere-arnprior.vercel.app',
+    externalLabel: 'Live preview',
+    detailMeta: ['Freelance client project', 'Arnprior, Ontario', 'Next.js 16 · Supabase · Resend'],
+    overviewTitle: 'What it is',
+    flowTitle: 'How it works',
+    deepDiveTitle: 'Build notes',
+    screenshotsIntro: 'The live storefront.',
+    sidebarNarrativeTitle: 'Why it exists',
+    sidebarTraitsTitle: 'Highlights',
+    sidebarNarrative:
+      'A small seasonal business needs ordering that fits how it actually works: no online payments, no customer accounts, and stock that arrives in batches.',
+    summary:
+      'Shop Elsewhere grows Ontario wildflowers from seed and bakes organic sourdough in a certified home kitchen. The site gives them a real ordering flow built around a two-person seasonal business: **pay at pickup**, guest checkout with no accounts, plant reservations before stock is ready, and baked goods ordered against a **pickup slot**.',
+    humanSummary: [
+      {
+        label: 'Live preview',
+        value: 'shop-elsewhere-arnprior.vercel.app',
+      },
+      {
+        label: 'Client',
+        value: 'Native plant nursery and home bakery in Arnprior, ON',
+      },
+    ],
+    incidentFlow: [
+      {
+        title: '1. Browse',
+        text: 'A catalogue of native plants, baked goods and garden transplants with stock status, plus notify-me sign-ups for items that are not available yet.',
+      },
+      {
+        title: '2. Order',
+        text: 'Guest cart and checkout with a pickup date and time slot. Each order gets its own private tracking link.',
+      },
+      {
+        title: '3. Run the shop',
+        text: 'An admin dashboard for products, bake batches, inventory, orders, pickup slots, garden design inquiries and shop settings.',
+      },
+    ],
+    deepDive: [
+      'Data model in **Supabase Postgres** across **5** migrations, with bake batches kept separate from products so several future bakes can be scheduled at once.',
+      'Notify-me emails sent through **Resend**, with one-click unsubscribe.',
+      'Launched with the owners\' first **21** products, their own photography and a photo credits page.',
+      'Redesigned the storefront around the owners\' photography and local identity, away from a generic template look.',
+    ],
+    screenshots: [
+      {
+        src: `${BASE}images/shop-elsewhere-home.jpg`,
+        alt: 'Shop Elsewhere Arnprior homepage: "Native plants & sourdough from Arnprior" over a photo of wildflowers and a monarch butterfly',
+        eyebrow: 'Storefront',
+        title: 'Homepage',
+        caption: 'Order online, pay at pickup in Arnprior.',
+      },
+    ],
+    sidebarFacts: ['Pay at pickup, guest checkout', 'Admin dashboard with 7 sections', 'Next.js 16, Supabase and Resend on Vercel'],
+  },
+  {
     name: 'BlackBoxNet',
     slug: 'blackboxnet',
     year: '2026',
@@ -1550,6 +1700,7 @@ export default function App() {
                   <div className={styles.projectMedia}>
                     <div className={styles.projectMediaHeader}>
                       {project.featured ? <span className={styles.featuredBadge}>FEATURED</span> : null}
+                      {project.status ? <span className={styles.statusBadge}>{project.status}</span> : null}
                     </div>
                     <div className={styles.projectImageFrame}>
                       <ProjectImage project={project} />
