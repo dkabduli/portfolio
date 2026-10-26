@@ -61,7 +61,7 @@ const EXPERIENCE = [
     slug: '4ummah-software-developer',
     layer: 'Applications',
     period: 'SEPT 2026 — PRESENT',
-    title: 'Software Developer',
+    title: 'Founding Software Developer',
     company: '4Ummah',
     logo: `${BASE}images/4ummah-logo.jpg`,
     image: `${BASE}images/4ummah-homepage.jpg`,
