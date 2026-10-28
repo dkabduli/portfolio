@@ -5,9 +5,11 @@ import styles from './App.module.css'
 import CareerStack from './components/CareerStack'
 import ProjectCarousel from './components/ProjectCarousel'
 import SkillsToolbox from './components/SkillsToolbox'
+import ResumePage from './components/ResumePage'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const RESUME_URL = `${BASE}resume/Resume.pdf`
+const RESUME_PAGE_HREF = '#/resume'
 const LINKEDIN_URL = contactMethods.find((item) => item.id === 'linkedin')?.href || 'https://linkedin.com'
 const EMAIL_URL = contactMethods.find((item) => item.id === 'email')?.href || 'mailto:'
 const EXPERIENCE_ROUTE_PREFIX = 'experience/'
@@ -982,7 +984,7 @@ function ExperienceDetailPage({ job }) {
               ← Back to portfolio
             </a>
             <div className={styles.detailActions}>
-              <a href={RESUME_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
+              <a href={RESUME_PAGE_HREF} className={styles.detailResumeLink} onClick={(e) => { e.preventDefault(); returnToPortfolio(RESUME_PAGE_HREF) }}>
                 Resume
               </a>
               <a href={LINKEDIN_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
@@ -1087,7 +1089,7 @@ function ProjectDetailPage({ project }) {
               ← Back to portfolio
             </a>
             <div className={styles.detailActions}>
-              <a href={RESUME_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
+              <a href={RESUME_PAGE_HREF} className={styles.detailResumeLink} onClick={(e) => { e.preventDefault(); returnToPortfolio(RESUME_PAGE_HREF) }}>
                 Resume
               </a>
               <a href={LINKEDIN_URL} className={styles.detailResumeLink} target="_blank" rel="noreferrer">
@@ -1278,6 +1280,7 @@ export default function App() {
   const activeProjectDetail = detailRoute
     ? PROJECTS.find((project) => project.slug && `${PROJECT_ROUTE_PREFIX}${project.slug}` === detailRoute)
     : null
+  const activeResume = detailRoute === 'resume'
 
   useEffect(() => {
     setMounted(true)
@@ -1317,9 +1320,9 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (!activeExperienceDetail && !activeProjectDetail) return
+    if (!activeExperienceDetail && !activeProjectDetail && !activeResume) return
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-  }, [activeExperienceDetail, activeProjectDetail])
+  }, [activeExperienceDetail, activeProjectDetail, activeResume])
 
   useEffect(() => {
     if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
@@ -1329,7 +1332,7 @@ export default function App() {
     if (!window.location.hash) window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
   }, [])
 
-  const onDetailPage = Boolean(activeExperienceDetail || activeProjectDetail)
+  const onDetailPage = Boolean(activeExperienceDetail || activeProjectDetail || activeResume)
   const wasOnDetailPage = useRef(onDetailPage)
   useEffect(() => {
     const returning = wasOnDetailPage.current && !onDetailPage
@@ -1407,6 +1410,16 @@ export default function App() {
           <motion.div key={`proj-${activeProjectDetail.slug}`} {...pageTransition} style={{ minHeight: '100vh' }}>
             <ProjectDetailPage project={activeProjectDetail} />
           </motion.div>
+        ) : activeResume ? (
+          <motion.div key="resume" {...pageTransition} style={{ minHeight: '100vh' }}>
+            <ResumePage
+              base={BASE}
+              pdfUrl={RESUME_URL}
+              linkedinUrl={LINKEDIN_URL}
+              emailUrl={EMAIL_URL}
+              onBack={(e) => { e.preventDefault(); returnToPortfolio(window.location.pathname) }}
+            />
+          </motion.div>
         ) : (
           <motion.div key="main" {...pageTransition}>
       <div className={styles.pageShell}>
@@ -1453,6 +1466,9 @@ export default function App() {
                     </a>
                   )
                 ))}
+                <a href={RESUME_PAGE_HREF} className={styles.navLink} onClick={handleDetailNav(RESUME_PAGE_HREF)}>
+                  Resume
+                </a>
               </nav>
 
               <div className={styles.navSocials}>
@@ -1506,6 +1522,9 @@ export default function App() {
                 </a>
               )
             ))}
+            <a href={RESUME_PAGE_HREF} className={styles.mobileNavLink} onClick={(e) => { handleDetailNav(RESUME_PAGE_HREF)(e); setMenuOpen(false) }}>
+              Resume
+            </a>
           </motion.div>
         </header>
 
@@ -1574,8 +1593,8 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.44 }}
                   >
-                    <a href={RESUME_URL} className={styles.primaryButton} target="_blank" rel="noreferrer">
-                      Download Resume
+                    <a href={RESUME_PAGE_HREF} className={styles.primaryButton} onClick={handleDetailNav(RESUME_PAGE_HREF)}>
+                      View Resume
                     </a>
                     <a href={LINKEDIN_URL} className={styles.secondaryLink} target="_blank" rel="noreferrer">
                       LinkedIn
@@ -1681,7 +1700,7 @@ export default function App() {
               <CareerStack jobs={EXPERIENCE} activeIndex={activeJob} onSelect={scrollToJob} />
             </div>
 
-            <a href={RESUME_URL} className={styles.resumeLink} target="_blank" rel="noreferrer">
+            <a href={RESUME_PAGE_HREF} className={styles.resumeLink} onClick={handleDetailNav(RESUME_PAGE_HREF)}>
               View full resume →
             </a>
           </Section>
@@ -1798,7 +1817,7 @@ export default function App() {
                   </a>
                 ))}
               </div>
-              <a href={RESUME_URL} className={styles.primaryButton} target="_blank" rel="noreferrer">
+              <a href={RESUME_URL} className={styles.primaryButton} download="Abdul_Rehman_Resume.pdf">
                 Download Resume
               </a>
             </div>

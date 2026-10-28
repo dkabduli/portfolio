@@ -1,0 +1,59 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "aspect": 0.77273,
+      "links": [
+        {
+          "href": "mailto:abdulrehman6@cmail.carleton.ca",
+          "label": "abdulrehman6@cmail.carleton.ca",
+          "left": 11.329,
+          "top": 3.872,
+          "width": 25.817,
+          "height": 1.431
+        },
+        {
+          "href": "https://www.linkedin.com/in/arbaseem/",
+          "label": "LinkedIn",
+          "left": 55.011,
+          "top": 3.872,
+          "width": 6.972,
+          "height": 1.431
+        },
+        {
+          "href": "https://github.com/dkabduli",
+          "label": "github.com/dkabduli",
+          "left": 63.617,
+          "top": 3.872,
+          "width": 16.558,
+          "height": 1.431
+        },
+        {
+          "href": "https://dkabduli.github.io/portfolio/",
+          "label": "Portfolio",
+          "left": 81.917,
+          "top": 3.872,
+          "width": 6.863,
+          "height": 1.431
+        },
+        {
+          "href": "https://visioncompanion.vercel.app",
+          "label": "visioncompanion.vercel.app",
+          "left": 72.658,
+          "top": 62.458,
+          "width": 21.46,
+          "height": 1.431
+        },
+        {
+          "href": "https://blackboxnet-web.onrender.com",
+          "label": "blackboxnet-web.onrender.com",
+          "left": 69.935,
+          "top": 70.96,
+          "width": 24.183,
+          "height": 1.431
+        }
+      ],
+      "image": "resume-page-1.png"
+    }
+  ]
+}

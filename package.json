@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "resume:preview": "python3 scripts/resume_preview.py"
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.0",
