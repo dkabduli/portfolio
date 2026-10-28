@@ -3522,9 +3522,9 @@
   margin-top: 40px;
   padding: 20px 24px 18px;
   border: 2px solid var(--ink);
-  background: #101317;
+  background: var(--surface);
   box-shadow: 6px 6px 0 var(--ink);
-  color: #d4d8de;
+  color: var(--ink);
 }
 
 .ghHeader {
@@ -3534,14 +3534,14 @@
   justify-content: space-between;
   gap: 12px 24px;
   padding-bottom: 14px;
-  border-bottom: 1px solid #2a2f37;
+  border-bottom: 1px solid var(--ink);
 }
 
 .ghCommand {
   margin: 0;
   font-family: var(--font-code);
   font-size: 0.75rem;
-  color: #8f97a3;
+  color: var(--mist);
 }
 
 .ghTitle {
@@ -3550,7 +3550,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: var(--ink);
 }
 
 .ghStatus {
@@ -3561,15 +3561,15 @@
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #8ee6a8;
+  color: #15803d;
 }
 
 .ghLinkLed {
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: #34d399;
-  box-shadow: 0 0 8px #34d399;
+  background: #16a34a;
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.6);
   animation: ghBlink 2.4s ease-in-out infinite;
 }
 
@@ -3585,14 +3585,14 @@
 
 .ghProfileLink {
   margin-left: 10px;
-  color: #9db4ff;
+  color: var(--accent);
   text-decoration: none;
   text-transform: none;
   letter-spacing: 0;
 }
 
 .ghProfileLink:hover {
-  color: #ffffff;
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -3601,7 +3601,7 @@
   overflow-x: auto;
   padding: 16px 0 6px;
   scrollbar-width: thin;
-  scrollbar-color: #39404a transparent;
+  scrollbar-color: #a3a3a3 transparent;
 }
 
 .ghFaceplate {
@@ -3621,7 +3621,7 @@
 .ghMonths {
   font-family: var(--font-code);
   font-size: 0.6875rem;
-  color: #8f97a3;
+  color: var(--mist);
 }
 
 .ghMonths span {
@@ -3639,9 +3639,9 @@
   display: block;
   width: var(--gh-cell);
   height: var(--gh-cell);
-  border: 1px solid #2c323b;
+  border: 1px solid #b8bdc6;
   border-radius: 2px;
-  background: #181c22;
+  background: #f4f5f7;
 }
 
 .ghPort::before {
@@ -3652,37 +3652,35 @@
   width: 40%;
   height: 3px;
   transform: translateX(-50%);
-  background: #101317;
+  background: var(--surface);
 }
 
 .ghPort0 {
-  background: #181c22;
+  background: #f4f5f7;
 }
 
 .ghPort1 {
-  background: #1c2d6b;
-  border-color: #24398a;
+  background: #cdd8ff;
+  border-color: #8ea6f5;
 }
 
 .ghPort2 {
-  background: #2443b8;
-  border-color: #2f52d6;
+  background: #8aa5ff;
+  border-color: #4f6fe0;
 }
 
 .ghPort3 {
-  background: #3b6bff;
-  border-color: #5a82ff;
-  box-shadow: 0 0 6px rgba(59, 107, 255, 0.45);
+  background: #3d63f0;
+  border-color: #1f3fd6;
 }
 
 .ghPort4 {
-  background: #a9c1ff;
-  border-color: #d3e0ff;
-  box-shadow: 0 0 10px rgba(130, 165, 255, 0.75);
+  background: #1f3fd6;
+  border-color: var(--ink);
 }
 
 .ghPorts .ghPort:hover {
-  outline: 2px solid #ffffff;
+  outline: 2px solid var(--ink);
   outline-offset: 1px;
 }
 
@@ -3693,7 +3691,7 @@
   justify-content: space-between;
   gap: 14px 24px;
   padding-top: 14px;
-  border-top: 1px solid #2a2f37;
+  border-top: 1px solid var(--ink);
 }
 
 .ghCounters {
@@ -3713,14 +3711,15 @@
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #8f97a3;
+  color: var(--mist);
 }
 
 .ghCounters dd {
   margin: 0;
   font-family: var(--font-code);
   font-size: 1rem;
-  color: #ffffff;
+  font-weight: 700;
+  color: var(--ink);
 }
 
 .ghLegend {
@@ -3729,7 +3728,7 @@
   gap: 5px;
   font-family: var(--font-code);
   font-size: 0.6875rem;
-  color: #8f97a3;
+  color: var(--mist);
 }
 
 .ghLegend span:first-child {
