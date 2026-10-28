@@ -3515,3 +3515,257 @@
     box-shadow: 4px 4px 0 var(--ink);
   }
 }
+
+.ghPanel {
+  --gh-cell: 13px;
+  --gh-gap: 4px;
+  margin-top: 40px;
+  padding: 20px 24px 18px;
+  border: 2px solid var(--ink);
+  background: #101317;
+  box-shadow: 6px 6px 0 var(--ink);
+  color: #d4d8de;
+}
+
+.ghHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #2a2f37;
+}
+
+.ghCommand {
+  margin: 0;
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  color: #8f97a3;
+}
+
+.ghTitle {
+  margin: 6px 0 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.ghStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8ee6a8;
+}
+
+.ghLinkLed {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+  animation: ghBlink 2.4s ease-in-out infinite;
+}
+
+@keyframes ghBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.ghProfileLink {
+  margin-left: 10px;
+  color: #9db4ff;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.ghProfileLink:hover {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ghScroll {
+  overflow-x: auto;
+  padding: 16px 0 6px;
+  scrollbar-width: thin;
+  scrollbar-color: #39404a transparent;
+}
+
+.ghFaceplate {
+  display: grid;
+  gap: 8px;
+  width: max-content;
+  margin: 0 auto;
+}
+
+.ghMonths,
+.ghPorts {
+  display: grid;
+  grid-template-columns: repeat(var(--gh-weeks), var(--gh-cell));
+  column-gap: var(--gh-gap);
+}
+
+.ghMonths {
+  font-family: var(--font-code);
+  font-size: 0.6875rem;
+  color: #8f97a3;
+}
+
+.ghMonths span {
+  grid-row: 1;
+  white-space: nowrap;
+}
+
+.ghPorts {
+  grid-template-rows: repeat(7, var(--gh-cell));
+  row-gap: var(--gh-gap);
+}
+
+.ghPort {
+  position: relative;
+  display: block;
+  width: var(--gh-cell);
+  height: var(--gh-cell);
+  border: 1px solid #2c323b;
+  border-radius: 2px;
+  background: #181c22;
+}
+
+.ghPort::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 40%;
+  height: 3px;
+  transform: translateX(-50%);
+  background: #101317;
+}
+
+.ghPort0 {
+  background: #181c22;
+}
+
+.ghPort1 {
+  background: #1c2d6b;
+  border-color: #24398a;
+}
+
+.ghPort2 {
+  background: #2443b8;
+  border-color: #2f52d6;
+}
+
+.ghPort3 {
+  background: #3b6bff;
+  border-color: #5a82ff;
+  box-shadow: 0 0 6px rgba(59, 107, 255, 0.45);
+}
+
+.ghPort4 {
+  background: #a9c1ff;
+  border-color: #d3e0ff;
+  box-shadow: 0 0 10px rgba(130, 165, 255, 0.75);
+}
+
+.ghPorts .ghPort:hover {
+  outline: 2px solid #ffffff;
+  outline-offset: 1px;
+}
+
+.ghFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  padding-top: 14px;
+  border-top: 1px solid #2a2f37;
+}
+
+.ghCounters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin: 0;
+}
+
+.ghCounters div {
+  display: grid;
+  gap: 2px;
+}
+
+.ghCounters dt {
+  font-family: var(--font-code);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8f97a3;
+}
+
+.ghCounters dd {
+  margin: 0;
+  font-family: var(--font-code);
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.ghLegend {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-code);
+  font-size: 0.6875rem;
+  color: #8f97a3;
+}
+
+.ghLegend span:first-child {
+  margin-right: 4px;
+}
+
+.ghLegend span:last-child {
+  margin-left: 4px;
+}
+
+@media (max-width: 720px) {
+  .ghPanel {
+    --gh-cell: 11px;
+    --gh-gap: 3px;
+    padding: 16px 16px 14px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  .ghFaceplate {
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghLinkLed {
+    animation: none;
+  }
+}
+
+@media (min-width: 1100px) {
+  .ghPanel {
+    --gh-cell: 17px;
+    --gh-gap: 4px;
+  }
+
+  .ghPort::before {
+    height: 4px;
+  }
+}

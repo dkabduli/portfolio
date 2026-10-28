@@ -6,6 +6,7 @@ import CareerStack from './components/CareerStack'
 import ProjectCarousel from './components/ProjectCarousel'
 import SkillsToolbox from './components/SkillsToolbox'
 import ResumePage from './components/ResumePage'
+import GithubActivity from './components/GithubActivity'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const RESUME_URL = `${BASE}resume/Resume.pdf`
@@ -1762,6 +1763,7 @@ export default function App() {
                 </motion.article>
               )}
             />
+            <GithubActivity />
           </Section>
 
           <Section id="extracurriculars" label="// 03 — EXTRACURRICULARS">
