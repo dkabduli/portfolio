@@ -125,7 +125,7 @@ const EXPERIENCE = [
   {
     slug: 'infrastructure-dev-intern',
     layer: 'Platforms',
-    period: 'MAY 2026 — PRESENT',
+    period: 'MAY 2026 — SEPT 2026',
     title: 'Infrastructure Dev Intern',
     company: 'Shared Services Canada',
     location: 'Ottawa, Ontario',
@@ -1558,7 +1558,7 @@ export default function App() {
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.15 }}
                   >
                     <span className={styles.heroMetaLine}>Infrastructure &amp; NetDevOps</span>
-                    <span className={styles.heroMetaLine}>Shared Services Canada · <span className={styles.noWrap}>Carleton B.IT. '27</span></span>
+                    <span className={styles.heroMetaLine}>Founding Developer at 4Ummah · <span className={styles.noWrap}>Carleton B.IT. '27</span></span>
                   </motion.p>
                   <motion.p
                     className={styles.heroLocation}
@@ -1574,7 +1574,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: shouldReduceMotion ? 0.1 : 0.6, delay: 0.28 }}
                   >
-                    Building production systems at Shared Services Canada: a full-stack intake platform (Next.js/PostgreSQL), Ansible-based provisioning, Zabbix CI/CD pipelines, and mailbox-to-ticket automation, all deployed under federal change-control constraints.
+                    Founding software developer at 4Ummah, after three co-op terms at Shared Services Canada building production systems: a full-stack intake platform (Next.js/PostgreSQL), Ansible-based provisioning, Zabbix CI/CD pipelines and mailbox-to-ticket automation, all under federal change control.
                   </motion.p>
                   <motion.div
                     className={styles.heroStrengths}
@@ -1652,7 +1652,7 @@ export default function App() {
                 </div>
               </div>
               <p className={styles.aboutBio}>
-                Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College), completing three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, infrastructure automation, and full-stack application delivery. My work runs under federal change-control and security baseline requirements — production environments, not sandboxes. Outside of work, I build things end to end: VisionCompanion, an AI walking companion that announces street hazards to blind and low-vision pedestrians, and BlackBoxNet, a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments.
+                Fourth-year B.IT. Network Technology student at Carleton University (joint with Algonquin College). I completed three consecutive co-op terms at Shared Services Canada across enterprise LAN operations, NetDevOps pipelines, infrastructure automation and full-stack application delivery, all on production systems under federal change-control and security baseline requirements. I'm now the founding software developer at 4Ummah, building a directory of Muslim-built products and jobs on Next.js and Supabase. Outside of work, I build things end to end: VisionCompanion, an AI walking companion that announces street hazards to blind and low-vision pedestrians, and BlackBoxNet, a multi-vendor network replay platform that applies real incident-investigation methodology to lab environments.
               </p>
             </div>
           </Section>
