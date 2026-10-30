@@ -640,6 +640,70 @@ const PROJECTS = [
     resourceLinks: [{ label: 'API docs', href: 'https://blackboxnet-api.onrender.com/docs' }],
   },
   {
+    name: 'RedLight Sentinel',
+    slug: 'redlight-sentinel',
+    year: '2026',
+    description:
+      'Team project: a red-light camera on a bare-metal Arduino Uno, where I designed the circuit and ran the serial testing. It runs a green, amber and red traffic cycle with a 7-segment countdown and a 16×2 LCD, and during red an ultrasonic sensor at the stop line catches cars that cross it, sounding a buzzer and logging the violation over serial. Written at the register level, with no Arduino library calls.',
+    tags: ['C/C++', 'ATmega328P', 'Embedded', 'PlatformIO', 'Tinkercad'],
+    image: `${BASE}images/redlight-circuit.png`,
+    fallback: `${BASE}images/redlight-circuit.png`,
+    imagePosition: 'center center',
+    github: 'https://github.com/dkabduli/redlight-sentinel',
+    external: null,
+    detailMeta: ['NET3001 Embedded Systems · Carleton University', 'Team of 2 · Winter 2026', 'Arduino Uno (ATmega328P)'],
+    overviewTitle: 'What it is',
+    flowTitle: 'How violation detection works',
+    deepDiveTitle: 'Design decisions',
+    screenshotsIntro: 'The circuit I designed in Tinkercad.',
+    sidebarNarrativeTitle: 'My part',
+    sidebarTraitsTitle: 'Highlights',
+    sidebarNarrative:
+      'I designed the full circuit in Tinkercad, ran the serial testing, and produced the demo video. My teammate built the hardware and wrote the firmware drivers.',
+    summary:
+      'RedLight Sentinel is a traffic-light controller that also watches for cars that run the red. It cycles **10 s green**, **5 s amber** and **10 s red**, shows the seconds remaining on a 7-segment display driven through a **74HC595** shift register, and prints the current phase on a **16×2 HD44780 LCD**. During red, an **HC-SR04** ultrasonic sensor watches the stop line; a car crossing it triggers a buzzer, a two-second LCD alert and a `VIOLATION dist=NN cm` line on the serial log. Pause and Reset buttons run on pin-change interrupts.',
+    humanSummary: [
+      {
+        label: 'Repository',
+        value: 'github.com/dkabduli/redlight-sentinel',
+      },
+      {
+        label: 'Course',
+        value: 'NET3001 Embedded Systems, Carleton University',
+      },
+    ],
+    incidentFlow: [
+      {
+        title: '1. Watch during red',
+        text: 'The ultrasonic sensor samples the stop line on every loop pass while the light is red, ignoring timed-out readings.',
+      },
+      {
+        title: '2. Detect a crossing',
+        text: 'A violation is a transition: the previous reading was at least 45 cm away and the current one is within 18 cm. A car simply waiting at the line never triggers it.',
+      },
+      {
+        title: '3. Alert once, then re-arm',
+        text: 'After an alert the detector disarms so one car fires one violation, and re-arms only once the lane reads clear again.',
+      },
+    ],
+    deepDive: [
+      'Every driver writes the **ATmega328P** registers directly (`DDRx`, `PORTx`, `PINx`) instead of using `digitalWrite`, which keeps timing predictable.',
+      'A **Timer1** compare interrupt raises a 1 Hz flag, so the main loop never blocks on `delay()`. Interrupt handlers only set flags; the slow LCD and serial work happens in the loop.',
+      'All wiring lives in one header, `PinMap.h`, so rewiring the circuit means editing a single file.',
+      'Firmware builds automatically with **PlatformIO** in GitHub Actions on every push.',
+    ],
+    screenshots: [
+      {
+        src: `${BASE}images/redlight-circuit.png`,
+        alt: 'Tinkercad circuit: Arduino Uno wired to an HC-SR04 sensor, traffic LEDs, buttons, a buzzer, a 74HC595 with a 7-segment display and a 16x2 LCD',
+        eyebrow: 'Circuit',
+        title: 'Full wiring in Tinkercad',
+        caption: 'Arduino Uno, HC-SR04, traffic LEDs, buttons, buzzer, 74HC595 with a 7-segment display, and a 16×2 LCD.',
+      },
+    ],
+    sidebarFacts: ['Register-level C/C++, no Arduino library calls', 'Interrupt-driven timing and buttons', 'Team of 2, NET3001 final project'],
+  },
+  {
     name: 'IPv6 EIGRP Network',
     slug: 'ipv6-eigrp-network',
     year: '2024',
