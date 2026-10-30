@@ -3768,3 +3768,12 @@
     height: 4px;
   }
 }
+
+.projectScreenshotImage {
+  aspect-ratio: auto;
+  height: auto;
+  max-height: 560px;
+  object-fit: contain;
+  object-position: center;
+  background: #f4f5f7;
+}

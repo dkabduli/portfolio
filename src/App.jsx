@@ -326,6 +326,10 @@ const PROJECTS = [
     image: `${BASE}images/visioncompanion-logo.png`,
     fallback: `${BASE}images/visioncompanion-logo.png`,
     imagePosition: 'center center',
+    detailImage: {
+      src: `${BASE}images/visioncompanion-phone-map.jpg`,
+      alt: 'VisionCompanion hazard map on a phone: nearest reported hazard is a lifted sidewalk panel 163 m away, near uOttawa',
+    },
     github: 'https://github.com/dkabduli/VisionCompanion',
     external: 'https://visioncompanion.vercel.app',
     externalLabel: 'Live app',
@@ -1274,7 +1278,11 @@ function ProjectDetailPage({ project }) {
 
               <aside className={styles.detailSidebar}>
                 <div className={styles.detailImageCard}>
-                  <img src={project.image} alt={`${project.name} dashboard preview`} className={`${styles.detailImage} ${styles.detailImageContain}`} />
+                  <img
+                    src={project.detailImage?.src || project.image}
+                    alt={project.detailImage?.alt || `${project.name} preview`}
+                    className={`${styles.detailImage} ${project.detailImage ? styles.detailImageNatural : styles.detailImageContain}`}
+                  />
                 </div>
 
                 <div className={styles.detailSidebarCard}>
