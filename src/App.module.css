@@ -3776,3 +3776,58 @@
   object-position: center;
   background: #f4f5f7;
 }
+
+/* Tall phone captures: phone in a dark stage beside the caption instead of a narrow strip */
+.projectScreenshotPortrait {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+}
+
+.projectScreenshotStage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 36px 24px;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(31, 63, 214, 0.35), transparent 65%),
+    var(--ink);
+  border-right: 2px solid var(--ink);
+}
+
+.projectScreenshotPhone {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 520px;
+  object-fit: contain;
+  border: 7px solid #1c1c1f;
+  border-radius: 34px;
+  box-shadow: 0 0 0 1px #3a3a40, 0 24px 48px rgba(0, 0, 0, 0.55);
+}
+
+.projectScreenshotPortrait .projectScreenshotCaption {
+  padding: 28px;
+}
+
+@media (max-width: 720px) {
+  .projectScreenshotPortrait {
+    grid-template-columns: 1fr;
+  }
+
+  .projectScreenshotStage {
+    border-right: 0;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .projectScreenshotStage {
+    padding: 28px 20px;
+  }
+
+  .projectScreenshotPhone {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+  }
+}

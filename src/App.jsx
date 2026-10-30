@@ -327,8 +327,8 @@ const PROJECTS = [
     fallback: `${BASE}images/visioncompanion-logo.png`,
     imagePosition: 'center center',
     detailImage: {
-      src: `${BASE}images/visioncompanion-phone-map.jpg`,
-      alt: 'VisionCompanion hazard map on a phone: nearest reported hazard is a lifted sidewalk panel 163 m away, near uOttawa',
+      src: `${BASE}images/visioncompanion-street-snapshot.jpg`,
+      alt: 'A street snapshot from the VisionCompanion test set: a bilingual stop sign beside a crosswalk at night',
     },
     github: 'https://github.com/dkabduli/VisionCompanion',
     external: 'https://visioncompanion.vercel.app',
@@ -383,6 +383,7 @@ const PROJECTS = [
       {
         src: `${BASE}images/visioncompanion-near-me.jpg`,
         alt: 'VisionCompanion home screen with usage steps, a potholes-near-me answer, and the Start walk button',
+        portrait: true,
         eyebrow: 'Home screen',
         title: 'Street mode & voice answers',
         caption: '"Potholes near me" answered with distances and addresses before leaving home.',
@@ -1263,8 +1264,17 @@ function ProjectDetailPage({ project }) {
                   </div>
                   <div className={styles.projectScreenshotGrid}>
                     {project.screenshots.map((shot) => (
-                      <figure key={shot.title} className={styles.projectScreenshotCard}>
-                        <img src={shot.src} alt={shot.alt} className={styles.projectScreenshotImage} />
+                      <figure
+                        key={shot.title}
+                        className={`${styles.projectScreenshotCard} ${shot.portrait ? styles.projectScreenshotPortrait : ''}`.trim()}
+                      >
+                        {shot.portrait ? (
+                          <div className={styles.projectScreenshotStage}>
+                            <img src={shot.src} alt={shot.alt} className={styles.projectScreenshotPhone} />
+                          </div>
+                        ) : (
+                          <img src={shot.src} alt={shot.alt} className={styles.projectScreenshotImage} />
+                        )}
                         <figcaption className={styles.projectScreenshotCaption}>
                           <p className={styles.projectScreenshotEyebrow}>{shot.eyebrow}</p>
                           <h3 className={styles.projectScreenshotTitle}>{shot.title}</h3>
