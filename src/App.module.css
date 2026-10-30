@@ -1564,7 +1564,6 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   scrollbar-width: none;
   padding: 8px 2px 12px;
   margin: -8px -2px -12px;
